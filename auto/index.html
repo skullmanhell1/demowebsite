@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redline AutoWorks — Auto & Repair Website Demo</title>
+  <meta name="description" content="A solid, trustworthy auto repair website demo with service booking, estimate request form, credentials, coupons, reviews, location and fleet callouts." />
+  <meta name="theme-color" content="#0b2341" />
+  <meta name="color-scheme" content="light" />
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Redline AutoWorks — ASE-Certified Auto Repair & Diagnostics" />
+  <meta property="og:description" content="Book a service or request an estimate. Honest pricing, certified technicians, fast turnaround and a repair warranty." />
+  <meta property="og:image" content="https://skullmanhell1.github.io/demowebsite/auto/images/auto-repair/hero-shop.jpg" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230b2341'/%3E%3Cstop offset='0.55' stop-color='%231559a6'/%3E%3Cstop offset='1' stop-color='%23d63a31'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='67' font-family='Arial,sans-serif' font-size='46' font-weight='900' fill='%23fff' text-anchor='middle'%3ERa%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --ink: #111927;
+      --navy: #0b2341;
+      --blue: #1559a6;
+      --blue-2: #2478d4;
+      --ice: #eef6ff;
+      --red: #d63a31;
+      --red-2: #f05848;
+      --amber: #f2b13f;
+      --steel: #607186;
+      --slate: #334155;
+      --graphite: #202833;
+      --line: rgba(17, 25, 39, 0.12);
+      --muted: rgba(17, 25, 39, 0.68);
+      --soft: rgba(17, 25, 39, 0.52);
+      --white: #ffffff;
+      --bg: #f6f9fc;
+      --shadow: 0 26px 78px rgba(11, 35, 65, 0.17);
+      --soft-shadow: 0 16px 42px rgba(11, 35, 65, 0.10);
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(36, 120, 212, 0.16), transparent 32rem),
+        radial-gradient(circle at 94% 6%, rgba(214, 58, 49, 0.13), transparent 30rem),
+        linear-gradient(180deg, #f7fbff 0%, #ffffff 42%, #eef3f8 100%);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.11;
+      background-image:
+        linear-gradient(90deg, rgba(11, 35, 65, 0.18) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(11, 35, 65, 0.14) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(180deg, black 0%, transparent 82%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button, input, select, textarea { font: inherit; }
+    button { color: inherit; }
+    .container { width: min(100% - 40px, var(--max)); margin: 0 auto; }
+
+    .btn {
+      min-height: 48px;
+      padding: 13px 18px;
+      border: 0;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      font-weight: 950;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--navy), var(--blue) 58%, var(--blue-2));
+      box-shadow: 0 16px 36px rgba(21, 89, 166, 0.32);
+    }
+
+    .btn-primary:hover { box-shadow: 0 22px 52px rgba(21, 89, 166, 0.40); }
+
+    .btn-red {
+      color: var(--white);
+      background: linear-gradient(135deg, #9f231d, var(--red), var(--red-2));
+      box-shadow: 0 16px 36px rgba(214, 58, 49, 0.30);
+    }
+
+    .btn-secondary {
+      color: var(--navy);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(11, 35, 65, 0.14);
+    }
+
+    .btn-dark { color: var(--white); background: var(--graphite); }
+    .btn-small { min-height: 38px; padding: 9px 13px; font-size: 0.86rem; }
+
+    .top-strip {
+      color: rgba(255,255,255,0.86);
+      background: var(--graphite);
+      font-size: 0.88rem;
+    }
+
+    .top-strip .container {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .top-strip strong { color: #ffb6ae; }
+    .top-strip a { color: var(--white); font-weight: 950; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 251, 255, 0.86);
+      backdrop-filter: blur(22px);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: max-content;
+    }
+
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 17px;
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      font-weight: 950;
+      letter-spacing: -0.08em;
+      background:
+        radial-gradient(circle at 28% 20%, rgba(255,255,255,0.30), transparent 30%),
+        linear-gradient(135deg, var(--navy), var(--blue) 54%, var(--red));
+      box-shadow: 0 14px 30px rgba(11, 35, 65, 0.26);
+    }
+
+    .brand-name {
+      display: block;
+      font-weight: 950;
+      font-size: 1.16rem;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+    }
+
+    .brand-subtitle {
+      display: block;
+      margin-top: 3px;
+      color: var(--soft);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 850;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.68);
+    }
+
+    .nav-links a {
+      padding: 9px 12px;
+      border-radius: 999px;
+      color: rgba(17, 25, 39, 0.72);
+      font-size: 0.91rem;
+      font-weight: 820;
+      transition: 160ms ease;
+    }
+
+    .nav-links a:hover { color: var(--navy); background: var(--ice); }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+
+    .phone-link {
+      min-height: 44px;
+      padding: 10px 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      color: var(--navy);
+      background: rgba(255, 255, 255, 0.80);
+      border: 1px solid var(--line);
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .phone-link span,
+    .phone-hero span {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--white);
+      background: var(--red);
+    }
+
+    .hero {
+      padding: 70px 0 34px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.98fr) minmax(430px, 1.02fr);
+      align-items: center;
+      gap: clamp(28px, 5vw, 58px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--blue);
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(21, 89, 166, 0.16);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+      font-weight: 950;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 0 7px rgba(214, 58, 49, 0.15);
+    }
+
+    h1, h2, h3 { margin: 0; line-height: 1.02; }
+
+    h1 {
+      margin-top: 22px;
+      max-width: 860px;
+      font-size: clamp(3.25rem, 7.2vw, 6.8rem);
+      letter-spacing: -0.075em;
+    }
+
+    h1 em { color: var(--red); font-style: normal; }
+
+    .lead {
+      max-width: 660px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.08rem, 1.6vw, 1.26rem);
+    }
+
+    .hero-cta {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .phone-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 13px 17px;
+      border-radius: 999px;
+      border: 1px solid rgba(214, 58, 49, 0.18);
+      background: rgba(255, 255, 255, 0.84);
+      color: var(--navy);
+      font-weight: 950;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .hero-proof {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 710px;
+      margin-top: 34px;
+    }
+
+    .proof-card {
+      padding: 17px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .proof-card strong { display: block; font-size: 1.5rem; line-height: 1; }
+    .proof-card span { display: block; margin-top: 6px; color: var(--soft); font-size: 0.9rem; }
+
+    .hero-media { position: relative; min-height: 650px; }
+
+    .hero-photo {
+      position: absolute;
+      inset: 14px 0 0 18px;
+      border-radius: 46px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      background:
+        linear-gradient(0deg, rgba(11, 35, 65, 0.24), rgba(11, 35, 65, 0.02)),
+        url("images/auto-repair/hero-shop.jpg") center / cover;
+      box-shadow: var(--shadow);
+      transform: rotate(1.1deg);
+    }
+
+    .hero-photo::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 44%;
+      background: linear-gradient(0deg, rgba(11, 35, 65, 0.86), transparent);
+    }
+
+    .hero-caption {
+      position: absolute;
+      z-index: 2;
+      left: 26px;
+      right: 26px;
+      bottom: 26px;
+      color: var(--white);
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .hero-caption strong { display: block; font-size: 1.5rem; letter-spacing: -0.04em; }
+    .hero-caption span { color: rgba(255,255,255,0.74); }
+
+    .floating-trust {
+      position: absolute;
+      left: -8px;
+      top: 66px;
+      z-index: 4;
+      width: min(300px, 82%);
+      padding: 18px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.90);
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      box-shadow: 0 22px 60px rgba(11, 35, 65, 0.20);
+      backdrop-filter: blur(16px);
+      transform: rotate(-3deg);
+    }
+
+    .stars { color: #d89727; letter-spacing: 0.05em; }
+    .floating-trust strong { display: block; margin-top: 7px; font-size: 1.14rem; }
+    .floating-trust p { margin: 5px 0 0; color: var(--muted); font-size: 0.92rem; }
+
+    .quick-card {
+      position: absolute;
+      right: -4px;
+      bottom: 12px;
+      z-index: 4;
+      width: min(382px, 86%);
+      padding: 18px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      box-shadow: 0 22px 60px rgba(11, 35, 65, 0.20);
+      backdrop-filter: blur(18px);
+    }
+
+    .quick-card strong { display: block; font-size: 1.05rem; }
+    .quick-card p { margin: 6px 0 14px; color: var(--muted); font-size: 0.92rem; }
+    .quick-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .quick-pills button { border: 0; border-radius: 999px; padding: 8px 11px; background: var(--ice); color: var(--navy); font-weight: 900; cursor: pointer; }
+
+    .trust-bar { padding: 22px 0 0; }
+
+    .trust-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      padding: 14px;
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 12px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #eef6ff, #fff3f2);
+    }
+
+    .trust-icon {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      color: var(--white);
+      background: var(--blue);
+      font-weight: 950;
+    }
+
+    .trust-item:nth-child(2) .trust-icon,
+    .trust-item:nth-child(5) .trust-icon { background: var(--red); }
+    .trust-item strong { display: block; line-height: 1.05; }
+    .trust-item span { color: var(--soft); font-size: 0.86rem; }
+
+    section { padding: 76px 0; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 30px;
+    }
+
+    .section-kicker {
+      color: var(--blue);
+      font-size: 0.79rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 950;
+    }
+
+    h2 {
+      margin-top: 8px;
+      max-width: 850px;
+      font-size: clamp(2.25rem, 4.2vw, 4.2rem);
+      letter-spacing: -0.065em;
+    }
+
+    .section-head p { max-width: 490px; margin: 0; color: var(--muted); }
+
+    .coupons { padding: 30px 0 0; }
+
+    .coupon-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 16px;
+    }
+
+    .coupon-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      border: 1px solid rgba(214, 58, 49, 0.18);
+      color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(11, 35, 65, 0.90), rgba(21, 89, 166, 0.72)),
+        var(--image) center / cover;
+      box-shadow: var(--shadow);
+      padding: clamp(24px, 4vw, 36px);
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .coupon-badge {
+      width: max-content;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--red);
+      color: var(--white);
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+    }
+
+    .coupon-card h2 { color: var(--white); font-size: clamp(2rem, 3.4vw, 3.55rem); }
+    .coupon-card p { color: rgba(255,255,255,0.78); max-width: 700px; }
+
+    .coupon-mini {
+      background:
+        linear-gradient(145deg, rgba(214, 58, 49, 0.92), rgba(11, 35, 65, 0.94)),
+        var(--image) center / cover;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .service-card {
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .service-photo {
+      position: relative;
+      min-height: 175px;
+      background:
+        linear-gradient(0deg, rgba(11, 35, 65, 0.48), rgba(11, 35, 65, 0.02)),
+        var(--image) center / cover;
+    }
+
+    .service-icon {
+      position: absolute;
+      left: 16px;
+      bottom: -24px;
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      border: 4px solid var(--white);
+      font-size: 1.28rem;
+      font-weight: 950;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .service-body { padding: 34px 20px 20px; }
+    .service-body h3 { font-size: 1.18rem; letter-spacing: -0.025em; }
+    .service-body p { color: var(--muted); margin: 10px 0 16px; }
+    .service-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .meta-pill { padding: 7px 9px; border-radius: 999px; background: var(--ice); color: var(--blue); font-weight: 900; font-size: 0.78rem; }
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.84fr) minmax(430px, 1.16fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .booking-copy,
+    .booking-card,
+    .why-card,
+    .fleet-card,
+    .location-card,
+    .map-card,
+    .reviews-summary {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: var(--shadow);
+    }
+
+    .booking-copy {
+      overflow: hidden;
+      color: var(--white);
+      background:
+        linear-gradient(0deg, rgba(11, 35, 65, 0.80), rgba(11, 35, 65, 0.70)),
+        url("images/auto-repair/team-mechanics.jpg") center / cover;
+      padding: clamp(28px, 4vw, 38px);
+    }
+
+    .booking-copy h2 { color: var(--white); font-size: clamp(2.1rem, 4vw, 3.9rem); }
+    .booking-copy p { color: rgba(255,255,255,0.76); }
+
+    .booking-steps { display: grid; gap: 12px; margin-top: 28px; }
+
+    .step {
+      display: grid;
+      grid-template-columns: 45px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 15px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .step span:first-child {
+      width: 45px;
+      height: 45px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: var(--red);
+      color: var(--white);
+      font-weight: 950;
+    }
+
+    .step strong { display: block; }
+    .step small { display: block; color: rgba(255,255,255,0.72); margin-top: 3px; }
+
+    .booking-card { padding: clamp(24px, 4vw, 32px); }
+
+    .booking-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .booking-top h3,
+    .why-card h3,
+    .fleet-card h3,
+    .location-card h3 {
+      font-size: 2rem;
+      letter-spacing: -0.055em;
+    }
+
+    .selected-service { margin: 0; color: var(--muted); font-size: 0.94rem; }
+
+    .service-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
+    .field { display: grid; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    label { color: var(--navy); font-weight: 900; font-size: 0.88rem; }
+
+    input, select, textarea {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid rgba(11, 35, 65, 0.16);
+      border-radius: 17px;
+      padding: 12px 14px;
+      color: var(--ink);
+      background: rgba(247, 251, 255, 0.94);
+      outline: none;
+      transition: 160ms ease;
+    }
+
+    textarea { min-height: 108px; resize: vertical; }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(21, 89, 166, 0.62);
+      box-shadow: 0 0 0 4px rgba(36, 120, 212, 0.16);
+    }
+
+    .time-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
+
+    .time-chip {
+      min-height: 40px;
+      border: 1px solid rgba(11, 35, 65, 0.14);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      cursor: pointer;
+      font-weight: 900;
+      transition: 160ms ease;
+    }
+
+    .time-chip:hover,
+    .time-chip.active { color: var(--white); background: var(--navy); border-color: var(--navy); }
+
+    .form-footer {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .estimate-pill {
+      padding: 10px 12px;
+      border-radius: 999px;
+      color: var(--blue);
+      background: var(--ice);
+      font-weight: 900;
+      font-size: 0.88rem;
+    }
+
+    .confirmation {
+      display: none;
+      grid-column: 1 / -1;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(21, 89, 166, 0.10);
+      border: 1px solid rgba(21, 89, 166, 0.20);
+      color: var(--navy);
+      font-weight: 850;
+    }
+
+    .confirmation.show { display: block; }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .why-card { padding: clamp(24px, 4vw, 34px); }
+    .why-card p, .fleet-card p { color: var(--muted); }
+
+    .why-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .why-item {
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 14px;
+      padding: 15px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, var(--ice), #fff3f2);
+      border: 1px solid var(--line);
+    }
+
+    .why-item > span:first-child {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: var(--blue);
+      font-weight: 950;
+    }
+
+    .why-item:nth-child(even) > span:first-child { background: var(--red); }
+    .why-item strong { display: block; }
+    .why-item small { display: block; color: var(--muted); margin-top: 3px; }
+
+    .fleet-card {
+      overflow: hidden;
+      background: rgba(255,255,255,0.86);
+    }
+
+    .fleet-photo {
+      min-height: 255px;
+      background:
+        linear-gradient(0deg, rgba(11, 35, 65, 0.38), rgba(11, 35, 65, 0.02)),
+        url("images/auto-repair/fleet-service.jpg") center / cover;
+    }
+
+    .fleet-body { padding: clamp(24px, 4vw, 34px); }
+    .fleet-list { display: grid; gap: 10px; margin: 20px 0 0; }
+
+    .fleet-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 18px;
+      background: var(--ice);
+      border: 1px solid var(--line);
+      font-weight: 900;
+    }
+
+    .fleet-item span { color: var(--soft); font-weight: 800; }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.86fr) minmax(420px, 1.14fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .location-card { overflow: hidden; }
+
+    .location-photo {
+      min-height: 235px;
+      background:
+        linear-gradient(0deg, rgba(11, 35, 65, 0.30), rgba(11, 35, 65, 0.02)),
+        url("images/auto-repair/shop-interior.jpg") center / cover;
+    }
+
+    .location-body { padding: clamp(24px, 4vw, 34px); }
+    .location-body p { color: var(--muted); }
+
+    .hours-list {
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .hours-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(17,25,39,0.09);
+      color: var(--muted);
+    }
+
+    .hours-list b { color: var(--navy); }
+
+    .address-card {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 22px;
+      background: var(--ice);
+      border: 1px solid var(--line);
+    }
+
+    .address-card strong { display: block; }
+    .address-card span { color: var(--muted); }
+
+    .map-card { overflow: hidden; padding: 18px; }
+
+    .map-illustration {
+      position: relative;
+      min-height: 500px;
+      height: 100%;
+      border-radius: 30px;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(11, 35, 65, 0.10) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(11, 35, 65, 0.10) 1px, transparent 1px),
+        radial-gradient(circle at 78% 20%, rgba(214, 58, 49, 0.18), transparent 16rem),
+        linear-gradient(135deg, #eef6ff, #f7fbff);
+      background-size: 54px 54px, 54px 54px, auto, auto;
+      border: 1px solid var(--line);
+    }
+
+    .map-road { position: absolute; border-radius: 999px; background: rgba(21, 89, 166, 0.20); transform-origin: center; }
+    .road-one { width: 88%; height: 18px; left: -10%; top: 42%; transform: rotate(-16deg); }
+    .road-two { width: 78%; height: 14px; right: -9%; top: 63%; transform: rotate(23deg); background: rgba(214, 58, 49, 0.18); }
+    .road-three { width: 16px; height: 92%; left: 49%; top: -12%; transform: rotate(7deg); background: rgba(21, 89, 166, 0.16); }
+
+    .map-pin {
+      position: absolute;
+      left: 50%;
+      top: 43%;
+      width: 76px;
+      height: 76px;
+      border-radius: 26px 26px 26px 7px;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      background: linear-gradient(135deg, var(--navy), var(--red));
+      box-shadow: 0 22px 44px rgba(21, 89, 166, 0.26);
+    }
+
+    .map-pin::after {
+      content: "Ra";
+      position: absolute;
+      inset: 14px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      transform: rotate(45deg);
+      background: var(--white);
+      color: var(--blue);
+      font-weight: 950;
+      letter-spacing: -0.08em;
+    }
+
+    .map-label {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.90);
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      box-shadow: 0 18px 38px rgba(11, 35, 65, 0.14);
+      backdrop-filter: blur(14px);
+    }
+
+    .map-label strong { display: block; }
+    .map-label span { color: var(--muted); }
+
+    .reviews-layout {
+      display: grid;
+      grid-template-columns: minmax(310px, 0.78fr) minmax(0, 1.22fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .reviews-summary {
+      padding: 32px;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 26% 18%, rgba(214, 58, 49, 0.28), transparent 18rem),
+        linear-gradient(145deg, var(--navy), var(--blue));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .review-score {
+      font-size: clamp(4.8rem, 9vw, 7.2rem);
+      line-height: 0.85;
+      letter-spacing: -0.09em;
+      font-weight: 950;
+    }
+
+    .reviews-summary p { color: rgba(255,255,255,0.74); margin: 12px 0 0; }
+    .rating-bars { display: grid; gap: 10px; margin-top: 24px; }
+    .bar-row { display: grid; grid-template-columns: 42px 1fr 38px; align-items: center; gap: 10px; color: rgba(255,255,255,0.76); font-size: 0.9rem; }
+    .bar-track { height: 9px; border-radius: 999px; background: rgba(255,255,255,0.16); overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: inherit; background: var(--red-2); }
+
+    .review-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+
+    .review-card {
+      padding: 22px;
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .review-card p { margin: 12px 0 18px; color: var(--muted); }
+
+    .reviewer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      color: var(--soft);
+      font-size: 0.9rem;
+    }
+
+    .reviewer strong { color: var(--navy); }
+    .source { color: var(--blue); font-weight: 900; }
+
+    .final-cta { padding: 70px 0 84px; }
+
+    .final-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 44px;
+      padding: clamp(30px, 5.5vw, 62px);
+      color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(11, 35, 65, 0.88), rgba(11, 35, 65, 0.60)),
+        url("images/auto-repair/service-diagnostics.jpg") center / cover;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .final-card h2 { color: var(--white); }
+    .final-card p { max-width: 650px; color: rgba(255,255,255,0.78); }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0;
+      color: var(--muted);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-links { display: flex; gap: 12px; flex-wrap: wrap; }
+    .footer-links a { color: var(--navy); font-weight: 850; }
+
+    .img-oil { --image: url("images/auto-repair/service-oil.jpg"); }
+    .img-brakes { --image: url("images/auto-repair/service-brakes.jpg"); }
+    .img-diagnostics { --image: url("images/auto-repair/service-diagnostics.jpg"); }
+    .img-ac { --image: url("images/auto-repair/service-ac.jpg"); }
+    .img-transmission { --image: url("images/auto-repair/service-transmission.jpg"); }
+    .img-tires { --image: url("images/auto-repair/service-tires.jpg"); }
+    .img-shop { --image: url("images/auto-repair/shop-interior.jpg"); }
+    .img-fleet { --image: url("images/auto-repair/fleet-service.jpg"); }
+
+    @media (max-width: 1120px) {
+      .nav-links { display: none; }
+      .hero-grid,
+      .booking-grid,
+      .why-grid,
+      .location-grid,
+      .reviews-layout { grid-template-columns: 1fr; }
+      .hero-media { min-height: 560px; max-width: 760px; width: 100%; margin: 0 auto; }
+      .trust-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .coupon-grid { grid-template-columns: 1fr; }
+      .map-illustration { min-height: 430px; }
+    }
+
+    @media (max-width: 760px) {
+      .container { width: min(100% - 32px, var(--max)); }
+      .top-strip .container { justify-content: center; text-align: center; }
+      .nav { min-height: 70px; }
+      .brand-subtitle, .phone-link { display: none; }
+      .nav-actions .btn { min-height: 42px; padding: 10px 13px; font-size: 0.88rem; }
+      .hero { padding-top: 42px; }
+      h1 { font-size: clamp(3rem, 14vw, 4.9rem); }
+      .lead { font-size: 1.03rem; }
+      .hero-proof { grid-template-columns: 1fr; }
+      .hero-media { min-height: 455px; }
+      .hero-photo { inset: 0; border-radius: 34px; transform: none; }
+      .floating-trust { top: 14px; left: 12px; transform: none; width: min(285px, calc(100% - 24px)); }
+      .quick-card { right: 12px; bottom: -10px; }
+      .hero-caption { display: none; }
+      .trust-strip, .services-grid, .why-list, .review-grid { grid-template-columns: 1fr; }
+      section { padding: 56px 0; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 14px; }
+      .service-form { grid-template-columns: 1fr; }
+      .time-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-footer .btn { width: 100%; }
+      .final-card { grid-template-columns: 1fr; border-radius: 32px; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-strip">
+    <div class="container">
+      <span><strong>Same-day appointments:</strong> brakes, diagnostics, oil changes and urgent repair estimates</span>
+      <a href="tel:+61862440440">Call now: 08 6244 0440</a>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Redline AutoWorks home">
+        <div class="brand-mark">Ra</div>
+        <div>
+          <span class="brand-name">Redline AutoWorks</span>
+          <span class="brand-subtitle">ASE-certified auto repair demo</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#services">Services</a>
+        <a href="#appointment">Book</a>
+        <a href="#why">Why us</a>
+        <a href="#location">Location</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#specials">Coupons</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="phone-link" href="tel:+61862440440"><span>☎</span>08 6244 0440</a>
+        <a class="btn btn-primary" href="#appointment">Book a Service</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Auto repair · diagnostics · fleet service</div>
+          <h1 id="hero-title">Trust your car to a shop that <em>shows the proof.</em></h1>
+          <p class="lead">A solid, credential-first auto repair website concept designed to get drivers to book service, request estimates and feel confident handing over their keys.</p>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#appointment">Book a Service</a>
+            <a class="btn btn-red" href="#appointment">Get an Estimate</a>
+            <a class="phone-hero" href="tel:+61862440440"><span>☎</span>Click to call 08 6244 0440</a>
+          </div>
+
+          <div class="hero-proof" aria-label="Shop highlights">
+            <div class="proof-card"><strong>4.9★</strong><span>1,180 five-star reviews</span></div>
+            <div class="proof-card"><strong>24 mo</strong><span>repair warranty available</span></div>
+            <div class="proof-card"><strong>18 yrs</strong><span>serving local drivers</span></div>
+          </div>
+        </div>
+
+        <div class="hero-media" aria-label="Mechanic inspecting a vehicle">
+          <div class="hero-photo">
+            <div class="hero-caption">
+              <div><strong>Industrial-clean bays. Certified technicians.</strong><span>Maintenance, repairs, diagnostics and fleet service</span></div>
+              <a class="btn btn-secondary btn-small" href="#services">See services</a>
+            </div>
+          </div>
+
+          <aside class="floating-trust" aria-label="Review highlight">
+            <div class="stars">★★★★★</div>
+            <strong>“They explained the issue clearly and never pushed extra work.”</strong>
+            <p>Honest pricing and credentials are the fastest way to overcome auto repair distrust.</p>
+          </aside>
+
+          <aside class="quick-card" aria-label="Quick service shortcuts">
+            <strong>What does your vehicle need?</strong>
+            <p>Tap a service to pre-fill the estimate form.</p>
+            <div class="quick-pills">
+              <button type="button" data-service="Oil Change">Oil</button>
+              <button type="button" data-service="Brake Repair">Brakes</button>
+              <button type="button" data-service="Diagnostics">Diagnostics</button>
+              <button type="button" data-service="Tires">Tires</button>
+              <button type="button" data-service="A/C Service">A/C</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-bar" aria-label="Trust signals">
+      <div class="container trust-strip">
+        <div class="trust-item"><div class="trust-icon">ASE</div><div><strong>ASE-certified</strong><span>trained technicians</span></div></div>
+        <div class="trust-item"><div class="trust-icon">24</div><div><strong>Warranty</strong><span>24 mo repair cover</span></div></div>
+        <div class="trust-item"><div class="trust-icon">18</div><div><strong>Years</strong><span>in business</span></div></div>
+        <div class="trust-item"><div class="trust-icon">5★</div><div><strong>1,180</strong><span>five-star reviews</span></div></div>
+        <div class="trust-item"><div class="trust-icon">✓</div><div><strong>Inspections</strong><span>free with approved repair</span></div></div>
+      </div>
+    </section>
+
+    <section id="specials" class="coupons" aria-label="Coupons and specials">
+      <div class="container coupon-grid">
+        <article class="coupon-card img-oil">
+          <div><span class="coupon-badge">Coupon</span><h2>$25 off synthetic oil service</h2><p>Common in auto marketing: coupons give price-conscious drivers a reason to book now.</p></div>
+          <a class="btn btn-secondary" href="#appointment">Claim oil special</a>
+        </article>
+        <article class="coupon-card coupon-mini img-brakes">
+          <div><span class="coupon-badge">Brake month</span><h2>Free brake inspection</h2><p>With any booked service. Pads, rotors and fluid check included.</p></div>
+          <a class="btn btn-secondary" href="#appointment">Book inspection</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="services" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Services offered</div>
+            <h2 id="services-title">Everything drivers look for, presented clearly.</h2>
+          </div>
+          <p>Auto visitors need to know you can solve their problem, then book or call immediately. Each service button pre-fills the appointment form.</p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card"><div class="service-photo img-oil"><div class="service-icon">🛢</div></div><div class="service-body"><h3>Oil Change</h3><p>Synthetic, high-mileage and fleet oil services with filter replacement and fluid top-off.</p><div class="service-meta"><span class="meta-pill">30–45 min</span><span class="meta-pill">From $89</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Oil Change">Book oil service</button></div></article>
+          <article class="service-card"><div class="service-photo img-brakes"><div class="service-icon">●</div></div><div class="service-body"><h3>Brakes</h3><p>Brake pads, rotors, fluid, calipers, squeal diagnosis and safety inspections.</p><div class="service-meta"><span class="meta-pill">Safety critical</span><span class="meta-pill">Estimate first</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Brake Repair">Book brakes</button></div></article>
+          <article class="service-card"><div class="service-photo img-diagnostics"><div class="service-icon">▣</div></div><div class="service-body"><h3>Diagnostics</h3><p>Check engine lights, drivability issues, electrical faults and scan tool testing.</p><div class="service-meta"><span class="meta-pill">Scan + test</span><span class="meta-pill">From $120</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Diagnostics">Book diagnosis</button></div></article>
+          <article class="service-card"><div class="service-photo img-ac"><div class="service-icon">❄</div></div><div class="service-body"><h3>A/C Service</h3><p>A/C performance checks, leak testing, cabin filters, recharge and compressor diagnosis.</p><div class="service-meta"><span class="meta-pill">Cold air check</span><span class="meta-pill">Seasonal</span></div><button class="btn btn-secondary btn-small" type="button" data-service="A/C Service">Book A/C</button></div></article>
+          <article class="service-card"><div class="service-photo img-transmission"><div class="service-icon">⚙</div></div><div class="service-body"><h3>Transmission</h3><p>Fluid service, slipping diagnosis, clutch concerns and shift-quality inspections.</p><div class="service-meta"><span class="meta-pill">Inspection</span><span class="meta-pill">Quote required</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Transmission Service">Request estimate</button></div></article>
+          <article class="service-card"><div class="service-photo img-shop"><div class="service-icon">✓</div></div><div class="service-body"><h3>Smog / Inspection</h3><p>Roadworthy checks, pre-purchase inspections and emissions-related diagnosis.</p><div class="service-meta"><span class="meta-pill">Reports</span><span class="meta-pill">By appointment</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Smog / Inspection">Book inspection</button></div></article>
+          <article class="service-card"><div class="service-photo img-tires"><div class="service-icon">◉</div></div><div class="service-body"><h3>Tires</h3><p>Mounting, balancing, rotations, puncture repairs, alignment checks and tire sourcing.</p><div class="service-meta"><span class="meta-pill">Tire care</span><span class="meta-pill">Fast turnaround</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Tires">Book tires</button></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="appointment" aria-labelledby="appointment-title">
+      <div class="container booking-grid">
+        <aside class="booking-copy">
+          <div class="section-kicker" style="color:#ffb6ae">Appointment / estimate request</div>
+          <h2 id="appointment-title">Collect the vehicle details before the service bay.</h2>
+          <p>A strong auto form captures make, model, year, service needed and symptoms so the shop can respond with a realistic next step.</p>
+          <div class="booking-steps">
+            <div class="step"><span>1</span><div><strong>Vehicle details</strong><small>Year, make, model, mileage and service need.</small></div></div>
+            <div class="step"><span>2</span><div><strong>Preferred appointment</strong><small>Choose date, time and whether you need a quote.</small></div></div>
+            <div class="step"><span>3</span><div><strong>Shop follow-up</strong><small>Confirm appointment, estimate range or diagnostic plan.</small></div></div>
+          </div>
+        </aside>
+
+        <div class="booking-card">
+          <div class="booking-top">
+            <div>
+              <div class="section-kicker">Book service</div>
+              <h3>Service request</h3>
+              <p class="selected-service" id="selectedServiceText">Select a service or tap any service button.</p>
+            </div>
+            <a class="btn btn-red btn-small" href="tel:+61862440440">Call shop</a>
+          </div>
+
+          <form class="service-form" id="serviceForm">
+            <div class="field"><label for="yearInput">Vehicle year</label><input id="yearInput" inputmode="numeric" placeholder="2020" required /></div>
+            <div class="field"><label for="makeInput">Make</label><input id="makeInput" placeholder="Toyota, Ford, Mazda..." required /></div>
+            <div class="field"><label for="modelInput">Model</label><input id="modelInput" placeholder="Corolla, Ranger, CX-5..." required /></div>
+            <div class="field"><label for="mileageInput">Mileage / odometer</label><input id="mileageInput" placeholder="85,000 km" /></div>
+            <div class="field full"><label for="serviceSelect">Service needed</label><select id="serviceSelect" required><option value="">Select a service</option><option>Oil Change</option><option>Brake Repair</option><option>Diagnostics</option><option>A/C Service</option><option>Transmission Service</option><option>Smog / Inspection</option><option>Tires</option><option>Fleet Service</option><option>Other / not sure</option></select></div>
+            <div class="field"><label for="dateSelect">Preferred date</label><input id="dateSelect" type="date" required /></div>
+            <div class="field"><label for="requestType">Request type</label><select id="requestType"><option>Book a service</option><option>Get an estimate first</option><option>Ask a question</option><option>Fleet account enquiry</option></select></div>
+            <div class="field full"><label>Preferred time</label><div class="time-grid" role="group" aria-label="Preferred time options"><button class="time-chip" type="button" data-time="8:00 AM">8:00</button><button class="time-chip" type="button" data-time="9:30 AM">9:30</button><button class="time-chip" type="button" data-time="11:00 AM">11:00</button><button class="time-chip" type="button" data-time="1:00 PM">1:00</button><button class="time-chip" type="button" data-time="2:30 PM">2:30</button><button class="time-chip" type="button" data-time="4:00 PM">4:00</button><button class="time-chip" type="button" data-time="Drop-off">Drop-off</button><button class="time-chip" type="button" data-time="Flexible">Flexible</button></div><input id="timeValue" type="hidden" required /></div>
+            <div class="field"><label for="nameInput">Name</label><input id="nameInput" autocomplete="name" placeholder="Your name" required /></div>
+            <div class="field"><label for="phoneInput">Phone</label><input id="phoneInput" autocomplete="tel" placeholder="0400 000 000" required /></div>
+            <div class="field full"><label for="symptomsInput">Symptoms / notes</label><textarea id="symptomsInput" placeholder="Describe noises, warning lights, driving symptoms, recent repairs, tire size, or service history."></textarea></div>
+            <div class="confirmation" id="confirmation" role="status"></div>
+            <div class="form-footer"><span class="estimate-pill" id="estimateText">Estimate: depends on service and inspection</span><button class="btn btn-primary" type="submit">Send service request</button></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="why" aria-labelledby="why-title">
+      <div class="container why-grid">
+        <div class="why-card">
+          <div class="section-kicker">Why choose us</div>
+          <h2 id="why-title">Honest pricing, fast turnaround and credentials up front.</h2>
+          <p>Auto repair trust is earned before a driver books. This section makes guarantees, process and shop standards visible.</p>
+          <div class="why-list">
+            <div class="why-item"><span>$</span><div><strong>Honest pricing</strong><small>Clear estimates before work begins, with no pressure to approve extras.</small></div></div>
+            <div class="why-item"><span>↻</span><div><strong>Fast turnaround</strong><small>Same-day options for common maintenance and diagnostics when available.</small></div></div>
+            <div class="why-item"><span>✓</span><div><strong>Free inspections</strong><small>Complimentary brake and safety checks with qualifying services.</small></div></div>
+            <div class="why-item"><span>ASE</span><div><strong>Certified techs</strong><small>Experienced technicians using modern diagnostic equipment.</small></div></div>
+            <div class="why-item"><span>24</span><div><strong>Repair warranty</strong><small>Warranty-backed parts and labour options on approved repairs.</small></div></div>
+            <div class="why-item"><span>☑</span><div><strong>Clean shop policy</strong><small>Organized bays, seat covers, floor mats and documented findings.</small></div></div>
+          </div>
+        </div>
+
+        <aside class="fleet-card">
+          <div class="fleet-photo"></div>
+          <div class="fleet-body">
+            <div class="section-kicker">Fleet / specialties</div>
+            <h3>Fleet maintenance for busy vehicles.</h3>
+            <p>Add a specialty callout for fleet accounts, diesel, European cars, hybrids, 4x4s, performance vehicles or commercial vans.</p>
+            <div class="fleet-list">
+              <div class="fleet-item"><strong>Priority scheduling</strong><span>Reduce downtime</span></div>
+              <div class="fleet-item"><strong>Maintenance reminders</strong><span>Oil, brakes, tires</span></div>
+              <div class="fleet-item"><strong>Monthly reporting</strong><span>For business accounts</span></div>
+            </div>
+            <div class="hero-cta" style="margin-top:22px"><button class="btn btn-primary" type="button" data-service="Fleet Service">Ask about fleet service</button></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="location" aria-labelledby="location-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Hours & location</div>
+            <h2 id="location-title">Make the shop easy to find and easy to trust.</h2>
+          </div>
+          <p>Location details, opening hours, drop-off notes and directions help drivers plan their service without friction.</p>
+        </div>
+
+        <div class="location-grid">
+          <div class="location-card">
+            <div class="location-photo"></div>
+            <div class="location-body">
+              <h3>Redline AutoWorks</h3>
+              <p>18 Workshop Avenue, Perth WA 6000<br />Easy drop-off lane · After-hours key box · Fleet parking available</p>
+              <ul class="hours-list" aria-label="Opening hours">
+                <li><span>Monday</span><b>7:30 AM – 5:30 PM</b></li>
+                <li><span>Tuesday</span><b>7:30 AM – 5:30 PM</b></li>
+                <li><span>Wednesday</span><b>7:30 AM – 5:30 PM</b></li>
+                <li><span>Thursday</span><b>7:30 AM – 5:30 PM</b></li>
+                <li><span>Friday</span><b>7:30 AM – 5:00 PM</b></li>
+                <li><span>Saturday</span><b>8:00 AM – 1:00 PM</b></li>
+                <li><span>Sunday</span><b>Closed</b></li>
+              </ul>
+              <div class="address-card"><strong>Directions</strong><span>Two minutes from the freeway exit. Replace the map with Google Maps or Apple Maps embed.</span></div>
+              <div class="hero-cta" style="margin-top:20px"><a class="btn btn-primary" href="#appointment">Book service</a><a class="btn btn-secondary" href="https://maps.google.com" target="_blank" rel="noreferrer">Get directions</a></div>
+            </div>
+          </div>
+
+          <div class="map-card" aria-label="Location map illustration">
+            <div class="map-illustration">
+              <div class="map-road road-one"></div><div class="map-road road-two"></div><div class="map-road road-three"></div>
+              <div class="map-pin" aria-hidden="true"></div>
+              <div class="map-label"><strong>Easy access from main roads and business parks.</strong><span>This map-style block can become a live embedded map with directions and opening hours.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews" aria-labelledby="reviews-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Reviews</div>
+            <h2 id="reviews-title">Prominent reviews because trust is the biggest auto barrier.</h2>
+          </div>
+          <p>Drivers are nervous about repairs. Specific reviews about pricing, communication and repeat visits reduce that hesitation.</p>
+        </div>
+
+        <div class="reviews-layout">
+          <aside class="reviews-summary">
+            <div>
+              <div class="review-score">4.9</div>
+              <div class="stars" style="font-size:1.25rem;color:#ffb6ae">★★★★★</div>
+              <p>1,180 five-star reviews across oil changes, brakes, diagnostics, tires, A/C, inspections and fleet accounts.</p>
+              <div class="rating-bars" aria-label="Rating breakdown">
+                <div class="bar-row"><span>5★</span><div class="bar-track"><div class="bar-fill" style="width:94%"></div></div><span>94%</span></div>
+                <div class="bar-row"><span>4★</span><div class="bar-track"><div class="bar-fill" style="width:5%"></div></div><span>5%</span></div>
+                <div class="bar-row"><span>3★</span><div class="bar-track"><div class="bar-fill" style="width:1%"></div></div><span>1%</span></div>
+              </div>
+            </div>
+            <a class="btn btn-secondary" href="#appointment">Book with confidence</a>
+          </aside>
+
+          <div class="review-grid">
+            <article class="review-card"><div class="stars">★★★★★</div><p>“They diagnosed the warning light, sent photos and explained the repair before doing anything. Honest and professional.”</p><div class="reviewer"><strong>Michelle R.</strong><span class="source">Google</span></div></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>“Brake job was quoted clearly and finished the same day. No surprise add-ons when I picked up the car.”</p><div class="reviewer"><strong>Ben C.</strong><span class="source">Google</span></div></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>“The online form saved time because I could include the vehicle details and symptoms up front.”</p><div class="reviewer"><strong>Talia W.</strong><span class="source">Shop review</span></div></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>“Our fleet vans are serviced here now. They keep us on schedule and flag issues before downtime hits.”</p><div class="reviewer"><strong>Marcus K.</strong><span class="source">Fleet account</span></div></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>“A/C was warm, now it’s ice cold. They tested properly instead of just pushing a recharge.”</p><div class="reviewer"><strong>Laura S.</strong><span class="source">Google</span></div></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>“Clean shop, good communication and a warranty on the repair. I finally found a mechanic I trust.”</p><div class="reviewer"><strong>Daniel P.</strong><span class="source">Facebook</span></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" aria-label="Final service call to action">
+      <div class="container">
+        <div class="final-card">
+          <div>
+            <div class="section-kicker" style="color:#ffb6ae">Ready to drive bookings and calls</div>
+            <h2>Put credentials, reviews and phone CTAs in the driver’s path.</h2>
+            <p>This auto repair demo includes the full conversion flow: hero booking CTA, click-to-call, service list, appointment form, trust signals, coupons, hours, location map, why-choose-us proof, reviews and fleet callout.</p>
+          </div>
+          <div class="hero-cta" style="margin:0"><a class="btn btn-secondary" href="tel:+61862440440">Call now</a><a class="btn btn-primary" href="#appointment">Book a Service</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <a class="brand" href="#top"><div class="brand-mark">Ra</div><div><span class="brand-name">Redline AutoWorks</span><span class="brand-subtitle">18 Workshop Avenue, Perth WA</span></div></a>
+      <div class="footer-links"><a href="tel:+61862440440">08 6244 0440</a><a href="#appointment">Book service</a><a href="#location">Directions</a><a href="#specials">Coupons</a></div>
+      <div>Demo website concept · Replace with real auto shop details</div>
+    </div>
+  </footer>
+
+  <script>
+    const serviceSelect = document.getElementById('serviceSelect');
+    const selectedServiceText = document.getElementById('selectedServiceText');
+    const estimateText = document.getElementById('estimateText');
+    const appointmentSection = document.getElementById('appointment');
+    const confirmation = document.getElementById('confirmation');
+
+    const serviceNotes = {
+      'Oil Change': 'Typical visit: 30–45 min · coupon may apply',
+      'Brake Repair': 'Estimate after inspection · safety critical',
+      'Diagnostics': 'Diagnostic testing from $120 · applied to approved repairs where applicable',
+      'A/C Service': 'A/C performance check · leak testing may be required',
+      'Transmission Service': 'Inspection required before estimate',
+      'Smog / Inspection': 'Inspection appointment required',
+      'Tires': 'Mounting, balancing, rotation or sourcing',
+      'Fleet Service': 'Fleet account enquiry · scheduling options available'
+    };
+
+    function updateServiceText() {
+      const service = serviceSelect.value;
+      selectedServiceText.textContent = service ? `${service} selected. Add your vehicle details below.` : 'Select a service or tap any service button.';
+      estimateText.textContent = service ? (serviceNotes[service] || 'Estimate depends on vehicle and inspection') : 'Estimate: depends on service and inspection';
+    }
+
+    serviceSelect.addEventListener('change', updateServiceText);
+
+    document.querySelectorAll('[data-service]').forEach(button => {
+      button.addEventListener('click', () => {
+        const service = button.dataset.service;
+        if (serviceSelect && service) serviceSelect.value = service;
+        updateServiceText();
+        confirmation.classList.remove('show');
+        appointmentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    document.querySelectorAll('.time-chip').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.time-chip').forEach(chip => chip.classList.remove('active'));
+        button.classList.add('active');
+        document.getElementById('timeValue').value = button.dataset.time;
+      });
+    });
+
+    document.getElementById('serviceForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const name = document.getElementById('nameInput').value.trim() || 'there';
+      const year = document.getElementById('yearInput').value.trim();
+      const make = document.getElementById('makeInput').value.trim();
+      const model = document.getElementById('modelInput').value.trim();
+      const service = serviceSelect.value || 'your selected service';
+      const requestType = document.getElementById('requestType').value;
+      const time = document.getElementById('timeValue').value || 'a flexible time';
+      confirmation.textContent = `Thanks, ${name}! Your request to ${requestType.toLowerCase()} for ${service} on your ${year} ${make} ${model} at ${time} has been received. In a live site, this would send to the repair shop or service CRM.`;
+      confirmation.classList.add('show');
+    });
+
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    document.getElementById('dateSelect').min = tomorrow.toISOString().split('T')[0];
+  </script>
+</body>
+</html>
