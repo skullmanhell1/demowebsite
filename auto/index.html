@@ -1413,5 +1413,140 @@
     document.getElementById('dateSelect').min = tomorrow.toISOString().split('T')[0];
   </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<!-- DEMO-GUIDE:START -->
+<style>
+  #dg-root, #dg-root * { box-sizing: border-box; }
+  #dg-root { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .dg-pin {
+    position: absolute; top: 12px; right: 12px; z-index: 60;
+    width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff;
+    background: #f05848; color: #10141b; font-weight: 900; font-size: 0.92rem;
+    display: none; align-items: center; justify-content: center; cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.28); animation: dg-pulse 2.4s ease-out infinite;
+  }
+  .dg-on .dg-pin { display: inline-flex; }
+  .dg-on .dg-target { outline: 2px dashed #f05848; outline-offset: 6px; border-radius: 14px; }
+  @keyframes dg-pulse { 0% { box-shadow: 0 0 0 0 #f0584866; } 70% { box-shadow: 0 0 0 12px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+  .dg-note {
+    position: absolute; top: 50px; right: 12px; z-index: 61; width: min(320px, 78vw);
+    display: none; padding: 15px 16px; border-radius: 16px; color: #fff;
+    background: #171b22; border: 1px solid rgba(255,255,255,0.14);
+    box-shadow: 0 22px 60px rgba(0,0,0,0.4); text-align: left;
+  }
+  .dg-note.dg-open { display: block; }
+  .dg-note b { display: block; font-size: 1rem; margin-bottom: 6px; color: #f05848; }
+  .dg-note p { margin: 0; font-size: 0.9rem; line-height: 1.5; color: rgba(255,255,255,0.86); }
+  .dg-note .dg-x { position: absolute; top: 8px; right: 10px; cursor: pointer; color: rgba(255,255,255,0.6); font-size: 1rem; background: none; border: 0; }
+
+  #dg-toggle {
+    position: fixed; right: 18px; bottom: 84px; z-index: 2147483000;
+    padding: 12px 16px; border: 0; border-radius: 999px; cursor: pointer;
+    font-weight: 800; font-size: 0.9rem; color: #10141b; background: #f05848;
+    box-shadow: 0 14px 34px rgba(0,0,0,0.28); display: inline-flex; align-items: center; gap: 8px;
+  }
+  #dg-toggle .dg-dot { width: 9px; height: 9px; border-radius: 50%; background: #10141b; }
+
+  #dg-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 2147483000;
+    background: rgba(16,20,27,0.96); color: #fff; backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding: 13px 18px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    justify-content: center; font-size: 0.92rem;
+  }
+  #dg-bar strong { color: #f05848; }
+  #dg-bar .dg-btn {
+    padding: 9px 14px; border-radius: 999px; border: 0; cursor: pointer;
+    font-weight: 800; font-size: 0.86rem; color: #10141b; background: #f05848; white-space: nowrap;
+  }
+  #dg-bar .dg-close { background: none; border: 1px solid rgba(255,255,255,0.3); color: #fff; }
+  #dg-bar .dg-txt { max-width: 760px; line-height: 1.45; }
+  #dg-bar .dg-ai { color: rgba(255,255,255,0.7); }
+
+  #dg-pill {
+    position: fixed; left: 18px; bottom: 18px; z-index: 2147483000; display: none;
+    padding: 10px 14px; border-radius: 999px; cursor: pointer; font-weight: 700; font-size: 0.84rem;
+    color: #fff; background: rgba(16,20,27,0.94); border: 1px solid rgba(255,255,255,0.16);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.28);
+  }
+  @media (max-width: 640px) {
+    #dg-toggle { bottom: 128px; }
+    #dg-bar { font-size: 0.85rem; }
+  }
+</style>
+
+<div id="dg-root">
+  <button id="dg-toggle" type="button"><span class="dg-dot"></span><span id="dg-toggle-label">Tour the features</span></button>
+
+  <div id="dg-bar" role="note">
+    <span class="dg-txt">
+      <strong>&#9733; Live demo preview</strong> &mdash; this is what a website for your auto shop could look like.
+      <span class="dg-ai">All photos are <b>AI-generated for demonstration purposes only</b> &mdash; your finished site will use your own real images.</span>
+    </span>
+    <button class="dg-btn" id="dg-bar-tour" type="button">Show what each feature does</button>
+    <button class="dg-btn dg-close" id="dg-bar-close" type="button">Got it &times;</button>
+  </div>
+
+  <button id="dg-pill" type="button">&#9432; About this demo</button>
+</div>
+
+<script>
+(function(){
+  var A = [{"id": "specials", "title": "Coupons & specials", "text": "Limited-time offers give price-conscious drivers a reason to book now instead of later."}, {"id": "services", "title": "Services offered", "text": "Every service with pricing hints. Each button pre-fills the booking form to make the next step effortless."}, {"id": "appointment", "title": "Booking / estimate form", "text": "Drivers request a service or a quote with their vehicle details \u2014 leads land straight with you. Your main conversion tool."}, {"id": "why", "title": "Why choose us", "text": "Certifications, warranty and honest-pricing promises that overcome the distrust drivers feel about repairs."}, {"id": "location", "title": "Hours & location", "text": "Address, opening hours and directions so drivers can plan a drop-off with no friction."}, {"id": "reviews", "title": "Reviews", "text": "Prominent 5-star reviews, because trust is the single biggest barrier in auto repair."}];
+  var root = document.getElementById('dg-root');
+  var toggle = document.getElementById('dg-toggle');
+  var label = document.getElementById('dg-toggle-label');
+  var bar = document.getElementById('dg-bar');
+  var pill = document.getElementById('dg-pill');
+  var on = false;
+
+  A.forEach(function(a, i){
+    var sec = document.getElementById(a.id);
+    if(!sec) return;
+    if(getComputedStyle(sec).position === 'static'){ sec.style.position = 'relative'; }
+    sec.classList.add('dg-target-el');
+
+    var pin = document.createElement('button');
+    pin.type = 'button'; pin.className = 'dg-pin'; pin.textContent = (i+1);
+
+    var note = document.createElement('div');
+    note.className = 'dg-note';
+    note.innerHTML = '<button class="dg-x" type="button" aria-label="close">&times;</button>' +
+                     '<b>' + (i+1) + '. ' + a.title + '</b><p>' + a.text + '</p>';
+
+    pin.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = note.classList.contains('dg-open');
+      document.querySelectorAll('.dg-note').forEach(function(n){ n.classList.remove('dg-open'); });
+      if(!isOpen) note.classList.add('dg-open');
+    });
+    note.querySelector('.dg-x').addEventListener('click', function(e){ e.stopPropagation(); note.classList.remove('dg-open'); });
+
+    sec.appendChild(pin);
+    sec.appendChild(note);
+  });
+
+  function setGuide(state){
+    on = state;
+    document.body.classList.toggle('dg-on', on);
+    label.textContent = on ? 'Hide feature guide' : 'Tour the features';
+    if(!on) document.querySelectorAll('.dg-note').forEach(function(n){ n.classList.remove('dg-open'); });
+    document.querySelectorAll('.dg-target-el').forEach(function(s){ s.classList.toggle('dg-target', on); });
+    if(on){
+      var first = document.querySelector('.dg-pin');
+      if(first) first.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+  }
+
+  toggle.addEventListener('click', function(){ setGuide(!on); });
+  document.getElementById('dg-bar-tour').addEventListener('click', function(){ setGuide(true); });
+  document.getElementById('dg-bar-close').addEventListener('click', function(){
+    bar.style.display = 'none'; pill.style.display = 'inline-block';
+  });
+  pill.addEventListener('click', function(){
+    bar.style.display = 'flex'; pill.style.display = 'none';
+  });
+})();
+</script>
+<!-- DEMO-GUIDE:END -->
 </body>
 </html>
