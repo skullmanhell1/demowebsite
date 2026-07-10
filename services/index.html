@@ -1927,5 +1927,65 @@
 })();
 </script>
 <!-- ANIM:END -->
+<!-- FLAIR:START -->
+<style id="flair-layer">
+  /* Blur-in refinement for reveal (demos use body.premium-ready) */
+  body.premium-ready [data-reveal] {
+    filter: blur(6px);
+    transition: opacity .75s cubic-bezier(.16,.84,.44,1),
+                transform .75s cubic-bezier(.16,.84,.44,1),
+                filter .75s cubic-bezier(.16,.84,.44,1);
+  }
+  body.premium-ready [data-reveal].revealed { filter: blur(0); }
+
+  /* Smooth magnetic return */
+  .btn-primary, .btn-red, .btn-call { will-change: transform; }
+
+  @media (prefers-reduced-motion: reduce) {
+    body.premium-ready [data-reveal] { filter: none !important; }
+  }
+</style>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+
+  /* Hero parallax (demos) */
+  var hero = document.querySelector('.hero-photo');
+  if (hero) {
+    var ticking = false;
+    function onScroll(){
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(function(){
+        var r = hero.getBoundingClientRect();
+        if (r.bottom > -100 && r.top < window.innerHeight + 100) {
+          var shift = Math.max(-38, Math.min(38, r.top * -0.075));
+          hero.style.backgroundPositionY = 'calc(50% + ' + shift.toFixed(1) + 'px)';
+        }
+        ticking = false;
+      });
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll, {passive:true});
+    onScroll();
+  }
+
+  /* Magnetic CTA buttons (fine pointers only) */
+  if (window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    var btns = document.querySelectorAll('.btn-primary, .btn-red, .btn-call');
+    btns.forEach(function(b){
+      b.addEventListener('pointermove', function(e){
+        var r = b.getBoundingClientRect();
+        var x = (e.clientX - r.left - r.width/2) / (r.width/2);
+        var y = (e.clientY - r.top - r.height/2) / (r.height/2);
+        b.style.transform = 'translate(' + (x*7).toFixed(1) + 'px,' + (y*6 - 2).toFixed(1) + 'px)';
+      });
+      b.addEventListener('pointerleave', function(){ b.style.transform = ''; });
+    });
+  }
+})();
+</script>
+<!-- FLAIR:END -->
 </body>
 </html>
