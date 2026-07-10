@@ -1207,8 +1207,19 @@
   <!-- PRELOAD:START -->
   <link rel="preload" as="image" href="assets/ecc3a1c2cbae.jpg" fetchpriority="high" />
 <!-- PRELOAD:END -->
+  <!-- INTRO-CSS:START -->
+  <style id="intro-anim">
+    @media (prefers-reduced-motion: no-preference) {
+      html.has-js header { animation: dgHeaderIn .7s cubic-bezier(.16,.84,.44,1) both; }
+      html.has-js main > section:first-child { animation: dgHeroIn .9s cubic-bezier(.16,.84,.44,1) .05s both; }
+    }
+    @keyframes dgHeaderIn { from { opacity: 0; transform: translateY(-100%); } to { opacity: 1; transform: none; } }
+    @keyframes dgHeroIn   { from { opacity: 0; transform: translateY(26px); }   to { opacity: 1; transform: none; } }
+  </style>
+<!-- INTRO-CSS:END -->
 </head>
 <body>
+  <!-- INTRO-JS:START --><script>document.documentElement.classList.add("has-js");</script><!-- INTRO-JS:END -->
   <div class="top-strip">
     <div class="container">
       <span><strong>Tonight:</strong> wood-fired flatbread + spritz special from 5 PM</span>

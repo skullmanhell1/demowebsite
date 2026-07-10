@@ -1185,8 +1185,19 @@
   <!-- PRELOAD:START -->
   <link rel="preload" as="image" href="assets/01981c500106.jpg" fetchpriority="high" />
 <!-- PRELOAD:END -->
+  <!-- INTRO-CSS:START -->
+  <style id="intro-anim">
+    @media (prefers-reduced-motion: no-preference) {
+      html.has-js header { animation: dgHeaderIn .7s cubic-bezier(.16,.84,.44,1) both; }
+      html.has-js main > section:first-child { animation: dgHeroIn .9s cubic-bezier(.16,.84,.44,1) .05s both; }
+    }
+    @keyframes dgHeaderIn { from { opacity: 0; transform: translateY(-100%); } to { opacity: 1; transform: none; } }
+    @keyframes dgHeroIn   { from { opacity: 0; transform: translateY(26px); }   to { opacity: 1; transform: none; } }
+  </style>
+<!-- INTRO-CSS:END -->
 </head>
 <body>
+  <!-- INTRO-JS:START --><script>document.documentElement.classList.add("has-js");</script><!-- INTRO-JS:END -->
   <div class="top-strip">
     <div class="container">
       <span><strong>First visit:</strong> $20 off any cut + beard package this week</span>
