@@ -342,5 +342,87 @@
 })();
 </script>
 <!-- PREMIUM2:END -->
+<!-- ANIM:START -->
+<style id="anim-layer">
+  /* Shine sweep on primary CTAs */
+  .btn-primary, .btn-red, .btn-call, .btn-dark { position: relative; overflow: hidden; }
+  .btn-primary::after, .btn-red::after, .btn-call::after, .btn-dark::after {
+    content: ""; position: absolute; top: 0; bottom: 0; left: -130%; width: 55%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.38), transparent);
+    transform: skewX(-18deg); transition: left 0.7s cubic-bezier(.22,.61,.36,1); pointer-events: none;
+  }
+  .btn-primary:hover::after, .btn-red:hover::after, .btn-call:hover::after, .btn-dark:hover::after { left: 150%; }
+
+  /* Animated gradient headline (landing) */
+  .grad { background-size: 220% 220%; animation: dgGradShift 7s ease-in-out infinite; }
+  @keyframes dgGradShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+  /* Card glow on hover (landing) */
+  .demo { transition: transform .3s ease, box-shadow .35s ease, border-color .3s ease; }
+  .demo:hover { box-shadow: 0 34px 90px rgba(0,0,0,0.5), 0 0 0 1px rgba(34,211,238,0.4), 0 18px 60px rgba(99,102,241,0.28); }
+
+  /* Count-up: avoid layout shift by reserving space */
+  [data-counting] { font-variant-numeric: tabular-nums; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .grad { animation: none !important; }
+    .btn-primary::after, .btn-red::after, .btn-call::after, .btn-dark::after { display: none !important; }
+    .demo { transition: none !important; }
+  }
+</style>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+
+  function animateCount(el){
+    if (el.dataset.cuDone) return;
+    var raw = (el.textContent || '').trim();
+    var m = raw.match(/^(\D*?)(\d[\d,]*(?:\.\d+)?)(.*)$/s);
+    if (!m) { return; }
+    var prefix = m[1], numStr = m[2], suffix = m[3];
+    var decimals = (numStr.split('.')[1] || '').length;
+    var hasComma = numStr.indexOf(',') > -1;
+    var target = parseFloat(numStr.replace(/,/g, ''));
+    if (isNaN(target)) return;
+    el.dataset.cuDone = '1';
+    el.setAttribute('data-counting','');
+
+    function fmt(v){
+      var s = decimals ? v.toFixed(decimals) : Math.round(v).toString();
+      if (hasComma) {
+        var parts = s.split('.');
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        s = parts.join('.');
+      }
+      return prefix + s + suffix;
+    }
+    var dur = 1300, start = null;
+    function step(ts){
+      if (!start) start = ts;
+      var p = Math.min(1, (ts - start) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(target * eased);
+      if (p < 1) requestAnimationFrame(step); else el.textContent = fmt(target);
+    }
+    requestAnimationFrame(step);
+  }
+
+  var targets = Array.prototype.slice.call(
+    document.querySelectorAll('.proof-card strong, .review-score, .stat b, [data-count]')
+  );
+  if (!targets.length) return;
+
+  if (!('IntersectionObserver' in window)) { targets.forEach(animateCount); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { animateCount(e.target); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.6 });
+  targets.forEach(function(t){ io.observe(t); });
+})();
+</script>
+<!-- ANIM:END -->
 </body>
 </html>
