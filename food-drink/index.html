@@ -1732,134 +1732,151 @@
 <style>
   #dg-root, #dg-root * { box-sizing: border-box; }
   #dg-root { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  .dg-pin {
-    position: absolute; top: 12px; right: 12px; z-index: 60;
-    width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff;
-    background: #e7ab48; color: #10141b; font-weight: 900; font-size: 0.92rem;
-    display: none; align-items: center; justify-content: center; cursor: pointer;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.28); animation: dg-pulse 2.4s ease-out infinite;
-  }
-  .dg-on .dg-pin { display: inline-flex; }
-  .dg-on .dg-target { outline: 2px dashed #e7ab48; outline-offset: 6px; border-radius: 14px; }
-  @keyframes dg-pulse { 0% { box-shadow: 0 0 0 0 #e7ab4866; } 70% { box-shadow: 0 0 0 12px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
-  .dg-note {
-    position: absolute; top: 50px; right: 12px; z-index: 61; width: min(320px, 78vw);
-    display: none; padding: 15px 16px; border-radius: 16px; color: #fff;
-    background: #171b22; border: 1px solid rgba(255,255,255,0.14);
-    box-shadow: 0 22px 60px rgba(0,0,0,0.4); text-align: left;
-  }
-  .dg-note.dg-open { display: block; }
-  .dg-note b { display: block; font-size: 1rem; margin-bottom: 6px; color: #e7ab48; }
-  .dg-note p { margin: 0; font-size: 0.9rem; line-height: 1.5; color: rgba(255,255,255,0.86); }
-  .dg-note .dg-x { position: absolute; top: 8px; right: 10px; cursor: pointer; color: rgba(255,255,255,0.6); font-size: 1rem; background: none; border: 0; }
+  :root { --dg-accent: #e7ab48; }
 
-  #dg-toggle {
-    position: fixed; right: 18px; bottom: 84px; z-index: 2147483000;
-    padding: 12px 16px; border: 0; border-radius: 999px; cursor: pointer;
-    font-weight: 800; font-size: 0.9rem; color: #10141b; background: #e7ab48;
-    box-shadow: 0 14px 34px rgba(0,0,0,0.28); display: inline-flex; align-items: center; gap: 8px;
+  body.dg-on .dg-active {
+    outline: 3px solid var(--dg-accent); outline-offset: 7px; border-radius: 16px;
+    transition: outline-color .35s ease;
+    box-shadow: 0 0 0 9999px rgba(10,13,20,0.015);
   }
-  #dg-toggle .dg-dot { width: 9px; height: 9px; border-radius: 50%; background: #10141b; }
 
-  #dg-bar {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 2147483000;
-    background: rgba(16,20,27,0.96); color: #fff; backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255,255,255,0.12);
-    padding: 13px 18px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
-    justify-content: center; font-size: 0.92rem;
+  #dg-callout {
+    position: fixed; right: 20px; bottom: 70px; z-index: 2147483000;
+    width: min(370px, calc(100vw - 32px));
+    background: #12151c; color: #fff; border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 26px 74px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.03) inset;
+    overflow: hidden; opacity: 0; transform: translateY(26px) scale(.97); pointer-events: none;
+    transition: opacity .5s cubic-bezier(.16,.84,.44,1), transform .5s cubic-bezier(.16,.84,.44,1);
   }
-  #dg-bar strong { color: #e7ab48; }
-  #dg-bar .dg-btn {
-    padding: 9px 14px; border-radius: 999px; border: 0; cursor: pointer;
-    font-weight: 800; font-size: 0.86rem; color: #10141b; background: #e7ab48; white-space: nowrap;
+  #dg-callout.dg-show { opacity: 1; transform: none; pointer-events: auto; }
+  #dg-callout::before { content:""; position:absolute; left:0; top:0; bottom:0; width:5px;
+    background: linear-gradient(180deg, var(--dg-accent), transparent); }
+  .dg-c-top { display:flex; align-items:center; gap:10px; padding: 15px 16px 0; }
+  .dg-c-badge { width:36px; height:36px; border-radius:50%; flex:0 0 36px; display:grid; place-items:center;
+    font-weight:900; font-size:1rem; color:#10141b; background:var(--dg-accent);
+    animation: dgRing 2.1s ease-out infinite; }
+  @keyframes dgRing {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--dg-accent) 70%, transparent); }
+    70% { box-shadow: 0 0 0 13px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
   }
-  #dg-bar .dg-close { background: none; border: 1px solid rgba(255,255,255,0.3); color: #fff; }
-  #dg-bar .dg-txt { max-width: 760px; line-height: 1.45; }
-  #dg-bar .dg-ai { color: rgba(255,255,255,0.7); }
+  .dg-c-label { font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dg-accent); font-weight:800; }
+  .dg-c-count { margin-left:auto; font-size:.75rem; color:rgba(255,255,255,.5); font-weight:700; }
+  .dg-c-body { padding: 9px 16px 16px; }
+  .dg-c-title { font-size:1.08rem; font-weight:800; margin:0 0 5px; letter-spacing:-.01em; }
+  .dg-c-text { margin:0; font-size:.92rem; line-height:1.5; color:rgba(255,255,255,.82); }
+  #dg-callout.dg-pop .dg-c-body { animation: dgPop .42s ease; }
+  @keyframes dgPop { from{opacity:0; transform:translateY(9px);} to{opacity:1; transform:none;} }
 
-  #dg-pill {
-    position: fixed; left: 18px; bottom: 18px; z-index: 2147483000; display: none;
-    padding: 10px 14px; border-radius: 999px; cursor: pointer; font-weight: 700; font-size: 0.84rem;
-    color: #fff; background: rgba(16,20,27,0.94); border: 1px solid rgba(255,255,255,0.16);
-    box-shadow: 0 10px 26px rgba(0,0,0,0.28);
+  #dg-bar { position: fixed; left:0; right:0; bottom:0; z-index:2147483001;
+    background: rgba(12,15,22,.96); color:#fff; backdrop-filter: blur(10px);
+    border-top:1px solid rgba(255,255,255,.12); padding: 10px 16px;
+    display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap; font-size:.9rem; }
+  #dg-bar strong { color: var(--dg-accent); }
+  #dg-bar .dg-ai { color: rgba(255,255,255,.66); }
+  #dg-bar button { padding:8px 13px; border-radius:999px; border:1px solid rgba(255,255,255,.28);
+    background:none; color:#fff; font-weight:800; cursor:pointer; font-size:.82rem; white-space:nowrap; }
+  #dg-bar button:hover { background: rgba(255,255,255,.1); }
+  #dg-pill { position: fixed; left:16px; bottom:16px; z-index:2147483001; display:none;
+    padding:11px 15px; border-radius:999px; background: var(--dg-accent); color:#10141b;
+    font-weight:800; font-size:.85rem; cursor:pointer; box-shadow:0 12px 30px rgba(0,0,0,.3); }
+  body:not(.dg-on) #dg-callout { display:none; }
+
+  @media (max-width:640px){
+    #dg-callout { right:12px; left:12px; width:auto; bottom:96px; }
+    #dg-bar { font-size:.82rem; }
   }
-  @media (max-width: 640px) {
-    #dg-toggle { bottom: 128px; }
-    #dg-bar { font-size: 0.85rem; }
+  @media (prefers-reduced-motion: reduce){
+    #dg-callout { transition: opacity .25s linear; transform:none !important; }
+    .dg-c-badge { animation:none; }
+    #dg-callout.dg-pop .dg-c-body { animation:none; }
+    body.dg-on .dg-active { transition:none; }
   }
 </style>
 
 <div id="dg-root">
-  <button id="dg-toggle" type="button"><span class="dg-dot"></span><span id="dg-toggle-label">Tour the features</span></button>
-
-  <div id="dg-bar" role="note">
-    <span class="dg-txt">
-      <strong>&#9733; Live demo preview</strong> &mdash; this is what a website for your restaurant could look like.
-      <span class="dg-ai">All photos are <b>AI-generated for demonstration purposes only</b> &mdash; your finished site will use your own real images.</span>
-    </span>
-    <button class="dg-btn" id="dg-bar-tour" type="button">Show what each feature does</button>
-    <button class="dg-btn dg-close" id="dg-bar-close" type="button">Got it &times;</button>
+  <div id="dg-callout" role="status" aria-live="polite">
+    <div class="dg-c-top">
+      <span class="dg-c-badge" id="dg-badge">1</span>
+      <span class="dg-c-label">Feature spotlight</span>
+      <span class="dg-c-count" id="dg-count"></span>
+    </div>
+    <div class="dg-c-body">
+      <p class="dg-c-title" id="dg-title"></p>
+      <p class="dg-c-text" id="dg-text"></p>
+    </div>
   </div>
 
-  <button id="dg-pill" type="button">&#9432; About this demo</button>
+  <div id="dg-bar">
+    <span><strong>&#9733; Interactive demo</strong> &mdash; scroll down and we'll explain each feature for your restaurant.</span>
+    <span class="dg-ai">Photos are <b>AI-generated for demonstration only</b>.</span>
+    <button id="dg-hide" type="button">Hide guide</button>
+  </div>
+
+  <button id="dg-pill" type="button">&#9733; Show feature guide</button>
 </div>
 
 <script>
 (function(){
   var A = [{"id": "menu", "title": "Menu", "text": "Your full menu with photos and prices \u2014 the single most-searched thing for any eatery. Guests decide before they arrive."}, {"id": "gallery", "title": "Photo gallery", "text": "Mouth-watering food and atmosphere shots that turn a browser into a booking or an order."}, {"id": "reserve", "title": "Table reservations", "text": "Guests reserve a table online in seconds \u2014 more filled seats without tying up your phone."}, {"id": "story", "title": "Our story", "text": "Your story and values build a personal connection that turns first-timers into regulars."}, {"id": "reviews", "title": "Reviews", "text": "Diner ratings and testimonials that reassure new customers you're worth the trip."}, {"id": "location", "title": "Location & hours", "text": "Map, address and opening times so guests always know where you are and when you're open."}, {"id": "find-us", "title": "Find us / schedule", "text": "A live 'where to find us' schedule \u2014 perfect for a food truck, pop-up or event catering."}];
-  var root = document.getElementById('dg-root');
-  var toggle = document.getElementById('dg-toggle');
-  var label = document.getElementById('dg-toggle-label');
-  var bar = document.getElementById('dg-bar');
-  var pill = document.getElementById('dg-pill');
-  var on = false;
+  var items = A.map(function(a){ return { a:a, el: document.getElementById(a.id) }; })
+               .filter(function(x){ return x.el; });
+  if(!items.length) return;
 
-  A.forEach(function(a, i){
-    var sec = document.getElementById(a.id);
-    if(!sec) return;
-    if(getComputedStyle(sec).position === 'static'){ sec.style.position = 'relative'; }
-    sec.classList.add('dg-target-el');
+  var callout = document.getElementById('dg-callout');
+  var badge = document.getElementById('dg-badge'),
+      title = document.getElementById('dg-title'),
+      text  = document.getElementById('dg-text'),
+      count = document.getElementById('dg-count');
+  var bar = document.getElementById('dg-bar'),
+      pill = document.getElementById('dg-pill');
+  var current = -1, ticking = false;
 
-    var pin = document.createElement('button');
-    pin.type = 'button'; pin.className = 'dg-pin'; pin.textContent = (i+1);
+  document.body.classList.add('dg-on');
 
-    var note = document.createElement('div');
-    note.className = 'dg-note';
-    note.innerHTML = '<button class="dg-x" type="button" aria-label="close">&times;</button>' +
-                     '<b>' + (i+1) + '. ' + a.title + '</b><p>' + a.text + '</p>';
-
-    pin.addEventListener('click', function(e){
-      e.stopPropagation();
-      var isOpen = note.classList.contains('dg-open');
-      document.querySelectorAll('.dg-note').forEach(function(n){ n.classList.remove('dg-open'); });
-      if(!isOpen) note.classList.add('dg-open');
-    });
-    note.querySelector('.dg-x').addEventListener('click', function(e){ e.stopPropagation(); note.classList.remove('dg-open'); });
-
-    sec.appendChild(pin);
-    sec.appendChild(note);
-  });
-
-  function setGuide(state){
-    on = state;
-    document.body.classList.toggle('dg-on', on);
-    label.textContent = on ? 'Hide feature guide' : 'Tour the features';
-    if(!on) document.querySelectorAll('.dg-note').forEach(function(n){ n.classList.remove('dg-open'); });
-    document.querySelectorAll('.dg-target-el').forEach(function(s){ s.classList.toggle('dg-target', on); });
-    if(on){
-      var first = document.querySelector('.dg-pin');
-      if(first) first.scrollIntoView({behavior:'smooth', block:'center'});
-    }
+  function render(i){
+    if(i === current) return;
+    current = i;
+    var a = items[i].a;
+    badge.textContent = (i+1);
+    title.textContent = a.title;
+    text.textContent = a.text;
+    count.textContent = (i+1) + ' / ' + items.length;
+    callout.classList.remove('dg-pop'); void callout.offsetWidth; callout.classList.add('dg-pop');
   }
+  function setActive(el){
+    items.forEach(function(x){ x.el.classList.toggle('dg-active', x.el === el); });
+  }
+  function update(){
+    ticking = false;
+    if(!document.body.classList.contains('dg-on')) return;
+    var vh = window.innerHeight, vpc = vh * 0.5, best = -1, bestDist = Infinity;
+    items.forEach(function(x, i){
+      var r = x.el.getBoundingClientRect();
+      if(r.bottom < vh*0.16 || r.top > vh*0.84) return;
+      var c = r.top + r.height/2, d = Math.abs(c - vpc);
+      if(d < bestDist){ bestDist = d; best = i; }
+    });
+    if(best >= 0){ render(best); setActive(items[best].el); callout.classList.add('dg-show'); }
+    else { callout.classList.remove('dg-show'); setActive(null); }
+  }
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
 
-  toggle.addEventListener('click', function(){ setGuide(!on); });
-  document.getElementById('dg-bar-tour').addEventListener('click', function(){ setGuide(true); });
-  document.getElementById('dg-bar-close').addEventListener('click', function(){
+  document.getElementById('dg-hide').addEventListener('click', function(){
+    document.body.classList.remove('dg-on');
+    callout.classList.remove('dg-show'); setActive(null);
     bar.style.display = 'none'; pill.style.display = 'inline-block';
   });
   pill.addEventListener('click', function(){
+    document.body.classList.add('dg-on');
     bar.style.display = 'flex'; pill.style.display = 'none';
+    current = -1; update();
   });
+
+  update();
 })();
 </script>
 <!-- DEMO-GUIDE:END -->
