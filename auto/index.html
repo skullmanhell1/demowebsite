@@ -1606,5 +1606,102 @@
   }
 </style>
 <!-- PRO-POLISH:END -->
+<!-- PREMIUM:START -->
+<style id="premium-layer">
+  html { -webkit-text-size-adjust: 100%; }
+  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+
+  ::selection { background: #f05848; color: #fff; }
+  * { scrollbar-width: thin; scrollbar-color: #f05848 transparent; }
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-thumb { background: #f05848; border-radius: 12px; border: 3px solid transparent; background-clip: content-box; }
+  ::-webkit-scrollbar-thumb:hover { background: #1559a6; border-radius: 12px; border: 3px solid transparent; background-clip: content-box; }
+  ::-webkit-scrollbar-track { background: transparent; }
+
+  #premium-progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+    z-index: 2147483001; pointer-events: none;
+    background: linear-gradient(90deg, #0b2341, #1559a6 45%, #f05848);
+    box-shadow: 0 0 12px #f0584888; transition: width 90ms linear;
+  }
+
+  /* Progressive-enhancement reveal: only active once JS confirms support */
+  body.premium-ready [data-reveal] {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(.16,.84,.44,1), transform 0.7s cubic-bezier(.16,.84,.44,1);
+    will-change: opacity, transform;
+  }
+  body.premium-ready [data-reveal].revealed { opacity: 1; transform: none; }
+
+  /* Subtle premium depth on hover for card-like blocks (shadow only; no transform clash) */
+  body.premium-ready main [class*="card"] { transition: box-shadow .35s ease, transform .35s ease; }
+  body.premium-ready main [class*="card"]:hover { box-shadow: 0 30px 70px rgba(0,0,0,0.16); }
+
+  @media (prefers-reduced-motion: reduce) {
+    body.premium-ready [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+    #premium-progress { display: none; }
+  }
+</style>
+
+<div id="premium-progress" aria-hidden="true"></div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Scroll progress bar
+  var bar = document.getElementById('premium-progress');
+  function onScroll(){
+    var h = document.documentElement;
+    var max = (h.scrollHeight - h.clientHeight) || 1;
+    var p = Math.min(100, Math.max(0, (h.scrollTop || document.body.scrollTop) / max * 100));
+    bar.style.width = p + '%';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
+  onScroll();
+
+  if (reduce) { document.body.classList.add('premium-ready'); return; }
+
+  // Collect reveal targets (scoped to main; exclude the demo-guide overlay)
+  var selectors = 'section .section-head, section > .container > h2, article, [class*="card"], [class*="-item"]';
+  var main = document.querySelector('main') || document.body;
+  var nodes = Array.prototype.slice.call(main.querySelectorAll(selectors));
+  var dg = document.getElementById('dg-root');
+  var seen = new Set();
+  var targets = [];
+  nodes.forEach(function(n){
+    if (dg && dg.contains(n)) return;
+    if (n.closest('.hero')) return;           // keep above-the-fold hero instant
+    if (seen.has(n)) return; seen.add(n);
+    targets.push(n);
+  });
+
+  // Stagger by index within parent for a refined cascade
+  targets.forEach(function(n){
+    n.setAttribute('data-reveal', '');
+    var parent = n.parentElement;
+    var idx = parent ? Array.prototype.indexOf.call(parent.children, n) : 0;
+    n.style.transitionDelay = Math.min(idx * 60, 300) + 'ms';
+  });
+
+  document.body.classList.add('premium-ready');
+
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach(function(n){ n.classList.add('revealed'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  targets.forEach(function(n){ io.observe(n); });
+
+  // Ultimate failsafe: never leave anything hidden
+  setTimeout(function(){ targets.forEach(function(n){ n.classList.add('revealed'); }); }, 4000);
+})();
+</script>
+<!-- PREMIUM:END -->
 </body>
 </html>
