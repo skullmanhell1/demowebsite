@@ -162,12 +162,15 @@
   </style>
   <!-- INTRO-CSS:START -->
   <style id="intro-anim">
-    @media (prefers-reduced-motion: no-preference) {
-      html.has-js header { animation: dgHeaderIn .7s cubic-bezier(.16,.84,.44,1) both; }
-      html.has-js main > section:first-child { animation: dgHeroIn .9s cubic-bezier(.16,.84,.44,1) .05s both; }
-    }
+    /* Plays for everyone; reduce-motion gets a gentle fade (no movement) below. */
+    html.has-js header { animation: dgHeaderIn .75s cubic-bezier(.16,.84,.44,1) both; }
+    html.has-js main > section:first-child { animation: dgHeroIn 1s cubic-bezier(.16,.84,.44,1) .06s both; }
     @keyframes dgHeaderIn { from { opacity: 0; transform: translateY(-100%); } to { opacity: 1; transform: none; } }
-    @keyframes dgHeroIn   { from { opacity: 0; transform: translateY(26px); }   to { opacity: 1; transform: none; } }
+    @keyframes dgHeroIn   { from { opacity: 0; transform: translateY(28px); }   to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      @keyframes dgHeaderIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes dgHeroIn   { from { opacity: 0; } to { opacity: 1; } }
+    }
   </style>
 <!-- INTRO-CSS:END -->
 </head>
