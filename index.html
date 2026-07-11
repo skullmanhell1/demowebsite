@@ -173,6 +173,27 @@
     }
   </style>
 <!-- INTRO-CSS:END -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Wide Web Solutions",
+    "description": "High-converting demo websites for small businesses across pet care, health, beauty, food, home & trade and auto.",
+    "url": "https://skullmanhell1.github.io/demowebsite/",
+    "email": "hello@widewebsolutions.com.au",
+    "logo": "https://skullmanhell1.github.io/demowebsite/services/og-image.jpg",
+    "areaServed": "AU",
+    "knowsAbout": ["Web design", "Small business websites", "SEO", "Online booking"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Wide Web Solutions",
+    "url": "https://skullmanhell1.github.io/demowebsite/"
+  }
+  </script>
 </head>
 <body>
   <!-- INTRO-JS:START --><script>document.documentElement.classList.add("has-js");</script><!-- INTRO-JS:END -->
@@ -181,12 +202,16 @@
   <header class="site">
     <div class="container nav">
       <a class="brand" href="#top"><span class="mark">W</span>Wide Web Solutions</a>
-      <nav class="nav-links">
+      <nav class="nav-links" id="site-menu">
         <a href="#demos">Demos</a>
         <a href="#included">What's included</a>
         <a href="#how">How it works</a>
+        <a href="#contact">Contact</a>
       </nav>
-      <a class="btn btn-primary" href="#contact">Get your website</a>
+      <div class="nav-right">
+        <a class="btn btn-primary hide-sm-btn" href="#contact">Get your website</a>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="site-menu" aria-expanded="false"><span></span></button>
+      </div>
     </div>
   </header>
 
@@ -370,14 +395,50 @@
 
     <section id="contact">
       <div class="container">
-        <div class="cta-band" data-reveal>
-          <h2>Ready for a website that works as hard as you do?</h2>
-          <p>Reply to the email that brought you here, or reach out and we'll tailor one of these demos to your business.</p>
-          <a class="btn btn-primary" href="#demos">Explore the demos again</a>
-          <div class="note" style="text-align:left; max-width:640px; margin-inline:auto;">
-            <span>ℹ️</span>
-            <span><b>About the images:</b> all photos in these demos are <b>AI-generated for demonstration purposes only</b>, to show what the layout will look like. Your finished website will use your own real photos and content.</span>
+        <div class="contact-wrap" data-reveal>
+          <div class="contact-info">
+            <div class="kick">Get your website</div>
+            <h2>Ready for a website that works as hard as you do?</h2>
+            <p>Tell us a little about your business and we'll tailor the closest demo to you — with a first draft usually back within a few days. No obligation, no upfront cost.</p>
+            <ul class="contact-points">
+              <li><span class="ci">✓</span><span><b>Reply within 1 business day.</b> A real person reads every enquiry.</span></li>
+              <li><span class="ci">✓</span><span><b>See it before you commit.</b> We tailor a demo to your business first.</span></li>
+              <li><span class="ci">✓</span><span><b>Everything included.</b> Design, mobile, bookings, SEO and your branding.</span></li>
+            </ul>
+            <div class="contact-direct">
+              <a class="chip" id="emailChip" href="#contact">✉ Email us directly</a>
+              <a class="chip" href="#demos">↧ Browse demos again</a>
+            </div>
           </div>
+          <form class="contact-card contact-form" id="enquiryForm" novalidate>
+            <div class="fields">
+              <div class="field"><label for="c-name">Your name</label><input id="c-name" type="text" autocomplete="name" placeholder="Jane Smith" required></div>
+              <div class="field"><label for="c-email">Email</label><input id="c-email" type="email" autocomplete="email" placeholder="you@business.com" required></div>
+              <div class="field"><label for="c-business">Business name</label><input id="c-business" type="text" autocomplete="organization" placeholder="Your business"></div>
+              <div class="field"><label for="c-industry">Industry</label>
+                <select id="c-industry">
+                  <option value="">Select…</option>
+                  <option>Pet care &amp; grooming</option>
+                  <option>Health &amp; wellness</option>
+                  <option>Beauty &amp; grooming</option>
+                  <option>Food &amp; drink</option>
+                  <option>Home &amp; trade</option>
+                  <option>Auto &amp; repair</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+              <div class="field full"><label for="c-message">What do you need?</label><textarea id="c-message" placeholder="Tell us about your business and which demo caught your eye."></textarea></div>
+            </div>
+            <div class="form-foot">
+              <span class="form-hint">Opens in your email app, ready to send.</span>
+              <button class="btn btn-primary" type="submit">Send enquiry</button>
+            </div>
+            <div class="form-status" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+        <div class="note" style="max-width:760px; margin-inline:auto;">
+          <span>ℹ️</span>
+          <span><b>About the images:</b> all photos in these demos are <b>AI-generated for demonstration purposes only</b>, to show what the layout will look like. Your finished website will use your own real photos and content.</span>
         </div>
       </div>
     </section>
@@ -614,5 +675,110 @@
 }
 </style>
 <!-- MOTION:END -->
+<!-- CONTACT:START -->
+<style id="contact-layer">
+  /* ----- mobile hamburger nav ----- */
+  .nav-right { display: flex; align-items: center; gap: 10px; }
+  .nav-toggle { display: none; align-items: center; justify-content: center; width: 46px; height: 46px; padding: 0; border-radius: 14px; border: 1px solid var(--line); background: var(--panel-2); color: var(--ink); cursor: pointer; }
+  .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after { display: block; width: 20px; height: 2px; background: currentColor; border-radius: 2px; transition: transform .3s ease, opacity .2s ease; }
+  .nav-toggle span { position: relative; }
+  .nav-toggle span::before, .nav-toggle span::after { content: ""; position: absolute; left: 0; }
+  .nav-toggle span::before { top: -6px; }
+  .nav-toggle span::after { top: 6px; }
+  .nav-toggle[aria-expanded="true"] span { background: transparent; }
+  .nav-toggle[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span::after { top: 0; transform: rotate(-45deg); }
+
+  /* ----- contact section ----- */
+  .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+  .contact-info, .contact-card { border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(24px, 3.4vw, 40px); box-shadow: var(--shadow); }
+  .contact-info { background: linear-gradient(135deg, rgba(99,102,241,0.16), rgba(34,211,238,0.10)); }
+  .contact-card { background: var(--panel); }
+  .contact-info h2 { margin: 12px 0 0; font-size: clamp(1.7rem, 3vw, 2.6rem); letter-spacing: -0.04em; font-weight: 900; }
+  .contact-info > p { color: var(--muted); margin: 14px 0 0; }
+  .contact-points { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 12px; }
+  .contact-points li { display: flex; gap: 11px; align-items: flex-start; color: var(--muted); }
+  .contact-points .ci { flex: none; width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; font-size: .8rem; background: var(--panel-2); border: 1px solid var(--line); color: var(--cyan); }
+  .contact-points b { color: var(--ink); }
+  .contact-direct { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; padding: 10px 15px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--line); color: var(--ink); font-weight: 700; font-size: .92rem; transition: transform .2s ease, border-color .2s ease; }
+  .chip:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.28); }
+
+  .contact-form { display: grid; gap: 14px; }
+  .contact-form .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .field { display: grid; gap: 6px; }
+  .field.full { grid-column: 1 / -1; }
+  .field label { font-size: .82rem; font-weight: 700; color: var(--muted); }
+  .field input, .field select, .field textarea { width: 100%; padding: 13px 14px; border-radius: 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--line); color: var(--ink); font: inherit; font-size: .96rem; transition: border-color .2s ease, box-shadow .2s ease; }
+  .field textarea { min-height: 110px; resize: vertical; }
+  .field input::placeholder, .field textarea::placeholder { color: var(--soft); }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(34,211,238,0.18); }
+  .field select { appearance: none; -webkit-appearance: none; }
+  .field select option { color: #0b1020; }
+  .contact-form .form-foot { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 2px; }
+  .form-hint { color: var(--soft); font-size: .82rem; }
+  .form-status { font-size: .9rem; font-weight: 700; min-height: 1.2em; }
+  .form-status.ok { color: var(--cyan); }
+  .form-status.err { color: #ff9090; }
+
+  @media (max-width: 900px) {
+    header.site .container.nav { position: relative; }
+    .nav-toggle { display: inline-flex; }
+    .nav-links.open { display: flex; flex-direction: column; align-items: stretch; gap: 2px; position: absolute; top: calc(100% + 10px); left: 0; right: 0; z-index: 60; padding: 12px; border-radius: 20px; background: rgba(11,16,32,0.98); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .nav-links.open a { padding: 13px 15px; border-radius: 12px; font-size: 1rem; }
+    .contact-wrap { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .hide-sm-btn { display: none; }
+    .contact-form .fields { grid-template-columns: 1fr; }
+  }
+</style>
+<script>
+(function(){
+  var CONTACT_EMAIL = "hello@widewebsolutions.com.au"; /* <-- replace with your real inbox */
+
+  /* mobile nav toggle */
+  var t = document.querySelector(".nav-toggle"), m = document.getElementById("site-menu");
+  if (t && m) {
+    t.addEventListener("click", function(){
+      var o = m.classList.toggle("open");
+      t.setAttribute("aria-expanded", o ? "true" : "false");
+    });
+    m.addEventListener("click", function(e){
+      if (e.target.closest("a")) { m.classList.remove("open"); t.setAttribute("aria-expanded", "false"); }
+    });
+  }
+
+  /* direct email chip */
+  var chip = document.getElementById("emailChip");
+  if (chip) chip.setAttribute("href", "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Website enquiry"));
+
+  /* enquiry form -> compose email */
+  var form = document.getElementById("enquiryForm");
+  if (!form) return;
+  var status = form.querySelector(".form-status");
+  function val(id){ var el = document.getElementById(id); return el ? el.value.trim() : ""; }
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = val("c-name"), email = val("c-email");
+    if (!name || !email) { status.textContent = "Please add your name and email."; status.className = "form-status err"; return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { status.textContent = "That email doesn't look right — mind checking it?"; status.className = "form-status err"; return; }
+    var business = val("c-business"), industry = val("c-industry"), message = val("c-message");
+    var subject = "Website enquiry" + (business ? " \u2014 " + business : "");
+    var body = [
+      "Name: " + name,
+      "Email: " + email,
+      "Business: " + (business || "\u2014"),
+      "Industry: " + (industry || "\u2014"),
+      "",
+      (message || "(no message)")
+    ].join("\n");
+    status.textContent = "Opening your email app\u2026";
+    status.className = "form-status ok";
+    window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  });
+})();
+</script>
+<!-- CONTACT:END -->
 </body>
 </html>
