@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meridian Coachworks — Luxury &amp; Exotic Detailing, Paint Protection &amp; Restoration</title>
-  <meta name="description" content="An appointment-only atelier for luxury and exotic vehicles: concours detailing, paint protection film, ceramic coating and full paint restoration. ASE Master certified, manufacturer approved, fully insured. Request a white-glove estimate." />
+  <title>Redline AutoWorks — Auto & Repair Website Demo</title>
+  <meta name="description" content="A solid, trustworthy auto repair website demo with service booking, estimate request form, credentials, coupons, reviews, location and fleet callouts." />
   <meta name="theme-color" content="#0b2341" />
   <meta name="color-scheme" content="light" />
 
   <!-- Open Graph / social preview -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Meridian Coachworks — Luxury &amp; Exotic Detailing &amp; Restoration" />
-  <meta property="og:description" content="Precision detailing, paint protection and bespoke restoration for luxury and exotic machinery. ASE Master certified, manufacturer approved, fully insured. By appointment." />
+  <meta property="og:title" content="Redline AutoWorks — ASE-Certified Auto Repair & Diagnostics" />
+  <meta property="og:description" content="Book a service or request an estimate. Honest pricing, certified technicians, fast turnaround and a repair warranty." />
   <meta property="og:image" content="https://skullmanhell1.github.io/demowebsite/auto/og-image.jpg" />
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230b2341'/%3E%3Cstop offset='0.55' stop-color='%231559a6'/%3E%3Cstop offset='1' stop-color='%23d63a31'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='67' font-family='Arial,sans-serif' font-size='46' font-weight='900' fill='%23fff' text-anchor='middle'%3ERa%3C/text%3E%3C/svg%3E" />
@@ -524,341 +524,6 @@
       background:
         linear-gradient(145deg, rgba(214, 58, 49, 0.92), rgba(11, 35, 65, 0.94)),
         var(--image) center / cover;
-    }
-
-    /* ===== Before / After restoration slider ===== */
-    .ba-frame {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      background: #0b0f16;
-      aspect-ratio: 16 / 10;
-      touch-action: none;
-      user-select: none;
-    }
-
-    .ba-layer {
-      position: absolute;
-      inset: 0;
-      background-image: var(--ba-image);
-      background-size: cover;
-      background-position: center;
-    }
-
-    .ba-after { z-index: 1; }
-
-    .ba-before {
-      z-index: 2;
-      clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0);
-      filter: grayscale(0.42) brightness(0.70) contrast(0.88) saturate(0.7);
-    }
-
-    .ba-before::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.10), transparent 40%),
-        linear-gradient(180deg, rgba(11,15,22,0.30), rgba(11,15,22,0.10));
-      mix-blend-mode: overlay;
-    }
-
-    .ba-tag {
-      position: absolute;
-      top: 18px;
-      z-index: 4;
-      padding: 8px 13px;
-      border-radius: 999px;
-      font-size: 0.74rem;
-      font-weight: 950;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--white);
-      backdrop-filter: blur(8px);
-    }
-
-    .ba-tag.before { left: 18px; background: rgba(11, 15, 22, 0.66); border: 1px solid rgba(255,255,255,0.20); }
-    .ba-tag.after { right: 18px; background: rgba(21, 89, 166, 0.72); border: 1px solid rgba(255,255,255,0.24); }
-
-    .ba-divider {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      z-index: 5;
-      left: var(--pos, 50%);
-      width: 2px;
-      margin-left: -1px;
-      background: rgba(255,255,255,0.92);
-      box-shadow: 0 0 22px rgba(0,0,0,0.5);
-      pointer-events: none;
-    }
-
-    .ba-knob {
-      position: absolute;
-      top: 50%;
-      left: var(--pos, 50%);
-      z-index: 6;
-      width: 54px;
-      height: 54px;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: var(--navy);
-      font-weight: 950;
-      background: rgba(255,255,255,0.96);
-      border: 2px solid rgba(21, 89, 166, 0.35);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-      pointer-events: none;
-    }
-
-    .ba-range {
-      position: absolute;
-      inset: 0;
-      z-index: 7;
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      opacity: 0;
-      cursor: ew-resize;
-      -webkit-appearance: none;
-      appearance: none;
-      background: transparent;
-    }
-
-    .ba-range::-webkit-slider-thumb { -webkit-appearance: none; width: 64px; height: 100%; cursor: ew-resize; }
-    .ba-range::-moz-range-thumb { width: 64px; height: 999px; border: 0; background: transparent; cursor: ew-resize; }
-
-    .ba-caption-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 22px;
-    }
-
-    .ba-caption-card {
-      padding: 18px;
-      border-radius: 20px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.82);
-      box-shadow: var(--soft-shadow);
-    }
-
-    .ba-caption-card strong { display: block; font-size: 1.05rem; letter-spacing: -0.02em; }
-    .ba-caption-card span { display: block; margin-top: 6px; color: var(--muted); font-size: 0.9rem; }
-    .ba-caption-card .ba-step { color: var(--blue); font-weight: 950; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; }
-
-    /* ===== Master technicians ===== */
-    .tech-lead {
-      display: grid;
-      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
-      gap: 24px;
-      align-items: stretch;
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.86);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .tech-portrait {
-      position: relative;
-      min-height: 420px;
-      background:
-        linear-gradient(0deg, rgba(11, 35, 65, 0.52), rgba(11, 35, 65, 0.04)),
-        var(--image, url("assets/566e825be496.jpg")) center / cover;
-    }
-
-    .tech-portrait .tech-name-tag {
-      position: absolute;
-      left: 22px;
-      right: 22px;
-      bottom: 22px;
-      padding: 16px 18px;
-      border-radius: 20px;
-      color: var(--white);
-      background: rgba(11, 35, 65, 0.46);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      backdrop-filter: blur(12px);
-    }
-
-    .tech-name-tag strong { display: block; font-size: 1.2rem; letter-spacing: -0.02em; }
-    .tech-name-tag span { color: rgba(255, 255, 255, 0.82); font-size: 0.9rem; }
-
-    .tech-bio { padding: clamp(24px, 4vw, 38px); }
-    .tech-bio p { color: var(--muted); }
-
-    .tech-stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin: 22px 0;
-    }
-
-    .tech-stat {
-      padding: 15px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, var(--ice), #fff3f2);
-      border: 1px solid var(--line);
-    }
-
-    .tech-stat strong { display: block; font-size: 1.5rem; line-height: 1; letter-spacing: -0.03em; }
-    .tech-stat span { display: block; margin-top: 6px; color: var(--soft); font-size: 0.84rem; }
-
-    .tech-specialties { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
-
-    .tech-quote {
-      margin: 22px 0 0;
-      padding: 16px 18px;
-      border-left: 3px solid var(--blue);
-      background: rgba(21, 89, 166, 0.06);
-      border-radius: 0 16px 16px 0;
-      color: var(--slate);
-      font-style: italic;
-    }
-
-    .tech-support {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 16px;
-    }
-
-    .tech-mini {
-      display: grid;
-      grid-template-columns: 64px 1fr;
-      gap: 14px;
-      align-items: center;
-      padding: 16px;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.82);
-      box-shadow: var(--soft-shadow);
-    }
-
-    .tech-mini .tech-avatar {
-      width: 64px;
-      height: 64px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      color: var(--white);
-      font-weight: 950;
-      font-size: 1.1rem;
-      letter-spacing: -0.04em;
-      background: linear-gradient(135deg, var(--navy), var(--blue));
-    }
-
-    .tech-mini:nth-child(even) .tech-avatar { background: linear-gradient(135deg, #9f231d, var(--red)); }
-    .tech-mini strong { display: block; letter-spacing: -0.02em; }
-    .tech-mini span { color: var(--soft); font-size: 0.86rem; }
-    .tech-mini small { display: block; color: var(--muted); margin-top: 4px; font-size: 0.86rem; }
-
-    @media (max-width: 1120px) {
-      .tech-lead { grid-template-columns: 1fr; }
-      .tech-portrait { min-height: 320px; }
-    }
-
-    /* ===== White-glove 3-step estimate wizard ===== */
-    .wizard-progress { display: flex; gap: 10px; margin-bottom: 22px; }
-
-    .wp-item {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 11px 12px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.6);
-      color: var(--soft);
-      transition: 180ms ease;
-      min-width: 0;
-    }
-
-    .wp-item .wp-num {
-      width: 30px;
-      height: 30px;
-      flex: 0 0 30px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: var(--ice);
-      color: var(--soft);
-      font-weight: 950;
-      font-size: 0.9rem;
-    }
-
-    .wp-item .wp-label { font-weight: 900; font-size: 0.84rem; line-height: 1.1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .wp-item.active { border-color: rgba(21, 89, 166, 0.5); background: var(--ice); color: var(--navy); box-shadow: var(--soft-shadow); }
-    .wp-item.active .wp-num { background: var(--navy); color: var(--white); }
-    .wp-item.done .wp-num { background: var(--red); color: var(--white); }
-    .wp-item.done { color: var(--navy); }
-
-    .wizard-step { display: none; }
-    .wizard-step.active { display: block; animation: wizIn 0.4s cubic-bezier(.16,.84,.44,1); }
-    @keyframes wizIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-
-    .wizard-step h4 { margin: 0 0 4px; font-size: 1.15rem; letter-spacing: -0.03em; }
-    .wizard-step .wiz-help { margin: 0 0 16px; color: var(--muted); font-size: 0.92rem; }
-
-    .choice-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-
-    .choice {
-      position: relative;
-      display: block;
-      padding: 14px 15px;
-      border-radius: 16px;
-      border: 1px solid rgba(11, 35, 65, 0.16);
-      background: rgba(247, 251, 255, 0.7);
-      cursor: pointer;
-      transition: 150ms ease;
-    }
-
-    .choice:hover { border-color: rgba(21, 89, 166, 0.45); }
-    .choice input { position: absolute; opacity: 0; pointer-events: none; }
-    .choice .c-title { display: block; font-weight: 900; color: var(--navy); }
-    .choice .c-sub { display: block; margin-top: 3px; color: var(--soft); font-size: 0.84rem; }
-
-    .choice.selected {
-      border-color: var(--navy);
-      background: var(--ice);
-      box-shadow: 0 0 0 3px rgba(36, 120, 212, 0.16);
-    }
-
-    .wiz-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; margin-top: 4px; }
-    .wiz-fields .field.full { grid-column: 1 / -1; }
-
-    .wiz-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-      padding-top: 18px;
-      border-top: 1px solid var(--line);
-    }
-
-    .wiz-back {
-      background: none;
-      border: 0;
-      color: var(--soft);
-      font-weight: 900;
-      cursor: pointer;
-      padding: 10px 4px;
-    }
-    .wiz-back:hover { color: var(--navy); }
-    .wiz-back[hidden] { visibility: hidden; }
-
-    @media (max-width: 760px) {
-      .choice-grid, .wiz-fields { grid-template-columns: 1fr; }
-      .wp-item .wp-label { display: none; }
-      .wp-item { flex: 0 0 auto; }
-      .wizard-progress { justify-content: flex-start; }
     }
 
     .services-grid {
@@ -1383,22 +1048,22 @@
   </style>
   <!-- SEO-PRO:START -->
   <link rel="canonical" href="https://skullmanhell1.github.io/demowebsite/auto/" />
-  <meta name="keywords" content="luxury car detailing, exotic car detailing Perth, paint protection film, PPF, ceramic coating, paint correction, concours restoration, supercar detailing, ASE master certified" />
+  <meta name="keywords" content="auto repair, mechanic, brakes, diagnostics, oil change, tyres, Perth car service" />
   <meta name="robots" content="index, follow" />
-  <meta name="author" content="Meridian Coachworks" />
+  <meta name="author" content="Redline AutoWorks" />
   <meta property="og:url" content="https://skullmanhell1.github.io/demowebsite/auto/" />
-  <meta property="og:site_name" content="Meridian Coachworks" />
+  <meta property="og:site_name" content="Redline AutoWorks" />
   <meta property="og:locale" content="en_AU" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Meridian Coachworks — Luxury &amp; Exotic Detailing &amp; Restoration" />
-  <meta name="twitter:description" content="Precision detailing, paint protection and bespoke restoration for luxury and exotic machinery. ASE Master certified, manufacturer approved, fully insured. By appointment." />
+  <meta name="twitter:title" content="Redline AutoWorks — ASE-Certified Auto Repair & Diagnostics" />
+  <meta name="twitter:description" content="Book a service or request an estimate. Honest pricing, certified technicians, fast turnaround and a repair warranty." />
   <meta name="twitter:image" content="https://skullmanhell1.github.io/demowebsite/auto/og-image.jpg" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "AutoDetailing",
-  "name": "Meridian Coachworks",
-  "description": "An appointment-only atelier for luxury and exotic vehicles: concours detailing, paint protection film, ceramic coating and full paint restoration. ASE Master certified, manufacturer approved, fully insured.",
+  "@type": "AutoRepair",
+  "name": "Redline AutoWorks",
+  "description": "Book a service or request an estimate. Honest pricing, certified technicians, fast turnaround and a repair warranty.",
   "url": "https://skullmanhell1.github.io/demowebsite/auto/",
   "image": "https://skullmanhell1.github.io/demowebsite/auto/og-image.jpg",
   "telephone": "+61862440440",
@@ -1440,33 +1105,33 @@
   <!-- INTRO-JS:START --><script>document.documentElement.classList.add("has-js");</script><!-- INTRO-JS:END -->
   <div class="top-strip">
     <div class="container">
-      <span><strong>By appointment only</strong> · Enclosed collection &amp; delivery for luxury and exotic vehicles</span>
-      <a href="tel:+61862440440">Private line: 08 6244 0440</a>
+      <span><strong>Same-day appointments:</strong> brakes, diagnostics, oil changes and urgent repair estimates</span>
+      <a href="tel:+61862440440">Call now: 08 6244 0440</a>
     </div>
   </div>
 
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="#top" aria-label="Meridian Coachworks home">
-        <div class="brand-mark">MC</div>
+      <a class="brand" href="#top" aria-label="Redline AutoWorks home">
+        <div class="brand-mark">Ra</div>
         <div>
-          <span class="brand-name">Meridian Coachworks</span>
-          <span class="brand-subtitle">Detailing · Protection · Restoration</span>
+          <span class="brand-name">Redline AutoWorks</span>
+          <span class="brand-subtitle">ASE-certified auto repair demo</span>
         </div>
       </a>
 
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="#services">Services</a>
-        <a href="#transformation">Before / After</a>
-        <a href="#accreditation">Accreditation</a>
-        <a href="#technicians">Technicians</a>
-        <a href="#reviews">Clients</a>
-        <a href="#location">Atelier</a>
+        <a href="#appointment">Book</a>
+        <a href="#why">Why us</a>
+        <a href="#location">Location</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#specials">Coupons</a>
       </nav>
 
       <div class="nav-actions">
         <a class="phone-link" href="tel:+61862440440"><span>☎</span>08 6244 0440</a>
-        <a class="btn btn-primary" href="#appointment">Request Estimate</a>
+        <a class="btn btn-primary" href="#appointment">Book a Service</a>
       </div>
     </div>
   </header>
@@ -1475,46 +1140,46 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div>
-          <div class="eyebrow">Luxury &amp; exotic · Detailing · Paint protection · Restoration</div>
-          <h1 id="hero-title">Precision that <em>protects the value</em> beneath the paint.</h1>
-          <p class="lead">Meridian Coachworks is an appointment-only atelier for owners who understand that a car of this calibre is an investment, not a commodity. Every surface is measured, corrected and protected to a documented standard — so your machine looks, drives and appraises exactly as it should.</p>
+          <div class="eyebrow">Auto repair · diagnostics · fleet service</div>
+          <h1 id="hero-title">Trust your car to a shop that <em>shows the proof.</em></h1>
+          <p class="lead">A solid, credential-first auto repair website concept designed to get drivers to book service, request estimates and feel confident handing over their keys.</p>
 
           <div class="hero-cta">
-            <a class="btn btn-primary" href="#appointment">Request a White-Glove Estimate</a>
-            <a class="btn btn-red" href="#transformation">See the Transformation</a>
-            <a class="phone-hero" href="tel:+61862440440"><span>☎</span>Speak with a specialist: 08 6244 0440</a>
+            <a class="btn btn-primary" href="#appointment">Book a Service</a>
+            <a class="btn btn-red" href="#appointment">Get an Estimate</a>
+            <a class="phone-hero" href="tel:+61862440440"><span>☎</span>Click to call 08 6244 0440</a>
           </div>
 
-          <div class="hero-proof" aria-label="Atelier highlights">
-            <div class="proof-card"><strong>0.1µm</strong><span>paint depth measured before correction</span></div>
-            <div class="proof-card"><strong>$2M+</strong><span>care &amp; custody insurance per vehicle</span></div>
-            <div class="proof-card"><strong>4,000+</strong><span>marques detailed, from Porsche to Pagani</span></div>
+          <div class="hero-proof" aria-label="Shop highlights">
+            <div class="proof-card"><strong>4.9★</strong><span>1,180 five-star reviews</span></div>
+            <div class="proof-card"><strong>24 mo</strong><span>repair warranty available</span></div>
+            <div class="proof-card"><strong>18 yrs</strong><span>serving local drivers</span></div>
           </div>
         </div>
 
-        <div class="hero-media" aria-label="Specialist detailing an exotic vehicle in a controlled studio">
+        <div class="hero-media" aria-label="Mechanic inspecting a vehicle">
           <div class="hero-photo">
             <div class="hero-caption">
-              <div><strong>Climate-controlled studio. Master specialists.</strong><span>Correction, protection and restoration under calibrated lighting</span></div>
-              <a class="btn btn-secondary btn-small" href="#services">Explore services</a>
+              <div><strong>Industrial-clean bays. Certified technicians.</strong><span>Maintenance, repairs, diagnostics and fleet service</span></div>
+              <a class="btn btn-secondary btn-small" href="#services">See services</a>
             </div>
           </div>
 
-          <aside class="floating-trust" aria-label="Client highlight">
+          <aside class="floating-trust" aria-label="Review highlight">
             <div class="stars">★★★★★</div>
-            <strong>“They treated my 911 like it was the only car in the world.”</strong>
-            <p>Documented process, insured custody, and a finish that held its value at resale.</p>
+            <strong>“They explained the issue clearly and never pushed extra work.”</strong>
+            <p>Honest pricing and credentials are the fastest way to overcome auto repair distrust.</p>
           </aside>
 
           <aside class="quick-card" aria-label="Quick service shortcuts">
-            <strong>What does your vehicle require?</strong>
-            <p>Select a discipline to begin your estimate.</p>
+            <strong>What does your vehicle need?</strong>
+            <p>Tap a service to pre-fill the estimate form.</p>
             <div class="quick-pills">
-              <button type="button" data-service="Paint Correction">Correction</button>
-              <button type="button" data-service="Paint Protection Film">PPF</button>
-              <button type="button" data-service="Ceramic Coating">Ceramic</button>
-              <button type="button" data-service="Concours Detail">Concours</button>
-              <button type="button" data-service="Restoration">Restoration</button>
+              <button type="button" data-service="Oil Change">Oil</button>
+              <button type="button" data-service="Brake Repair">Brakes</button>
+              <button type="button" data-service="Diagnostics">Diagnostics</button>
+              <button type="button" data-service="Tires">Tires</button>
+              <button type="button" data-service="A/C Service">A/C</button>
             </div>
           </aside>
         </div>
@@ -1523,52 +1188,24 @@
 
     <section class="trust-bar" aria-label="Trust signals">
       <div class="container trust-strip">
-        <div class="trust-item"><div class="trust-icon">ASE</div><div><strong>ASE Master</strong><span>certified specialists</span></div></div>
-        <div class="trust-item"><div class="trust-icon">OEM</div><div><strong>Manufacturer</strong><span>approved processes</span></div></div>
-        <div class="trust-item"><div class="trust-icon">$2M</div><div><strong>Insured</strong><span>care &amp; custody cover</span></div></div>
-        <div class="trust-item"><div class="trust-icon">5★</div><div><strong>1,180</strong><span>owner reviews</span></div></div>
-        <div class="trust-item"><div class="trust-icon">✓</div><div><strong>Warrantied</strong><span>coatings up to 10 yrs</span></div></div>
+        <div class="trust-item"><div class="trust-icon">ASE</div><div><strong>ASE-certified</strong><span>trained technicians</span></div></div>
+        <div class="trust-item"><div class="trust-icon">24</div><div><strong>Warranty</strong><span>24 mo repair cover</span></div></div>
+        <div class="trust-item"><div class="trust-icon">18</div><div><strong>Years</strong><span>in business</span></div></div>
+        <div class="trust-item"><div class="trust-icon">5★</div><div><strong>1,180</strong><span>five-star reviews</span></div></div>
+        <div class="trust-item"><div class="trust-icon">✓</div><div><strong>Inspections</strong><span>free with approved repair</span></div></div>
       </div>
     </section>
 
-    <section id="transformation" aria-labelledby="transformation-title">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="section-kicker">The transformation</div>
-            <h2 id="transformation-title">Drag to reveal the difference precision makes.</h2>
-          </div>
-          <p>A 1998 Ferrari 550 Maranello, its original paint dulled by two decades of oxidation and swirl marks. Below is the same panel — multi-stage corrected, refined and sealed. Drag the handle to compare.</p>
-        </div>
-
-        <div class="ba-frame" id="baFrame" style="--ba-image: url('assets/009a9bf548d4.jpg'); --pos: 50%;">
-          <div class="ba-layer ba-after" aria-hidden="true"></div>
-          <div class="ba-layer ba-before" aria-hidden="true"></div>
-          <span class="ba-tag before">Before</span>
-          <span class="ba-tag after">After</span>
-          <div class="ba-divider" aria-hidden="true"></div>
-          <div class="ba-knob" aria-hidden="true">⇆</div>
-          <input class="ba-range" id="baRange" type="range" min="0" max="100" value="50"
-                 aria-label="Reveal the vehicle before and after restoration" />
-        </div>
-
-        <div class="ba-caption-grid">
-          <article class="ba-caption-card">
-            <div class="ba-step">Stage 01 — Assessment</div>
-            <strong>Measured, not guessed</strong>
-            <span>Paint depth logged at 40+ points with a digital gauge before a single pad touches the surface.</span>
-          </article>
-          <article class="ba-caption-card">
-            <div class="ba-step">Stage 02 — Correction</div>
-            <strong>Defects removed, not filled</strong>
-            <span>Multi-stage machine correction lifts swirl marks and etching to restore true, glass-clear reflection.</span>
-          </article>
-          <article class="ba-caption-card">
-            <div class="ba-step">Stage 03 — Protection</div>
-            <strong>Sealed for the long term</strong>
-            <span>Finished with a warrantied ceramic coating or paint protection film to lock the result — and the value — in place.</span>
-          </article>
-        </div>
+    <section id="specials" class="coupons" aria-label="Coupons and specials">
+      <div class="container coupon-grid">
+        <article class="coupon-card img-oil">
+          <div><span class="coupon-badge">Coupon</span><h2>$25 off synthetic oil service</h2><p>Common in auto marketing: coupons give price-conscious drivers a reason to book now.</p></div>
+          <a class="btn btn-secondary" href="#appointment">Claim oil special</a>
+        </article>
+        <article class="coupon-card coupon-mini img-brakes">
+          <div><span class="coupon-badge">Brake month</span><h2>Free brake inspection</h2><p>With any booked service. Pads, rotors and fluid check included.</p></div>
+          <a class="btn btn-secondary" href="#appointment">Book inspection</a>
+        </article>
       </div>
     </section>
 
@@ -1576,19 +1213,20 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <div class="section-kicker">Disciplines</div>
-            <h2 id="services-title">A discipline for every surface, inside and out.</h2>
+            <div class="section-kicker">Services offered</div>
+            <h2 id="services-title">Everything drivers look for, presented clearly.</h2>
           </div>
-          <p>Each programme is scoped to your vehicle's marque, paint system and history. Select a discipline to begin a tailored estimate.</p>
+          <p>Auto visitors need to know you can solve their problem, then book or call immediately. Each service button pre-fills the appointment form.</p>
         </div>
 
         <div class="services-grid">
-          <article class="service-card"><div class="service-photo img-diagnostics"><div class="service-icon">◐</div></div><div class="service-body"><h3>Paint Correction</h3><p>Multi-stage machine polishing to remove swirl marks, etching and holograms — restoring true optical clarity to the clear coat.</p><div class="service-meta"><span class="meta-pill">Depth-gauged</span><span class="meta-pill">1–3 stage</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Paint Correction">Scope correction</button></div></article>
-          <article class="service-card"><div class="service-photo img-brakes"><div class="service-icon">▤</div></div><div class="service-body"><h3>Paint Protection Film</h3><p>Self-healing urethane film applied to high-impact panels — computer-cut and hand-wrapped for near-invisible stone-chip defence.</p><div class="service-meta"><span class="meta-pill">Self-healing</span><span class="meta-pill">10-yr warranty</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Paint Protection Film">Scope PPF</button></div></article>
-          <article class="service-card"><div class="service-photo img-ac"><div class="service-icon">◇</div></div><div class="service-body"><h3>Ceramic Coating</h3><p>Professional-grade nano-ceramic protection with extreme hydrophobics, chemical resistance and years of measurable gloss retention.</p><div class="service-meta"><span class="meta-pill">9H hardness</span><span class="meta-pill">Warrantied</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Ceramic Coating">Scope coating</button></div></article>
-          <article class="service-card"><div class="service-photo img-oil"><div class="service-icon">✦</div></div><div class="service-body"><h3>Concours Detail</h3><p>The full white-glove service — engine bay, underbody, interior and paint refined to show-field standard for events and appraisals.</p><div class="service-meta"><span class="meta-pill">Show-ready</span><span class="meta-pill">By appointment</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Concours Detail">Scope concours</button></div></article>
-          <article class="service-card"><div class="service-photo img-transmission"><div class="service-icon">⚒</div></div><div class="service-body"><h3>Restoration</h3><p>Full paint and finish restoration for classic and collector cars — wet-sanding, respray colour-matching and period-correct detailing.</p><div class="service-meta"><span class="meta-pill">Bespoke</span><span class="meta-pill">Consultation</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Restoration">Request consultation</button></div></article>
-          <article class="service-card"><div class="service-photo img-shop"><div class="service-icon">✧</div></div><div class="service-body"><h3>Interior Detailing</h3><p>Leather revival, Alcantara care and hypersonic cabin cleaning — restoring and protecting bespoke trim without altering its patina.</p><div class="service-meta"><span class="meta-pill">Leather &amp; Alcantara</span><span class="meta-pill">pH-neutral</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Interior Detailing">Scope interior</button></div></article>
+          <article class="service-card"><div class="service-photo img-oil"><div class="service-icon">🛢</div></div><div class="service-body"><h3>Oil Change</h3><p>Synthetic, high-mileage and fleet oil services with filter replacement and fluid top-off.</p><div class="service-meta"><span class="meta-pill">30–45 min</span><span class="meta-pill">From $89</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Oil Change">Book oil service</button></div></article>
+          <article class="service-card"><div class="service-photo img-brakes"><div class="service-icon">●</div></div><div class="service-body"><h3>Brakes</h3><p>Brake pads, rotors, fluid, calipers, squeal diagnosis and safety inspections.</p><div class="service-meta"><span class="meta-pill">Safety critical</span><span class="meta-pill">Estimate first</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Brake Repair">Book brakes</button></div></article>
+          <article class="service-card"><div class="service-photo img-diagnostics"><div class="service-icon">▣</div></div><div class="service-body"><h3>Diagnostics</h3><p>Check engine lights, drivability issues, electrical faults and scan tool testing.</p><div class="service-meta"><span class="meta-pill">Scan + test</span><span class="meta-pill">From $120</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Diagnostics">Book diagnosis</button></div></article>
+          <article class="service-card"><div class="service-photo img-ac"><div class="service-icon">❄</div></div><div class="service-body"><h3>A/C Service</h3><p>A/C performance checks, leak testing, cabin filters, recharge and compressor diagnosis.</p><div class="service-meta"><span class="meta-pill">Cold air check</span><span class="meta-pill">Seasonal</span></div><button class="btn btn-secondary btn-small" type="button" data-service="A/C Service">Book A/C</button></div></article>
+          <article class="service-card"><div class="service-photo img-transmission"><div class="service-icon">⚙</div></div><div class="service-body"><h3>Transmission</h3><p>Fluid service, slipping diagnosis, clutch concerns and shift-quality inspections.</p><div class="service-meta"><span class="meta-pill">Inspection</span><span class="meta-pill">Quote required</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Transmission Service">Request estimate</button></div></article>
+          <article class="service-card"><div class="service-photo img-shop"><div class="service-icon">✓</div></div><div class="service-body"><h3>Smog / Inspection</h3><p>Roadworthy checks, pre-purchase inspections and emissions-related diagnosis.</p><div class="service-meta"><span class="meta-pill">Reports</span><span class="meta-pill">By appointment</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Smog / Inspection">Book inspection</button></div></article>
+          <article class="service-card"><div class="service-photo img-tires"><div class="service-icon">◉</div></div><div class="service-body"><h3>Tires</h3><p>Mounting, balancing, rotations, puncture repairs, alignment checks and tire sourcing.</p><div class="service-meta"><span class="meta-pill">Tire care</span><span class="meta-pill">Fast turnaround</span></div><button class="btn btn-secondary btn-small" type="button" data-service="Tires">Book tires</button></div></article>
         </div>
       </div>
     </section>
@@ -1596,197 +1234,75 @@
     <section id="appointment" aria-labelledby="appointment-title">
       <div class="container booking-grid">
         <aside class="booking-copy">
-          <div class="section-kicker" style="color:#ffb6ae">The white-glove estimate</div>
-          <h2 id="appointment-title">A considered estimate, in three precise steps.</h2>
-          <p>No guesswork, no pressure. Tell us the vehicle and the outcome you want; we respond with a transparent, itemised proposal — typically within one business day.</p>
+          <div class="section-kicker" style="color:#ffb6ae">Appointment / estimate request</div>
+          <h2 id="appointment-title">Collect the vehicle details before the service bay.</h2>
+          <p>A strong auto form captures make, model, year, service needed and symptoms so the shop can respond with a realistic next step.</p>
           <div class="booking-steps">
-            <div class="step"><span>1</span><div><strong>Vehicle class</strong><small>Pricing scales with paint area and marque — so we start here.</small></div></div>
-            <div class="step"><span>2</span><div><strong>Service level</strong><small>Choose a discipline, or let a specialist recommend the right programme.</small></div></div>
-            <div class="step"><span>3</span><div><strong>Schedule &amp; details</strong><small>Preferred date, contact details, and any specific requests.</small></div></div>
+            <div class="step"><span>1</span><div><strong>Vehicle details</strong><small>Year, make, model, mileage and service need.</small></div></div>
+            <div class="step"><span>2</span><div><strong>Preferred appointment</strong><small>Choose date, time and whether you need a quote.</small></div></div>
+            <div class="step"><span>3</span><div><strong>Shop follow-up</strong><small>Confirm appointment, estimate range or diagnostic plan.</small></div></div>
           </div>
         </aside>
 
         <div class="booking-card">
           <div class="booking-top">
             <div>
-              <div class="section-kicker">Estimate calculator</div>
-              <h3>Build your estimate</h3>
-              <p class="selected-service" id="selectedServiceText">Step 1 of 3 — begin with your vehicle.</p>
+              <div class="section-kicker">Book service</div>
+              <h3>Service request</h3>
+              <p class="selected-service" id="selectedServiceText">Select a service or tap any service button.</p>
             </div>
-            <a class="btn btn-red btn-small" href="tel:+61862440440">Call us</a>
+            <a class="btn btn-red btn-small" href="tel:+61862440440">Call shop</a>
           </div>
 
-          <form class="service-form" id="serviceForm" style="display:block">
-            <div class="wizard-progress" aria-label="Estimate progress">
-              <div class="wp-item active" data-step="1"><span class="wp-num">1</span><span class="wp-label">Vehicle</span></div>
-              <div class="wp-item" data-step="2"><span class="wp-num">2</span><span class="wp-label">Service</span></div>
-              <div class="wp-item" data-step="3"><span class="wp-num">3</span><span class="wp-label">Schedule</span></div>
-            </div>
-
-            <!-- Step 1: Vehicle class -->
-            <div class="wizard-step active" data-step="1">
-              <h4>Step 1 — Which class of vehicle?</h4>
-              <p class="wiz-help">The size and paint system of your car shape every quote. Select the closest match, then add the specifics.</p>
-              <div class="choice-grid" role="radiogroup" aria-label="Vehicle class">
-                <label class="choice"><input type="radio" name="vehicleClass" value="Luxury Saloon" /><span class="c-title">Luxury Saloon</span><span class="c-sub">S-Class, 7 Series, Flying Spur</span></label>
-                <label class="choice"><input type="radio" name="vehicleClass" value="Sports & GT" /><span class="c-title">Sports &amp; GT</span><span class="c-sub">911, AMG GT, Continental</span></label>
-                <label class="choice"><input type="radio" name="vehicleClass" value="Exotic & Supercar" /><span class="c-title">Exotic &amp; Supercar</span><span class="c-sub">Ferrari, McLaren, Lamborghini</span></label>
-                <label class="choice"><input type="radio" name="vehicleClass" value="Classic & Collector" /><span class="c-title">Classic &amp; Collector</span><span class="c-sub">Vintage, heritage, restoration</span></label>
-                <label class="choice"><input type="radio" name="vehicleClass" value="Luxury SUV & 4x4" /><span class="c-title">Luxury SUV &amp; 4x4</span><span class="c-sub">Urus, Bentayga, Range Rover</span></label>
-                <label class="choice"><input type="radio" name="vehicleClass" value="Other / Motorcycle" /><span class="c-title">Other / Motorcycle</span><span class="c-sub">Tell us more in step three</span></label>
-              </div>
-              <div class="wiz-fields">
-                <div class="field"><label for="yearInput">Year</label><input id="yearInput" inputmode="numeric" placeholder="2023" /></div>
-                <div class="field"><label for="makeInput">Make</label><input id="makeInput" placeholder="Porsche, Ferrari, Bentley..." /></div>
-                <div class="field full"><label for="modelInput">Model &amp; variant</label><input id="modelInput" placeholder="911 Turbo S, 296 GTB, Continental GT..." /></div>
-              </div>
-              <div class="wiz-nav">
-                <button class="wiz-back" type="button" data-back hidden>← Back</button>
-                <button class="btn btn-primary" type="button" data-next="1">Continue to service level →</button>
-              </div>
-            </div>
-
-            <!-- Step 2: Service level -->
-            <div class="wizard-step" data-step="2">
-              <h4>Step 2 — Choose your service level</h4>
-              <p class="wiz-help">Select the outcome you're after. Unsure which tier fits? Choose "Advise me" and a specialist will scope it with you.</p>
-              <div class="choice-grid" role="radiogroup" aria-label="Service level">
-                <label class="choice"><input type="radio" name="serviceLevel" value="Signature Detail" /><span class="c-title">Signature Detail</span><span class="c-sub">Maintenance wash &amp; refine · from $650</span></label>
-                <label class="choice"><input type="radio" name="serviceLevel" value="Paint Correction" /><span class="c-title">Paint Correction</span><span class="c-sub">Multi-stage polishing · from $1,200</span></label>
-                <label class="choice"><input type="radio" name="serviceLevel" value="Ceramic Coating" /><span class="c-title">Ceramic Coating</span><span class="c-sub">9H nano protection · from $1,800</span></label>
-                <label class="choice"><input type="radio" name="serviceLevel" value="Paint Protection Film" /><span class="c-title">Paint Protection Film</span><span class="c-sub">Self-healing PPF · from $3,500</span></label>
-                <label class="choice"><input type="radio" name="serviceLevel" value="Concours Detail" /><span class="c-title">Concours Detail</span><span class="c-sub">Show-field standard · from $2,500</span></label>
-                <label class="choice"><input type="radio" name="serviceLevel" value="Interior Detailing" /><span class="c-title">Interior Detailing</span><span class="c-sub">Leather &amp; Alcantara · from $550</span></label>
-                <label class="choice"><input type="radio" name="serviceLevel" value="Restoration" /><span class="c-title">Full Restoration</span><span class="c-sub">Bespoke paint &amp; finish · by quote</span></label>
-                <label class="choice"><input type="radio" name="serviceLevel" value="Advise me" /><span class="c-title">Advise me</span><span class="c-sub">A specialist will recommend</span></label>
-              </div>
-              <div class="wiz-nav">
-                <button class="wiz-back" type="button" data-back>← Back</button>
-                <button class="btn btn-primary" type="button" data-next="2">Continue to schedule →</button>
-              </div>
-            </div>
-
-            <!-- Step 3: Schedule & details -->
-            <div class="wizard-step" data-step="3">
-              <h4>Step 3 — Schedule &amp; your details</h4>
-              <p class="wiz-help">Choose a preferred window and how to reach you. Enclosed collection and delivery can be arranged on request.</p>
-              <div class="wiz-fields">
-                <div class="field"><label for="dateSelect">Preferred date</label><input id="dateSelect" type="date" /></div>
-                <div class="field"><label for="requestType">I would like to</label><select id="requestType"><option>Request a written estimate</option><option>Book a consultation</option><option>Arrange collection &amp; delivery</option><option>Ask a question</option></select></div>
-                <div class="field full"><label>Preferred time</label><div class="time-grid" role="group" aria-label="Preferred time options"><button class="time-chip" type="button" data-time="8:00 AM">8:00</button><button class="time-chip" type="button" data-time="9:30 AM">9:30</button><button class="time-chip" type="button" data-time="11:00 AM">11:00</button><button class="time-chip" type="button" data-time="1:00 PM">1:00</button><button class="time-chip" type="button" data-time="2:30 PM">2:30</button><button class="time-chip" type="button" data-time="4:00 PM">4:00</button><button class="time-chip" type="button" data-time="Collection">Collection</button><button class="time-chip" type="button" data-time="Flexible">Flexible</button></div><input id="timeValue" type="hidden" /></div>
-                <div class="field"><label for="nameInput">Name</label><input id="nameInput" autocomplete="name" placeholder="Your name" required /></div>
-                <div class="field"><label for="phoneInput">Phone</label><input id="phoneInput" autocomplete="tel" placeholder="0400 000 000" required /></div>
-                <div class="field full"><label for="emailInput">Email</label><input id="emailInput" type="email" autocomplete="email" placeholder="you@example.com" /></div>
-                <div class="field full"><label for="symptomsInput">Notes &amp; specific requests</label><textarea id="symptomsInput" placeholder="Paint condition, prior work, agreed value, event deadlines, storage needs, or anything else we should know."></textarea></div>
-              </div>
-              <div class="confirmation" id="confirmation" role="status"></div>
-              <div class="wiz-nav">
-                <button class="wiz-back" type="button" data-back>← Back</button>
-                <span class="estimate-pill" id="estimateText">Indicative estimate appears here</span>
-                <button class="btn btn-primary" type="submit">Request my estimate</button>
-              </div>
-            </div>
+          <form class="service-form" id="serviceForm">
+            <div class="field"><label for="yearInput">Vehicle year</label><input id="yearInput" inputmode="numeric" placeholder="2020" required /></div>
+            <div class="field"><label for="makeInput">Make</label><input id="makeInput" placeholder="Toyota, Ford, Mazda..." required /></div>
+            <div class="field"><label for="modelInput">Model</label><input id="modelInput" placeholder="Corolla, Ranger, CX-5..." required /></div>
+            <div class="field"><label for="mileageInput">Mileage / odometer</label><input id="mileageInput" placeholder="85,000 km" /></div>
+            <div class="field full"><label for="serviceSelect">Service needed</label><select id="serviceSelect" required><option value="">Select a service</option><option>Oil Change</option><option>Brake Repair</option><option>Diagnostics</option><option>A/C Service</option><option>Transmission Service</option><option>Smog / Inspection</option><option>Tires</option><option>Fleet Service</option><option>Other / not sure</option></select></div>
+            <div class="field"><label for="dateSelect">Preferred date</label><input id="dateSelect" type="date" required /></div>
+            <div class="field"><label for="requestType">Request type</label><select id="requestType"><option>Book a service</option><option>Get an estimate first</option><option>Ask a question</option><option>Fleet account enquiry</option></select></div>
+            <div class="field full"><label>Preferred time</label><div class="time-grid" role="group" aria-label="Preferred time options"><button class="time-chip" type="button" data-time="8:00 AM">8:00</button><button class="time-chip" type="button" data-time="9:30 AM">9:30</button><button class="time-chip" type="button" data-time="11:00 AM">11:00</button><button class="time-chip" type="button" data-time="1:00 PM">1:00</button><button class="time-chip" type="button" data-time="2:30 PM">2:30</button><button class="time-chip" type="button" data-time="4:00 PM">4:00</button><button class="time-chip" type="button" data-time="Drop-off">Drop-off</button><button class="time-chip" type="button" data-time="Flexible">Flexible</button></div><input id="timeValue" type="hidden" required /></div>
+            <div class="field"><label for="nameInput">Name</label><input id="nameInput" autocomplete="name" placeholder="Your name" required /></div>
+            <div class="field"><label for="phoneInput">Phone</label><input id="phoneInput" autocomplete="tel" placeholder="0400 000 000" required /></div>
+            <div class="field full"><label for="symptomsInput">Symptoms / notes</label><textarea id="symptomsInput" placeholder="Describe noises, warning lights, driving symptoms, recent repairs, tire size, or service history."></textarea></div>
+            <div class="confirmation" id="confirmation" role="status"></div>
+            <div class="form-footer"><span class="estimate-pill" id="estimateText">Estimate: depends on service and inspection</span><button class="btn btn-primary" type="submit">Send service request</button></div>
           </form>
         </div>
       </div>
     </section>
 
-    <section id="accreditation" aria-labelledby="accreditation-title">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="section-kicker">Trust &amp; accreditation</div>
-            <h2 id="accreditation-title">Credentials you can verify. Coverage you can rely on.</h2>
-          </div>
-          <p>Entrusting a six- or seven-figure vehicle demands more than a portfolio. Every claim below is documented, current, and available for your review before you book.</p>
-        </div>
-      </div>
+    <section id="why" aria-labelledby="why-title">
       <div class="container why-grid">
         <div class="why-card">
-          <div class="section-kicker">Certification &amp; approvals</div>
-          <h2 style="font-size:clamp(1.8rem,3vw,2.4rem)">Formally trained. Manufacturer approved.</h2>
-          <p>Our specialists hold the qualifications that manufacturers and insurers recognise — and we install only under the certifications each brand requires.</p>
+          <div class="section-kicker">Why choose us</div>
+          <h2 id="why-title">Honest pricing, fast turnaround and credentials up front.</h2>
+          <p>Auto repair trust is earned before a driver books. This section makes guarantees, process and shop standards visible.</p>
           <div class="why-list">
-            <div class="why-item"><span>ASE</span><div><strong>ASE Master Certified</strong><small>Lead specialists hold current ASE Master credentials, renewed on schedule.</small></div></div>
-            <div class="why-item"><span>OEM</span><div><strong>Manufacturer approved</strong><small>Approved refinishing &amp; protection processes for Porsche, Ferrari, McLaren and Aston Martin.</small></div></div>
-            <div class="why-item"><span>PPF</span><div><strong>Certified film installers</strong><small>Factory-trained &amp; accredited by leading PPF and ceramic coating manufacturers.</small></div></div>
-            <div class="why-item"><span>IDA</span><div><strong>IDA Certified Detailer</strong><small>Recognised by the International Detailing Association's certification programme.</small></div></div>
-            <div class="why-item"><span>✓</span><div><strong>Documented process</strong><small>Paint-depth readings, photography and a written report accompany every vehicle.</small></div></div>
-            <div class="why-item"><span>⚿</span><div><strong>Confidential &amp; secure</strong><small>Alarmed, climate-controlled storage with CCTV and strict client confidentiality.</small></div></div>
+            <div class="why-item"><span>$</span><div><strong>Honest pricing</strong><small>Clear estimates before work begins, with no pressure to approve extras.</small></div></div>
+            <div class="why-item"><span>↻</span><div><strong>Fast turnaround</strong><small>Same-day options for common maintenance and diagnostics when available.</small></div></div>
+            <div class="why-item"><span>✓</span><div><strong>Free inspections</strong><small>Complimentary brake and safety checks with qualifying services.</small></div></div>
+            <div class="why-item"><span>ASE</span><div><strong>Certified techs</strong><small>Experienced technicians using modern diagnostic equipment.</small></div></div>
+            <div class="why-item"><span>24</span><div><strong>Repair warranty</strong><small>Warranty-backed parts and labour options on approved repairs.</small></div></div>
+            <div class="why-item"><span>☑</span><div><strong>Clean shop policy</strong><small>Organized bays, seat covers, floor mats and documented findings.</small></div></div>
           </div>
         </div>
 
         <aside class="fleet-card">
           <div class="fleet-photo"></div>
           <div class="fleet-body">
-            <div class="section-kicker">Insurance &amp; liability</div>
-            <h3>Fully insured, care &amp; custody.</h3>
-            <p>From the moment we take the keys, your vehicle is covered under dedicated garage-keepers and care, custody &amp; control policies — not just general liability.</p>
+            <div class="section-kicker">Fleet / specialties</div>
+            <h3>Fleet maintenance for busy vehicles.</h3>
+            <p>Add a specialty callout for fleet accounts, diesel, European cars, hybrids, 4x4s, performance vehicles or commercial vans.</p>
             <div class="fleet-list">
-              <div class="fleet-item"><strong>$2M care &amp; custody</strong><span>Per vehicle</span></div>
-              <div class="fleet-item"><strong>$20M public liability</strong><span>Facility-wide</span></div>
-              <div class="fleet-item"><strong>Agreed-value handling</strong><span>Collector &amp; exotic</span></div>
-              <div class="fleet-item"><strong>Certificate on request</strong><span>Before drop-off</span></div>
+              <div class="fleet-item"><strong>Priority scheduling</strong><span>Reduce downtime</span></div>
+              <div class="fleet-item"><strong>Maintenance reminders</strong><span>Oil, brakes, tires</span></div>
+              <div class="fleet-item"><strong>Monthly reporting</strong><span>For business accounts</span></div>
             </div>
-            <div class="hero-cta" style="margin-top:22px"><a class="btn btn-primary" href="#appointment">Request coverage details</a></div>
+            <div class="hero-cta" style="margin-top:22px"><button class="btn btn-primary" type="button" data-service="Fleet Service">Ask about fleet service</button></div>
           </div>
         </aside>
-      </div>
-    </section>
-
-    <section id="technicians" aria-labelledby="technicians-title">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="section-kicker">Meet the master technicians</div>
-            <h2 id="technicians-title">The hands that will touch your paint.</h2>
-          </div>
-          <p>No apprentices on your clear coat, no rotating contractors. Every vehicle is assigned a named lead specialist who is accountable for the result from intake to handover.</p>
-        </div>
-
-        <div class="tech-lead">
-          <div class="tech-portrait" style="--image: url('assets/8d87048f3063.jpg');">
-            <div class="tech-name-tag">
-              <strong>Daniel Marchetti</strong>
-              <span>Lead Specialist &amp; Founder · ASE Master Certified</span>
-            </div>
-          </div>
-          <div class="tech-bio">
-            <div class="section-kicker">Lead specialist</div>
-            <p>Daniel began his career refinishing paint in a marque-approved body shop before spending six years correcting and protecting concours-level collections across Europe and Australia. He treats every panel as a measured, repeatable process — never a rushed one — and holds himself to tolerances most owners never knew existed: paint depth verified to the micron, panel gaps respected, and factory finishes preserved rather than reshaped.</p>
-            <div class="tech-stats" aria-label="Lead technician credentials">
-              <div class="tech-stat"><strong>18 yrs</strong><span>at the polisher &amp; the gun</span></div>
-              <div class="tech-stat"><strong>2,400+</strong><span>documented training hours</span></div>
-              <div class="tech-stat"><strong>4,000+</strong><span>vehicles corrected &amp; protected</span></div>
-            </div>
-            <div class="tech-specialties">
-              <span class="meta-pill">Multi-stage correction</span>
-              <span class="meta-pill">PPF bespoke wrapping</span>
-              <span class="meta-pill">Concours preparation</span>
-              <span class="meta-pill">Colour-matched respray</span>
-            </div>
-            <p class="tech-quote">"An exotic isn't a canvas for shortcuts. My job is to make the car look like the factory's best day — and to make sure it still measures that way years from now."</p>
-          </div>
-        </div>
-
-        <div class="tech-support">
-          <article class="tech-mini">
-            <div class="tech-avatar">SK</div>
-            <div>
-              <strong>Sofia Kang</strong>
-              <span>Coating &amp; PPF Specialist · Manufacturer Certified</span>
-              <small>Factory-accredited film installer with a dust-free application record across 900+ builds.</small>
-            </div>
-          </article>
-          <article class="tech-mini">
-            <div class="tech-avatar">RO</div>
-            <div>
-              <strong>Reuben Osei</strong>
-              <span>Restoration &amp; Refinish Lead · IDA Certified</span>
-              <small>Classic and collector refinishing, period-correct detailing and wet-sand finishing.</small>
-            </div>
-          </article>
-        </div>
       </div>
     </section>
 
@@ -1794,29 +1310,29 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <div class="section-kicker">The atelier</div>
-            <h2 id="location-title">A private, climate-controlled studio — by appointment.</h2>
+            <div class="section-kicker">Hours & location</div>
+            <h2 id="location-title">Make the shop easy to find and easy to trust.</h2>
           </div>
-          <p>We are not a walk-in shop. Visits are scheduled so your vehicle receives undivided attention, and enclosed collection and delivery can be arranged across the metro area.</p>
+          <p>Location details, opening hours, drop-off notes and directions help drivers plan their service without friction.</p>
         </div>
 
         <div class="location-grid">
           <div class="location-card">
             <div class="location-photo"></div>
             <div class="location-body">
-              <h3>Meridian Coachworks</h3>
-              <p>18 Vantage Court, Perth WA 6000<br />Private reception · Enclosed collection &amp; delivery · Secure alarmed storage</p>
+              <h3>Redline AutoWorks</h3>
+              <p>18 Workshop Avenue, Perth WA 6000<br />Easy drop-off lane · After-hours key box · Fleet parking available</p>
               <ul class="hours-list" aria-label="Opening hours">
-                <li><span>Monday</span><b>By appointment</b></li>
-                <li><span>Tuesday</span><b>8:00 AM – 6:00 PM</b></li>
-                <li><span>Wednesday</span><b>8:00 AM – 6:00 PM</b></li>
-                <li><span>Thursday</span><b>8:00 AM – 6:00 PM</b></li>
-                <li><span>Friday</span><b>8:00 AM – 6:00 PM</b></li>
-                <li><span>Saturday</span><b>9:00 AM – 2:00 PM · by appointment</b></li>
+                <li><span>Monday</span><b>7:30 AM – 5:30 PM</b></li>
+                <li><span>Tuesday</span><b>7:30 AM – 5:30 PM</b></li>
+                <li><span>Wednesday</span><b>7:30 AM – 5:30 PM</b></li>
+                <li><span>Thursday</span><b>7:30 AM – 5:30 PM</b></li>
+                <li><span>Friday</span><b>7:30 AM – 5:00 PM</b></li>
+                <li><span>Saturday</span><b>8:00 AM – 1:00 PM</b></li>
                 <li><span>Sunday</span><b>Closed</b></li>
               </ul>
-              <div class="address-card"><strong>Consultations</strong><span>All work begins with a private consultation and written estimate. Same-day emergencies for existing clients are considered on request.</span></div>
-              <div class="hero-cta" style="margin-top:20px"><a class="btn btn-primary" href="#appointment">Request estimate</a><a class="btn btn-secondary" href="https://maps.google.com" target="_blank" rel="noreferrer">Get directions</a></div>
+              <div class="address-card"><strong>Directions</strong><span>Two minutes from the freeway exit. Replace the map with Google Maps or Apple Maps embed.</span></div>
+              <div class="hero-cta" style="margin-top:20px"><a class="btn btn-primary" href="#appointment">Book service</a><a class="btn btn-secondary" href="https://maps.google.com" target="_blank" rel="noreferrer">Get directions</a></div>
             </div>
           </div>
 
@@ -1824,7 +1340,7 @@
             <div class="map-illustration">
               <div class="map-road road-one"></div><div class="map-road road-two"></div><div class="map-road road-three"></div>
               <div class="map-pin" aria-hidden="true"></div>
-              <div class="map-label"><strong>Discreetly located, moments from the city.</strong><span>Replace this map-style block with a live embedded map, directions and collection zones.</span></div>
+              <div class="map-label"><strong>Easy access from main roads and business parks.</strong><span>This map-style block can become a live embedded map with directions and opening hours.</span></div>
             </div>
           </div>
         </div>
@@ -1835,10 +1351,10 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <div class="section-kicker">Client reflections</div>
-            <h2 id="reviews-title">Owners who don't trust their cars to just anyone.</h2>
+            <div class="section-kicker">Reviews</div>
+            <h2 id="reviews-title">Prominent reviews because trust is the biggest auto barrier.</h2>
           </div>
-          <p>Collectors, enthusiasts and dealers return to Meridian because the work is documented, the custody is insured, and the finish holds its value.</p>
+          <p>Drivers are nervous about repairs. Specific reviews about pricing, communication and repeat visits reduce that hesitation.</p>
         </div>
 
         <div class="reviews-layout">
@@ -1846,23 +1362,23 @@
             <div>
               <div class="review-score">4.9</div>
               <div class="stars" style="font-size:1.25rem;color:#ffb6ae">★★★★★</div>
-              <p>1,180 verified owner reviews across correction, paint protection film, ceramic coating, concours preparation and restoration.</p>
+              <p>1,180 five-star reviews across oil changes, brakes, diagnostics, tires, A/C, inspections and fleet accounts.</p>
               <div class="rating-bars" aria-label="Rating breakdown">
-                <div class="bar-row"><span>5★</span><div class="bar-track"><div class="bar-fill" style="width:96%"></div></div><span>96%</span></div>
-                <div class="bar-row"><span>4★</span><div class="bar-track"><div class="bar-fill" style="width:3%"></div></div><span>3%</span></div>
+                <div class="bar-row"><span>5★</span><div class="bar-track"><div class="bar-fill" style="width:94%"></div></div><span>94%</span></div>
+                <div class="bar-row"><span>4★</span><div class="bar-track"><div class="bar-fill" style="width:5%"></div></div><span>5%</span></div>
                 <div class="bar-row"><span>3★</span><div class="bar-track"><div class="bar-fill" style="width:1%"></div></div><span>1%</span></div>
               </div>
             </div>
-            <a class="btn btn-secondary" href="#appointment">Request an estimate</a>
+            <a class="btn btn-secondary" href="#appointment">Book with confidence</a>
           </aside>
 
           <div class="review-grid">
-            <article class="review-card"><div class="stars">★★★★★</div><p>“Depth readings before and after, photos at every stage, and a finish on my 911 that genuinely looked better than delivery day. This is how it should be done.”</p><div class="reviewer"><strong>Michael R.</strong><span class="source">Google</span></div></article>
-            <article class="review-card"><div class="stars">★★★★★</div><p>“Full PPF wrap on the McLaren. The film edges are invisible and the paint underneath is flawless. Worth every dollar for the protection.”</p><div class="reviewer"><strong>Ben C.</strong><span class="source">Google</span></div></article>
-            <article class="review-card"><div class="stars">★★★★★</div><p>“They insured the car in writing before I handed over the keys. As a collector, that peace of mind is everything.”</p><div class="reviewer"><strong>Talia W.</strong><span class="source">Client</span></div></article>
-            <article class="review-card"><div class="stars">★★★★★</div><p>“We prep our showroom exotics here. Consistent, discreet and always on time for delivery deadlines.”</p><div class="reviewer"><strong>Marcus K.</strong><span class="source">Dealer partner</span></div></article>
-            <article class="review-card"><div class="stars">★★★★★</div><p>“Concours detail before a national event — took a class win. Daniel's attention to the underbody and engine bay is on another level.”</p><div class="reviewer"><strong>Laura S.</strong><span class="source">Google</span></div></article>
-            <article class="review-card"><div class="stars">★★★★★</div><p>“A restoration on a 1970s classic that others wouldn't touch. Period-correct, patient, and communicated the whole way through.”</p><div class="reviewer"><strong>Daniel P.</strong><span class="source">Facebook</span></div></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>“They diagnosed the warning light, sent photos and explained the repair before doing anything. Honest and professional.”</p><div class="reviewer"><strong>Michelle R.</strong><span class="source">Google</span></div></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>“Brake job was quoted clearly and finished the same day. No surprise add-ons when I picked up the car.”</p><div class="reviewer"><strong>Ben C.</strong><span class="source">Google</span></div></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>“The online form saved time because I could include the vehicle details and symptoms up front.”</p><div class="reviewer"><strong>Talia W.</strong><span class="source">Shop review</span></div></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>“Our fleet vans are serviced here now. They keep us on schedule and flag issues before downtime hits.”</p><div class="reviewer"><strong>Marcus K.</strong><span class="source">Fleet account</span></div></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>“A/C was warm, now it’s ice cold. They tested properly instead of just pushing a recharge.”</p><div class="reviewer"><strong>Laura S.</strong><span class="source">Google</span></div></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>“Clean shop, good communication and a warranty on the repair. I finally found a mechanic I trust.”</p><div class="reviewer"><strong>Daniel P.</strong><span class="source">Facebook</span></div></article>
           </div>
         </div>
       </div>
@@ -1872,11 +1388,11 @@
       <div class="container">
         <div class="final-card">
           <div>
-            <div class="section-kicker" style="color:#ffb6ae">Preserve what you've invested in</div>
-            <h2>Your car deserves a specialist, not a shortcut.</h2>
-            <p>Begin with a transparent, itemised estimate and a conversation about the outcome you want. Precision, protection and value — documented at every stage.</p>
+            <div class="section-kicker" style="color:#ffb6ae">Ready to drive bookings and calls</div>
+            <h2>Put credentials, reviews and phone CTAs in the driver’s path.</h2>
+            <p>This auto repair demo includes the full conversion flow: hero booking CTA, click-to-call, service list, appointment form, trust signals, coupons, hours, location map, why-choose-us proof, reviews and fleet callout.</p>
           </div>
-          <div class="hero-cta" style="margin:0"><a class="btn btn-secondary" href="tel:+61862440440">Call a specialist</a><a class="btn btn-primary" href="#appointment">Request Estimate</a></div>
+          <div class="hero-cta" style="margin:0"><a class="btn btn-secondary" href="tel:+61862440440">Call now</a><a class="btn btn-primary" href="#appointment">Book a Service</a></div>
         </div>
       </div>
     </section>
@@ -1884,107 +1400,45 @@
 
   <footer class="site-footer">
     <div class="container footer-grid">
-      <a class="brand" href="#top"><div class="brand-mark">MC</div><div><span class="brand-name">Meridian Coachworks</span><span class="brand-subtitle">18 Vantage Court, Perth WA</span></div></a>
-      <div class="footer-links"><a href="tel:+61862440440">08 6244 0440</a><a href="#appointment">Request estimate</a><a href="#transformation">Before / After</a><a href="#accreditation">Accreditation</a></div>
-      <div>Luxury &amp; exotic detailing · Paint protection · Restoration · Perth</div>
+      <a class="brand" href="#top"><div class="brand-mark">Ra</div><div><span class="brand-name">Redline AutoWorks</span><span class="brand-subtitle">18 Workshop Avenue, Perth WA</span></div></a>
+      <div class="footer-links"><a href="tel:+61862440440">08 6244 0440</a><a href="#appointment">Book service</a><a href="#location">Directions</a><a href="#specials">Coupons</a></div>
+      <div>Demo website concept · Replace with real auto shop details</div>
     </div>
   </footer>
 
   <script>
-    // ===== White-glove 3-step estimate wizard =====
-    const form = document.getElementById('serviceForm');
-    const wpItems = Array.from(document.querySelectorAll('.wp-item'));
-    const steps = Array.from(document.querySelectorAll('.wizard-step'));
+    const serviceSelect = document.getElementById('serviceSelect');
     const selectedServiceText = document.getElementById('selectedServiceText');
     const estimateText = document.getElementById('estimateText');
     const appointmentSection = document.getElementById('appointment');
     const confirmation = document.getElementById('confirmation');
-    let currentStep = 1;
 
-    const estimates = {
-      'Signature Detail': 'Signature Detail · indicative from $650',
-      'Paint Correction': 'Paint Correction · indicative from $1,200',
-      'Ceramic Coating': 'Ceramic Coating · indicative from $1,800',
-      'Paint Protection Film': 'Paint Protection Film · indicative from $3,500',
-      'Concours Detail': 'Concours Detail · indicative from $2,500',
-      'Interior Detailing': 'Interior Detailing · indicative from $550',
-      'Restoration': 'Full Restoration · bespoke written quotation',
-      'Advise me': 'A specialist will recommend the right programme'
+    const serviceNotes = {
+      'Oil Change': 'Typical visit: 30–45 min · coupon may apply',
+      'Brake Repair': 'Estimate after inspection · safety critical',
+      'Diagnostics': 'Diagnostic testing from $120 · applied to approved repairs where applicable',
+      'A/C Service': 'A/C performance check · leak testing may be required',
+      'Transmission Service': 'Inspection required before estimate',
+      'Smog / Inspection': 'Inspection appointment required',
+      'Tires': 'Mounting, balancing, rotation or sourcing',
+      'Fleet Service': 'Fleet account enquiry · scheduling options available'
     };
 
-    const stepHints = {
-      1: 'Step 1 of 3 — begin with your vehicle.',
-      2: 'Step 2 of 3 — choose your service level.',
-      3: 'Step 3 of 3 — schedule and details.'
-    };
-
-    function selectedRadio(name) {
-      const el = form.querySelector('input[name="' + name + '"]:checked');
-      return el ? el.value : '';
+    function updateServiceText() {
+      const service = serviceSelect.value;
+      selectedServiceText.textContent = service ? `${service} selected. Add your vehicle details below.` : 'Select a service or tap any service button.';
+      estimateText.textContent = service ? (serviceNotes[service] || 'Estimate depends on vehicle and inspection') : 'Estimate: depends on service and inspection';
     }
 
-    function updateEstimate() {
-      const s = selectedRadio('serviceLevel');
-      estimateText.textContent = s ? (estimates[s] || 'Indicative estimate on request') : 'Indicative estimate appears here';
-    }
+    serviceSelect.addEventListener('change', updateServiceText);
 
-    function showStep(n) {
-      currentStep = n;
-      steps.forEach(s => s.classList.toggle('active', Number(s.dataset.step) === n));
-      wpItems.forEach(it => {
-        const step = Number(it.dataset.step);
-        it.classList.toggle('active', step === n);
-        it.classList.toggle('done', step < n);
-      });
-      if (selectedServiceText) selectedServiceText.textContent = stepHints[n];
-    }
-
-    // Highlight selected choice cards
-    form.querySelectorAll('.choice input').forEach(input => {
-      input.addEventListener('change', () => {
-        form.querySelectorAll('input[name="' + input.name + '"]').forEach(r => {
-          r.closest('.choice').classList.toggle('selected', r.checked);
-        });
-        if (input.name === 'serviceLevel') updateEstimate();
-      });
-    });
-
-    // Advance / go back
-    form.querySelectorAll('[data-next]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const from = Number(btn.dataset.next);
-        if (from === 1 && !selectedRadio('vehicleClass')) {
-          selectedServiceText.textContent = 'Please select a vehicle class to continue.';
-          return;
-        }
-        if (from === 2 && !selectedRadio('serviceLevel')) {
-          selectedServiceText.textContent = 'Please choose a service level (or "Advise me").';
-          return;
-        }
-        showStep(from + 1);
-        appointmentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
-
-    form.querySelectorAll('[data-back]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (currentStep > 1) showStep(currentStep - 1);
-      });
-    });
-
-    // Service shortcuts (hero pills + discipline cards) preselect the tier and open the wizard
     document.querySelectorAll('[data-service]').forEach(button => {
       button.addEventListener('click', () => {
         const service = button.dataset.service;
-        const radio = form.querySelector('input[name="serviceLevel"][value="' + service + '"]');
-        if (radio) {
-          radio.checked = true;
-          radio.dispatchEvent(new Event('change', { bubbles: true }));
-        }
+        if (serviceSelect && service) serviceSelect.value = service;
+        updateServiceText();
         confirmation.classList.remove('show');
-        showStep(1);
         appointmentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        if (service) selectedServiceText.textContent = service + ' selected. First, tell us about the vehicle.';
       });
     });
 
@@ -1996,37 +1450,22 @@
       });
     });
 
-    form.addEventListener('submit', event => {
+    document.getElementById('serviceForm').addEventListener('submit', event => {
       event.preventDefault();
       const name = document.getElementById('nameInput').value.trim() || 'there';
       const year = document.getElementById('yearInput').value.trim();
       const make = document.getElementById('makeInput').value.trim();
       const model = document.getElementById('modelInput').value.trim();
-      const vehicle = [year, make, model].filter(Boolean).join(' ') || (selectedRadio('vehicleClass') || 'your vehicle');
-      const service = selectedRadio('serviceLevel') || 'your selected service';
+      const service = serviceSelect.value || 'your selected service';
       const requestType = document.getElementById('requestType').value;
       const time = document.getElementById('timeValue').value || 'a flexible time';
-      confirmation.textContent = `Thank you, ${name}. Your request to ${requestType.toLowerCase()} for ${service} on ${vehicle} (${time}) has been received. A specialist will respond with an itemised proposal, typically within one business day. In a live site, this would route to the studio's booking system.`;
+      confirmation.textContent = `Thanks, ${name}! Your request to ${requestType.toLowerCase()} for ${service} on your ${year} ${make} ${model} at ${time} has been received. In a live site, this would send to the repair shop or service CRM.`;
       confirmation.classList.add('show');
-      confirmation.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
-
-    showStep(1);
-    updateEstimate();
 
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     document.getElementById('dateSelect').min = tomorrow.toISOString().split('T')[0];
-
-    // Before / after restoration slider
-    (function () {
-      const frame = document.getElementById('baFrame');
-      const range = document.getElementById('baRange');
-      if (!frame || !range) return;
-      const setPos = value => { frame.style.setProperty('--pos', value + '%'); };
-      range.addEventListener('input', () => setPos(range.value));
-      setPos(range.value);
-    })();
   </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 <!-- DEMO-GUIDE:START -->
@@ -2120,7 +1559,7 @@
 
 <script>
 (function(){
-  var A = [{"id": "transformation", "title": "Before / after slider", "text": "An interactive reveal of a real restoration \u2014 the single most persuasive proof of quality for a detailing brand."}, {"id": "services", "title": "Disciplines", "text": "Each service scoped to the vehicle. Every card pre-fills the estimate wizard to make the next step effortless."}, {"id": "appointment", "title": "White-glove estimate wizard", "text": "A 3-step tier calculator \u2014 vehicle class, service level, schedule \u2014 that qualifies premium leads before they reach you."}, {"id": "accreditation", "title": "Trust & accreditation", "text": "ASE, manufacturer approvals and insured care & custody \u2014 the credentials that let owners hand over a six-figure car."}, {"id": "technicians", "title": "Master technicians", "text": "Named specialists with training hours and certifications, building the personal trust luxury clients expect."}, {"id": "location", "title": "The atelier", "text": "An appointment-only studio with collection & delivery \u2014 positioning the brand as exclusive, not walk-in."}, {"id": "reviews", "title": "Client reflections", "text": "Verified owner reviews from collectors and dealers, the strongest signal of trust for high-value work."}];
+  var A = [{"id": "specials", "title": "Coupons & specials", "text": "Limited-time offers give price-conscious drivers a reason to book now instead of later."}, {"id": "services", "title": "Services offered", "text": "Every service with pricing hints. Each button pre-fills the booking form to make the next step effortless."}, {"id": "appointment", "title": "Booking / estimate form", "text": "Drivers request a service or a quote with their vehicle details \u2014 leads land straight with you. Your main conversion tool."}, {"id": "why", "title": "Why choose us", "text": "Certifications, warranty and honest-pricing promises that overcome the distrust drivers feel about repairs."}, {"id": "location", "title": "Hours & location", "text": "Address, opening hours and directions so drivers can plan a drop-off with no friction."}, {"id": "reviews", "title": "Reviews", "text": "Prominent 5-star reviews, because trust is the single biggest barrier in auto repair."}];
   var items = A.map(function(a){ return { a:a, el: document.getElementById(a.id) }; })
                .filter(function(x){ return x.el; });
   if(!items.length) return;
