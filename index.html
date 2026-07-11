@@ -498,5 +498,36 @@
 })();
 </script>
 <!-- FLAIR:END -->
+<!-- MOTION:START -->
+<style id="motion-layer">
+@media (prefers-reduced-motion: no-preference) {
+  /* Animated underline on nav links */
+  .nav-links a { position: relative; }
+  .nav-links a::after {
+    content: ""; position: absolute; left: 13px; right: 13px; bottom: 4px; height: 2px;
+    border-radius: 2px; background: currentColor; opacity: 0; transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform .3s cubic-bezier(.16,.84,.44,1), opacity .3s ease;
+  }
+  .nav-links a:hover::after { opacity: .6; transform: scaleX(1); }
+
+  /* Stat cards lift on hover */
+  .stat { transition: transform .4s cubic-bezier(.16,.84,.44,1), border-color .3s ease, background .3s ease; }
+  .stat:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.22); background: var(--panel-2); }
+
+  /* Pulsing eyebrow status dot */
+  .eyebrow::before { animation: mtnDot 2.6s ease-in-out infinite; }
+  @keyframes mtnDot { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.35); opacity: .6; } }
+
+  /* Logo pops on hover */
+  .brand .mark { transition: transform .5s cubic-bezier(.34,1.56,.64,1); }
+  .brand:hover .mark { transform: rotate(-6deg) scale(1.08); }
+
+  /* Demo tag subtle float */
+  .demo .tag { transition: transform .35s ease; }
+  .demo:hover .tag { transform: translateY(-2px); }
+}
+</style>
+<!-- MOTION:END -->
 </body>
 </html>

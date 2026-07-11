@@ -2162,5 +2162,70 @@
 })();
 </script>
 <!-- FLAIR:END -->
+<!-- MOTION:START -->
+<style id="motion-layer">
+@media (prefers-reduced-motion: no-preference) {
+  /* Animated underline on nav links */
+  .nav-links a { position: relative; }
+  .nav-links a::after {
+    content: ""; position: absolute; left: 12px; right: 12px; bottom: 5px; height: 2px;
+    border-radius: 2px; background: currentColor; opacity: 0; transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform .32s cubic-bezier(.16,.84,.44,1), opacity .32s ease;
+  }
+  .nav-links a:hover::after { opacity: .55; transform: scaleX(1); }
+
+  /* Hover lift on content cards (!important sits above the reveal transform:none) */
+  main .service-card, main .review-card, main .dish-card, main .coupon-card,
+  main .proof-card, main .why-item, main .source-item, main .special-mini,
+  main .platform-card, main .schedule-item, main .tech-mini, main .team-card,
+  main .price-card, main .fleet-item, main .trust-item {
+    transition: transform .4s cubic-bezier(.16,.84,.44,1), box-shadow .4s ease;
+  }
+  main .service-card:hover, main .review-card:hover, main .dish-card:hover,
+  main .coupon-card:hover, main .proof-card:hover, main .why-item:hover,
+  main .source-item:hover, main .special-mini:hover, main .platform-card:hover,
+  main .schedule-item:hover, main .tech-mini:hover, main .team-card:hover,
+  main .price-card:hover, main .fleet-item:hover, main .trust-item:hover {
+    transform: translateY(-6px) !important;
+  }
+
+  /* Photo zoom inside cards (parents clip overflow) */
+  .service-photo, .dish-photo, .location-photo, .team-photo,
+  .story-photo, .truck-photo, .fleet-photo, .menu-side-photo {
+    transition: transform .7s cubic-bezier(.16,.84,.44,1);
+  }
+  .service-card:hover .service-photo,
+  .dish-card:hover .dish-photo,
+  .team-card:hover .team-photo,
+  .location-card:hover .location-photo { transform: scale(1.07); }
+  .story-photo:hover, .truck-photo:hover, .fleet-photo:hover, .menu-side-photo:hover { transform: scale(1.04); }
+
+  /* Gallery tiles */
+  .gallery-item { transition: transform .5s cubic-bezier(.16,.84,.44,1), box-shadow .4s ease; }
+  .gallery-item:hover { transform: translateY(-6px) scale(1.015) !important; }
+
+  /* Service icons spring on card hover */
+  .service-icon { transition: transform .45s cubic-bezier(.34,1.56,.64,1); }
+  .service-card:hover .service-icon { transform: translateY(-3px) scale(1.1) rotate(-4deg); }
+
+  /* Pulsing eyebrow status dot */
+  .eyebrow::before { animation: mtnDot 2.6s ease-in-out infinite; }
+  @keyframes mtnDot { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.35); opacity: .65; } }
+
+  /* Logo pops on hover */
+  .brand-mark { transition: transform .5s cubic-bezier(.34,1.56,.64,1); }
+  .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.06); }
+}
+
+/* Gentle float on the pinned hero cards — desktop only */
+@media (min-width: 761px) and (prefers-reduced-motion: no-preference) {
+  .floating-trust { animation: mtnFloatA 6.5s ease-in-out infinite; }
+  .floating-review { animation: mtnFloatB 7.5s ease-in-out infinite; }
+  @keyframes mtnFloatA { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-10px) rotate(-3deg); } }
+  @keyframes mtnFloatB { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-12px) rotate(-3deg); } }
+}
+</style>
+<!-- MOTION:END -->
 </body>
 </html>
