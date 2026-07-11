@@ -239,15 +239,102 @@
       .footer-grid { grid-template-columns:1fr; }
     }
   </style>
+  <style id="enhance">
+    /* ---- enhancement layer: a11y, mobile nav, reveal, FAQ, micro-interactions ---- */
+    .skip-link { position:absolute; left:-999px; top:0; z-index:300; background:var(--dark); color:#fff; padding:11px 18px; border-radius:0 0 14px 0; font-weight:850; text-decoration:none; }
+    .skip-link:focus { left:0; }
+    :focus-visible { outline:3px solid var(--primary); outline-offset:3px; border-radius:8px; }
+    .nav-toggle { display:none; }
+    .btn { position:relative; overflow:hidden; }
+    .btn::after { content:""; position:absolute; top:0; left:-130%; width:55%; height:100%; background:linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent); transform:skewX(-20deg); transition:left .6s ease; pointer-events:none; }
+    .btn:hover::after { left:150%; }
+    .service-card, .review-card, .proof-card, .why-item, .location-card { transition:transform .3s ease, box-shadow .3s ease; }
+    .service-card:hover, .proof-card:hover, .review-card:hover { transform:translateY(-6px); }
+    .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
+    .reveal.in-view { opacity:1; transform:none; }
+    .faq { padding:64px 0; }
+    .faq-list { display:grid; gap:12px; margin-top:28px; }
+    .faq-item { border:1px solid var(--line); border-radius:var(--radius-lg); background:var(--white); box-shadow:var(--soft-shadow); overflow:hidden; }
+    .faq-item summary { list-style:none; cursor:pointer; padding:20px 24px; font-weight:850; font-size:1.04rem; color:var(--dark); display:flex; justify-content:space-between; align-items:center; gap:18px; }
+    .faq-item summary::-webkit-details-marker { display:none; }
+    .faq-item summary::after { content:"+"; font-size:1.6rem; line-height:1; color:var(--primary); transition:transform .3s ease; flex:none; }
+    .faq-item[open] summary::after { transform:rotate(45deg); }
+    .faq-item .faq-body { padding:0 24px 20px; color:var(--muted); line-height:1.65; }
+    @media (max-width:1120px) {
+      .site-header .container.nav { position:relative; }
+      .nav-toggle { display:inline-flex; align-items:center; justify-content:center; width:48px; height:48px; padding:0; border-radius:14px; border:1px solid var(--line); background:rgba(255,255,255,.85); color:var(--dark); cursor:pointer; }
+      .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after { display:block; width:20px; height:2px; background:currentColor; border-radius:2px; transition:transform .3s ease, opacity .2s ease; }
+      .nav-toggle span { position:relative; }
+      .nav-toggle span::before, .nav-toggle span::after { content:""; position:absolute; left:0; }
+      .nav-toggle span::before { top:-6px; }
+      .nav-toggle span::after { top:6px; }
+      .nav-toggle[aria-expanded="true"] span { background:transparent; }
+      .nav-toggle[aria-expanded="true"] span::before { top:0; transform:rotate(45deg); }
+      .nav-toggle[aria-expanded="true"] span::after { top:0; transform:rotate(-45deg); }
+      .nav-links.open { display:flex; flex-direction:column; align-items:stretch; gap:2px; position:absolute; top:calc(100% + 12px); left:0; right:0; z-index:120; padding:12px; border-radius:20px; background:rgba(255,255,255,.98); border:1px solid var(--line); box-shadow:var(--shadow); }
+      .nav-links.open a { padding:13px 16px; border-radius:12px; font-size:1rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity:1 !important; transform:none !important; transition:none !important; }
+      .btn::after { display:none; }
+      html { scroll-behavior:auto !important; }
+    }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutomotiveBusiness",
+  "name": "MirrorFinish Detailing",
+  "telephone": "+61862440540",
+  "url": "",
+  "priceRange": "$$",
+  "image": "og-image.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "12 Detail Lane, Perth WA",
+    "addressLocality": "Perth",
+    "addressRegion": "WA",
+    "addressCountry": "AU"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "128"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "08:00",
+      "closes": "17:30"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Saturday"
+      ],
+      "opens": "08:00",
+      "closes": "14:00"
+    }
+  ]
+}
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#top">Skip to content</a>
   <div class="top-strip"><div class="container"><span><strong>Auto &amp; Repair:</strong> This month: free paint inspection with any ceramic coating quote</span><a href="tel:+61862440540">Call 08 6244 0540</a></div></div>
 
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="#top" aria-label="MirrorFinish Detailing home"><div class="brand-mark">Mf</div><div><span class="brand-name">MirrorFinish Detailing</span><span class="brand-subtitle">Detailing • ceramic coating • paint correction</span></div></a>
-      <nav class="nav-links" aria-label="Primary navigation"><a href="#services">Services</a><a href="#gallery">Gallery</a><a href="#booking">Book</a><a href="#why">Why us</a><a href="#reviews">Reviews</a><a href="#location">Location</a></nav>
-      <div class="nav-actions"><a class="phone-link" href="tel:+61862440540"><span class="phone-dot">☎</span>08 6244 0540</a><a class="btn btn-primary" href="#booking">Book Detail</a></div>
+      <nav class="nav-links" id="site-menu" aria-label="Primary navigation"><a href="#services">Services</a><a href="#gallery">Gallery</a><a href="#booking">Book</a><a href="#why">Why us</a><a href="#reviews">Reviews</a><a href="#location">Location</a></nav>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="site-menu" aria-expanded="false"><span></span></button><div class="nav-actions"><a class="phone-link" href="tel:+61862440540"><span class="phone-dot">☎</span>08 6244 0540</a><a class="btn btn-primary" href="#booking">Book Detail</a></div>
     </div>
   </header>
 
@@ -359,6 +446,7 @@
 <li><span>Sat</span><b>8:00 AM – 2:00 PM</b></li>
 <li><span>Sun</span><b>By appointment</b></li></ul><div class="hero-cta"><a class="btn btn-primary" href="#booking">Book Detail</a><a class="btn btn-secondary" href="https://maps.google.com" target="_blank" rel="noreferrer">Directions</a></div></div></div><div class="map-card"><div class="map-illustration"><div class="map-road road-one"></div><div class="map-road road-two"></div><div class="map-road road-three"></div><div class="map-pin"></div><div class="map-label"><strong>MirrorFinish Detailing service area / location</strong><span>Use this area for live maps, suburbs covered, directions or class schedules.</span></div></div></div></div></div></section>
 
+    <section class="faq" aria-labelledby="faq-title"><div class="container"><div class="section-head"><div><div class="section-kicker">FAQ</div><h2 id="faq-title">Frequently asked questions</h2></div><p>Everything drivers ask before booking a detail or coating.</p></div><div class="faq-list"><details class="faq-item"><summary>How long does a full detail take?</summary><div class="faq-body">Most details take between half a day and a full day depending on the package and the condition of the vehicle. We confirm timing when we quote.</div></details><details class="faq-item"><summary>What's the difference between a polish and paint correction?</summary><div class="faq-body">A polish enhances gloss and hides minor marks, while paint correction removes swirls and scratches over multiple machine stages for a lasting finish.</div></details><details class="faq-item"><summary>How long does a ceramic coating last?</summary><div class="faq-body">A professionally applied ceramic coating typically lasts two to five years with the right wash routine and periodic maintenance.</div></details><details class="faq-item"><summary>Do I drop the car off or do you come to me?</summary><div class="faq-body">Work is completed at our studio at 12 Detail Lane. Early drop-off and secure key handover are available to suit your day.</div></details><details class="faq-item"><summary>How should I look after the finish afterwards?</summary><div class="faq-body">Stick to a pH-neutral wash with clean microfibre, dry gently and avoid automatic brush car washes to protect the finish.</div></details><details class="faq-item"><summary>Do you detail fleet or pre-sale vehicles?</summary><div class="faq-body">Yes. We offer fleet maintenance details and pre-sale packages to help vehicles present at their best.</div></details></div></div></section>
     <section class="final-cta"><div class="container final-card"><div><div class="section-kicker" style="color:#fff">Second website concept</div><h2>Another complete website for the Auto &amp; Repair niche.</h2><p>This page uses its own generated imagery embedded directly into the HTML, so it previews without external image loading.</p></div><div class="hero-cta" style="margin:0"><a class="btn btn-secondary" href="tel:+61862440540">Call now</a><a class="btn btn-primary" href="#booking">Book Detail</a></div></div></section>
   </main>
 
@@ -386,7 +474,30 @@
     const dateInput = document.getElementById('dateInput');
     if (dateInput) { const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate()+1); dateInput.min = tomorrow.toISOString().split('T')[0]; }
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a19784db3a894e37',t:'MTc4Mzc2OTg3NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><!-- DEMO-GUIDE:START -->
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a19784db3a894e37',t:'MTc4Mzc2OTg3NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>  <script>
+  (function(){
+    var toggle=document.querySelector('.nav-toggle');
+    var menu=document.getElementById('site-menu');
+    if(toggle&&menu){
+      toggle.addEventListener('click',function(){
+        var open=menu.classList.toggle('open');
+        toggle.setAttribute('aria-expanded',open?'true':'false');
+      });
+      menu.addEventListener('click',function(e){
+        if(e.target.closest('a')){menu.classList.remove('open');toggle.setAttribute('aria-expanded','false');}
+      });
+    }
+    var els=document.querySelectorAll('.section-head,.service-card,.review-card,.why-item,.proof-card,.faq-item,.trust-item');
+    if('IntersectionObserver' in window && els.length){
+      els.forEach(function(el){el.classList.add('reveal');});
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in-view');io.unobserve(en.target);}});
+      },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+      els.forEach(function(el){io.observe(el);});
+    }
+  })();
+  </script>
+<!-- DEMO-GUIDE:START -->
 <style>
   #dg-root, #dg-root * { box-sizing: border-box; }
   #dg-root { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
