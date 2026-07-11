@@ -18,7 +18,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root{
       --ink:#14201f;--deep:#0b1716;--forest:#213f3b;--sage:#8ba79b;--mint:#dcebe4;--cream:#f6f1e8;--sand:#dfd0bc;--gold:#c2a46b;--rose:#cfa6a0;--blue:#8fb6c7;--white:#fffaf2;--muted:#6e7d79;--line:rgba(20,32,31,.13);--line-light:rgba(246,241,232,.18);--shadow:0 28px 90px rgba(20,32,31,.18);--radius:30px;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--serif:Georgia,"Times New Roman",serif}
@@ -64,6 +64,44 @@
     footer{padding:58px 0 28px}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px}.foot-brand .brand{color:var(--white);margin-bottom:16px}.foot-brand .brand small{color:rgba(246,241,232,.6)}.foot-brand p{color:rgba(246,241,232,.6);max-width:300px;font-size:.92rem}.foot-col h4{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mint);margin:0 0 14px;font-weight:900}.foot-col a,.foot-col span{display:block;color:rgba(246,241,232,.66);padding:5px 0;font-size:.92rem}.foot-col a{transition:color .3s ease}.foot-col a:hover{color:var(--white)}.foot-col .btn{color:var(--white);width:auto}.foot-bottom{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:.82rem;margin-top:36px;padding-top:22px;border-top:1px solid var(--line-light)}
     @media(max-width:960px){.locate-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}}
     @media(max-width:640px){.footer-grid{grid-template-columns:1fr}.faq summary{padding:18px}.faq-a{padding:0 18px 20px}}
+
+    /* ===== V3: performance (WebP backgrounds, off-screen skipping) + richer animation ===== */
+    picture{display:contents}
+    /* Serve WebP for the two CSS background images where supported; JPEG stays as the default fallback */
+    @supports (background-image: image-set(url("i.webp") type("image/webp"))){
+      .hero:before{background-image:linear-gradient(90deg,rgba(11,23,22,.94) 0%,rgba(11,23,22,.72) 44%,rgba(11,23,22,.22)),linear-gradient(0deg,rgba(11,23,22,.82),transparent 55%),image-set(url("assets/58110ad0ff1a.webp") type("image/webp"),url("assets/58110ad0ff1a.jpg") type("image/jpeg"))}
+      .final{background-image:linear-gradient(rgba(11,23,22,.58),rgba(11,23,22,.92)),image-set(url("assets/bd0a5d759b13.webp") type("image/webp"),url("assets/bd0a5d759b13.jpg") type("image/jpeg"))}
+    }
+    /* Skip rendering work for off-screen lower sections until they are scrolled near — faster first paint */
+    .reviews,.faq-section,.locate,.final{content-visibility:auto;contain-intrinsic-size:auto 720px}
+
+    /* Cinematic slow zoom/pan on the hero image */
+    .hero:before{animation:kenBurns 30s ease-in-out infinite alternate;will-change:transform}
+    @keyframes kenBurns{0%{transform:scale(1.03) translate3d(0,0,0)}100%{transform:scale(1.11) translate3d(-1.6%,-1.1%,0)}}
+
+    /* Staggered reveal cascade for items inside grids */
+    .cards .card:nth-child(2),.provider-grid .provider:nth-child(2),.review-grid .review:nth-child(2),.luxe-row .luxe-item:nth-child(2),.faq-list .faq:nth-child(2){transition-delay:.08s}
+    .cards .card:nth-child(3),.provider-grid .provider:nth-child(3),.review-grid .review:nth-child(3),.luxe-row .luxe-item:nth-child(3),.faq-list .faq:nth-child(3){transition-delay:.16s}
+    .cards .card:nth-child(4),.luxe-row .luxe-item:nth-child(4),.faq-list .faq:nth-child(4){transition-delay:.24s}
+    .cards .card:nth-child(5),.faq-list .faq:nth-child(5){transition-delay:.32s}
+    .cards .card:nth-child(6),.faq-list .faq:nth-child(6){transition-delay:.40s}
+
+    /* Softer focus-in for headings and the hero card */
+    .section-head.reveal,.hero-card.reveal,.editorial-card.reveal{filter:blur(6px)}
+    .section-head.reveal.visible,.hero-card.reveal.visible,.editorial-card.reveal.visible{filter:blur(0)}
+
+    /* Polished micro-interactions */
+    .mark{transition:transform .55s cubic-bezier(.19,1,.22,1)}.brand:hover .mark{transform:rotate(-8deg) scale(1.07)}
+    .trust{transition:background .4s ease,transform .4s ease}.trust:hover{background:rgba(255,250,242,.17);transform:translateY(-3px)}
+    .tag{transition:background .3s ease,border-color .3s ease,transform .3s ease,color .3s ease}.tag:hover{border-color:rgba(194,164,107,.5);color:var(--forest);transform:translateY(-2px)}
+    .hrow{transition:background .3s ease}.hrow:hover{background:#fff}
+    .locate-info .li{transition:transform .35s cubic-bezier(.19,1,.22,1)}.locate-info .li:hover{transform:translateX(5px)}
+    .review{transition:transform .5s cubic-bezier(.19,1,.22,1),border-color .5s ease,background .5s ease}.review:hover{transform:translateY(-6px);border-color:rgba(194,164,107,.4);background:rgba(255,255,255,.09)}
+    .btn-primary{background-image:linear-gradient(120deg,var(--forest),var(--forest));background-size:200% 100%;transition:.42s cubic-bezier(.19,1,.22,1),background-position .5s ease}.btn-primary:hover{background-image:linear-gradient(120deg,var(--forest),#2c534d);background-position:100% 0}
+    .map-pin{animation:pinDrop .9s cubic-bezier(.19,1,.22,1) both,pinFloat 3.4s ease-in-out 1s infinite}
+    @keyframes pinDrop{0%{transform:translate(-50%,-180%) rotate(-45deg);opacity:0}60%{opacity:1}100%{transform:translate(-50%,-70%) rotate(-45deg);opacity:1}}
+    @keyframes pinFloat{50%{transform:translate(-50%,-82%) rotate(-45deg)}}
+    @media(prefers-reduced-motion:reduce){.hero:before{animation:none}.map-pin{animation:none}.section-head.reveal,.hero-card.reveal,.editorial-card.reveal{filter:none}}
   </style>
   <!-- SEO-PRO:START -->
   <link rel="canonical" href="https://skullmanhell1.github.io/demowebsite/health/" />
@@ -128,7 +166,7 @@
   </script>
 <!-- SEO-PRO:END -->
   <!-- PRELOAD:START -->
-  <link rel="preload" as="image" href="assets/58110ad0ff1a.jpg" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/58110ad0ff1a.webp" type="image/webp" fetchpriority="high" />
 <!-- PRELOAD:END -->
 </head>
 <body>
@@ -197,10 +235,10 @@
           </div>
         </article>
         <div class="detail-stack">
-          <figure class="detail-image reveal tilt"><img src="assets/dada0f6134dc.jpg" alt="Luxury wellness clinic exterior" loading="lazy" decoding="async"><b>Boutique clinic presence.</b></figure>
+          <figure class="detail-image reveal tilt"><picture><source type="image/webp" srcset="assets/dada0f6134dc.webp"><img src="assets/dada0f6134dc.jpg" alt="Luxury wellness clinic exterior" loading="lazy" decoding="async"></picture><b>Boutique clinic presence.</b></figure>
           <div class="concierge">
-            <figure class="detail-image reveal tilt"><img src="assets/5994835c92ce.jpg" alt="Premium clinic hospitality details" loading="lazy" decoding="async"><b>Concierge details.</b></figure>
-            <figure class="detail-image reveal tilt"><img src="assets/260784a83888.jpg" alt="Premium treatment equipment" loading="lazy" decoding="async"><b>Clinical polish.</b></figure>
+            <figure class="detail-image reveal tilt"><picture><source type="image/webp" srcset="assets/5994835c92ce.webp"><img src="assets/5994835c92ce.jpg" alt="Premium clinic hospitality details" loading="lazy" decoding="async"></picture><b>Concierge details.</b></figure>
+            <figure class="detail-image reveal tilt"><picture><source type="image/webp" srcset="assets/260784a83888.webp"><img src="assets/260784a83888.jpg" alt="Premium treatment equipment" loading="lazy" decoding="async"></picture><b>Clinical polish.</b></figure>
           </div>
         </div>
       </div>
@@ -222,13 +260,13 @@
     <section class="visual" id="experience">
       <div class="container">
         <div class="section-head reveal"><div><div class="eyebrow">Premium patient experience</div><h2>A clinic that looks as reassuring as it feels.</h2></div><p>Generated imagery gives the site an elevated, professional visual identity: calm interiors, clean treatment rooms, warm clinical interaction and wellness-focused care.</p></div>
-        <div class="image-grid"><figure class="image-card reveal"><img src="assets/bd0a5d759b13.jpg" alt="Premium treatment room" loading="lazy" decoding="async"><figcaption class="caption"><b>Modern treatment rooms.</b><span>Clean, comfortable spaces that reduce anxiety and signal clinical quality.</span></figcaption></figure><div class="image-stack"><figure class="image-card small reveal"><img src="assets/6bb082c77ee2.jpg" alt="Premium med spa treatment room" loading="lazy" decoding="async"><figcaption class="caption"><b>Consult-led aesthetics.</b><span>A serene treatment environment that feels clinical, polished and calm.</span></figcaption></figure><figure class="image-card small reveal"><img src="assets/8ed00c2d0b17.jpg" alt="Physiotherapy appointment" loading="lazy" decoding="async"><figcaption class="caption"><b>Movement and recovery.</b><span>Care plans designed around the way patients live.</span></figcaption></figure></div></div>
+        <div class="image-grid"><figure class="image-card reveal"><picture><source type="image/webp" srcset="assets/bd0a5d759b13.webp"><img src="assets/bd0a5d759b13.jpg" alt="Premium treatment room" loading="lazy" decoding="async"></picture><figcaption class="caption"><b>Modern treatment rooms.</b><span>Clean, comfortable spaces that reduce anxiety and signal clinical quality.</span></figcaption></figure><div class="image-stack"><figure class="image-card small reveal"><picture><source type="image/webp" srcset="assets/6bb082c77ee2.webp"><img src="assets/6bb082c77ee2.jpg" alt="Premium med spa treatment room" loading="lazy" decoding="async"></picture><figcaption class="caption"><b>Consult-led aesthetics.</b><span>A serene treatment environment that feels clinical, polished and calm.</span></figcaption></figure><figure class="image-card small reveal"><picture><source type="image/webp" srcset="assets/8ed00c2d0b17.webp"><img src="assets/8ed00c2d0b17.jpg" alt="Physiotherapy appointment" loading="lazy" decoding="async"></picture><figcaption class="caption"><b>Movement and recovery.</b><span>Care plans designed around the way patients live.</span></figcaption></figure></div></div>
       </div>
     </section>
 
     <section class="journey">
       <div class="container journey-grid">
-        <figure class="journey-photo reveal"><img src="assets/90bdc3e4204b.jpg" alt="Clinician consulting with patient" loading="lazy" decoding="async"></figure>
+        <figure class="journey-photo reveal"><picture><source type="image/webp" srcset="assets/90bdc3e4204b.webp"><img src="assets/90bdc3e4204b.jpg" alt="Clinician consulting with patient" loading="lazy" decoding="async"></picture></figure>
         <div class="reveal"><div class="eyebrow">Patient journey</div><h2 style="margin:16px 0 24px">From first click to confident follow-up.</h2><div class="steps"><div class="step"><div class="num">1</div><p><b>Choose the right care path</b>Service categories and appointment reasons help route patients to the correct provider.</p></div><div class="step"><div class="num">2</div><p><b>Complete a polished intake</b>New patients can share symptoms, goals, insurance details and preferences before arrival.</p></div><div class="step"><div class="num">3</div><p><b>Understand the plan</b>Practitioners explain findings, options, expected visits and costs in plain language.</p></div><div class="step"><div class="num">4</div><p><b>Stay connected after care</b>Follow-up reminders, home guidance and next steps keep the experience professional.</p></div></div></div>
       </div>
     </section>
@@ -343,7 +381,12 @@
 
   <script>
     const nav=document.getElementById('nav'); const progress=document.getElementById('navProgress');
-    window.addEventListener('load',()=>setTimeout(()=>document.getElementById('preloader').classList.add('hide'),450));
+    // Perceived-speed: reveal content as soon as the DOM+CSS are ready — don't wait for every image to download.
+    const preEl=document.getElementById('preloader'); let preHidden=false;
+    function hidePre(){if(preHidden)return;preHidden=true;preEl.classList.add('hide');}
+    if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',()=>requestAnimationFrame(()=>setTimeout(hidePre,260)));}
+    else{requestAnimationFrame(()=>setTimeout(hidePre,260));}
+    setTimeout(hidePre,1500); // safety fallback
     window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>20); const h=document.documentElement.scrollHeight-innerHeight; progress.style.width=(scrollY/h*100)+'%';});
     const glow=document.getElementById('cursorGlow'); window.addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px';});
     const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible'); if(e.target.querySelectorAll) e.target.querySelectorAll('.counter').forEach(startCounter);}}),{threshold:.12}); document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
