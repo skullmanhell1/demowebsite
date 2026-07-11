@@ -18,7 +18,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -2275,5 +2275,74 @@
 }
 </style>
 <!-- MOTION:END -->
+<!-- BRAND-IDENTITY:START -->
+<style id="brand-identity">
+  /* ===== The Gentry Room — warm editorial barbershop identity ===== */
+  :root { --gr-display: "Fraunces", Georgia, "Times New Roman", serif; }
+
+  h1, h2, h3, h4,
+  .brand-name, .hero-caption strong, .serif,
+  .dg-c-title {
+    font-family: var(--gr-display) !important;
+  }
+  h1 { letter-spacing: -0.045em !important; }
+
+  /* Navigation: drop the pill container for minimal, uppercase, underline links */
+  .site-header { background: rgba(255, 247, 237, 0.9) !important; border-bottom: 1px solid rgba(91,56,44,0.16) !important; }
+  .nav-links {
+    background: none !important;
+    border: 0 !important;
+    padding: 0 !important;
+    gap: 26px !important;
+  }
+  .nav-links a {
+    border-radius: 0 !important;
+    padding: 6px 0 !important;
+    font-size: 0.76rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: rgba(23,19,18,0.66) !important;
+    border-bottom: 2px solid transparent;
+  }
+  .nav-links a:hover {
+    background: none !important;
+    color: var(--charcoal) !important;
+    border-bottom-color: var(--amber);
+  }
+  .nav-links a::after { display: none !important; } /* remove the shared MOTION underline; using our own */
+
+  /* Buttons: squared, uppercase, letter-spaced barbershop stamps */
+  .btn {
+    border-radius: 7px !important;
+    text-transform: uppercase;
+    letter-spacing: 0.11em;
+    font-weight: 800 !important;
+    font-size: 0.82rem;
+  }
+  .phone-link { border-radius: 7px !important; }
+
+  /* Hero image: framed, tilted portrait with a thick white mount */
+  .hero-photo {
+    border-radius: 10px !important;
+    transform: rotate(-1.5deg) !important;
+    border: 9px solid #ffffff !important;
+    box-shadow: 0 34px 74px rgba(43,33,29,0.34) !important;
+  }
+
+  /* Annotation: warm CREAM note card (distinct from the default dark card) */
+  #dg-callout {
+    background: #fbf1e3 !important;
+    color: #2b211d !important;
+    border: 1px solid rgba(91,56,44,0.22) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 26px 66px rgba(43,33,29,0.30) !important;
+  }
+  #dg-callout .dg-c-title { color: #2b211d !important; }
+  #dg-callout .dg-c-text { color: rgba(43,33,29,0.80) !important; }
+  #dg-callout .dg-c-count { color: rgba(43,33,29,0.5) !important; }
+  #dg-callout .dg-c-badge { color: #fff !important; }
+</style>
+<!-- BRAND-IDENTITY:END -->
 </body>
 </html>

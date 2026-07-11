@@ -18,7 +18,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -1964,5 +1964,87 @@
 }
 </style>
 <!-- MOTION:END -->
+<!-- BRAND-IDENTITY:START -->
+<style id="brand-identity">
+  /* ===== Redline AutoWorks — industrial, high-energy identity ===== */
+  :root { --ra-display: "Oswald", "Arial Narrow", system-ui, sans-serif; }
+
+  h1, h2, h3, h4,
+  .brand-name, .hero-caption strong, .serif,
+  .dg-c-title {
+    font-family: var(--ra-display) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.005em !important;
+    font-weight: 700 !important;
+  }
+  h1 { letter-spacing: -0.01em !important; line-height: 0.98 !important; }
+
+  /* Navigation: dark garage bar, condensed caps, red hover underline */
+  .site-header {
+    background: #10141b !important;
+    border-bottom: 2px solid var(--red-2) !important;
+    backdrop-filter: none !important;
+  }
+  .brand-name { color: #fff !important; }
+  .brand-subtitle { color: rgba(255,255,255,0.6) !important; }
+  .nav-links {
+    background: transparent !important;
+    border: 0 !important;
+    padding: 0 !important;
+    gap: 20px !important;
+  }
+  .nav-links a {
+    font-family: var(--ra-display);
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-size: 0.92rem !important;
+    font-weight: 600 !important;
+    border-radius: 0 !important;
+    padding: 6px 0 !important;
+    color: rgba(255,255,255,0.82) !important;
+    border-bottom: 2px solid transparent;
+  }
+  .nav-links a:hover { background: transparent !important; color: var(--red-2) !important; border-bottom-color: var(--red-2); }
+  .nav-links a::after { display: none !important; }
+  .phone-link {
+    background: transparent !important;
+    color: #fff !important;
+    border: 1px solid rgba(255,255,255,0.28) !important;
+    border-radius: 0 !important;
+  }
+
+  /* Buttons: sharp-edged, condensed caps, aggressive red */
+  .btn {
+    border-radius: 0 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: var(--ra-display);
+    font-weight: 600 !important;
+    font-size: 0.95rem;
+  }
+  .btn-primary { background: var(--red-2) !important; color: #fff !important; box-shadow: 0 14px 30px rgba(240,88,72,0.34) !important; }
+
+  /* Hero image: hard-edged, squared, with a solid red drop block */
+  .hero-photo {
+    border-radius: 0 !important;
+    transform: none !important;
+    border: 3px solid #10141b !important;
+    box-shadow: 14px 14px 0 var(--red-2) !important;
+  }
+
+  /* Annotation: dark diagnostic HUD, clipped corner, mono label */
+  #dg-callout {
+    border-radius: 0 !important;
+    border: 1px solid var(--red-2) !important;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
+  }
+  #dg-callout .dg-c-label {
+    font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace !important;
+    letter-spacing: 0.16em;
+  }
+  #dg-callout .dg-c-title { text-transform: uppercase; letter-spacing: 0.01em; }
+  #dg-callout .dg-c-badge { border-radius: 0 !important; font-family: var(--ra-display); }
+</style>
+<!-- BRAND-IDENTITY:END -->
 </body>
 </html>
