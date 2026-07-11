@@ -323,6 +323,42 @@
   ]
 }
   </script>
+  <style id="anim">
+    /* ---- animation layer: hero entrance, float, nav-scroll, stagger, hover ---- */
+    @keyframes heroRise { from { opacity:0; transform:translateY(26px); } to { opacity:1; transform:none; } }
+    @keyframes heroFade { from { opacity:0; transform:translateY(30px) scale(.985); } to { opacity:1; transform:none; } }
+    @keyframes heroFloat { 0%,100% { transform:rotate(1.1deg) translateY(0); } 50% { transform:rotate(1.1deg) translateY(-12px); } }
+    .hero .eyebrow { animation:heroRise .7s .05s both cubic-bezier(.2,.7,.2,1); }
+    .hero h1 { animation:heroRise .75s .14s both cubic-bezier(.2,.7,.2,1); }
+    .hero .lead { animation:heroRise .75s .24s both cubic-bezier(.2,.7,.2,1); }
+    .hero .hero-cta { animation:heroRise .75s .34s both cubic-bezier(.2,.7,.2,1); }
+    .hero .hero-proof { animation:heroRise .75s .44s both cubic-bezier(.2,.7,.2,1); }
+    .hero .hero-media { animation:heroFade 1s .2s both ease; }
+    /* nav shrink / shadow once the page is scrolled */
+    .site-header { transition:box-shadow .35s ease, background .35s ease; }
+    .site-header.scrolled { box-shadow:0 10px 30px rgba(16,32,47,.10); background:rgba(251,253,255,.96); }
+    /* animated nav-link underline */
+    .nav-links a { background-image:linear-gradient(var(--primary),var(--primary)); background-repeat:no-repeat; background-position:left 88%; background-size:0% 2px; transition:background-size .3s ease, color .2s ease; }
+    .nav-links a:hover { background-size:100% 2px; }
+    /* staggered reveal inside grids */
+    .services-grid>*:nth-child(2),.review-grid>*:nth-child(2),.why-list>*:nth-child(2),.hero-proof>*:nth-child(2),.faq-list>*:nth-child(2) { transition-delay:.08s; }
+    .services-grid>*:nth-child(3),.review-grid>*:nth-child(3),.why-list>*:nth-child(3),.hero-proof>*:nth-child(3),.faq-list>*:nth-child(3) { transition-delay:.16s; }
+    .services-grid>*:nth-child(4),.review-grid>*:nth-child(4),.why-list>*:nth-child(4),.faq-list>*:nth-child(4) { transition-delay:.24s; }
+    .faq-list>*:nth-child(5) { transition-delay:.32s; }
+    .faq-list>*:nth-child(6) { transition-delay:.40s; }
+    /* hover polish */
+    .service-image .service-icon { display:inline-block; transition:transform .4s ease; }
+    .service-card:hover .service-icon { transform:scale(1.18) rotate(-6deg); }
+    .proof-card { transition:transform .3s ease, box-shadow .3s ease; }
+    .proof-card:hover { transform:translateY(-5px); }
+    @media (min-width:961px) {
+      .hero-photo { animation:heroFloat 7s ease-in-out 1s infinite; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero .eyebrow,.hero h1,.hero .lead,.hero .hero-cta,.hero .hero-proof,.hero .hero-media,.hero-photo { animation:none !important; }
+      .nav-links a { transition:none !important; }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#top">Skip to content</a>
@@ -495,6 +531,15 @@
       },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
       els.forEach(function(el){io.observe(el);});
     }
+  })();
+  </script>
+  <script>
+  (function(){
+    var h=document.querySelector('.site-header');
+    if(!h) return;
+    var onScroll=function(){ h.classList.toggle('scrolled', window.scrollY>8); };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive:true });
   })();
   </script>
 <!-- DEMO-GUIDE:START -->
