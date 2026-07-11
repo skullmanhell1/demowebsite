@@ -18,7 +18,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -2083,5 +2083,72 @@
 }
 </style>
 <!-- MOTION:END -->
+<!-- BRAND-IDENTITY:START -->
+<style id="brand-identity">
+  /* ===== BluePeak Home Services — bold, trustworthy trade identity ===== */
+  :root { --bp-display: "Sora", Inter, system-ui, sans-serif; }
+
+  h1, h2, h3, h4,
+  .brand-name, .hero-caption strong, .serif,
+  .dg-c-title {
+    font-family: var(--bp-display) !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  /* Navigation: solid navy command bar with a standout CTA */
+  .site-header {
+    background: var(--navy) !important;
+    border-bottom: 0 !important;
+    box-shadow: 0 6px 24px rgba(13,43,69,0.28) !important;
+    backdrop-filter: none !important;
+  }
+  .brand-name { color: #fff !important; }
+  .brand-subtitle { color: rgba(255,255,255,0.68) !important; }
+  .nav-links {
+    background: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(255,255,255,0.16) !important;
+  }
+  .nav-links a { color: rgba(255,255,255,0.86) !important; font-weight: 700 !important; }
+  .nav-links a:hover { background: rgba(255,255,255,0.16) !important; color: #fff !important; }
+  .nav-links a::after { display: none !important; }
+  .phone-link {
+    background: rgba(255,255,255,0.10) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255,255,255,0.22) !important;
+  }
+  .phone-link span { background: var(--green-2) !important; }
+
+  /* Buttons: chunky, confident, with a hard offset base shadow */
+  .btn {
+    border-radius: 12px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary {
+    box-shadow: 0 5px 0 rgba(9,30,49,0.30) !important;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 7px 0 rgba(9,30,49,0.30) !important; }
+
+  /* Hero image: bold, straightened, thick white border */
+  .hero-photo {
+    transform: none !important;
+    border-radius: 18px !important;
+    border: 5px solid #ffffff !important;
+    box-shadow: 0 26px 60px rgba(13,43,69,0.28) !important;
+  }
+
+  /* Annotation: solid navy block with a hard green offset shadow, moved LEFT */
+  #dg-callout {
+    left: 20px; right: auto !important;
+    background: var(--navy) !important;
+    border: 2px solid #ffffff !important;
+    border-radius: 6px !important;
+    box-shadow: 9px 9px 0 var(--green-2) !important;
+  }
+  #dg-callout::before { background: linear-gradient(180deg, var(--green-2), transparent) !important; }
+  #dg-callout .dg-c-badge { border-radius: 6px !important; }
+  @media (max-width: 640px) { #dg-callout { left: 12px; right: 12px !important; box-shadow: 5px 5px 0 var(--green-2) !important; } }
+</style>
+<!-- BRAND-IDENTITY:END -->
 </body>
 </html>

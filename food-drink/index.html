@@ -18,7 +18,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -2227,5 +2227,81 @@
 }
 </style>
 <!-- MOTION:END -->
+<!-- BRAND-IDENTITY:START -->
+<style id="brand-identity">
+  /* ===== Ember & Olive — fine-dining editorial identity ===== */
+  :root { --eo-display: "Cormorant Garamond", Georgia, serif; --eo-body: "Jost", Inter, system-ui, sans-serif; }
+
+  body { font-family: var(--eo-body) !important; }
+  h1, h2, h3, h4,
+  .brand-name, .hero-caption strong, .serif,
+  .dg-c-title {
+    font-family: var(--eo-display) !important;
+    font-weight: 600 !important;
+  }
+  h1 { letter-spacing: -0.02em !important; }
+  .brand-name { letter-spacing: 0.01em !important; }
+
+  /* Navigation: airy, centred feel, thin high-tracking capitals, no pill */
+  .site-header { background: rgba(255, 248, 238, 0.82) !important; border-bottom: 1px solid rgba(58,32,23,0.10) !important; }
+  .nav { min-height: 86px !important; }
+  .nav-links {
+    background: none !important;
+    border: 0 !important;
+    padding: 0 !important;
+    gap: 28px !important;
+  }
+  .nav-links a {
+    border-radius: 0 !important;
+    padding: 4px 0 !important;
+    font-size: 0.72rem !important;
+    font-weight: 500 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: rgba(42,23,16,0.68) !important;
+  }
+  .nav-links a:hover { background: none !important; color: var(--terracotta) !important; }
+  .nav-links a::after { display: none !important; }
+
+  /* Buttons: sharp-cornered, refined, wide-tracked capitals */
+  .btn {
+    border-radius: 2px !important;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 600 !important;
+    font-size: 0.76rem;
+  }
+  .order-link { letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.74rem; }
+
+  /* Hero image: still, gallery-framed (no tilt, hairline mount) — and placed on the LEFT */
+  .hero-photo {
+    border-radius: 3px !important;
+    transform: none !important;
+    border: 1px solid rgba(58,32,23,0.12) !important;
+    box-shadow: 0 30px 74px rgba(58,32,23,0.20) !important;
+  }
+  @media (min-width: 1121px) {
+    .hero-grid { direction: rtl; }        /* swaps the two columns: image moves to the left */
+    .hero-grid > * { direction: ltr; }    /* keep all text left-to-right */
+  }
+
+  /* Annotation: pale parchment card, serif title, moved to the LEFT */
+  #dg-callout {
+    left: 20px; right: auto !important;
+    background: #fbf6ec !important;
+    color: #3a2017 !important;
+    border: 1px solid rgba(58,32,23,0.18) !important;
+    border-radius: 3px !important;
+    box-shadow: 0 24px 60px rgba(58,32,23,0.24) !important;
+  }
+  #dg-callout::before { background: linear-gradient(180deg, var(--terracotta), transparent) !important; }
+  #dg-callout .dg-c-label { color: var(--terracotta) !important; letter-spacing: 0.2em; }
+  #dg-callout .dg-c-title { color: #3a2017 !important; font-size: 1.35rem !important; }
+  #dg-callout .dg-c-text { color: rgba(58,32,23,0.82) !important; }
+  #dg-callout .dg-c-count { color: rgba(58,32,23,0.5) !important; }
+  #dg-callout .dg-c-badge { border-radius: 2px !important; color: #fff !important; }
+  @media (max-width: 640px) { #dg-callout { left: 12px; right: 12px !important; } }
+</style>
+<!-- BRAND-IDENTITY:END -->
 </body>
 </html>
