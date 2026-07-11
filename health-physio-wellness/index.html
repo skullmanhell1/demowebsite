@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NorthStar Physio &amp; Rehab — Health / Wellness Website Demo</title>
+  <meta name="description" content="A polished second-concept website demo for Health / Wellness with integrated images, booking, services, reviews and location details." />
+  <meta name="theme-color" content="#12333c" />
+  <meta name="color-scheme" content="light" />
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="NorthStar Physio &amp; Rehab — Physiotherapy &amp; Sports Rehab" />
+  <meta property="og:description" content="Book a physio assessment, sports injury or post-op rehab, clinical Pilates or remedial massage. Online booking, reviews, hours and location." />
+  <meta property="og:image" content="https://skullmanhell1.github.io/demowebsite/health-physio-wellness/og-image.jpg" />
+  <meta property="og:url" content="https://skullmanhell1.github.io/demowebsite/health-physio-wellness/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://skullmanhell1.github.io/demowebsite/health-physio-wellness/og-image.jpg" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2312333c'/%3E%3Cstop offset='0.55' stop-color='%23197a92'/%3E%3Cstop offset='1' stop-color='%2335a883'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='67' font-family='Arial,sans-serif' font-size='46' font-weight='900' fill='%23fff' text-anchor='middle'%3ENp%3C/text%3E%3C/svg%3E" />
+
+  <style>
+    :root {
+      --ink: #10202f;
+      --muted: rgba(16, 32, 47, 0.68);
+      --soft: rgba(16, 32, 47, 0.52);
+      --line: rgba(16, 32, 47, 0.12);
+      --primary: #197a92;
+      --secondary: #35a883;
+      --dark: #12333c;
+      --accent: #35a883;
+      --soft-bg: #e9fbf7;
+      --white: #ffffff;
+      --cream: #fbfdff;
+      --shadow: 0 26px 78px rgba(16, 32, 47, 0.16);
+      --soft-shadow: 0 16px 42px rgba(16, 32, 47, 0.10);
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --max: 1180px;
+      --hero-img: url("assets/hero.jpg");
+      --alt-img: url("assets/hero.jpg");
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 0%, color-mix(in srgb, var(--secondary) 18%, transparent), transparent 32rem),
+        radial-gradient(circle at 94% 6%, color-mix(in srgb, var(--primary) 14%, transparent), transparent 30rem),
+        linear-gradient(180deg, #f7fbff 0%, #ffffff 44%, color-mix(in srgb, var(--soft-bg) 70%, #eef3f8) 100%);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none; opacity: .12;
+      background-image: linear-gradient(90deg, rgba(16,32,47,.16) 1px, transparent 1px), linear-gradient(0deg, rgba(16,32,47,.12) 1px, transparent 1px);
+      background-size: 44px 44px; mask-image: linear-gradient(180deg, black 0%, transparent 82%);
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button { color: inherit; }
+    .container { width: min(100% - 40px, var(--max)); margin: 0 auto; }
+    .hero-bg { background-image: linear-gradient(0deg, rgba(16,32,47,.44), rgba(16,32,47,.03)), var(--hero-img); }
+    .alt-bg { background-image: linear-gradient(0deg, rgba(16,32,47,.44), rgba(16,32,47,.03)), var(--alt-img); }
+
+    .btn { min-height: 48px; padding: 13px 18px; border: 0; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; font-weight: 950; transition: transform .18s ease, box-shadow .18s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { color: var(--white); background: linear-gradient(135deg, var(--dark), var(--primary) 58%, var(--secondary)); box-shadow: 0 16px 36px color-mix(in srgb, var(--primary) 32%, transparent); }
+    .btn-secondary { color: var(--dark); background: rgba(255,255,255,.88); border: 1px solid var(--line); }
+    .btn-accent { color: var(--white); background: linear-gradient(135deg, var(--primary), var(--accent)); box-shadow: 0 16px 36px color-mix(in srgb, var(--accent) 28%, transparent); }
+    .btn-small { min-height: 38px; padding: 9px 13px; font-size: .86rem; }
+
+    .top-strip { background: var(--dark); color: rgba(255,255,255,.86); font-size: .88rem; }
+    .top-strip .container { min-height: 42px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+    .top-strip strong, .top-strip a { color: #fff; font-weight: 950; }
+
+    .site-header { position: sticky; top: 0; z-index: 40; border-bottom: 1px solid var(--line); background: rgba(251,253,255,.88); backdrop-filter: blur(22px); }
+    .nav { min-height: 78px; display:flex; align-items:center; justify-content:space-between; gap:18px; }
+    .brand { display:flex; align-items:center; gap:12px; min-width:max-content; }
+    .brand-mark { width:48px; height:48px; border-radius:17px; display:grid; place-items:center; color:#fff; font-weight:950; letter-spacing:-.08em; background: radial-gradient(circle at 28% 20%, rgba(255,255,255,.3), transparent 30%), linear-gradient(135deg, var(--dark), var(--primary) 56%, var(--accent)); box-shadow: var(--soft-shadow); }
+    .brand-name { display:block; font-weight:950; font-size:1.16rem; line-height:1.05; letter-spacing:-.035em; }
+    .brand-subtitle { display:block; margin-top:3px; color:var(--soft); font-size:.75rem; text-transform:uppercase; letter-spacing:.12em; font-weight:850; }
+    .nav-links { display:flex; align-items:center; gap:4px; padding:6px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.68); }
+    .nav-links a { padding:9px 12px; border-radius:999px; color:rgba(16,32,47,.72); font-size:.91rem; font-weight:820; }
+    .nav-links a:hover { background:var(--soft-bg); color:var(--dark); }
+    .nav-actions { display:flex; align-items:center; gap:10px; }
+    .phone-link { min-height:44px; padding:10px 13px; display:inline-flex; align-items:center; gap:8px; border-radius:999px; color:var(--dark); background:rgba(255,255,255,.8); border:1px solid var(--line); font-weight:950; white-space:nowrap; }
+    .phone-dot { width:28px; height:28px; display:grid; place-items:center; border-radius:50%; color:#fff; background:var(--accent); }
+
+    .hero { padding:70px 0 34px; overflow:hidden; }
+    .hero-grid { display:grid; grid-template-columns:minmax(0,.98fr) minmax(430px,1.02fr); gap:clamp(28px,5vw,58px); align-items:center; }
+    .eyebrow { display:inline-flex; align-items:center; gap:9px; padding:8px 12px; border-radius:999px; color:var(--primary); background:rgba(255,255,255,.78); border:1px solid color-mix(in srgb, var(--primary) 18%, transparent); text-transform:uppercase; letter-spacing:.12em; font-size:.78rem; font-weight:950; }
+    .eyebrow::before { content:""; width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 7px color-mix(in srgb, var(--accent) 18%, transparent); }
+    h1,h2,h3 { margin:0; line-height:1.02; }
+    h1 { margin-top:22px; max-width:860px; font-size:clamp(3.25rem,7.2vw,6.7rem); letter-spacing:-.075em; }
+    h1 em { color:var(--primary); font-style:normal; }
+    .lead { max-width:680px; margin:22px 0 0; color:var(--muted); font-size:clamp(1.08rem,1.6vw,1.26rem); }
+    .hero-cta { margin-top:30px; display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
+    .phone-hero { display:inline-flex; align-items:center; gap:10px; min-height:52px; padding:13px 17px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.86); color:var(--dark); font-weight:950; box-shadow:var(--soft-shadow); }
+    .hero-proof { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; max-width:720px; margin-top:34px; }
+    .proof-card { padding:17px; border-radius:22px; border:1px solid var(--line); background:rgba(255,255,255,.80); box-shadow:var(--soft-shadow); }
+    .proof-card strong { display:block; font-size:1.45rem; line-height:1; }
+    .proof-card span { display:block; margin-top:6px; color:var(--soft); font-size:.9rem; }
+    .hero-media { position:relative; min-height:650px; }
+    .hero-photo { position:absolute; inset:14px 0 0 18px; border-radius:46px; overflow:hidden; border:1px solid rgba(255,255,255,.82); background-size:cover; background-position:center; box-shadow:var(--shadow); transform:rotate(1.1deg); }
+    .hero-photo::after { content:""; position:absolute; inset:auto 0 0; height:45%; background:linear-gradient(0deg, rgba(16,32,47,.86), transparent); }
+    .hero-caption { position:absolute; z-index:2; left:26px; right:26px; bottom:26px; color:#fff; display:flex; align-items:end; justify-content:space-between; gap:18px; }
+    .hero-caption strong { display:block; font-size:1.5rem; letter-spacing:-.04em; }
+    .hero-caption span { color:rgba(255,255,255,.74); }
+    .float-card { position:absolute; left:-8px; top:66px; z-index:4; width:min(305px,82%); padding:18px; border-radius:26px; background:rgba(255,255,255,.90); border:1px solid rgba(255,255,255,.78); box-shadow:0 22px 60px rgba(16,32,47,.20); backdrop-filter:blur(16px); transform:rotate(-3deg); }
+    .stars { color:#d69729; letter-spacing:.05em; }
+    .float-card strong { display:block; margin-top:7px; font-size:1.12rem; }
+    .float-card p { margin:5px 0 0; color:var(--muted); font-size:.92rem; }
+    .quick-card { position:absolute; right:-4px; bottom:12px; z-index:4; width:min(382px,86%); padding:18px; border-radius:28px; background:rgba(255,255,255,.92); border:1px solid rgba(255,255,255,.78); box-shadow:0 22px 60px rgba(16,32,47,.20); backdrop-filter:blur(18px); }
+    .quick-card strong { display:block; font-size:1.05rem; }
+    .quick-card p { margin:6px 0 14px; color:var(--muted); font-size:.92rem; }
+    .quick-pills { display:flex; flex-wrap:wrap; gap:8px; }
+    .quick-pills button { border:0; border-radius:999px; padding:8px 11px; background:var(--soft-bg); color:var(--dark); font-weight:900; cursor:pointer; }
+
+    .trust-bar { padding:22px 0 0; }
+    .trust-strip { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; padding:14px; border-radius:26px; border:1px solid var(--line); background:rgba(255,255,255,.82); box-shadow:var(--soft-shadow); }
+    .trust-item { display:flex; align-items:center; gap:11px; padding:12px; border-radius:18px; background:linear-gradient(135deg, var(--soft-bg), #fff); }
+    .trust-icon { width:38px; height:38px; flex:0 0 38px; display:grid; place-items:center; border-radius:14px; color:#fff; background:var(--primary); font-weight:950; }
+    .trust-item strong { display:block; } .trust-item span { color:var(--soft); font-size:.86rem; }
+
+    section { padding:76px 0; }
+    .section-head { display:flex; align-items:end; justify-content:space-between; gap:28px; margin-bottom:30px; }
+    .section-kicker { color:var(--primary); font-size:.79rem; text-transform:uppercase; letter-spacing:.12em; font-weight:950; }
+    h2 { margin-top:8px; max-width:860px; font-size:clamp(2.25rem,4.2vw,4.2rem); letter-spacing:-.065em; }
+    .section-head p { max-width:500px; margin:0; color:var(--muted); }
+
+    .offer { padding:30px 0 0; }
+    .offer-card { border-radius:34px; overflow:hidden; color:#fff; border:1px solid color-mix(in srgb, var(--primary) 20%, transparent); background:linear-gradient(90deg, rgba(16,32,47,.88), rgba(16,32,47,.56)), var(--alt-img) center/cover; box-shadow:var(--shadow); padding:clamp(24px,4vw,38px); display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center; }
+    .offer-card h2 { color:#fff; font-size:clamp(2rem,3.4vw,3.55rem); }
+    .offer-card p { color:rgba(255,255,255,.78); max-width:720px; }
+    .offer-code { min-width:220px; padding:18px; border-radius:24px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.16); text-align:center; }
+    .offer-code small { color:rgba(255,255,255,.72); } .offer-code strong { display:block; margin:5px 0 14px; font-size:1.3rem; letter-spacing:.04em; }
+
+    .services-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+    .service-card { overflow:hidden; border-radius:var(--radius-lg); border:1px solid var(--line); background:rgba(255,255,255,.82); box-shadow:var(--soft-shadow); }
+    .service-image { position:relative; min-height:170px; background-size:cover; background-position:center; }
+    .service-icon { position:absolute; left:16px; bottom:-24px; width:54px; height:54px; border-radius:18px; display:grid; place-items:center; color:#fff; background:linear-gradient(135deg, var(--dark), var(--primary)); border:4px solid #fff; font-size:1.25rem; font-weight:950; box-shadow:var(--soft-shadow); }
+    .service-body { padding:34px 20px 20px; }
+    .service-top { display:flex; justify-content:space-between; align-items:start; gap:12px; }
+    .service-top h3 { font-size:1.16rem; letter-spacing:-.025em; }
+    .service-top strong { color:var(--primary); white-space:nowrap; }
+    .service-body p { color:var(--muted); margin:10px 0 16px; }
+
+    .gallery-grid { display:grid; grid-template-columns:1.1fr .9fr; gap:18px; }
+    .gallery-main,.gallery-side { min-height:440px; border-radius:var(--radius-xl); overflow:hidden; box-shadow:var(--shadow); border:1px solid rgba(255,255,255,.78); background-size:cover; background-position:center; position:relative; }
+    .gallery-side { min-height:440px; display:grid; align-content:end; padding:24px; }
+    .gallery-main::after { content:""; position:absolute; inset:auto 0 0; height:52%; background:linear-gradient(0deg, rgba(16,32,47,.82), transparent); }
+    .gallery-label { position:absolute; left:24px; right:24px; bottom:24px; z-index:2; color:#fff; padding:18px; border-radius:22px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.16); backdrop-filter:blur(12px); }
+    .gallery-label strong { display:block; font-size:1.2rem; } .gallery-label span { color:rgba(255,255,255,.76); }
+    .gallery-side-panel { color:#fff; padding:20px; border-radius:24px; background:rgba(16,32,47,.52); border:1px solid rgba(255,255,255,.16); backdrop-filter:blur(12px); }
+
+    .form-grid { display:grid; grid-template-columns:minmax(0,.84fr) minmax(430px,1.16fr); gap:24px; align-items:stretch; }
+    .form-copy,.form-card,.why-card,.reviews-summary,.location-card,.map-card { border-radius:var(--radius-xl); border:1px solid var(--line); background:rgba(255,255,255,.82); box-shadow:var(--shadow); }
+    .form-copy { overflow:hidden; color:#fff; background:linear-gradient(0deg, rgba(16,32,47,.78), rgba(16,32,47,.68)), var(--hero-img) center/cover; padding:clamp(28px,4vw,38px); }
+    .form-copy h2 { color:#fff; font-size:clamp(2.1rem,4vw,3.9rem); }
+    .form-copy p { color:rgba(255,255,255,.76); }
+    .form-card { padding:clamp(24px,4vw,32px); }
+    .form-top { display:flex; align-items:start; justify-content:space-between; gap:18px; margin-bottom:20px; }
+    .form-top h3,.location-card h3 { font-size:2rem; letter-spacing:-.055em; }
+    .booking-form { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; }
+    .field { display:grid; gap:7px; } .field.full { grid-column:1/-1; }
+    label { color:var(--dark); font-weight:900; font-size:.88rem; }
+    input,select,textarea { width:100%; min-height:48px; border:1px solid rgba(16,32,47,.16); border-radius:17px; padding:12px 14px; color:var(--ink); background:rgba(251,253,255,.94); outline:none; }
+    textarea { min-height:112px; resize:vertical; }
+    input:focus,select:focus,textarea:focus { border-color: color-mix(in srgb, var(--primary) 60%, transparent); box-shadow:0 0 0 4px color-mix(in srgb, var(--primary) 14%, transparent); }
+    .form-footer { grid-column:1/-1; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:4px; }
+    .note-pill { padding:10px 12px; border-radius:999px; color:var(--primary); background:var(--soft-bg); font-weight:900; font-size:.88rem; }
+    .confirmation { display:none; grid-column:1/-1; padding:14px 16px; border-radius:18px; background: color-mix(in srgb, var(--primary) 12%, white); border:1px solid color-mix(in srgb, var(--primary) 22%, white); color:var(--dark); font-weight:850; }
+    .confirmation.show { display:block; }
+
+    .why-grid { display:grid; grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr); gap:24px; align-items:stretch; }
+    .why-card { padding:clamp(24px,4vw,34px); } .why-card p,.location-card p { color:var(--muted); }
+    .why-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:24px; }
+    .why-item { display:grid; grid-template-columns:46px 1fr; gap:14px; padding:15px; border-radius:22px; background:linear-gradient(135deg, var(--soft-bg), #fff); border:1px solid var(--line); }
+    .why-item > span:first-child { width:46px; height:46px; border-radius:16px; display:grid; place-items:center; color:#fff; background:var(--primary); font-weight:950; }
+    .why-item strong { display:block; } .why-item small { display:block; color:var(--muted); margin-top:3px; }
+    .why-photo { min-height:100%; border-radius:var(--radius-xl); background:linear-gradient(0deg, rgba(16,32,47,.38), rgba(16,32,47,.03)), var(--alt-img) center/cover; box-shadow:var(--shadow); }
+
+    .reviews-layout { display:grid; grid-template-columns:minmax(310px,.78fr) minmax(0,1.22fr); gap:22px; align-items:stretch; }
+    .reviews-summary { padding:32px; color:#fff; background:radial-gradient(circle at 26% 18%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 18rem), linear-gradient(145deg, var(--dark), var(--primary)); display:flex; flex-direction:column; justify-content:space-between; gap:28px; }
+    .review-score { font-size:clamp(4.8rem,9vw,7.2rem); line-height:.85; letter-spacing:-.09em; font-weight:950; }
+    .reviews-summary p { color:rgba(255,255,255,.74); margin:12px 0 0; }
+    .review-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+    .review-card { padding:22px; border-radius:26px; border:1px solid var(--line); background:rgba(255,255,255,.82); box-shadow:var(--soft-shadow); }
+    .review-card p { margin:12px 0 18px; color:var(--muted); }
+    .reviewer { display:flex; align-items:center; justify-content:space-between; gap:14px; color:var(--soft); font-size:.9rem; }
+    .reviewer strong { color:var(--dark); }
+
+    .location-grid { display:grid; grid-template-columns:minmax(0,.86fr) minmax(420px,1.14fr); gap:24px; align-items:stretch; }
+    .location-card { overflow:hidden; }
+    .location-photo { min-height:235px; background:linear-gradient(0deg, rgba(16,32,47,.30), rgba(16,32,47,.02)), var(--alt-img) center/cover; }
+    .location-body { padding:clamp(24px,4vw,34px); }
+    .hours-list { margin:18px 0 0; padding:0; list-style:none; border-top:1px solid var(--line); }
+    .hours-list li { display:flex; justify-content:space-between; gap:18px; padding:12px 0; border-bottom:1px solid rgba(16,32,47,.09); color:var(--muted); }
+    .hours-list b { color:var(--dark); }
+    .map-card { overflow:hidden; padding:18px; }
+    .map-illustration { position:relative; min-height:460px; height:100%; border-radius:30px; overflow:hidden; background:linear-gradient(90deg, rgba(16,32,47,.10) 1px, transparent 1px), linear-gradient(0deg, rgba(16,32,47,.10) 1px, transparent 1px), radial-gradient(circle at 78% 20%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 16rem), linear-gradient(135deg, #eef6ff, var(--soft-bg)); background-size:54px 54px,54px 54px,auto,auto; border:1px solid var(--line); }
+    .map-road { position:absolute; border-radius:999px; background:color-mix(in srgb, var(--primary) 20%, transparent); transform-origin:center; }
+    .road-one { width:88%; height:18px; left:-10%; top:42%; transform:rotate(-16deg); } .road-two { width:78%; height:14px; right:-9%; top:63%; transform:rotate(23deg); background:color-mix(in srgb, var(--accent) 18%, transparent); } .road-three { width:16px; height:92%; left:49%; top:-12%; transform:rotate(7deg); }
+    .map-pin { position:absolute; left:50%; top:43%; width:76px; height:76px; border-radius:26px 26px 26px 7px; transform:translate(-50%,-50%) rotate(-45deg); background:linear-gradient(135deg, var(--dark), var(--primary)); box-shadow:0 22px 44px rgba(16,32,47,.25); }
+    .map-pin::after { content:"Ns"; position:absolute; inset:14px; display:grid; place-items:center; border-radius:50%; transform:rotate(45deg); background:#fff; color:var(--primary); font-weight:950; letter-spacing:-.08em; }
+    .map-label { position:absolute; left:24px; right:24px; bottom:24px; padding:18px; border-radius:22px; background:rgba(255,255,255,.90); border:1px solid rgba(255,255,255,.72); box-shadow:0 18px 38px rgba(16,32,47,.14); backdrop-filter:blur(14px); }
+    .map-label strong { display:block; } .map-label span { color:var(--muted); }
+
+    .final-cta { padding:70px 0 84px; }
+    .final-card { overflow:hidden; border-radius:44px; padding:clamp(30px,5.5vw,62px); color:#fff; background:linear-gradient(90deg, rgba(16,32,47,.88), rgba(16,32,47,.58)), var(--hero-img) center/cover; box-shadow:var(--shadow); display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center; }
+    .final-card h2 { color:#fff; } .final-card p { max-width:650px; color:rgba(255,255,255,.78); }
+    .site-footer { border-top:1px solid var(--line); padding:28px 0; color:var(--muted); }
+    .footer-grid { display:grid; grid-template-columns:1fr auto auto; align-items:center; gap:20px; }
+    .footer-links { display:flex; gap:12px; flex-wrap:wrap; } .footer-links a { color:var(--dark); font-weight:850; }
+
+    @media (max-width:1120px) {
+      .nav-links { display:none; }
+      .hero-grid,.form-grid,.why-grid,.reviews-layout,.location-grid,.gallery-grid { grid-template-columns:1fr; }
+      .hero-media { min-height:560px; max-width:760px; width:100%; margin:0 auto; }
+      .trust-strip,.services-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .why-photo { min-height:420px; }
+    }
+    @media (max-width:760px) {
+      .container { width:min(100% - 32px, var(--max)); }
+      .top-strip .container { justify-content:center; text-align:center; }
+      .brand-subtitle,.phone-link { display:none; }
+      .nav-actions .btn { min-height:42px; padding:10px 13px; font-size:.88rem; }
+      .hero { padding-top:42px; } h1 { font-size:clamp(3rem,14vw,4.9rem); } .lead { font-size:1.03rem; }
+      .hero-proof,.trust-strip,.services-grid,.booking-form,.why-list,.review-grid { grid-template-columns:1fr; }
+      .hero-media { min-height:455px; } .hero-photo { inset:0; border-radius:34px; transform:none; } .hero-caption { display:none; }
+      .float-card { top:14px; left:12px; transform:none; width:min(285px, calc(100% - 24px)); } .quick-card { right:12px; bottom:-10px; }
+      section { padding:56px 0; } .section-head { display:block; } .section-head p { margin-top:14px; }
+      .offer-card,.final-card { grid-template-columns:1fr; } .offer-code { min-width:0; text-align:left; }
+      .gallery-main,.gallery-side { min-height:360px; } .form-footer .btn { width:100%; }
+      .footer-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-strip"><div class="container"><span><strong>Health / Wellness:</strong> New patient appointments available this week — no dental services, physiotherapy only</span><a href="tel:+61862440550">Call 08 6244 0550</a></div></div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="NorthStar Physio &amp; Rehab home"><div class="brand-mark">Ns</div><div><span class="brand-name">NorthStar Physio &amp; Rehab</span><span class="brand-subtitle">Physiotherapy • sports rehab • wellness</span></div></a>
+      <nav class="nav-links" aria-label="Primary navigation"><a href="#services">Services</a><a href="#gallery">Gallery</a><a href="#booking">Book</a><a href="#why">Why us</a><a href="#reviews">Reviews</a><a href="#location">Location</a></nav>
+      <div class="nav-actions"><a class="phone-link" href="tel:+61862440550"><span class="phone-dot">☎</span>08 6244 0550</a><a class="btn btn-primary" href="#booking">Book Assessment</a></div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Second concept for Health / Wellness</div>
+          <h1 id="hero-title">Move better, <em>recover</em> stronger and feel like yourself again.</h1>
+          <p class="lead">A calm, professional physiotherapy and wellness clinic website concept designed for appointment bookings, practitioner trust and service clarity.</p>
+          <div class="hero-cta"><a class="btn btn-primary" href="#booking">Book Assessment</a><a class="btn btn-secondary" href="#services">View Treatments</a><a class="phone-hero" href="tel:+61862440550"><span class="phone-dot">☎</span>08 6244 0550</a></div>
+          <div class="hero-proof"><div class="proof-card"><strong>4.9★</strong><span>patient satisfaction</span></div><div class="proof-card"><strong>Same week</strong><span>new patient openings</span></div><div class="proof-card"><strong>Private</strong><span>one-to-one treatment rooms</span></div></div>
+        </div>
+        <div class="hero-media">
+          <div class="hero-photo hero-bg"><div class="hero-caption"><div><strong>NorthStar Physio &amp; Rehab</strong><span>Physiotherapy • sports rehab • wellness</span></div><a class="btn btn-secondary btn-small" href="#gallery">Call Clinic</a></div></div>
+          <aside class="float-card"><div class="stars">★★★★★</div><strong>“I finally understood what was causing my pain and had a plan.”</strong><p>Clear services, real imagery and quick CTAs help turn visitors into enquiries.</p></aside>
+          <aside class="quick-card"><strong>Book by concern</strong><p>Tap to pre-fill the form.</p><div class="quick-pills"><button type="button" data-service="Initial Physio Assessment">Initial</button><button type="button" data-service="Sports Injury Rehab">Sports</button><button type="button" data-service="Back &amp; Neck Pain">Back</button><button type="button" data-service="Post-op Rehab">Post-op</button><button type="button" data-service="Clinical Pilates">Clinical</button></div></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-bar" aria-label="Trust bar"><div class="container trust-strip"><div class="trust-item"><span class="trust-icon">✓</span><div><strong>Trusted</strong><span>local specialists</span></div></div><div class="trust-item"><span class="trust-icon">★</span><div><strong>Reviewed</strong><span>reputation-first layout</span></div></div><div class="trust-item"><span class="trust-icon">24</span><div><strong>Fast</strong><span>quick enquiry flow</span></div></div><div class="trust-item"><span class="trust-icon">$</span><div><strong>Clear</strong><span>pricing / packages</span></div></div></div></section>
+
+    <section class="offer" aria-label="Offer banner"><div class="container offer-card"><div><div class="section-kicker" style="color:#fff">Offer / special</div><h2>Free 10-minute phone consult for new physiotherapy patients.</h2><p>Health and wellness sites convert when services, practitioners, outcomes and appointment options are clear.</p></div><div class="offer-code"><small>Feature callout</small><strong>FREE CONSULT</strong><a class="btn btn-secondary" href="#booking">Claim / enquire</a></div></div></section>
+
+    <section id="services" aria-labelledby="services-title"><div class="container"><div class="section-head"><div><div class="section-kicker">Services</div><h2 id="services-title">A different service angle within the same niche.</h2></div><p>These cards make the offer clear, show starting prices or durations, and send users straight into the booking or quote flow.</p></div><div class="services-grid">
+          <article class="service-card">
+            <div class="service-image hero-bg"><span class="service-icon">☑</span></div>
+            <div class="service-body">
+              <div class="service-top"><h3>Initial Physio Assessment</h3><strong>$120</strong></div>
+              <p>45 min · movement testing, diagnosis and treatment plan</p>
+              <button class="btn btn-secondary btn-small" type="button" data-service="Initial Physio Assessment">Book / enquire</button>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-image alt-bg"><span class="service-icon">↗</span></div>
+            <div class="service-body">
+              <div class="service-top"><h3>Sports Injury Rehab</h3><strong>$95</strong></div>
+              <p>Running, gym, shoulder, knee and ankle rehab plans</p>
+              <button class="btn btn-secondary btn-small" type="button" data-service="Sports Injury Rehab">Book / enquire</button>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-image hero-bg"><span class="service-icon">◎</span></div>
+            <div class="service-body">
+              <div class="service-top"><h3>Back &amp; Neck Pain</h3><strong>$95</strong></div>
+              <p>Manual therapy, exercise and ergonomic guidance</p>
+              <button class="btn btn-secondary btn-small" type="button" data-service="Back &amp; Neck Pain">Book / enquire</button>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-image alt-bg"><span class="service-icon">✓</span></div>
+            <div class="service-body">
+              <div class="service-top"><h3>Post-op Rehab</h3><strong>$105</strong></div>
+              <p>Guided recovery after surgery with staged milestones</p>
+              <button class="btn btn-secondary btn-small" type="button" data-service="Post-op Rehab">Book / enquire</button>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-image hero-bg"><span class="service-icon">◒</span></div>
+            <div class="service-body">
+              <div class="service-top"><h3>Clinical Pilates</h3><strong>$38</strong></div>
+              <p>Small-group strength, mobility and injury prevention</p>
+              <button class="btn btn-secondary btn-small" type="button" data-service="Clinical Pilates">Book / enquire</button>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-image alt-bg"><span class="service-icon">◐</span></div>
+            <div class="service-body">
+              <div class="service-top"><h3>Remedial Massage</h3><strong>$85</strong></div>
+              <p>Soft tissue treatment for tension and recovery</p>
+              <button class="btn btn-secondary btn-small" type="button" data-service="Remedial Massage">Book / enquire</button>
+            </div>
+          </article></div></div></section>
+
+    <section id="gallery" aria-labelledby="gallery-title"><div class="container"><div class="section-head"><div><div class="section-kicker">Photo-led proof</div><h2 id="gallery-title">Show the clinic experience, not stock promises.</h2></div><p>Wellness clients want to see calm rooms, practitioner support, safe movement and a clear care pathway.</p></div><div class="gallery-grid"><div class="gallery-main hero-bg"><div class="gallery-label"><strong>Hero image integrated directly in the HTML</strong><span>No external image files required in preview.</span></div></div><div class="gallery-side alt-bg"><div class="gallery-side-panel"><div class="section-kicker" style="color:#fff">Visual credibility</div><h3>Realistic, niche-specific imagery</h3><p>Use this area for portfolio shots, environment photos, staff, products, transformations or proof of quality.</p><a class="btn btn-secondary" href="#booking">Book Assessment</a></div></div></div></div></section>
+
+    <section id="booking" aria-labelledby="booking-title"><div class="container form-grid"><aside class="form-copy"><div class="section-kicker" style="color:#fff">Booking / enquiry</div><h2 id="booking-title">Appointment request</h2><p>Capture condition, preferred practitioner, appointment time and relevant health notes before confirming.</p><div class="hero-cta"><a class="btn btn-secondary" href="tel:+61862440550">Call 08 6244 0550</a></div></aside><div class="form-card"><div class="form-top"><div><div class="section-kicker">Request details</div><h3>Appointment request</h3></div><a class="btn btn-accent btn-small" href="tel:+61862440550">Call</a></div><form class="booking-form" id="bookingForm"><div class="field"><label for="nameInput">Name</label><input id="nameInput" autocomplete="name" placeholder="Your name" required></div><div class="field"><label for="phoneInput">Phone</label><input id="phoneInput" autocomplete="tel" placeholder="0400 000 000" required></div><div class="field full"><label for="serviceSelect">Treatment</label><select id="serviceSelect" required><option value="">Select an option</option><option>Initial Physio Assessment</option>
+<option>Sports Injury Rehab</option>
+<option>Back &amp; Neck Pain</option>
+<option>Post-op Rehab</option>
+<option>Clinical Pilates</option>
+<option>Remedial Massage</option></select></div><div class="field"><label for="preferenceInput">Preferred clinician</label><select id="preferenceInput"><option>Any available physio</option><option>Amelia — sports rehab</option><option>Jonah — back and neck</option><option>Priya — Pilates rehab</option></select></div><div class="field"><label for="dateInput">Preferred date</label><input id="dateInput" type="date" required></div><div class="field full"><label for="notesInput">Notes</label><textarea id="notesInput" placeholder="Tell us your concern, injury date, pain level, referral details, goals or accessibility needs."></textarea></div><div class="confirmation" id="confirmation" role="status"></div><div class="form-footer"><span class="note-pill">Fast response • Clear next step</span><button class="btn btn-primary" type="submit">Send request</button></div></form></div></div></section>
+
+    <section id="why" aria-labelledby="why-title"><div class="container why-grid"><div class="why-card"><div class="section-kicker">Why choose us</div><h2 id="why-title">Built to answer doubts before visitors leave.</h2><p>Every second-concept site uses trust signals, clear packages, phone-first CTAs and realistic imagery to support conversion.</p><div class="why-list">
+            <div class="why-item"><span>1</span><div><strong>Evidence-informed care</strong><small>Explain assessments, plans and progress tracking clearly.</small></div></div>
+
+            <div class="why-item"><span>2</span><div><strong>One-to-one appointments</strong><small>Private rooms and focused clinician time build trust.</small></div></div>
+
+            <div class="why-item"><span>3</span><div><strong>Clear treatment pathways</strong><small>Patients understand next steps before booking.</small></div></div>
+
+            <div class="why-item"><span>4</span><div><strong>Wellness services</strong><small>Pilates, massage and rehab programs support recurring care.</small></div></div></div></div><div class="why-photo"></div></div></section>
+
+    <section id="reviews" aria-labelledby="reviews-title"><div class="container"><div class="section-head"><div><div class="section-kicker">Reviews</div><h2 id="reviews-title">Trust-heavy testimonials near the decision point.</h2></div><p>Reviews are prominent because they reduce hesitation and validate the business before a booking, call or quote request.</p></div><div class="reviews-layout"><aside class="reviews-summary"><div><div class="review-score">4.9</div><div class="stars" style="font-size:1.25rem;color:#fff">★★★★★</div><p>Representative rating summary for this demo concept.</p></div><a class="btn btn-secondary" href="#booking">Book after reading</a></aside><div class="review-grid">
+          <article class="review-card"><div class="stars">★★★★★</div><p>“The assessment was thorough and I left with exercises I could actually do.”</p><div class="reviewer"><strong>Rachel M.</strong><span>Verified review</span></div></article>
+
+          <article class="review-card"><div class="stars">★★★★★</div><p>“My shoulder rehab finally progressed after months of guessing.”</p><div class="reviewer"><strong>Owen K.</strong><span>Verified review</span></div></article>
+
+          <article class="review-card"><div class="stars">★★★★★</div><p>“Calm clinic, clear plan and easy booking. Highly recommend.”</p><div class="reviewer"><strong>Leah S.</strong><span>Verified review</span></div></article>
+
+          <article class="review-card"><div class="stars">★★★★★</div><p>“Clinical Pilates helped me return to running without fear.”</p><div class="reviewer"><strong>Sam P.</strong><span>Verified review</span></div></article></div></div></div></section>
+
+    <section id="location" aria-labelledby="location-title"><div class="container"><div class="section-head"><div><div class="section-kicker">Hours & location</div><h2 id="location-title">Make the visit, booking or service area obvious.</h2></div><p>Location and hours are easy to find, with a map-style block that can be replaced by Google Maps or a postcode checker.</p></div><div class="location-grid"><div class="location-card"><div class="location-photo"></div><div class="location-body"><h3>NorthStar Physio &amp; Rehab</h3><p>44 Wellness Way, West Perth WA</p><ul class="hours-list"><li><span>Mon–Thu</span><b>7:00 AM – 7:00 PM</b></li>
+<li><span>Fri</span><b>7:00 AM – 5:00 PM</b></li>
+<li><span>Sat</span><b>8:00 AM – 1:00 PM</b></li>
+<li><span>Sun</span><b>Closed</b></li></ul><div class="hero-cta"><a class="btn btn-primary" href="#booking">Book Assessment</a><a class="btn btn-secondary" href="https://maps.google.com" target="_blank" rel="noreferrer">Directions</a></div></div></div><div class="map-card"><div class="map-illustration"><div class="map-road road-one"></div><div class="map-road road-two"></div><div class="map-road road-three"></div><div class="map-pin"></div><div class="map-label"><strong>NorthStar Physio &amp; Rehab service area / location</strong><span>Use this area for live maps, suburbs covered, directions or class schedules.</span></div></div></div></div></div></section>
+
+    <section class="final-cta"><div class="container final-card"><div><div class="section-kicker" style="color:#fff">Second website concept</div><h2>Another complete website for the Health / Wellness niche.</h2><p>This page uses its own generated imagery embedded directly into the HTML, so it previews without external image loading.</p></div><div class="hero-cta" style="margin:0"><a class="btn btn-secondary" href="tel:+61862440550">Call now</a><a class="btn btn-primary" href="#booking">Book Assessment</a></div></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-grid"><a class="brand" href="#top"><div class="brand-mark">Ns</div><div><span class="brand-name">NorthStar Physio &amp; Rehab</span><span class="brand-subtitle">Health / Wellness second concept</span></div></a><div class="footer-links"><a href="tel:+61862440550">08 6244 0550</a><a href="#services">Services</a><a href="#booking">Book</a><a href="#reviews">Reviews</a></div><div>Demo website concept · Integrated images</div></div></footer>
+
+  <script>
+    const serviceSelect = document.getElementById('serviceSelect');
+    const confirmation = document.getElementById('confirmation');
+    const bookingSection = document.getElementById('booking');
+    document.querySelectorAll('[data-service]').forEach(button => {
+      button.addEventListener('click', () => {
+        const service = button.dataset.service;
+        if (serviceSelect && service) serviceSelect.value = service;
+        confirmation.classList.remove('show');
+        bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    document.getElementById('bookingForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const name = document.getElementById('nameInput').value.trim() || 'there';
+      const service = serviceSelect.value || 'your selected service';
+      confirmation.textContent = `Thanks, ${name}! Your request for ${service} has been received. In a live site, this would send to the business booking or CRM system.`;
+      confirmation.classList.add('show');
+    });
+    const dateInput = document.getElementById('dateInput');
+    if (dateInput) { const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate()+1); dateInput.min = tomorrow.toISOString().split('T')[0]; }
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a197850088b94e37',t:'MTc4Mzc2OTg4MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
