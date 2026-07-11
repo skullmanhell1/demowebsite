@@ -232,5 +232,158 @@
     document.getElementById('quickBook').addEventListener('click',()=>{appointmentType.value=document.getElementById('quickType').value});
     document.getElementById('bookingForm').addEventListener('submit',e=>{e.preventDefault();document.getElementById('confirm').classList.add('show')});
   </script>
+<!-- DEMO-GUIDE:START -->
+<style>
+  #dg-root, #dg-root * { box-sizing: border-box; }
+  #dg-root { font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  :root { --dg-accent: #c2a46b; }
+
+  body.dg-on .dg-active {
+    outline: 3px solid var(--dg-accent); outline-offset: 7px; border-radius: 18px;
+    transition: outline-color .35s ease;
+    box-shadow: 0 0 0 9999px rgba(11,23,22,0.015);
+  }
+
+  #dg-callout {
+    position: fixed; right: 20px; bottom: 70px; z-index: 2147483000;
+    width: min(370px, calc(100vw - 32px));
+    background: #0f1c1a; color: #fffaf2; border-radius: 20px;
+    border: 1px solid rgba(139,167,155,0.28);
+    box-shadow: 0 26px 74px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03) inset;
+    overflow: hidden; opacity: 0; transform: translateY(26px) scale(.97); pointer-events: none;
+    transition: opacity .5s cubic-bezier(.16,.84,.44,1), transform .5s cubic-bezier(.16,.84,.44,1);
+  }
+  #dg-callout.dg-show { opacity: 1; transform: none; pointer-events: auto; }
+  #dg-callout::before { content:""; position:absolute; left:0; top:0; bottom:0; width:5px;
+    background: linear-gradient(180deg, var(--dg-accent), transparent); }
+  .dg-c-top { display:flex; align-items:center; gap:10px; padding: 15px 16px 0; }
+  .dg-c-badge { width:36px; height:36px; border-radius:50%; flex:0 0 36px; display:grid; place-items:center;
+    font-weight:900; font-size:1rem; color:#0b1716; background:var(--dg-accent);
+    animation: dgRing 2.1s ease-out infinite; }
+  @keyframes dgRing {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--dg-accent) 70%, transparent); }
+    70% { box-shadow: 0 0 0 13px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+  }
+  .dg-c-label { font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dg-accent); font-weight:800; }
+  .dg-c-count { margin-left:auto; font-size:.75rem; color:rgba(255,250,242,.5); font-weight:700; }
+  .dg-c-body { padding: 9px 16px 16px; }
+  .dg-c-title { font-family:"Georgia", serif; font-size:1.28rem; font-weight:400; margin:0 0 5px; letter-spacing:-.01em; }
+  .dg-c-text { margin:0; font-size:.92rem; line-height:1.5; color:rgba(255,250,242,.82); }
+  #dg-callout.dg-pop .dg-c-body { animation: dgPop .42s ease; }
+  @keyframes dgPop { from{opacity:0; transform:translateY(9px);} to{opacity:1; transform:none;} }
+
+  #dg-bar { position: fixed; left:0; right:0; bottom:0; z-index:2147483001;
+    background: rgba(11,23,22,.96); color:#fffaf2; backdrop-filter: blur(10px);
+    border-top:1px solid rgba(139,167,155,.24); padding: 10px 16px;
+    display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap; font-size:.9rem; }
+  #dg-bar strong { color: var(--dg-accent); }
+  #dg-bar .dg-ai { color: rgba(255,250,242,.6); }
+  #dg-bar button { padding:8px 13px; border-radius:999px; border:1px solid rgba(255,250,242,.28);
+    background:none; color:#fffaf2; font-weight:800; cursor:pointer; font-size:.82rem; white-space:nowrap; }
+  #dg-bar button:hover { background: rgba(255,255,255,.1); }
+  #dg-pill { position: fixed; left:16px; bottom:16px; z-index:2147483001; display:none;
+    padding:11px 15px; border-radius:999px; background: var(--dg-accent); color:#0b1716;
+    font-weight:800; font-size:.85rem; cursor:pointer; box-shadow:0 12px 30px rgba(0,0,0,.3); }
+  body:not(.dg-on) #dg-callout { display:none; }
+
+  @media (max-width:640px){
+    #dg-callout { right:12px; left:12px; width:auto; bottom:132px; }
+    #dg-bar { font-size:.82rem; }
+    body.dg-on .sticky-mobile { bottom: 66px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    #dg-callout { transition: opacity .25s linear; transform:none !important; }
+    .dg-c-badge { animation:none; }
+    #dg-callout.dg-pop .dg-c-body { animation:none; }
+    body.dg-on .dg-active { transition:none; }
+  }
+</style>
+
+<div id="dg-root">
+  <div id="dg-callout" role="status" aria-live="polite">
+    <div class="dg-c-top">
+      <span class="dg-c-badge" id="dg-badge">1</span>
+      <span class="dg-c-label">Feature spotlight</span>
+      <span class="dg-c-count" id="dg-count"></span>
+    </div>
+    <div class="dg-c-body">
+      <p class="dg-c-title" id="dg-title"></p>
+      <p class="dg-c-text" id="dg-text"></p>
+    </div>
+  </div>
+
+  <div id="dg-bar">
+    <span><strong>&#9733; Interactive demo</strong> &mdash; scroll down and we'll explain each feature for your health practice.</span>
+    <span class="dg-ai">Photos are <b>AI-generated for demonstration only</b>.</span>
+    <button id="dg-hide" type="button">Hide guide</button>
+  </div>
+
+  <button id="dg-pill" type="button">&#9733; Show feature guide</button>
+</div>
+
+<script>
+(function(){
+  var A = [{"id":"specialties","title":"Service specialties","text":"Every care discipline \u2014 dentistry, chiropractic, med spa, optometry and physio \u2014 laid out so patients instantly find the treatment they need."},{"id":"experience","title":"Patient experience","text":"Premium imagery and calm design that make the clinic feel as reassuring online as it does in person, building trust before the first visit."},{"id":"providers","title":"Provider profiles","text":"Credentials, specialties and warm introductions to your clinical team, so patients know exactly who they'll be seeing."},{"id":"booking","title":"Online booking","text":"An intake-first booking form lets patients request appointments in seconds \u2014 more booked visits without tying up your front desk."},{"id":"reviews","title":"Patient reviews","text":"Ratings and testimonials that reduce hesitation and reassure new patients you're worth the visit."}];
+  var items = A.map(function(a){ return { a:a, el: document.getElementById(a.id) }; })
+               .filter(function(x){ return x.el; });
+  if(!items.length) return;
+
+  var callout = document.getElementById('dg-callout');
+  var badge = document.getElementById('dg-badge'),
+      title = document.getElementById('dg-title'),
+      text  = document.getElementById('dg-text'),
+      count = document.getElementById('dg-count');
+  var bar = document.getElementById('dg-bar'),
+      pill = document.getElementById('dg-pill');
+  var current = -1, ticking = false;
+
+  document.body.classList.add('dg-on');
+
+  function render(i){
+    if(i === current) return;
+    current = i;
+    var a = items[i].a;
+    badge.textContent = (i+1);
+    title.textContent = a.title;
+    text.textContent = a.text;
+    count.textContent = (i+1) + ' / ' + items.length;
+    callout.classList.remove('dg-pop'); void callout.offsetWidth; callout.classList.add('dg-pop');
+  }
+  function setActive(el){
+    items.forEach(function(x){ x.el.classList.toggle('dg-active', x.el === el); });
+  }
+  function update(){
+    ticking = false;
+    if(!document.body.classList.contains('dg-on')) return;
+    var vh = window.innerHeight, vpc = vh * 0.5, best = -1, bestDist = Infinity;
+    items.forEach(function(x, i){
+      var r = x.el.getBoundingClientRect();
+      if(r.bottom < vh*0.16 || r.top > vh*0.84) return;
+      var c = r.top + r.height/2, d = Math.abs(c - vpc);
+      if(d < bestDist){ bestDist = d; best = i; }
+    });
+    if(best >= 0){ render(best); setActive(items[best].el); callout.classList.add('dg-show'); }
+    else { callout.classList.remove('dg-show'); setActive(null); }
+  }
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
+
+  document.getElementById('dg-hide').addEventListener('click', function(){
+    document.body.classList.remove('dg-on');
+    callout.classList.remove('dg-show'); setActive(null);
+    bar.style.display = 'none'; pill.style.display = 'inline-block';
+  });
+  pill.addEventListener('click', function(){
+    document.body.classList.add('dg-on');
+    bar.style.display = 'flex'; pill.style.display = 'none';
+    current = -1; update();
+  });
+
+  update();
+})();
+</script>
+<!-- DEMO-GUIDE:END -->
 </body>
 </html>
