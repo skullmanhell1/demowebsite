@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solace Health Collective — Premium Health & Wellness Practice</title>
+  <meta name="description" content="A premium website concept for a modern health and wellness practice: dentist, chiropractor, med spa, optometry, physiotherapy and integrated care." />
+  <meta name="theme-color" content="#0b1716" />
+  <meta name="color-scheme" content="light" />
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Solace Health Collective — Integrated Health & Aesthetics" />
+  <meta property="og:description" content="A calmer standard for modern private care: dentistry, chiropractic, med spa, optometry and physiotherapy with premium patient intake and online booking." />
+  <meta property="og:image" content="https://skullmanhell1.github.io/demowebsite/health/og-image.jpg" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23213f3b'/%3E%3Cstop offset='1' stop-color='%238ba79b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Cpath d='M50 28v44M28 50h44' stroke='white' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='50' cy='50' r='30' stroke='white' stroke-opacity='.55' stroke-width='5' fill='none'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --ink:#14201f;--deep:#0b1716;--forest:#213f3b;--sage:#8ba79b;--mint:#dcebe4;--cream:#f6f1e8;--sand:#dfd0bc;--gold:#c2a46b;--rose:#cfa6a0;--blue:#8fb6c7;--white:#fffaf2;--muted:#6e7d79;--line:rgba(20,32,31,.13);--line-light:rgba(246,241,232,.18);--shadow:0 28px 90px rgba(20,32,31,.18);--radius:30px;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--serif:Georgia,"Times New Roman",serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.6;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;z-index:999;pointer-events:none;background:radial-gradient(circle at 20% 10%,rgba(194,164,107,.14),transparent 18%),linear-gradient(rgba(20,32,31,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(20,32,31,.02) 1px,transparent 1px);background-size:auto,46px 46px,46px 46px;opacity:.8;mask-image:linear-gradient(#000,transparent 82%)}
+    a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button,input,select,textarea{font:inherit}.container{width:min(1180px,calc(100% - 38px));margin:auto}.eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--forest);font-size:.72rem;font-weight:850;letter-spacing:.18em;text-transform:uppercase}.eyebrow:before{content:"";width:42px;height:1px;background:var(--gold)}h1,h2,h3{margin:0;font-family:var(--serif);font-weight:400;line-height:1;letter-spacing:-.045em}h1{font-size:clamp(3.8rem,8.2vw,8.8rem);max-width:1060px}h2{font-size:clamp(2.55rem,5.3vw,5.9rem)}h3{font-size:clamp(1.55rem,2.35vw,2.7rem)}p{margin:0;color:rgba(20,32,31,.72)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid var(--line);border-radius:999px;min-height:54px;padding:15px 24px;text-transform:uppercase;letter-spacing:.13em;font-size:.74rem;font-weight:900;cursor:pointer;transition:.42s cubic-bezier(.19,1,.22,1);position:relative;overflow:hidden}.btn:after{content:"";position:absolute;inset:auto -20% -100% -20%;height:100%;background:radial-gradient(circle,rgba(255,255,255,.7),transparent 63%);transition:.42s ease}.btn:hover{transform:translateY(-3px);box-shadow:0 18px 45px rgba(20,32,31,.12)}.btn:hover:after{bottom:-42%}.btn-primary{background:var(--forest);color:var(--white);border-color:var(--forest)}.btn-light{background:var(--white);color:var(--ink);border-color:rgba(255,255,255,.7)}.btn-ghost{background:rgba(255,250,242,.2);backdrop-filter:blur(16px);color:var(--white);border-color:rgba(255,255,255,.26)}.btn-outline{background:transparent;color:var(--forest)}
+    .topbar{background:var(--deep);color:rgba(246,241,232,.84);font-size:.84rem;font-weight:700}.topbar .container{display:flex;justify-content:space-between;gap:18px;padding:9px 0}.topbar a{color:var(--mint);text-decoration:underline;text-underline-offset:3px}.nav{position:fixed;top:38px;left:0;right:0;z-index:60;padding:18px 0;transition:.38s ease}.nav.scrolled{top:0;background:rgba(246,241,232,.82);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);padding:12px 0}.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:12px;font-size:1.25rem;font-weight:800;letter-spacing:-.04em}.mark{width:46px;height:46px;border-radius:18px;background:linear-gradient(135deg,var(--forest),var(--sage));display:grid;place-items:center;box-shadow:0 15px 38px rgba(33,63,59,.18)}.mark svg{width:26px}.brand small{display:block;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:850}.nav-links{display:flex;align-items:center;gap:28px;text-transform:uppercase;letter-spacing:.12em;font-size:.74rem;font-weight:900;color:rgba(20,32,31,.72)}.nav-links a:hover{color:var(--forest)}.nav-actions{display:flex;gap:10px}.nav-actions .btn{min-height:42px;padding:10px 16px;font-size:.64rem}
+    .hero{position:relative;min-height:calc(100vh - 38px);display:grid;align-items:end;padding:145px 0 58px;isolation:isolate;overflow:hidden;color:var(--white)}.hero:before{content:"";position:absolute;inset:0;z-index:-3;background:linear-gradient(90deg,rgba(11,23,22,.94) 0%,rgba(11,23,22,.72) 44%,rgba(11,23,22,.22)),linear-gradient(0deg,rgba(11,23,22,.82),transparent 55%),url('assets/58110ad0ff1a.jpg');background-size:cover;background-position:center}.hero:after{content:"";position:absolute;inset:-15%;z-index:-2;background:radial-gradient(circle at 25% 70%,rgba(139,167,155,.28),transparent 28%),radial-gradient(circle at 80% 20%,rgba(194,164,107,.24),transparent 30%);animation:breath 7s ease-in-out infinite alternate}.orb{position:absolute;border-radius:50%;filter:blur(1px);opacity:.7;animation:float 12s ease-in-out infinite}.orb.one{width:160px;height:160px;right:11%;top:22%;border:1px solid rgba(255,250,242,.18)}.orb.two{width:92px;height:92px;left:8%;bottom:18%;border:1px solid rgba(220,235,228,.2);animation-delay:-4s}.hero-grid{display:grid;grid-template-columns:1fr 355px;gap:46px;align-items:end}.hero .eyebrow{color:var(--mint)}.hero h1{margin:20px 0 26px}.lead{max-width:760px;font-size:clamp(1.08rem,1.5vw,1.3rem);color:rgba(255,250,242,.78)}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}.trust-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;max-width:830px;margin-top:32px;border:1px solid var(--line-light);border-radius:22px;overflow:hidden;background:var(--line-light)}.trust{padding:17px;background:rgba(255,250,242,.10);backdrop-filter:blur(14px)}.trust b{display:block;font-family:var(--serif);font-size:1.75rem;font-weight:400;color:var(--white);line-height:1}.trust span{font-size:.67rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,250,242,.66);font-weight:900}.hero-card{border:1px solid var(--line-light);border-radius:var(--radius);background:linear-gradient(155deg,rgba(255,255,255,.14),rgba(255,255,255,.045));backdrop-filter:blur(18px);box-shadow:0 30px 90px rgba(0,0,0,.24);padding:24px}.status{display:flex;align-items:center;gap:9px;color:var(--mint);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.pulse{width:9px;height:9px;border-radius:50%;background:#91e0c3;box-shadow:0 0 18px #91e0c3;animation:blink 1.5s infinite}.hero-card h3{font-size:2rem;margin:14px 0 12px}.mini-book{display:grid;gap:11px;margin-top:18px}.mini-book select,.mini-book input{border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:13px;background:rgba(0,0,0,.18);color:var(--white);outline:0}.mini-book option{background:var(--deep)}
+    section{position:relative;padding:106px 0}.section-head{display:grid;grid-template-columns:1fr .82fr;gap:52px;align-items:end;margin-bottom:54px}.section-head h2{margin-top:16px}.section-head p{font-size:1.05rem}.specialties{background:linear-gradient(180deg,var(--cream),#fbf7ef)}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{position:relative;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,250,242,.72);padding:26px;box-shadow:0 18px 50px rgba(20,32,31,.06);overflow:hidden;transition:.48s cubic-bezier(.19,1,.22,1)}.card:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:rgba(194,164,107,.38)}.card:after{content:"";position:absolute;inset:auto -30% -45% -30%;height:70%;background:radial-gradient(circle,rgba(139,167,155,.18),transparent 65%)}.icon{width:54px;height:54px;border-radius:20px;background:linear-gradient(135deg,rgba(139,167,155,.24),rgba(194,164,107,.16));display:grid;place-items:center;margin-bottom:28px;color:var(--forest);font-weight:900}.card h3{font-size:1.95rem;margin-bottom:12px}.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.tag{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:900;color:var(--forest);border:1px solid rgba(33,63,59,.14);border-radius:999px;padding:7px 9px;background:rgba(255,255,255,.45)}
+    .visual{background:var(--deep);color:var(--white)}.visual p{color:rgba(246,241,232,.72)}.visual .eyebrow{color:var(--mint)}.image-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}.image-card{position:relative;min-height:560px;border-radius:34px;overflow:hidden;border:1px solid var(--line-light);box-shadow:0 30px 90px rgba(0,0,0,.26)}.image-stack{display:grid;gap:20px}.image-card.small{min-height:270px}.image-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:1s cubic-bezier(.19,1,.22,1);filter:saturate(.95) contrast(1.04) brightness(.9)}.image-card:hover img{transform:scale(1.06);filter:saturate(1.05) contrast(1.05) brightness(.98)}.image-card:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,23,22,.78),transparent 58%)}.caption{position:absolute;z-index:2;left:24px;right:24px;bottom:24px}.caption b{display:block;font-family:var(--serif);font-size:2.2rem;font-weight:400;line-height:1;margin-bottom:9px}.caption span{color:rgba(255,250,242,.72)}
+    .journey{background:#fbf7ef}.journey-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:26px;align-items:center}.journey-photo{min-height:610px;border-radius:34px;overflow:hidden;box-shadow:var(--shadow);position:relative}.journey-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}.journey-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,32,31,.58),transparent 50%)}.steps{display:grid;gap:14px}.step{display:grid;grid-template-columns:56px 1fr;gap:16px;border:1px solid var(--line);border-radius:24px;background:rgba(255,250,242,.8);padding:18px;transition:.38s ease}.step:hover{transform:translateX(6px);border-color:rgba(194,164,107,.42)}.num{width:46px;height:46px;border-radius:17px;background:var(--forest);color:var(--white);display:grid;place-items:center;font-weight:900}.step b{display:block;margin-bottom:4px;color:var(--ink)}
+    .providers{background:linear-gradient(180deg,#fbf7ef,var(--cream))}.provider-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.provider{border:1px solid var(--line);border-radius:30px;background:rgba(255,250,242,.72);padding:20px;box-shadow:0 18px 50px rgba(20,32,31,.06)}.avatar{height:260px;border-radius:24px;background:linear-gradient(135deg,rgba(139,167,155,.35),rgba(194,164,107,.18));position:relative;overflow:hidden}.avatar:before{content:"";position:absolute;left:50%;top:28%;width:88px;height:88px;border-radius:50%;background:rgba(33,63,59,.20);transform:translateX(-50%)}.avatar:after{content:"";position:absolute;left:50%;bottom:-25px;width:170px;height:170px;border-radius:50%;background:rgba(33,63,59,.20);transform:translateX(-50%)}.provider h3{font-size:1.9rem;margin:20px 0 8px}.provider small{display:block;color:var(--forest);font-weight:900;letter-spacing:.12em;text-transform:uppercase}.provider p{margin-top:12px}
+    .booking-section{background:radial-gradient(circle at 85% 12%,rgba(139,167,155,.22),transparent 32%),linear-gradient(180deg,var(--cream),#efe4d5)}.booking-grid{display:grid;grid-template-columns:.82fr 1fr;gap:46px;align-items:start}.booking-card{border:1px solid rgba(20,32,31,.14);border-radius:34px;background:rgba(255,250,242,.78);box-shadow:var(--shadow);padding:28px;backdrop-filter:blur(16px)}form{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}label{font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:900}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:16px;padding:14px;background:rgba(255,255,255,.66);outline:0;color:var(--ink)}textarea{min-height:112px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:var(--forest);box-shadow:0 0 0 4px rgba(139,167,155,.16)}.notice{grid-column:1/-1;border:1px solid rgba(33,63,59,.14);border-radius:18px;background:rgba(220,235,228,.65);padding:14px;color:rgba(20,32,31,.72)}.form-actions{grid-column:1/-1;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.confirm{display:none;grid-column:1/-1;border:1px solid rgba(33,63,59,.24);border-radius:18px;background:rgba(139,167,155,.18);padding:14px}.confirm.show{display:block;animation:up .55s ease}.insurance{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:26px}.insurance span{border:1px solid var(--line);border-radius:16px;padding:14px;background:rgba(255,250,242,.5);font-weight:850;text-align:center;color:var(--forest)}
+    .reviews{background:var(--deep);color:var(--white)}.reviews p{color:rgba(246,241,232,.72)}.reviews .eyebrow{color:var(--mint)}.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.review{border:1px solid var(--line-light);border-radius:26px;background:rgba(255,255,255,.06);padding:24px}.stars{color:var(--gold);letter-spacing:.08em;margin-bottom:14px}.review b{display:block;margin-top:18px;color:var(--white)}
+    .final{min-height:560px;display:grid;place-items:center;text-align:center;color:var(--white);background:linear-gradient(rgba(11,23,22,.58),rgba(11,23,22,.92)),url('assets/bd0a5d759b13.jpg');background-size:cover;background-position:center}.final h2{max-width:900px;margin:18px auto 22px}.final p{max-width:690px;margin:0 auto 34px;color:rgba(255,250,242,.76)}.sticky-mobile{display:none;position:fixed;left:12px;right:12px;bottom:12px;z-index:80;grid-template-columns:1fr 1fr;gap:8px}.sticky-mobile .btn{min-height:48px;padding:12px;font-size:.67rem}footer{padding:34px 0;background:var(--deep);color:rgba(246,241,232,.62);border-top:1px solid var(--line-light)}.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:.88rem}
+    .reveal{opacity:0;transform:translateY(26px);transition:opacity .85s cubic-bezier(.19,1,.22,1),transform .85s cubic-bezier(.19,1,.22,1)}.reveal.visible{opacity:1;transform:none}.split span{display:block;opacity:0;transform:translateY(24px);animation:up .9s cubic-bezier(.19,1,.22,1) forwards}.split span:nth-child(2){animation-delay:.14s}.split span:nth-child(3){animation-delay:.28s}@keyframes up{to{opacity:1;transform:none}}@keyframes breath{to{opacity:.72;transform:scale(1.025)}}@keyframes float{50%{transform:translateY(-24px) translateX(10px)}}@keyframes blink{50%{opacity:.4}}
+
+
+    /* Premium sophistication upgrade */
+    .preloader{position:fixed;inset:0;z-index:1000;background:var(--deep);display:grid;place-items:center;color:var(--white);transition:opacity .8s ease,visibility .8s ease}.preloader.hide{opacity:0;visibility:hidden}.preloader-inner{text-align:center}.preloader-mark{width:86px;height:86px;border-radius:32px;margin:0 auto 20px;background:linear-gradient(135deg,var(--forest),var(--sage));display:grid;place-items:center;box-shadow:0 28px 90px rgba(0,0,0,.34);animation:markBreath 1.8s ease-in-out infinite alternate}.preloader-mark svg{width:42px}.preloader-text{font-family:var(--serif);font-size:2rem;letter-spacing:-.04em}.preloader-line{width:180px;height:1px;background:rgba(255,250,242,.16);margin:18px auto 0;overflow:hidden}.preloader-line:after{content:"";display:block;height:100%;width:45%;background:var(--gold);animation:loadLine 1.15s ease-in-out infinite}
+    .cursor-glow{position:fixed;z-index:998;left:0;top:0;width:340px;height:340px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(194,164,107,.18),rgba(139,167,155,.10) 36%,transparent 68%);transform:translate(-50%,-50%);mix-blend-mode:multiply;opacity:.9;transition:opacity .25s ease}
+    .luxury-rail{position:relative;z-index:2;margin-top:-1px;background:rgba(255,250,242,.86);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);border-top:1px solid rgba(255,255,255,.5);overflow:hidden}.rail-track{display:flex;gap:64px;white-space:nowrap;padding:18px 0;color:var(--forest);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:900;animation:marquee 28s linear infinite}.rail-track span{display:inline-flex;align-items:center;gap:64px}.rail-track span:after{content:"✦";color:var(--gold)}
+    .premium-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(194,164,107,.55),transparent);margin:0 auto;width:min(1180px,calc(100% - 38px))}.philosophy{background:linear-gradient(180deg,#fbf7ef,var(--cream));padding-top:118px}.philosophy-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;align-items:stretch}.editorial-card{border:1px solid var(--line);border-radius:38px;background:rgba(255,250,242,.74);box-shadow:var(--shadow);padding:34px;position:relative;overflow:hidden}.editorial-card:before{content:"";position:absolute;right:-18%;top:-18%;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(139,167,155,.24),transparent 66%)}.editorial-card h2{font-size:clamp(2.4rem,4.7vw,5rem);margin:16px 0 22px}.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}.metric{border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.45);padding:18px}.metric b{display:block;font-family:var(--serif);font-size:2.8rem;font-weight:400;line-height:1;color:var(--forest)}.metric span{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900;color:var(--muted)}.detail-stack{display:grid;gap:22px}.detail-image{position:relative;min-height:310px;border-radius:34px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 70px rgba(20,32,31,.12)}.detail-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:1s cubic-bezier(.19,1,.22,1);filter:saturate(.96) contrast(1.03)}.detail-image:hover img{transform:scale(1.065)}.detail-image:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,32,31,.62),transparent 58%)}.detail-image b{position:absolute;z-index:2;left:24px;bottom:20px;color:var(--white);font-family:var(--serif);font-size:2.1rem;font-weight:400;line-height:1}.concierge{display:grid;grid-template-columns:1fr 1fr;gap:22px}.concierge .detail-image{min-height:255px}
+    .services-luxe{background:var(--deep);color:var(--white);overflow:hidden}.services-luxe p{color:rgba(246,241,232,.72)}.services-luxe .eyebrow{color:var(--mint)}.luxe-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.luxe-item{min-height:360px;border:1px solid var(--line-light);border-radius:32px;padding:24px;background:linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.035));position:relative;overflow:hidden;transition:.55s cubic-bezier(.19,1,.22,1)}.luxe-item:hover{transform:translateY(-10px);border-color:rgba(194,164,107,.45)}.luxe-item:before{content:"";position:absolute;inset:auto -30% -45% -30%;height:75%;background:radial-gradient(circle,rgba(194,164,107,.18),transparent 65%)}.luxe-item .count{font-family:var(--serif);font-size:4rem;color:rgba(255,250,242,.20);line-height:1}.luxe-item h3{font-size:2rem;margin:95px 0 14px;color:var(--white)}.luxe-item a{position:relative;z-index:2;color:var(--mint);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;font-weight:900}.spotlight{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(139,167,155,.22),transparent 64%);filter:blur(3px);right:-180px;top:20px;animation:float 10s ease-in-out infinite}
+    .image-card,.journey-photo,.detail-image{transform-style:preserve-3d}.tilt{transition:transform .18s ease}.nav-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--sage),var(--gold));z-index:90;width:0%;box-shadow:0 0 18px rgba(194,164,107,.55)}
+    .card{cursor:pointer}.card .icon{transition:transform .5s cubic-bezier(.19,1,.22,1),background .5s ease}.card:hover .icon{transform:rotate(-8deg) scale(1.08);background:linear-gradient(135deg,rgba(194,164,107,.32),rgba(139,167,155,.24))}.provider{transition:.5s cubic-bezier(.19,1,.22,1)}.provider:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:rgba(194,164,107,.42)}.provider:hover .avatar:before{animation:avatarPulse 1.4s ease-in-out infinite alternate}.booking-card{position:relative;overflow:hidden}.booking-card:before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--sage),var(--gold),var(--rose));}.booking-card form{position:relative;z-index:1}
+    @keyframes marquee{to{transform:translateX(-50%)}}@keyframes markBreath{to{transform:translateY(-5px) scale(1.04)}}@keyframes loadLine{0%{transform:translateX(-120%)}100%{transform:translateX(260%)}}@keyframes avatarPulse{to{transform:translateX(-50%) scale(1.08);background:rgba(194,164,107,.22)}}
+
+    @media(max-width:960px){.topbar .container{display:block;text-align:center}.nav{top:58px}.nav-links{display:none}.hero-grid,.section-head,.image-grid,.journey-grid,.booking-grid,.philosophy-grid{grid-template-columns:1fr}.cards,.provider-grid,.review-grid,.luxe-row{grid-template-columns:1fr 1fr}.trust-row{grid-template-columns:1fr 1fr}.hero-card{max-width:520px}.sticky-mobile{display:grid}.insurance{grid-template-columns:1fr 1fr}.image-card{min-height:430px}}
+    @media(max-width:640px){.container{width:min(100% - 28px,1180px)}h1{font-size:3.45rem}.hero{padding-top:135px}.cards,.provider-grid,.review-grid,form,.luxe-row,.concierge,.metric-grid{grid-template-columns:1fr}.field.full,.notice,.form-actions,.confirm{grid-column:auto}.hero-actions,.form-actions{display:grid}.btn{width:100%}.nav-actions .btn-outline{display:none}.trust-row,.insurance{grid-template-columns:1fr}.image-card,.journey-photo{min-height:360px}.topbar{font-size:.76rem}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+  </style>
+  <!-- SEO-PRO:START -->
+  <link rel="canonical" href="https://skullmanhell1.github.io/demowebsite/health/" />
+  <meta name="keywords" content="health clinic, dentist, chiropractor, med spa, optometry, physiotherapy, wellness practice, Perth integrated care" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Solace Health Collective" />
+  <meta property="og:url" content="https://skullmanhell1.github.io/demowebsite/health/" />
+  <meta property="og:site_name" content="Solace Health Collective" />
+  <meta property="og:locale" content="en_AU" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Solace Health Collective — Integrated Health & Aesthetics" />
+  <meta name="twitter:description" content="A calmer standard for modern private care: dentistry, chiropractic, med spa, optometry and physiotherapy with premium patient intake and online booking." />
+  <meta name="twitter:image" content="https://skullmanhell1.github.io/demowebsite/health/og-image.jpg" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalClinic",
+  "name": "Solace Health Collective",
+  "description": "A calmer standard for modern private care: dentistry, chiropractic, med spa, optometry and physiotherapy with premium patient intake and online booking.",
+  "url": "https://skullmanhell1.github.io/demowebsite/health/",
+  "image": "https://skullmanhell1.github.io/demowebsite/health/og-image.jpg",
+  "telephone": "+61862404440",
+  "medicalSpecialty": ["Dentistry", "Chiropractic", "Dermatology", "Optometry", "Physiotherapy"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Perth",
+    "addressRegion": "WA",
+    "addressCountry": "AU",
+    "streetAddress": "24 Wellness Parade",
+    "postalCode": "6000"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "840",
+    "bestRating": "5"
+  }
+}
+  </script>
+<!-- SEO-PRO:END -->
+  <!-- PRELOAD:START -->
+  <link rel="preload" as="image" href="assets/58110ad0ff1a.jpg" fetchpriority="high" />
+<!-- PRELOAD:END -->
+</head>
+<body>
+  <div class="preloader" id="preloader" aria-hidden="true"><div class="preloader-inner"><div class="preloader-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4v16M4 12h16" stroke="white" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="8" stroke="white" opacity=".55" stroke-width="1.5"/></svg></div><div class="preloader-text">Solace Health Collective</div><div class="preloader-line"></div></div></div>
+  <div class="nav-progress" id="navProgress" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="topbar"><div class="container"><span><b>Now accepting new patients:</b> dental, chiropractic, med spa, optometry and physiotherapy appointments</span><a href="tel:+6186240444">Call 08 6240 4440</a></div></div>
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Solace Health Collective home"><span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4v16M4 12h16" stroke="white" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="8" stroke="white" opacity=".55" stroke-width="1.5"/></svg></span><span>Solace Health Collective<small>Integrated health & aesthetics</small></span></a>
+      <div class="nav-links"><a href="#specialties">Specialties</a><a href="#experience">Experience</a><a href="#providers">Providers</a><a href="#booking">Book</a><a href="#reviews">Reviews</a></div>
+      <div class="nav-actions"><a class="btn btn-outline" href="tel:+6186240444">Call</a><a class="btn btn-primary" href="#booking">Book Visit</a></div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <header class="hero">
+      <div class="orb one" aria-hidden="true"></div><div class="orb two" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Dentistry · Chiropractic · Med spa · Optometry · Physio</div>
+          <h1 class="split"><span>A calmer standard</span><span>for modern</span><span>private care.</span></h1>
+          <p class="lead reveal">A sophisticated digital front door for modern health and wellness practices — balancing clinical trust, quiet luxury, clear pathways and appointment conversion.</p>
+          <div class="hero-actions reveal"><a class="btn btn-light" href="#booking">Book a Consultation</a><a class="btn btn-ghost" href="#specialties">Explore Services</a><a class="btn btn-ghost" href="tel:+6186240444">Click to Call</a></div>
+          <div class="trust-row reveal"><div class="trust"><b>4.9★</b><span>Patient rating</span></div><div class="trust"><b>5</b><span>Care disciplines</span></div><div class="trust"><b>24 hr</b><span>Response goal</span></div><div class="trust"><b>1:1</b><span>Care plans</span></div></div>
+        </div>
+        <aside class="hero-card reveal">
+          <div class="status"><span class="pulse"></span> Online bookings open</div>
+          <h3>Find the right appointment.</h3>
+          <p>Choose a care area and request the earliest suitable visit with the correct practitioner.</p>
+          <div class="mini-book"><select id="quickType"><option>New patient consultation</option><option>Dental appointment</option><option>Chiropractic assessment</option><option>Med spa consultation</option><option>Optometry exam</option><option>Physiotherapy assessment</option></select><input placeholder="Preferred day or time"><a class="btn btn-light" id="quickBook" href="#booking">Start Booking</a></div>
+        </aside>
+      </div>
+    </header>
+
+    <div class="luxury-rail" aria-label="Practice highlights"><div class="rail-track"><span>Same-week appointments</span><span>Private consultation rooms</span><span>Integrated care plans</span><span>Premium patient intake</span><span>Clinical-grade aesthetics</span><span>Insurance-ready workflows</span><span>Same-week appointments</span><span>Private consultation rooms</span><span>Integrated care plans</span><span>Premium patient intake</span><span>Clinical-grade aesthetics</span><span>Insurance-ready workflows</span></div></div>
+    <div class="premium-divider"></div>
+
+    <section class="specialties" id="specialties">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="eyebrow">Practice specialties</div><h2>One premium layout. Multiple health verticals.</h2></div><p>This design works for dentists, chiropractors, med spas, optometrists, physiotherapists or an integrated wellness clinic. Each service card can pre-fill the booking form.</p></div>
+        <div class="cards">
+          <article class="card reveal"><div class="icon">✦</div><h3>Dentistry</h3><p>Preventive care, cosmetic consultations, whitening, restorative treatment and clear patient education before treatment begins.</p><div class="tags"><span class="tag">Preventive</span><span class="tag">Cosmetic</span><span class="tag">Family care</span></div></article>
+          <article class="card reveal"><div class="icon">◎</div><h3>Chiropractic</h3><p>Movement assessments, posture reviews, manual care plans and practical guidance for everyday mobility and comfort.</p><div class="tags"><span class="tag">Mobility</span><span class="tag">Posture</span><span class="tag">Care plans</span></div></article>
+          <article class="card reveal"><div class="icon">◌</div><h3>Med Spa</h3><p>Skin consultations, facial treatments, aesthetic planning and non-surgical services presented with clinical clarity.</p><div class="tags"><span class="tag">Skin health</span><span class="tag">Aesthetics</span><span class="tag">Consult-led</span></div></article>
+          <article class="card reveal"><div class="icon">◐</div><h3>Optometry</h3><p>Comprehensive eye exams, lens guidance, dry eye support, ocular imaging and premium eyewear consultations.</p><div class="tags"><span class="tag">Eye exams</span><span class="tag">Imaging</span><span class="tag">Eyewear</span></div></article>
+          <article class="card reveal"><div class="icon">↻</div><h3>Physiotherapy</h3><p>Assessment-led rehabilitation, sports recovery, strength progressions and return-to-activity planning.</p><div class="tags"><span class="tag">Rehab</span><span class="tag">Sports</span><span class="tag">Movement</span></div></article>
+          <article class="card reveal"><div class="icon">✓</div><h3>Integrated Care</h3><p>A coordinated patient experience with polished intake, reminders, treatment plans and follow-up communication.</p><div class="tags"><span class="tag">Coordinated</span><span class="tag">Premium UX</span><span class="tag">Follow-up</span></div></article>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="philosophy">
+      <div class="container philosophy-grid">
+        <article class="editorial-card reveal">
+          <div class="eyebrow">Elevated clinical hospitality</div>
+          <h2>Designed for patients who value clarity, privacy and calm.</h2>
+          <p>Solace Health Collective blends the trust of a medical practice with the thoughtful atmosphere of a private wellness studio. The website now feels more editorial, more refined and more conversion-focused — ideal for premium dental, aesthetics, optometry, chiropractic or physiotherapy brands.</p>
+          <div class="metric-grid">
+            <div class="metric"><b class="counter" data-target="92">0</b><span>Patient-ready UX score</span></div>
+            <div class="metric"><b class="counter" data-target="5">0</b><span>Service categories</span></div>
+            <div class="metric"><b class="counter" data-target="24">0</b><span>Hour response goal</span></div>
+          </div>
+        </article>
+        <div class="detail-stack">
+          <figure class="detail-image reveal tilt"><img src="assets/dada0f6134dc.jpg" alt="Luxury wellness clinic exterior" loading="lazy" decoding="async"><b>Boutique clinic presence.</b></figure>
+          <div class="concierge">
+            <figure class="detail-image reveal tilt"><img src="assets/5994835c92ce.jpg" alt="Premium clinic hospitality details" loading="lazy" decoding="async"><b>Concierge details.</b></figure>
+            <figure class="detail-image reveal tilt"><img src="assets/260784a83888.jpg" alt="Premium treatment equipment" loading="lazy" decoding="async"><b>Clinical polish.</b></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services-luxe">
+      <div class="spotlight" aria-hidden="true"></div>
+      <div class="container">
+        <div class="section-head reveal"><div><div class="eyebrow">Sophisticated conversion structure</div><h2>Every section answers a patient’s silent question.</h2></div><p>The upgraded experience does more than look beautiful. It reduces hesitation by addressing trust, comfort, cost expectations, practitioner fit and next steps.</p></div>
+        <div class="luxe-row">
+          <article class="luxe-item reveal"><div class="count">01</div><h3>Is this safe?</h3><p>Clinical language, credentials, disclaimers and calm visuals establish professionalism without overpromising outcomes.</p><a href="#providers">Meet providers →</a></article>
+          <article class="luxe-item reveal"><div class="count">02</div><h3>Will I be heard?</h3><p>Intake-first booking lets patients explain symptoms, goals, concerns and preferred appointment style before arrival.</p><a href="#booking">Start intake →</a></article>
+          <article class="luxe-item reveal"><div class="count">03</div><h3>What happens next?</h3><p>A clear patient journey explains consultation, assessment, care plan and follow-up in a reassuring sequence.</p><a href="#experience">View journey →</a></article>
+          <article class="luxe-item reveal"><div class="count">04</div><h3>Can I trust them?</h3><p>Reviews, provider cards, ratings, premium imagery and transparent process cues build confidence quickly.</p><a href="#reviews">Read reviews →</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="visual" id="experience">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="eyebrow">Premium patient experience</div><h2>A clinic that looks as reassuring as it feels.</h2></div><p>Generated imagery gives the site an elevated, professional visual identity: calm interiors, clean treatment rooms, warm clinical interaction and wellness-focused care.</p></div>
+        <div class="image-grid"><figure class="image-card reveal"><img src="assets/bd0a5d759b13.jpg" alt="Premium treatment room" loading="lazy" decoding="async"><figcaption class="caption"><b>Modern treatment rooms.</b><span>Clean, comfortable spaces that reduce anxiety and signal clinical quality.</span></figcaption></figure><div class="image-stack"><figure class="image-card small reveal"><img src="assets/6bb082c77ee2.jpg" alt="Premium med spa treatment room" loading="lazy" decoding="async"><figcaption class="caption"><b>Consult-led aesthetics.</b><span>A serene treatment environment that feels clinical, polished and calm.</span></figcaption></figure><figure class="image-card small reveal"><img src="assets/8ed00c2d0b17.jpg" alt="Physiotherapy appointment" loading="lazy" decoding="async"><figcaption class="caption"><b>Movement and recovery.</b><span>Care plans designed around the way patients live.</span></figcaption></figure></div></div>
+      </div>
+    </section>
+
+    <section class="journey">
+      <div class="container journey-grid">
+        <figure class="journey-photo reveal"><img src="assets/90bdc3e4204b.jpg" alt="Clinician consulting with patient" loading="lazy" decoding="async"></figure>
+        <div class="reveal"><div class="eyebrow">Patient journey</div><h2 style="margin:16px 0 24px">From first click to confident follow-up.</h2><div class="steps"><div class="step"><div class="num">1</div><p><b>Choose the right care path</b>Service categories and appointment reasons help route patients to the correct provider.</p></div><div class="step"><div class="num">2</div><p><b>Complete a polished intake</b>New patients can share symptoms, goals, insurance details and preferences before arrival.</p></div><div class="step"><div class="num">3</div><p><b>Understand the plan</b>Practitioners explain findings, options, expected visits and costs in plain language.</p></div><div class="step"><div class="num">4</div><p><b>Stay connected after care</b>Follow-up reminders, home guidance and next steps keep the experience professional.</p></div></div></div>
+      </div>
+    </section>
+
+    <section class="providers" id="providers">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="eyebrow">Clinical team</div><h2>Credentials presented with warmth.</h2></div><p>Provider cards make the practice feel human while still emphasizing expertise, specialties and patient-centred care.</p></div>
+        <div class="provider-grid"><article class="provider reveal"><div class="avatar"></div><h3>Dr. Amara Lee</h3><small>Clinical Director</small><p>Preventive and cosmetic care with a calm, education-first consultation style.</p></article><article class="provider reveal"><div class="avatar"></div><h3>Marcus Chen</h3><small>Movement & Rehab Lead</small><p>Chiropractic and physiotherapy planning for mobility, strength and recovery.</p></article><article class="provider reveal"><div class="avatar"></div><h3>Sofia Hart</h3><small>Aesthetics & Skin</small><p>Consult-led skin health and med spa treatment planning with a natural-looking philosophy.</p></article></div>
+      </div>
+    </section>
+
+    <section class="booking-section" id="booking">
+      <div class="container booking-grid">
+        <div class="reveal"><div class="eyebrow">Appointments</div><h2 style="margin:16px 0 22px">Make booking feel simple, private and premium.</h2><p>The appointment block is designed for integration with practice management systems, online forms, Jane App, HotDoc, Zocdoc, Fresha or a custom booking workflow.</p><div class="insurance"><span>HICAPS</span><span>Private health</span><span>Medicare-ready</span><span>Payment plans</span></div></div>
+        <div class="booking-card reveal"><form id="bookingForm"><div class="field full"><label>Appointment type</label><select id="appointmentType"><option>New patient consultation</option><option>Dental appointment</option><option>Chiropractic assessment</option><option>Med spa consultation</option><option>Optometry exam</option><option>Physiotherapy assessment</option></select></div><div class="field"><label>Preferred date</label><input type="date"></div><div class="field"><label>Preferred time</label><select><option>Morning</option><option>Midday</option><option>Afternoon</option><option>Evening</option><option>First available</option></select></div><div class="field"><label>Name</label><input placeholder="Your name"></div><div class="field"><label>Phone</label><input placeholder="Your phone"></div><div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div><div class="field"><label>Patient status</label><select><option>New patient</option><option>Returning patient</option><option>Family booking</option><option>Not sure</option></select></div><div class="field full"><label>Goals, symptoms or notes</label><textarea placeholder="Tell us what you would like help with, any concerns, or preferred practitioner."></textarea></div><div class="notice" id="notice">For urgent symptoms or medical emergencies, call emergency services or seek immediate medical care. This form is for appointment requests only.</div><div class="form-actions"><button class="btn btn-primary" type="submit">Request Appointment</button><a class="btn btn-outline" href="tel:+6186240444">Call Reception</a></div><div class="confirm" id="confirm">Your appointment request has been received. The clinic team will contact you to confirm availability and next steps.</div></form></div>
+      </div>
+    </section>
+
+    <section class="reviews" id="reviews">
+      <div class="container"><div class="section-head reveal"><div><div class="eyebrow">Patient confidence</div><h2>Reviews that reduce hesitation.</h2></div><p>Trust signals should speak to clarity, comfort, communication and professionalism — not exaggerated medical promises.</p></div><div class="review-grid"><article class="review reveal"><div class="stars">★★★★★</div><p>“The whole visit felt calm and organised. I understood my options before deciding on treatment.”</p><b>Naomi R. · Patient review</b></article><article class="review reveal"><div class="stars">★★★★★</div><p>“Beautiful clinic, clear explanations and easy booking. The follow-up instructions were excellent.”</p><b>Daniel M. · Google</b></article><article class="review reveal"><div class="stars">★★★★★</div><p>“Professional without feeling cold. The intake form saved time and the appointment started on schedule.”</p><b>Priya S. · Patient review</b></article></div></div>
+    </section>
+
+    <section class="final"><div class="container reveal"><div class="eyebrow">Premium health website demo</div><h2>Designed to turn clinical trust into booked appointments.</h2><p>Solace Health Collective now combines cinematic healthcare imagery, editorial layouts, concierge-style booking, advanced motion, provider credibility, patient reassurance and premium conversion architecture.</p><div class="hero-actions" style="justify-content:center"><a class="btn btn-light" href="#booking">Book a Consultation</a><a class="btn btn-ghost" href="tel:+6186240444">Call the Clinic</a></div></div></section>
+  </main>
+
+  <div class="sticky-mobile"><a class="btn btn-light" href="tel:+6186240444">Call</a><a class="btn btn-primary" href="#booking">Book</a></div>
+  <footer><div class="container footer-inner"><span>© 2026 Solace Health Collective. Integrated health, wellness and aesthetics.</span><span>Perth WA · New patient appointments · Reception 08 6240 4440</span></div></footer>
+
+  <script>
+    const nav=document.getElementById('nav'); const progress=document.getElementById('navProgress');
+    window.addEventListener('load',()=>setTimeout(()=>document.getElementById('preloader').classList.add('hide'),450));
+    window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>20); const h=document.documentElement.scrollHeight-innerHeight; progress.style.width=(scrollY/h*100)+'%';});
+    const glow=document.getElementById('cursorGlow'); window.addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px';});
+    const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible'); if(e.target.querySelectorAll) e.target.querySelectorAll('.counter').forEach(startCounter);}}),{threshold:.12}); document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    const counted=new WeakSet(); function startCounter(el){if(counted.has(el))return; counted.add(el); const target=+el.dataset.target; let n=0; const step=Math.max(1,Math.ceil(target/46)); const t=setInterval(()=>{n+=step; if(n>=target){n=target;clearInterval(t)} el.textContent=n+(target===92?'%':'');},24);} 
+    document.querySelectorAll('.tilt,.image-card').forEach(el=>{el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(); const x=(e.clientX-r.left)/r.width-.5; const y=(e.clientY-r.top)/r.height-.5; el.style.transform=`perspective(900px) rotateX(${y*-3}deg) rotateY(${x*3}deg) translateY(-2px)`;}); el.addEventListener('pointerleave',()=>el.style.transform='');});
+    const appointmentType=document.getElementById('appointmentType');
+    document.querySelectorAll('.card').forEach(card=>card.addEventListener('click',()=>{const title=card.querySelector('h3').textContent; const map={Dentistry:'Dental appointment',Chiropractic:'Chiropractic assessment','Med Spa':'Med spa consultation',Optometry:'Optometry exam',Physiotherapy:'Physiotherapy assessment','Integrated Care':'New patient consultation'}; appointmentType.value=map[title]||'New patient consultation'; document.getElementById('booking').scrollIntoView({behavior:'smooth'});}));
+    document.getElementById('quickBook').addEventListener('click',()=>{appointmentType.value=document.getElementById('quickType').value});
+    document.getElementById('bookingForm').addEventListener('submit',e=>{e.preventDefault();document.getElementById('confirm').classList.add('show')});
+  </script>
+</body>
+</html>
