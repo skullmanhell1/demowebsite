@@ -50,6 +50,20 @@
     @media(max-width:960px){.topbar .container{display:block;text-align:center}.nav{top:58px}.nav-links{display:none}.hero-grid,.section-head,.image-grid,.journey-grid,.booking-grid,.philosophy-grid{grid-template-columns:1fr}.cards,.provider-grid,.review-grid,.luxe-row{grid-template-columns:1fr 1fr}.trust-row{grid-template-columns:1fr 1fr}.hero-card{max-width:520px}.sticky-mobile{display:grid}.insurance{grid-template-columns:1fr 1fr}.image-card{min-height:430px}}
     @media(max-width:640px){.container{width:min(100% - 28px,1180px)}h1{font-size:3.45rem}.hero{padding-top:135px}.cards,.provider-grid,.review-grid,form,.luxe-row,.concierge,.metric-grid{grid-template-columns:1fr}.field.full,.notice,.form-actions,.confirm{grid-column:auto}.hero-actions,.form-actions{display:grid}.btn{width:100%}.nav-actions .btn-outline{display:none}.trust-row,.insurance{grid-template-columns:1fr}.image-card,.journey-photo{min-height:360px}.topbar{font-size:.76rem}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+    /* ===== V2 upgrade: a11y, nav scroll-spy, forms, providers, FAQ, location, footer ===== */
+    .skip-link{position:fixed;top:-100px;left:16px;z-index:1001;background:var(--forest);color:var(--white);padding:12px 18px;border-radius:0 0 14px 14px;font-size:.74rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;transition:top .3s ease}
+    .skip-link:focus{top:0;outline:3px solid var(--gold);outline-offset:2px}
+    :focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+    .nav-links a{position:relative;transition:color .3s ease}.nav-links a:after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:2px;background:var(--gold);transition:right .35s cubic-bezier(.19,1,.22,1)}.nav-links a:hover:after,.nav-links a.active:after{right:0}.nav-links a.active{color:var(--forest)}
+    .err{display:block;min-height:1.05em;color:#b0433a;font-size:.72rem;font-weight:800;letter-spacing:.01em;margin-top:1px}
+    input.invalid,select.invalid,textarea.invalid{border-color:#c06a5f;box-shadow:0 0 0 4px rgba(192,106,95,.15)}
+    .provider{position:relative}.avatar{position:relative}.pv-badge{position:absolute;z-index:3;top:14px;left:14px;background:rgba(255,250,242,.92);color:var(--forest);font-size:.58rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;padding:6px 10px;border-radius:999px;box-shadow:0 6px 18px rgba(20,32,31,.16)}.provider .tags{margin-top:16px}
+    .faq-section{background:linear-gradient(180deg,var(--cream),#fbf7ef)}.faq-list{display:grid;gap:12px;max-width:940px;margin:auto}.faq{border:1px solid var(--line);border-radius:22px;background:rgba(255,250,242,.72);overflow:hidden;transition:border-color .4s ease,box-shadow .4s ease}.faq[open]{border-color:rgba(194,164,107,.45);box-shadow:0 18px 50px rgba(20,32,31,.07)}.faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 24px;font-family:var(--serif);font-size:clamp(1.12rem,1.7vw,1.42rem);color:var(--ink);line-height:1.25}.faq summary::-webkit-details-marker{display:none}.faq summary:hover{color:var(--forest)}.faq-ico{position:relative;width:20px;height:20px;flex:0 0 20px}.faq-ico:before,.faq-ico:after{content:"";position:absolute;background:var(--forest);border-radius:2px;transition:transform .35s cubic-bezier(.19,1,.22,1),opacity .35s ease}.faq-ico:before{top:9px;left:0;width:20px;height:2px}.faq-ico:after{top:0;left:9px;width:2px;height:20px}.faq[open] .faq-ico:after{transform:rotate(90deg);opacity:0}.faq-a{padding:0 24px 24px}.faq-a p{color:rgba(20,32,31,.74)}
+    .locate{background:#fbf7ef}.locate-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:stretch}.hours{display:grid;gap:1px;margin:22px 0 4px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--line)}.hrow{display:flex;justify-content:space-between;gap:16px;padding:15px 18px;background:rgba(255,250,242,.86)}.hrow span{color:var(--muted);font-weight:700}.hrow b{color:var(--ink)}.hrow.closed b{color:var(--muted)}.locate-card{border:1px solid var(--line);border-radius:34px;overflow:hidden;box-shadow:var(--shadow);background:var(--deep);color:var(--white);display:flex;flex-direction:column}.locate-map{height:220px;position:relative;background:linear-gradient(135deg,#16302b,#0b1716);overflow:hidden}.locate-map:before{content:"";position:absolute;inset:-30%;background:linear-gradient(rgba(139,167,155,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(139,167,155,.16) 1px,transparent 1px);background-size:36px 36px;transform:rotate(-9deg)}.map-pin{position:absolute;left:50%;top:50%;width:22px;height:22px;transform:translate(-50%,-70%) rotate(-45deg);background:var(--gold);border-radius:50% 50% 50% 0;box-shadow:0 0 0 9px rgba(194,164,107,.22),0 14px 26px rgba(0,0,0,.45)}.map-pin:after{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;background:var(--deep);border-radius:50%;transform:translate(-50%,-50%)}.locate-info{padding:26px;display:grid;gap:18px}.locate-info .li{display:flex;gap:14px;align-items:flex-start}.locate-info .li svg{width:24px;height:24px;flex:0 0 24px;color:var(--mint);margin-top:2px}.locate-info .li b{display:block;color:var(--white);font-weight:800;letter-spacing:.01em}.locate-info .li span{color:rgba(246,241,232,.66);font-size:.9rem}
+    footer{padding:58px 0 28px}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px}.foot-brand .brand{color:var(--white);margin-bottom:16px}.foot-brand .brand small{color:rgba(246,241,232,.6)}.foot-brand p{color:rgba(246,241,232,.6);max-width:300px;font-size:.92rem}.foot-col h4{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mint);margin:0 0 14px;font-weight:900}.foot-col a,.foot-col span{display:block;color:rgba(246,241,232,.66);padding:5px 0;font-size:.92rem}.foot-col a{transition:color .3s ease}.foot-col a:hover{color:var(--white)}.foot-col .btn{color:var(--white);width:auto}.foot-bottom{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:.82rem;margin-top:36px;padding-top:22px;border-top:1px solid var(--line-light)}
+    @media(max-width:960px){.locate-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){.footer-grid{grid-template-columns:1fr}.faq summary{padding:18px}.faq-a{padding:0 18px 20px}}
   </style>
   <!-- SEO-PRO:START -->
   <link rel="canonical" href="https://skullmanhell1.github.io/demowebsite/health/" />
@@ -72,6 +86,9 @@
   "url": "https://skullmanhell1.github.io/demowebsite/health/",
   "image": "https://skullmanhell1.github.io/demowebsite/health/og-image.jpg",
   "telephone": "+61862404440",
+  "email": "care@solacehealth.example",
+  "priceRange": "$$",
+  "currenciesAccepted": "AUD",
   "medicalSpecialty": ["Dentistry", "Chiropractic", "Dermatology", "Optometry", "Physiotherapy"],
   "address": {
     "@type": "PostalAddress",
@@ -81,6 +98,12 @@
     "streetAddress": "24 Wellness Parade",
     "postalCode": "6000"
   },
+  "geo": { "@type": "GeoCoordinates", "latitude": -31.9523, "longitude": 115.8613 },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "08:00", "closes": "18:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "08:00", "closes": "17:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00" }
+  ],
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.9",
@@ -89,21 +112,36 @@
   }
 }
   </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Do I need a referral to book an appointment?", "acceptedAnswer": { "@type": "Answer", "text": "No referral is needed for most services. You can book dentistry, chiropractic, med spa, optometry or physiotherapy directly. For certain rebates or specialist care a referral may help, and our reception team will let you know when it applies." } },
+    { "@type": "Question", "name": "Which health funds and payment options do you accept?", "acceptedAnswer": { "@type": "Answer", "text": "We support HICAPS on-the-spot private health claiming, Medicare-eligible items, major cards and interest-free payment plans for larger treatment, with a clear estimate before treatment begins." } },
+    { "@type": "Question", "name": "What happens at a first appointment?", "acceptedAnswer": { "@type": "Answer", "text": "Your first visit is consultation-led: we review your history and goals, complete any needed assessment, and explain findings and options in plain language. Nothing is booked or charged without your agreement." } },
+    { "@type": "Question", "name": "How do I reschedule or cancel a booking?", "acceptedAnswer": { "@type": "Answer", "text": "You can reschedule or cancel up to 24 hours before your appointment at no cost, using the link in your confirmation message or by calling reception on 08 6240 4440." } },
+    { "@type": "Question", "name": "Do you offer same-week or urgent appointments?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we hold same-week slots across most disciplines and aim to respond to every request within 24 hours. For genuine emergencies please call 000 or attend your nearest emergency department." } },
+    { "@type": "Question", "name": "Is my personal and health information kept private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Records are stored securely and handled in line with Australian privacy and health-records requirements, and are only shared with your care team or as you direct." } }
+  ]
+}
+  </script>
 <!-- SEO-PRO:END -->
   <!-- PRELOAD:START -->
   <link rel="preload" as="image" href="assets/58110ad0ff1a.jpg" fetchpriority="high" />
 <!-- PRELOAD:END -->
 </head>
 <body>
+  <a class="skip-link" href="#specialties">Skip to content</a>
   <div class="preloader" id="preloader" aria-hidden="true"><div class="preloader-inner"><div class="preloader-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4v16M4 12h16" stroke="white" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="8" stroke="white" opacity=".55" stroke-width="1.5"/></svg></div><div class="preloader-text">Solace Health Collective</div><div class="preloader-line"></div></div></div>
   <div class="nav-progress" id="navProgress" aria-hidden="true"></div>
   <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
-  <div class="topbar"><div class="container"><span><b>Now accepting new patients:</b> dental, chiropractic, med spa, optometry and physiotherapy appointments</span><a href="tel:+6186240444">Call 08 6240 4440</a></div></div>
+  <div class="topbar"><div class="container"><span><b>Now accepting new patients:</b> dental, chiropractic, med spa, optometry and physiotherapy appointments</span><a href="tel:+61862404440">Call 08 6240 4440</a></div></div>
   <nav class="nav" id="nav">
     <div class="container nav-inner">
       <a class="brand" href="#top" aria-label="Solace Health Collective home"><span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4v16M4 12h16" stroke="white" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="8" stroke="white" opacity=".55" stroke-width="1.5"/></svg></span><span>Solace Health Collective<small>Integrated health & aesthetics</small></span></a>
-      <div class="nav-links"><a href="#specialties">Specialties</a><a href="#experience">Experience</a><a href="#providers">Providers</a><a href="#booking">Book</a><a href="#reviews">Reviews</a></div>
-      <div class="nav-actions"><a class="btn btn-outline" href="tel:+6186240444">Call</a><a class="btn btn-primary" href="#booking">Book Visit</a></div>
+      <div class="nav-links"><a href="#specialties">Specialties</a><a href="#experience">Experience</a><a href="#providers">Providers</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a><a href="#booking">Book</a></div>
+      <div class="nav-actions"><a class="btn btn-outline" href="tel:+61862404440">Call</a><a class="btn btn-primary" href="#booking">Book Visit</a></div>
     </div>
   </nav>
 
@@ -115,7 +153,7 @@
           <div class="eyebrow">Dentistry · Chiropractic · Med spa · Optometry · Physio</div>
           <h1 class="split"><span>A calmer standard</span><span>for modern</span><span>private care.</span></h1>
           <p class="lead reveal">A sophisticated digital front door for modern health and wellness practices — balancing clinical trust, quiet luxury, clear pathways and appointment conversion.</p>
-          <div class="hero-actions reveal"><a class="btn btn-light" href="#booking">Book a Consultation</a><a class="btn btn-ghost" href="#specialties">Explore Services</a><a class="btn btn-ghost" href="tel:+6186240444">Click to Call</a></div>
+          <div class="hero-actions reveal"><a class="btn btn-light" href="#booking">Book a Consultation</a><a class="btn btn-ghost" href="#specialties">Explore Services</a><a class="btn btn-ghost" href="tel:+61862404440">Click to Call</a></div>
           <div class="trust-row reveal"><div class="trust"><b>4.9★</b><span>Patient rating</span></div><div class="trust"><b>5</b><span>Care disciplines</span></div><div class="trust"><b>24 hr</b><span>Response goal</span></div><div class="trust"><b>1:1</b><span>Care plans</span></div></div>
         </div>
         <aside class="hero-card reveal">
@@ -198,14 +236,26 @@
     <section class="providers" id="providers">
       <div class="container">
         <div class="section-head reveal"><div><div class="eyebrow">Clinical team</div><h2>Credentials presented with warmth.</h2></div><p>Provider cards make the practice feel human while still emphasizing expertise, specialties and patient-centred care.</p></div>
-        <div class="provider-grid"><article class="provider reveal"><div class="avatar"></div><h3>Dr. Amara Lee</h3><small>Clinical Director</small><p>Preventive and cosmetic care with a calm, education-first consultation style.</p></article><article class="provider reveal"><div class="avatar"></div><h3>Marcus Chen</h3><small>Movement & Rehab Lead</small><p>Chiropractic and physiotherapy planning for mobility, strength and recovery.</p></article><article class="provider reveal"><div class="avatar"></div><h3>Sofia Hart</h3><small>Aesthetics & Skin</small><p>Consult-led skin health and med spa treatment planning with a natural-looking philosophy.</p></article></div>
+        <div class="provider-grid"><article class="provider reveal"><div class="avatar"><span class="pv-badge">✚ Verified</span></div><h3>Dr. Amara Lee</h3><small>Clinical Director · BDS, MHlth</small><p>Preventive and cosmetic care with a calm, education-first consultation style.</p><div class="tags"><span class="tag">Dentistry</span><span class="tag">Cosmetic</span></div></article><article class="provider reveal"><div class="avatar"><span class="pv-badge">✚ Verified</span></div><h3>Marcus Chen</h3><small>Movement & Rehab Lead · BPhysio, DC</small><p>Chiropractic and physiotherapy planning for mobility, strength and recovery.</p><div class="tags"><span class="tag">Chiropractic</span><span class="tag">Physio</span></div></article><article class="provider reveal"><div class="avatar"><span class="pv-badge">✚ Verified</span></div><h3>Sofia Hart</h3><small>Aesthetics & Skin · RN, Cosmetic</small><p>Consult-led skin health and med spa treatment planning with a natural-looking philosophy.</p><div class="tags"><span class="tag">Med spa</span><span class="tag">Skin health</span></div></article></div>
       </div>
     </section>
 
     <section class="booking-section" id="booking">
       <div class="container booking-grid">
         <div class="reveal"><div class="eyebrow">Appointments</div><h2 style="margin:16px 0 22px">Make booking feel simple, private and premium.</h2><p>The appointment block is designed for integration with practice management systems, online forms, Jane App, HotDoc, Zocdoc, Fresha or a custom booking workflow.</p><div class="insurance"><span>HICAPS</span><span>Private health</span><span>Medicare-ready</span><span>Payment plans</span></div></div>
-        <div class="booking-card reveal"><form id="bookingForm"><div class="field full"><label>Appointment type</label><select id="appointmentType"><option>New patient consultation</option><option>Dental appointment</option><option>Chiropractic assessment</option><option>Med spa consultation</option><option>Optometry exam</option><option>Physiotherapy assessment</option></select></div><div class="field"><label>Preferred date</label><input type="date"></div><div class="field"><label>Preferred time</label><select><option>Morning</option><option>Midday</option><option>Afternoon</option><option>Evening</option><option>First available</option></select></div><div class="field"><label>Name</label><input placeholder="Your name"></div><div class="field"><label>Phone</label><input placeholder="Your phone"></div><div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div><div class="field"><label>Patient status</label><select><option>New patient</option><option>Returning patient</option><option>Family booking</option><option>Not sure</option></select></div><div class="field full"><label>Goals, symptoms or notes</label><textarea placeholder="Tell us what you would like help with, any concerns, or preferred practitioner."></textarea></div><div class="notice" id="notice">For urgent symptoms or medical emergencies, call emergency services or seek immediate medical care. This form is for appointment requests only.</div><div class="form-actions"><button class="btn btn-primary" type="submit">Request Appointment</button><a class="btn btn-outline" href="tel:+6186240444">Call Reception</a></div><div class="confirm" id="confirm">Your appointment request has been received. The clinic team will contact you to confirm availability and next steps.</div></form></div>
+        <div class="booking-card reveal"><form id="bookingForm" novalidate>
+          <div class="field full"><label for="appointmentType">Appointment type</label><select id="appointmentType" name="appointmentType"><option>New patient consultation</option><option>Dental appointment</option><option>Chiropractic assessment</option><option>Med spa consultation</option><option>Optometry exam</option><option>Physiotherapy assessment</option></select></div>
+          <div class="field"><label for="prefDate">Preferred date</label><input id="prefDate" name="prefDate" type="date"></div>
+          <div class="field"><label for="prefTime">Preferred time</label><select id="prefTime" name="prefTime"><option>Morning</option><option>Midday</option><option>Afternoon</option><option>Evening</option><option>First available</option></select></div>
+          <div class="field"><label for="fullName">Name</label><input id="fullName" name="fullName" placeholder="Your name" autocomplete="name" required aria-describedby="err-fullName"><span class="err" id="err-fullName" role="alert"></span></div>
+          <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" placeholder="Your phone" autocomplete="tel" required aria-describedby="err-phone"><span class="err" id="err-phone" role="alert"></span></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required aria-describedby="err-email"><span class="err" id="err-email" role="alert"></span></div>
+          <div class="field"><label for="patientStatus">Patient status</label><select id="patientStatus" name="patientStatus"><option>New patient</option><option>Returning patient</option><option>Family booking</option><option>Not sure</option></select></div>
+          <div class="field full"><label for="notes">Goals, symptoms or notes</label><textarea id="notes" name="notes" placeholder="Tell us what you would like help with, any concerns, or preferred practitioner."></textarea></div>
+          <div class="notice" id="notice">For urgent symptoms or medical emergencies, call emergency services or seek immediate medical care. This form is for appointment requests only.</div>
+          <div class="form-actions"><button class="btn btn-primary" type="submit">Request Appointment</button><a class="btn btn-outline" href="tel:+61862404440">Call Reception</a></div>
+          <div class="confirm" id="confirm" role="status" aria-live="polite">Your appointment request has been received. The clinic team will contact you to confirm availability and next steps.</div>
+        </form></div>
       </div>
     </section>
 
@@ -213,11 +263,83 @@
       <div class="container"><div class="section-head reveal"><div><div class="eyebrow">Patient confidence</div><h2>Reviews that reduce hesitation.</h2></div><p>Trust signals should speak to clarity, comfort, communication and professionalism — not exaggerated medical promises.</p></div><div class="review-grid"><article class="review reveal"><div class="stars">★★★★★</div><p>“The whole visit felt calm and organised. I understood my options before deciding on treatment.”</p><b>Naomi R. · Patient review</b></article><article class="review reveal"><div class="stars">★★★★★</div><p>“Beautiful clinic, clear explanations and easy booking. The follow-up instructions were excellent.”</p><b>Daniel M. · Google</b></article><article class="review reveal"><div class="stars">★★★★★</div><p>“Professional without feeling cold. The intake form saved time and the appointment started on schedule.”</p><b>Priya S. · Patient review</b></article></div></div>
     </section>
 
-    <section class="final"><div class="container reveal"><div class="eyebrow">Premium health website demo</div><h2>Designed to turn clinical trust into booked appointments.</h2><p>Solace Health Collective now combines cinematic healthcare imagery, editorial layouts, concierge-style booking, advanced motion, provider credibility, patient reassurance and premium conversion architecture.</p><div class="hero-actions" style="justify-content:center"><a class="btn btn-light" href="#booking">Book a Consultation</a><a class="btn btn-ghost" href="tel:+6186240444">Call the Clinic</a></div></div></section>
+    <section class="faq-section" id="faq" aria-labelledby="faq-h">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="eyebrow">Questions &amp; answers</div><h2 id="faq-h">Everything you need before booking.</h2></div><p>Clear answers reduce phone calls, cancellations and hesitation — and reassure new patients before their first visit.</p></div>
+        <div class="faq-list">
+          <details class="faq reveal"><summary>Do I need a referral to book an appointment?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>No referral is needed for most services. You can book dentistry, chiropractic, med spa, optometry or physiotherapy directly. For certain rebates or specialist care, a referral may help — our reception team will let you know when it applies.</p></div></details>
+          <details class="faq reveal"><summary>Which health funds and payment options do you accept?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>We support HICAPS on-the-spot private health claiming, Medicare-eligible items, major cards and interest-free payment plans for larger treatment. You will always receive a clear estimate before treatment begins.</p></div></details>
+          <details class="faq reveal"><summary>What happens at a first appointment?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Your first visit is consultation-led: we review your history and goals, complete any needed assessment, and explain findings and options in plain language. You decide on next steps with no pressure — nothing is booked or charged without your agreement.</p></div></details>
+          <details class="faq reveal"><summary>How do I reschedule or cancel a booking?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>You can reschedule or cancel up to 24 hours before your appointment at no cost, using the link in your confirmation message or by calling reception on 08 6240 4440. We send reminders by SMS and email so appointments are easy to keep.</p></div></details>
+          <details class="faq reveal"><summary>Do you offer same-week or urgent appointments?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Yes — we hold same-week slots across most disciplines and aim to respond to every request within 24 hours. For genuine medical emergencies, please call 000 or attend your nearest emergency department.</p></div></details>
+          <details class="faq reveal"><summary>Is my personal and health information kept private?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Absolutely. Records are stored securely and handled in line with Australian privacy and health-records requirements. Your information is only shared with your care team or as you direct.</p></div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="locate" id="visit" aria-labelledby="visit-h">
+      <div class="container locate-grid">
+        <div class="reveal">
+          <div class="eyebrow">Hours &amp; location</div>
+          <h2 id="visit-h" style="margin:16px 0 20px">Visit the clinic.</h2>
+          <p>Centrally located with easy parking and transit access. Reception is open six days a week for appointments, enquiries and new-patient intake.</p>
+          <div class="hours" role="table" aria-label="Opening hours">
+            <div class="hrow"><span>Monday – Thursday</span><b>8:00am – 6:00pm</b></div>
+            <div class="hrow"><span>Friday</span><b>8:00am – 5:00pm</b></div>
+            <div class="hrow"><span>Saturday</span><b>9:00am – 1:00pm</b></div>
+            <div class="hrow closed"><span>Sunday &amp; public holidays</span><b>Closed</b></div>
+          </div>
+          <div class="hero-actions" style="margin-top:26px"><a class="btn btn-primary" href="#booking">Book a Visit</a><a class="btn btn-outline" href="tel:+61862404440">Call Reception</a></div>
+        </div>
+        <div class="locate-card reveal">
+          <div class="locate-map" aria-hidden="true"><span class="map-pin"></span></div>
+          <div class="locate-info">
+            <div class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>24 Wellness Parade</b><span>Perth WA 6000, Australia</span></div></div>
+            <div class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5c0 8.3 6.7 15 15 15v-3.5l-4-1.5-2 2a12 12 0 0 1-6-6l2-2L7.5 4H4Z"/></svg><div><b>08 6240 4440</b><span>Reception · Mon–Sat</span></div></div>
+            <div class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><div><b>care@solacehealth.example</b><span>Enquiries &amp; new patients</span></div></div>
+            <div class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 11 12 4l7 7"/><path d="M6 10v9h12v-9"/></svg><div><b>On-site &amp; street parking</b><span>Wheelchair accessible entry</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final"><div class="container reveal"><div class="eyebrow">Premium health website demo</div><h2>Designed to turn clinical trust into booked appointments.</h2><p>Solace Health Collective now combines cinematic healthcare imagery, editorial layouts, concierge-style booking, advanced motion, provider credibility, patient reassurance and premium conversion architecture.</p><div class="hero-actions" style="justify-content:center"><a class="btn btn-light" href="#booking">Book a Consultation</a><a class="btn btn-ghost" href="tel:+61862404440">Call the Clinic</a></div></div></section>
   </main>
 
-  <div class="sticky-mobile"><a class="btn btn-light" href="tel:+6186240444">Call</a><a class="btn btn-primary" href="#booking">Book</a></div>
-  <footer><div class="container footer-inner"><span>© 2026 Solace Health Collective. Integrated health, wellness and aesthetics.</span><span>Perth WA · New patient appointments · Reception 08 6240 4440</span></div></footer>
+  <div class="sticky-mobile"><a class="btn btn-light" href="tel:+61862404440">Call</a><a class="btn btn-primary" href="#booking">Book</a></div>
+  <footer>
+    <div class="container footer-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top" aria-label="Solace Health Collective home"><span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4v16M4 12h16" stroke="white" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="8" stroke="white" opacity=".55" stroke-width="1.5"/></svg></span><span>Solace Health Collective<small>Integrated health &amp; aesthetics</small></span></a>
+        <p>A calmer standard for modern private care — dentistry, chiropractic, med spa, optometry and physiotherapy under one roof in Perth.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Practice</h4>
+        <a href="#specialties">Specialties</a>
+        <a href="#experience">Patient experience</a>
+        <a href="#providers">Our team</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="foot-col">
+        <h4>Visit</h4>
+        <a href="#visit">Hours &amp; location</a>
+        <span>24 Wellness Parade</span>
+        <span>Perth WA 6000</span>
+        <span>Mon–Sat by appointment</span>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href="tel:+61862404440">08 6240 4440</a>
+        <a href="mailto:care@solacehealth.example">care@solacehealth.example</a>
+        <a class="btn btn-primary" href="#booking" style="margin-top:8px">Book a Visit</a>
+      </div>
+    </div>
+    <div class="container foot-bottom">
+      <span>© 2026 Solace Health Collective. Integrated health, wellness and aesthetics.</span>
+      <span>Demo website · not a real medical practice · imagery is AI-generated</span>
+    </div>
+  </footer>
 
   <script>
     const nav=document.getElementById('nav'); const progress=document.getElementById('navProgress');
@@ -230,7 +352,34 @@
     const appointmentType=document.getElementById('appointmentType');
     document.querySelectorAll('.card').forEach(card=>card.addEventListener('click',()=>{const title=card.querySelector('h3').textContent; const map={Dentistry:'Dental appointment',Chiropractic:'Chiropractic assessment','Med Spa':'Med spa consultation',Optometry:'Optometry exam',Physiotherapy:'Physiotherapy assessment','Integrated Care':'New patient consultation'}; appointmentType.value=map[title]||'New patient consultation'; document.getElementById('booking').scrollIntoView({behavior:'smooth'});}));
     document.getElementById('quickBook').addEventListener('click',()=>{appointmentType.value=document.getElementById('quickType').value});
-    document.getElementById('bookingForm').addEventListener('submit',e=>{e.preventDefault();document.getElementById('confirm').classList.add('show')});
+    // Booking form: inline validation + personalised confirmation
+    const bookingForm=document.getElementById('bookingForm');
+    function setErr(id,msg){const inp=document.getElementById(id);const el=document.getElementById('err-'+id);if(el)el.textContent=msg||'';if(inp){inp.classList.toggle('invalid',!!msg);if(msg)inp.setAttribute('aria-invalid','true');else inp.removeAttribute('aria-invalid');}}
+    ['fullName','phone','email'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('input',()=>setErr(id,''));});
+    bookingForm.addEventListener('submit',e=>{
+      e.preventDefault();
+      const name=document.getElementById('fullName'),phone=document.getElementById('phone'),email=document.getElementById('email');
+      let ok=true,firstBad=null;
+      if(!name.value.trim()){setErr('fullName','Please enter your name.');ok=false;firstBad=firstBad||name;}else setErr('fullName','');
+      if(phone.value.replace(/\D/g,'').length<8){setErr('phone','Enter a valid contact number.');ok=false;firstBad=firstBad||phone;}else setErr('phone','');
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())){setErr('email','Enter a valid email address.');ok=false;firstBad=firstBad||email;}else setErr('email','');
+      if(!ok){if(firstBad)firstBad.focus();return;}
+      const confirm=document.getElementById('confirm');
+      const first=name.value.trim().split(/\s+/)[0];
+      confirm.textContent='Thank you, '+first+'. Your '+document.getElementById('appointmentType').value.toLowerCase()+' request has been received — our team will contact you within 24 hours to confirm availability and next steps.';
+      confirm.classList.add('show');
+      confirm.scrollIntoView({behavior:'smooth',block:'center'});
+    });
+
+    // Scroll-spy: highlight the nav link for the section in view
+    const spyLinks=[...document.querySelectorAll('.nav-links a[href^="#"]')];
+    const spyMap=spyLinks.map(a=>({a,sec:document.getElementById(a.getAttribute('href').slice(1))})).filter(x=>x.sec);
+    const spy=new IntersectionObserver(entries=>{entries.forEach(en=>{if(en.isIntersecting){spyMap.forEach(x=>x.a.classList.toggle('active',x.sec===en.target));}});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
+    spyMap.forEach(x=>spy.observe(x.sec));
+
+    // FAQ: accordion behaves as single-open
+    const faqs=[...document.querySelectorAll('.faq')];
+    faqs.forEach(d=>d.addEventListener('toggle',()=>{if(d.open)faqs.forEach(o=>{if(o!==d)o.open=false;});}));
   </script>
 <!-- DEMO-GUIDE:START -->
 <style>
