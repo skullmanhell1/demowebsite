@@ -429,9 +429,10 @@
               </div>
               <div class="field full"><label for="c-message">What do you need?</label><textarea id="c-message" placeholder="Tell us about your business and which demo caught your eye."></textarea></div>
             </div>
+            <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="form-foot">
-              <span class="form-hint">Opens in your email app, ready to send.</span>
-              <button class="btn btn-primary" type="submit">Send enquiry</button>
+              <span class="form-hint">We'll reply within one business day.</span>
+              <button class="btn btn-primary" id="enquirySubmit" type="submit">Send enquiry</button>
             </div>
             <div class="form-status" role="status" aria-live="polite"></div>
           </form>
@@ -735,7 +736,12 @@
 </style>
 <script>
 (function(){
-  var CONTACT_EMAIL = "hello@widewebsolutions.com.au"; /* <-- replace with your real inbox */
+  /* ---- Contact settings ---------------------------------------------------
+     To receive enquiries by email, paste a free Web3Forms access key below.
+     Get one in ~30s at https://web3forms.com (enter your email, key is emailed).
+     Until a key is set, the form falls back to opening the visitor's email app. */
+  var WEB3FORMS_ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+  var CONTACT_EMAIL = "hello@widewebsolutions.com.au"; /* fallback + "Email us" link — set your real inbox */
 
   /* mobile nav toggle */
   var t = document.querySelector(".nav-toggle"), m = document.getElementById("site-menu");
@@ -753,29 +759,75 @@
   var chip = document.getElementById("emailChip");
   if (chip) chip.setAttribute("href", "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Website enquiry"));
 
-  /* enquiry form -> compose email */
+  /* enquiry form -> real submission via Web3Forms (with mailto fallback) */
   var form = document.getElementById("enquiryForm");
   if (!form) return;
   var status = form.querySelector(".form-status");
+  var submitBtn = document.getElementById("enquirySubmit");
   function val(id){ var el = document.getElementById(id); return el ? el.value.trim() : ""; }
+  function keyReady(){ return WEB3FORMS_ACCESS_KEY && WEB3FORMS_ACCESS_KEY.indexOf("YOUR_") !== 0; }
+
   form.addEventListener("submit", function(e){
     e.preventDefault();
+    var hp = form.querySelector('[name="botcheck"]');
+    if (hp && hp.checked) { return; } /* spam trap */
+
     var name = val("c-name"), email = val("c-email");
     if (!name || !email) { status.textContent = "Please add your name and email."; status.className = "form-status err"; return; }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { status.textContent = "That email doesn't look right — mind checking it?"; status.className = "form-status err"; return; }
+
     var business = val("c-business"), industry = val("c-industry"), message = val("c-message");
     var subject = "Website enquiry" + (business ? " \u2014 " + business : "");
-    var body = [
-      "Name: " + name,
-      "Email: " + email,
-      "Business: " + (business || "\u2014"),
-      "Industry: " + (industry || "\u2014"),
-      "",
-      (message || "(no message)")
-    ].join("\n");
-    status.textContent = "Opening your email app\u2026";
-    status.className = "form-status ok";
-    window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+
+    /* No key configured yet: open the email app so the enquiry isn't lost. */
+    if (!keyReady()) {
+      var body = [
+        "Name: " + name, "Email: " + email,
+        "Business: " + (business || "\u2014"), "Industry: " + (industry || "\u2014"),
+        "", (message || "(no message)")
+      ].join("\n");
+      status.textContent = "Opening your email app\u2026";
+      status.className = "form-status ok";
+      window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      return;
+    }
+
+    var payload = {
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: subject,
+      from_name: "Wide Web Solutions website",
+      name: name, email: email,
+      business: business || "(not given)",
+      industry: industry || "(not given)",
+      message: message || "(no message)"
+    };
+
+    status.textContent = "Sending\u2026"; status.className = "form-status";
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.dataset.label = submitBtn.textContent; submitBtn.textContent = "Sending\u2026"; }
+
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(payload)
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if (data && data.success) {
+        status.textContent = "Thanks, " + name.split(" ")[0] + " — your enquiry has been sent. We'll reply within one business day.";
+        status.className = "form-status ok";
+        form.reset();
+      } else {
+        status.innerHTML = "Sorry, that didn't send. Please <a href=\"mailto:" + CONTACT_EMAIL + "\">email us directly</a>.";
+        status.className = "form-status err";
+      }
+    })
+    .catch(function(){
+      status.innerHTML = "Network error — please <a href=\"mailto:" + CONTACT_EMAIL + "\">email us directly</a>.";
+      status.className = "form-status err";
+    })
+    .then(function(){
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = submitBtn.dataset.label || "Send enquiry"; }
+    });
   });
 })();
 </script>
