@@ -388,5 +388,159 @@
     const dateInput = document.getElementById('dateInput');
     if (dateInput) { const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate()+1); dateInput.min = tomorrow.toISOString().split('T')[0]; }
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a197834d1afb4e37',t:'MTc4Mzc2OTgxMg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a197834d1afb4e37',t:'MTc4Mzc2OTgxMg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><!-- DEMO-GUIDE:START -->
+<style>
+  #dg-root, #dg-root * { box-sizing: border-box; }
+  #dg-root { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  :root { --dg-accent: #a94f7a; }
+  body { padding-bottom: 64px; }
+
+  body.dg-on .dg-active {
+    outline: 3px solid var(--dg-accent); outline-offset: 7px; border-radius: 16px;
+    transition: outline-color .35s ease;
+    box-shadow: 0 0 0 9999px rgba(10,13,20,0.015);
+  }
+
+  #dg-callout {
+    position: fixed; right: 20px; bottom: 70px; z-index: 2147483000;
+    width: min(370px, calc(100vw - 32px));
+    background: #12151c; color: #fff; border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 26px 74px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.03) inset;
+    overflow: hidden; opacity: 0; transform: translateY(26px) scale(.97); pointer-events: none;
+    transition: opacity .5s cubic-bezier(.16,.84,.44,1), transform .5s cubic-bezier(.16,.84,.44,1);
+  }
+  #dg-callout.dg-show { opacity: 1; transform: none; pointer-events: auto; }
+  #dg-callout::before { content:""; position:absolute; left:0; top:0; bottom:0; width:5px;
+    background: linear-gradient(180deg, var(--dg-accent), transparent); }
+  .dg-c-top { display:flex; align-items:center; gap:10px; padding: 15px 16px 0; }
+  .dg-c-badge { width:36px; height:36px; border-radius:50%; flex:0 0 36px; display:grid; place-items:center;
+    font-weight:900; font-size:1rem; color:#10141b; background:var(--dg-accent);
+    animation: dgRing 2.1s ease-out infinite; }
+  @keyframes dgRing {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--dg-accent) 70%, transparent); }
+    70% { box-shadow: 0 0 0 13px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+  }
+  .dg-c-label { font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dg-accent); font-weight:800; }
+  .dg-c-count { margin-left:auto; font-size:.75rem; color:rgba(255,255,255,.5); font-weight:700; }
+  .dg-c-body { padding: 9px 16px 16px; }
+  .dg-c-title { font-size:1.08rem; font-weight:800; margin:0 0 5px; letter-spacing:-.01em; }
+  .dg-c-text { margin:0; font-size:.92rem; line-height:1.5; color:rgba(255,255,255,.82); }
+  #dg-callout.dg-pop .dg-c-body { animation: dgPop .42s ease; }
+  @keyframes dgPop { from{opacity:0; transform:translateY(9px);} to{opacity:1; transform:none;} }
+
+  #dg-bar { position: fixed; left:0; right:0; bottom:0; z-index:2147483001;
+    background: rgba(12,15,22,.96); color:#fff; backdrop-filter: blur(10px);
+    border-top:1px solid rgba(255,255,255,.12); padding: 10px 16px;
+    display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap; font-size:.9rem; }
+  #dg-bar strong { color: var(--dg-accent); }
+  #dg-bar .dg-ai { color: rgba(255,255,255,.66); }
+  #dg-bar button { padding:8px 13px; border-radius:999px; border:1px solid rgba(255,255,255,.28);
+    background:none; color:#fff; font-weight:800; cursor:pointer; font-size:.82rem; white-space:nowrap; }
+  #dg-bar button:hover { background: rgba(255,255,255,.1); }
+  #dg-pill { position: fixed; left:16px; bottom:16px; z-index:2147483001; display:none;
+    padding:11px 15px; border-radius:999px; background: var(--dg-accent); color:#fff;
+    font-weight:800; font-size:.85rem; cursor:pointer; box-shadow:0 12px 30px rgba(0,0,0,.3); }
+  body:not(.dg-on) #dg-callout { display:none; }
+
+  @media (max-width:640px){
+    #dg-callout { right:12px; left:12px; width:auto; bottom:96px; }
+    #dg-bar { font-size:.82rem; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    #dg-callout { transition: opacity .25s linear; transform:none !important; }
+    .dg-c-badge { animation:none; }
+    #dg-callout.dg-pop .dg-c-body { animation:none; }
+    body.dg-on .dg-active { transition:none; }
+  }
+  @media print { #dg-root, #dg-bar, #dg-pill { display:none !important; } body { padding-bottom:0 !important; } }
+</style>
+
+<div id="dg-root">
+  <div id="dg-callout" role="status" aria-live="polite">
+    <div class="dg-c-top">
+      <span class="dg-c-badge" id="dg-badge">1</span>
+      <span class="dg-c-label">Feature spotlight</span>
+      <span class="dg-c-count" id="dg-count"></span>
+    </div>
+    <div class="dg-c-body">
+      <p class="dg-c-title" id="dg-title"></p>
+      <p class="dg-c-text" id="dg-text"></p>
+    </div>
+  </div>
+
+  <div id="dg-bar">
+    <span><strong>&#9733; Interactive demo</strong> &mdash; scroll down and we'll explain each feature for your nail salon.</span>
+    <span class="dg-ai">Photos are <b>AI-generated for demonstration only</b>.</span>
+    <button id="dg-hide" type="button">Hide guide</button>
+  </div>
+
+  <button id="dg-pill" type="button">&#9733; Show feature guide</button>
+</div>
+
+<script>
+(function(){
+  var A = [{"id": "services", "title": "Services & packages", "text": "Every service laid out with pricing, and each option pre-fills the booking form so clients can act in one tap."}, {"id": "gallery", "title": "Photo gallery", "text": "Large, realistic photos and before/after proof \u2014 the visual credibility that turns a browser into a booking."}, {"id": "booking", "title": "Booking / enquiry form", "text": "The main conversion tool: clients request a booking or quote with their details and the lead lands straight with you."}, {"id": "why", "title": "Why choose us", "text": "Guarantees, credentials and trust signals placed to answer doubts before clients leave the page."}, {"id": "reviews", "title": "Reviews", "text": "Prominent 5-star reviews positioned right at the decision point, where they reduce hesitation most."}, {"id": "location", "title": "Hours & location", "text": "Address, opening hours and a map so clients can visit or plan a visit with zero friction."}];
+  var items = A.map(function(a){ return { a:a, el: document.getElementById(a.id) }; })
+               .filter(function(x){ return x.el; });
+  if(!items.length) return;
+
+  var callout = document.getElementById('dg-callout');
+  var badge = document.getElementById('dg-badge'),
+      title = document.getElementById('dg-title'),
+      text  = document.getElementById('dg-text'),
+      count = document.getElementById('dg-count');
+  var bar = document.getElementById('dg-bar'),
+      pill = document.getElementById('dg-pill');
+  var current = -1, ticking = false;
+
+  document.body.classList.add('dg-on');
+
+  function render(i){
+    if(i === current) return;
+    current = i;
+    var a = items[i].a;
+    badge.textContent = (i+1);
+    title.textContent = a.title;
+    text.textContent = a.text;
+    count.textContent = (i+1) + ' / ' + items.length;
+    callout.classList.remove('dg-pop'); void callout.offsetWidth; callout.classList.add('dg-pop');
+  }
+  function setActive(el){
+    items.forEach(function(x){ x.el.classList.toggle('dg-active', x.el === el); });
+  }
+  function update(){
+    ticking = false;
+    if(!document.body.classList.contains('dg-on')) return;
+    var vh = window.innerHeight, vpc = vh * 0.5, best = -1, bestDist = Infinity;
+    items.forEach(function(x, i){
+      var r = x.el.getBoundingClientRect();
+      if(r.bottom < vh*0.16 || r.top > vh*0.84) return;
+      var c = r.top + r.height/2, d = Math.abs(c - vpc);
+      if(d < bestDist){ bestDist = d; best = i; }
+    });
+    if(best >= 0){ render(best); setActive(items[best].el); callout.classList.add('dg-show'); }
+    else { callout.classList.remove('dg-show'); setActive(null); }
+  }
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
+
+  document.getElementById('dg-hide').addEventListener('click', function(){
+    document.body.classList.remove('dg-on');
+    callout.classList.remove('dg-show'); setActive(null);
+    bar.style.display = 'none'; pill.style.display = 'inline-block';
+  });
+  pill.addEventListener('click', function(){
+    document.body.classList.add('dg-on');
+    bar.style.display = 'flex'; pill.style.display = 'none';
+    current = -1; update();
+  });
+
+  update();
+})();
+</script>
+<!-- DEMO-GUIDE:END -->
+</body>
 </html>
