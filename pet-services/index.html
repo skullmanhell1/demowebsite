@@ -288,5 +288,24 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 })();
 </script>
 <!-- ANIM2:END -->
+<!-- IMGTREAT:START -->
+<style id="imgtreat">
+  /* Cohesive brand image treatment — CSS only, additive.
+     Warm, natural, editorial grade for the luxury pet-hospitality brand. Refines
+     the existing per-image grade into one consistent, premium set. Filters are on
+     the <img> only (captions/scrims untouched); the darker resting brightness on
+     the dark "experience" section is preserved for caption legibility, and the
+     existing hover choreography is kept. No image files, DOM, src/width/height changed. */
+  .detail-image img, .journey-photo img {
+    filter: saturate(1.05) contrast(1.05) brightness(1.0) sepia(0.03);
+  }
+  .image-card img {
+    filter: saturate(1.04) contrast(1.05) brightness(0.92) sepia(0.03);
+  }
+  .image-card:hover img {
+    filter: saturate(1.12) contrast(1.06) brightness(1.0) sepia(0.03);
+  }
+</style>
+<!-- IMGTREAT:END -->
 </body>
 </html>

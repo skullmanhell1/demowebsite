@@ -895,5 +895,27 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 })();
 </script>
 <!-- ANIM2:END -->
+<!-- IMGTREAT:START -->
+<style id="imgtreat">
+  /* Cohesive brand image treatment — CSS only, additive.
+     Cool, clean, "comfort-engineering" grade for the HVAC brand. Unifies the
+     existing placeholder photos into one premium set with a subtle brand wash.
+     No image files, DOM, src/width/height changed. */
+  .hero-photo, .gallery-main, .gallery-side, .why-photo, .location-photo, .service-image {
+    filter: saturate(1.07) contrast(1.06) brightness(1.01);
+  }
+  .why-photo, .location-photo { position: relative; }
+  /* Brand duotone wash — background-image elements, so ::before sits above the
+     photo yet below existing scrims/captions, keeping text readable. */
+  .hero-photo::before, .gallery-main::before, .gallery-side::before,
+  .why-photo::before, .location-photo::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+    background: linear-gradient(150deg,
+      color-mix(in srgb, var(--primary) 60%, transparent),
+      color-mix(in srgb, var(--accent) 50%, transparent));
+    mix-blend-mode: soft-light; opacity: 0.10;
+  }
+</style>
+<!-- IMGTREAT:END -->
 </body>
 </html>

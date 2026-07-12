@@ -2194,5 +2194,28 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 })();
 </script>
 <!-- ANIM2:END -->
+<!-- IMGTREAT:START -->
+<style id="imgtreat">
+  /* Cohesive brand image treatment — CSS only, additive.
+     Cool, crisp, garage-clean grade for the auto-repair brand — extra contrast so
+     metal/paint reads sharp, unifying the placeholder photos into one premium set.
+     Filters target only the specific photo containers (hero, service, fleet,
+     location) — NOT a blanket img{}/[class*=card] rule — so nothing overrides the
+     reveal blur or any before/after-style filter layers. No image files, DOM,
+     src/width/height changed. */
+  .hero-photo, .service-photo, .fleet-photo, .location-photo {
+    filter: saturate(1.08) contrast(1.07) brightness(1.02);
+  }
+  /* Subtle cool brand wash on the hero (background-image element): ::before sits
+     above the photo, below the existing scrim/caption, so text stays readable. */
+  .hero-photo::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+    background: linear-gradient(150deg,
+      color-mix(in srgb, var(--navy) 62%, transparent),
+      color-mix(in srgb, var(--blue) 50%, transparent));
+    mix-blend-mode: soft-light; opacity: 0.12;
+  }
+</style>
+<!-- IMGTREAT:END -->
 </body>
 </html>
