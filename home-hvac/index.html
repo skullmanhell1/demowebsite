@@ -1289,5 +1289,25 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 </script>
 <!-- ENH:END -->
 
+<!-- LAYOUT:START — layout variety pass (additive, CSS-only, mobile-safe) -->
+<style id="layout-variety">
+  /* Gated at >=1121px so the existing mobile collapse (1120px/760px) is untouched. */
+  @media (min-width:1121px){
+    /* Bento feature grid: first service becomes a bold 2x2 anchor tile. */
+    #services .services-grid{grid-auto-flow:dense;}
+    #services .services-grid>.service-card:first-child{
+      grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column;
+    }
+    #services .services-grid>.service-card:first-child .service-image{flex:1 1 auto;min-height:320px;}
+    #services .services-grid>.service-card:first-child .service-top h3{font-size:1.55rem;}
+    #services .services-grid>.service-card:first-child .service-body{padding:40px 28px 28px;}
+    /* Section width rhythm: wide gallery band + tighter reviews & FAQ columns
+       so the page alternates between expansive and focused. */
+    #gallery .container{width:min(100% - 40px,1340px);}
+    #reviews .container{width:min(100% - 40px,1040px);}
+    .faq .container{width:min(100% - 40px,880px);}
+  }
+</style>
+<!-- LAYOUT:END -->
 </body>
 </html>

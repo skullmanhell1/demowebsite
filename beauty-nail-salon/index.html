@@ -1296,5 +1296,29 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 </script>
 <!-- ENH:END -->
 
+<!-- LAYOUT:START — layout variety pass (additive, CSS-only, mobile-safe) -->
+<style id="layout-variety">
+  /* Editorial "magazine" treatment for the story/why section — drop cap + generous
+     whitespace + accent rule. Safe at every width (drop cap reflows naturally). */
+  #why .why-card{padding:clamp(28px,5vw,52px);}
+  #why .why-card>p:first-of-type{
+    font-size:1.12rem;line-height:1.78;border-left:3px solid color-mix(in srgb, var(--accent, var(--primary,#c86b8f)) 70%, transparent);
+    padding-left:20px;margin-top:6px;
+  }
+  #why .why-card>p:first-of-type::first-letter{
+    font-family:Georgia,"Times New Roman",serif;font-weight:800;
+    font-size:3.5em;line-height:.72;float:left;padding:8px 14px 0 0;
+    color:var(--accent, var(--primary,#c86b8f));
+  }
+  /* Gated at >=1121px so the existing mobile collapse (1120px/760px) is untouched. */
+  @media (min-width:1121px){
+    /* Asymmetric story split: a tall salon image leads on the left, copy follows. */
+    #why .why-grid{grid-template-columns:minmax(340px,.82fr) minmax(0,1.18fr);}
+    #why .why-grid>.why-photo{order:-1;min-height:560px;}
+    /* Narrow, focused FAQ column for editorial pacing. */
+    .faq .container{width:min(100% - 40px,900px);}
+  }
+</style>
+<!-- LAYOUT:END -->
 </body>
 </html>

@@ -2846,5 +2846,26 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 </script>
 <!-- ENH:END -->
 
+<!-- LAYOUT:START — layout variety pass (additive, CSS-only, mobile-safe) -->
+<style id="layout-variety">
+  /* Editorial magazine treatment for the restaurant's story/sourcing section:
+     a serif drop cap and refined body measure give it the feel of a printed
+     feature. Safe at all widths (text reflows; drop cap floats). The filterable
+     gallery keeps its own wide/tall bento cells untouched. */
+  #story .story-card>p{line-height:1.85;}
+  #story .story-card>p:first-of-type{font-size:1.1rem;}
+  #story .story-card>p:first-of-type::first-letter{
+    font-family:var(--serif,Georgia,"Times New Roman",serif);font-weight:600;
+    font-size:3.8em;line-height:.68;float:left;padding:10px 16px 2px 0;color:var(--terracotta);
+  }
+  /* Gated at >=1121px so the mobile/tablet single-column collapse is untouched. */
+  @media (min-width:1121px){
+    /* Section width rhythm: expansive gallery band, then an intimate reviews column
+       — pacing that breaks the uniform full-width stack. */
+    #gallery .container{width:min(100% - 40px,1340px);}
+    #reviews .container{width:min(100% - 40px,1000px);}
+  }
+</style>
+<!-- LAYOUT:END -->
 </body>
 </html>

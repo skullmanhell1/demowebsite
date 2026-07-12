@@ -2590,5 +2590,30 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 </script>
 <!-- ENH:END -->
 
+<!-- LAYOUT:START — layout variety pass (additive, CSS-only, mobile-safe) -->
+<style id="layout-variety">
+  /* >=761px: the services grid is 2-up here (collapses to a single column at
+     760px, which we never touch). 7 cards => 1 full-width banner + 6 in a clean
+     3x2 grid = no gaps. Below 760px everything stacks in one column. */
+  @media (min-width:761px){
+    /* Featured service banner: the first service spans the full width as a
+       horizontal photo + copy split, breaking the uniform card rhythm. The
+       data-service button (which pre-fills the booking form) is preserved. */
+    #services .services-grid>.service-card:first-child{
+      grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
+      align-items:stretch;min-height:300px;
+    }
+    #services .services-grid>.service-card:first-child .service-photo{min-height:100%;}
+    #services .services-grid>.service-card:first-child .service-body{align-self:center;padding:30px 28px;}
+    #services .services-grid>.service-card:first-child h3{font-size:1.9rem;}
+  }
+  /* >=1121px: asymmetric ~60/40 "why choose us" split + tighter reviews column
+     for width rhythm. Both collapse cleanly below this width. */
+  @media (min-width:1121px){
+    #why .why-grid{grid-template-columns:minmax(0,1.4fr) minmax(300px,.6fr);}
+    #reviews .container{width:min(100% - 40px,1000px);}
+  }
+</style>
+<!-- LAYOUT:END -->
 </body>
 </html>

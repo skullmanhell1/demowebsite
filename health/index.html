@@ -1184,5 +1184,29 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 </script>
 <!-- ENH:END -->
 
+<!-- LAYOUT:START — layout variety pass (additive, CSS-only, mobile-safe) -->
+<style id="layout-variety">
+  /* Editorial magazine treatment for the clinical-hospitality story — drop cap on
+     the philosophy lead paragraph. Safe at all widths. Uses the brand gold. */
+  .philosophy .editorial-card>p:first-of-type::first-letter{
+    font-family:var(--serif,Georgia,serif);font-weight:400;
+    font-size:3.6em;line-height:.7;float:left;padding:10px 16px 0 0;color:var(--gold);
+  }
+  /* Gated at >=961px so the existing tablet (960px -> 2-up/1fr) and phone (640px)
+     collapse is untouched: clean stacking, no horizontal overflow. */
+  @media (min-width:961px){
+    /* Bento specialties grid: promote the first specialty into a large 2x2 tile.
+       6 cards in 3 cols => feature(2x2) + 5 cells, no gaps. */
+    .specialties .cards{grid-auto-flow:dense;}
+    .specialties .cards>.card:first-child{
+      grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column;justify-content:center;
+    }
+    .specialties .cards>.card:first-child h3{font-size:2.5rem;}
+    .specialties .cards>.card:first-child .icon{width:66px;height:66px;}
+    /* Width rhythm: pull the FAQ into a narrower, focused editorial column. */
+    .faq-section .container{width:min(920px,calc(100% - 38px));}
+  }
+</style>
+<!-- LAYOUT:END -->
 </body>
 </html>
