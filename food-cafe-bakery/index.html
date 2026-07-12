@@ -426,7 +426,7 @@
     <div class="container nav">
       <a class="brand" href="#top" aria-label="Morning Crust Café home"><div class="brand-mark">Mc</div><div><span class="brand-name">Morning Crust Café</span><span class="brand-subtitle">Cafe • bakery • brunch • coffee</span></div></a>
       <nav class="nav-links" id="site-menu" aria-label="Primary navigation"><a href="#services">Services</a><a href="#gallery">Gallery</a><a href="#booking">Book</a><a href="#why">Why us</a><a href="#reviews">Reviews</a><a href="#location">Location</a></nav>
-      <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="site-menu" aria-expanded="false"><span></span></button><div class="nav-actions"><a class="phone-link" href="tel:+61862440520"><span class="phone-dot">☎</span>08 6244 0520</a><a class="btn btn-primary" href="#booking">View Menu</a></div>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="site-menu" aria-expanded="false"><span></span></button><div class="nav-actions"><a class="xlink-nav" href="../" aria-label="Back to Wide Web Solutions — all demos"><span class="xlink-arrow" aria-hidden="true">←</span><span class="xlink-label"> All demos</span></a><a class="phone-link" href="tel:+61862440520"><span class="phone-dot">☎</span>08 6244 0520</a><a class="btn btn-primary" href="#booking">View Menu</a></div>
     </div>
   </header>
 
@@ -543,7 +543,8 @@
     <section class="final-cta"><div class="container final-card"><div><div class="section-kicker" style="color:#fff">Second website concept</div><h2>Another complete website for the Food &amp; Drink niche.</h2><p>This page uses its own generated imagery embedded directly into the HTML, so it previews without external image loading.</p></div><div class="hero-cta" style="margin:0"><a class="btn btn-secondary" href="tel:+61862440520">Call now</a><a class="btn btn-primary" href="#booking">View Menu</a></div></div></section>
   </main>
 
-  <footer class="site-footer"><div class="container footer-grid"><a class="brand" href="#top"><div class="brand-mark">Mc</div><div><span class="brand-name">Morning Crust Café</span><span class="brand-subtitle">Food &amp; Drink second concept</span></div></a><div class="footer-links"><a href="tel:+61862440520">08 6244 0520</a><a href="#services">Services</a><a href="#booking">Book</a><a href="#reviews">Reviews</a></div><div>Demo website concept · Integrated images</div></div></footer>
+  <footer class="site-footer"><div class="container footer-grid"><a class="brand" href="#top"><div class="brand-mark">Mc</div><div><span class="brand-name">Morning Crust Café</span><span class="brand-subtitle">Food &amp; Drink second concept</span></div></a><div class="footer-links"><a href="tel:+61862440520">08 6244 0520</a><a href="#services">Services</a><a href="#booking">Book</a><a href="#reviews">Reviews</a></div><div>Demo website concept · Integrated images</div></div>  <div class="container xlink-foot-bar"><a class="xlink-foot" href="../" aria-label="Back to Wide Web Solutions — see all our demos">← Back to Wide Web Solutions — see all our demos</a><span class="xlink-foot-note">Part of the Wide Web Solutions demo collection.</span></div>
+  </footer>
 
   <script>
     const serviceSelect = document.getElementById('serviceSelect');
@@ -753,5 +754,21 @@
 })();
 </script>
 <!-- DEMO-GUIDE:END -->
+  <!-- XLINK:START -->
+  <style id="xlink-styles">
+    /* Portfolio cross-linking: nav + footer back-links to the Wide Web Solutions hub */
+    .xlink-nav{display:inline-flex;align-items:center;gap:.4em;padding:.55em .85em;border-radius:999px;border:1px solid;border-color:color-mix(in srgb,currentColor 32%,transparent);background:color-mix(in srgb,currentColor 7%,transparent);color:inherit;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;line-height:1;white-space:nowrap;text-decoration:none;flex:0 0 auto;transition:background-color .25s ease,border-color .25s ease,transform .25s ease}
+    .xlink-nav:hover{background:color-mix(in srgb,currentColor 15%,transparent);transform:translateY(-1px)}
+    .xlink-nav:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+    .xlink-nav .xlink-arrow{font-size:1.05em;line-height:1}
+    .xlink-foot-bar{margin-top:18px;padding-top:16px;border-top:1px solid color-mix(in srgb,currentColor 18%,transparent);display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:.9rem}
+    .xlink-foot{color:inherit;text-decoration:underline;text-underline-offset:3px;font-weight:700;transition:opacity .25s ease}
+    .xlink-foot:hover{opacity:.72}
+    .xlink-foot:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+    .xlink-foot-note{opacity:.72}
+    @media (max-width:480px){.xlink-nav .xlink-label{display:none}.xlink-nav{padding:.5em .6em;letter-spacing:0}}
+    @media (prefers-reduced-motion:reduce){.xlink-nav,.xlink-foot{transition:none}.xlink-nav:hover{transform:none}}
+  </style>
+  <!-- XLINK:END -->
 </body>
 </html>

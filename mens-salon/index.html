@@ -1235,7 +1235,7 @@
         <a href="#instagram">Instagram</a>
       </nav>
 
-      <div class="nav-actions">
+      <div class="nav-actions"><a class="xlink-nav" href="../" aria-label="Back to Wide Web Solutions — all demos"><span class="xlink-arrow" aria-hidden="true">←</span><span class="xlink-label"> All demos</span></a>
         <a class="phone-link" href="tel:+61862440220"><span>☎</span>08 6244 0220</a>
         <a class="btn btn-primary" href="#booking">Book Appointment</a>
       </div>
@@ -1692,6 +1692,7 @@
       </div>
       <div>Demo website concept · Replace with real salon details</div>
     </div>
+    <div class="container xlink-foot-bar"><a class="xlink-foot" href="../" aria-label="Back to Wide Web Solutions — see all our demos">← Back to Wide Web Solutions — see all our demos</a><span class="xlink-foot-note">Part of the Wide Web Solutions demo collection.</span></div>
   </footer>
 
   <script>
@@ -2352,5 +2353,21 @@
   #dg-callout .dg-c-badge { color: #fff !important; }
 </style>
 <!-- BRAND-IDENTITY:END -->
+  <!-- XLINK:START -->
+  <style id="xlink-styles">
+    /* Portfolio cross-linking: nav + footer back-links to the Wide Web Solutions hub */
+    .xlink-nav{display:inline-flex;align-items:center;gap:.4em;padding:.55em .85em;border-radius:999px;border:1px solid;border-color:color-mix(in srgb,currentColor 32%,transparent);background:color-mix(in srgb,currentColor 7%,transparent);color:inherit;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;line-height:1;white-space:nowrap;text-decoration:none;flex:0 0 auto;transition:background-color .25s ease,border-color .25s ease,transform .25s ease}
+    .xlink-nav:hover{background:color-mix(in srgb,currentColor 15%,transparent);transform:translateY(-1px)}
+    .xlink-nav:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+    .xlink-nav .xlink-arrow{font-size:1.05em;line-height:1}
+    .xlink-foot-bar{margin-top:18px;padding-top:16px;border-top:1px solid color-mix(in srgb,currentColor 18%,transparent);display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:.9rem}
+    .xlink-foot{color:inherit;text-decoration:underline;text-underline-offset:3px;font-weight:700;transition:opacity .25s ease}
+    .xlink-foot:hover{opacity:.72}
+    .xlink-foot:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+    .xlink-foot-note{opacity:.72}
+    @media (max-width:480px){.xlink-nav .xlink-label{display:none}.xlink-nav{padding:.5em .6em;letter-spacing:0}}
+    @media (prefers-reduced-motion:reduce){.xlink-nav,.xlink-foot{transition:none}.xlink-nav:hover{transform:none}}
+  </style>
+  <!-- XLINK:END -->
 </body>
 </html>
