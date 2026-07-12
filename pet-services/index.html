@@ -147,5 +147,25 @@
     let reviewIndex=0;const grid=document.getElementById('reviewGrid');function moveReviews(dir){reviewIndex=Math.max(0,Math.min(1,reviewIndex+dir));grid.style.transform=`translateX(${-reviewIndex*33.333}%)`}document.getElementById('nextReview').onclick=()=>moveReviews(1);document.getElementById('prevReview').onclick=()=>moveReviews(-1);
     document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',()=>q.closest('.faq-item').classList.toggle('open')));
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1973f6d4fa0709e',t:'MTc4Mzc2NzAzMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1973f6d4fa0709e',t:'MTc4Mzc2NzAzMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><!-- POLISH-PASS:START -->
+<style id="polish-pass">
+  /* Tasteful visual refinement — additive, brand-scoped, motion-safe */
+  a:focus-visible, button:focus-visible, .btn:focus-visible,
+  input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 12px;
+  }
+  .btn { transition: .42s cubic-bezier(.19,1,.22,1); }
+  .btn:active { transform: translateY(0) scale(.98); }
+  .card, .plan, .protocol-item, .review, .editorial-card {
+    transition: transform .48s cubic-bezier(.19,1,.22,1), box-shadow .48s ease, border-color .48s ease;
+  }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+  @media (prefers-reduced-motion: reduce) {
+    .btn, .card, .plan, .protocol-item, .review, .editorial-card { transition: none !important; }
+    .btn:active { transform: none; }
+  }
+</style>
+<!-- POLISH-PASS:END -->
+</body>
 </html>
