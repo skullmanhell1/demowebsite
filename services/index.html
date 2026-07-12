@@ -1182,7 +1182,7 @@
         <a href="#reviews">Reviews</a>
       </nav>
 
-      <div class="nav-actions">
+      <div class="nav-actions"><a class="xlink-nav" href="../" aria-label="Back to Wide Web Solutions — all demos"><span class="xlink-arrow" aria-hidden="true">←</span><span class="xlink-nav-text">All demos</span></a>
         <a class="phone-link" href="tel:+61862440330"><span>☎</span>08 6244 0330</a>
         <a class="btn btn-primary" href="#quote">Get a Free Quote</a>
       </div>
@@ -1568,7 +1568,7 @@
       </div>
       <div>Demo website concept · Replace with real trade business details</div>
     </div>
-  </footer>
+  <div class="xlink-footer"><a href="../" aria-label="Back to Wide Web Solutions — all demos">← Back to Wide Web Solutions — see all our demos</a><p class="xlink-footer-note">Part of the Wide Web Solutions demo collection.</p></div></footer>
 
   <script>
     const serviceSelect = document.getElementById('serviceSelect');
@@ -2707,5 +2707,57 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   }
 </style>
 <!-- LAYOUT:END -->
+<!-- XLINK:START -->
+<style>
+/* Cross-link back to the Wide Web Solutions landing page (additive, brand-styled) */
+.nav-actions .xlink-nav{
+  display:inline-flex;align-items:center;gap:.4em;
+  padding:.45em .8em;border-radius:999px;
+  font:inherit;font-size:.85rem;font-weight:600;line-height:1;
+  text-decoration:none;color:currentColor;white-space:nowrap;
+  border:1px solid currentColor;background:transparent;
+  border:1px solid color-mix(in srgb, currentColor 32%, transparent);
+  background:color-mix(in srgb, currentColor 8%, transparent);
+  transition:background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.nav-actions .xlink-nav:hover{
+  background:color-mix(in srgb, currentColor 16%, transparent);
+  transform:translateY(-1px);
+}
+.nav-actions .xlink-nav:focus-visible{
+  outline:none;
+  box-shadow:0 0 0 3px color-mix(in srgb, currentColor 45%, transparent);
+}
+.nav-actions .xlink-nav .xlink-arrow{font-size:1.05em;line-height:1;}
+@media (max-width:480px){
+  .nav-actions .xlink-nav .xlink-nav-text{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+  }
+  .nav-actions .xlink-nav{padding:.45em .55em;gap:0;}
+}
+.xlink-footer{
+  margin-top:1.25rem;padding-top:1.25rem;text-align:center;font-size:.9rem;
+  border-top:1px solid rgba(127,127,127,.25);
+  border-top:1px solid color-mix(in srgb, currentColor 20%, transparent);
+}
+.xlink-footer a{
+  display:inline-block;color:currentColor;font-weight:600;text-decoration:none;
+  padding-bottom:1px;
+  border-bottom:1px solid color-mix(in srgb, currentColor 40%, transparent);
+  transition:opacity .2s ease;
+}
+.xlink-footer a:hover{opacity:.75;}
+.xlink-footer a:focus-visible{
+  outline:none;border-radius:4px;
+  box-shadow:0 0 0 3px color-mix(in srgb, currentColor 45%, transparent);
+}
+.xlink-footer-note{margin:.4rem 0 0;opacity:.7;font-size:.8rem;}
+@media (prefers-reduced-motion: reduce){
+  .nav-actions .xlink-nav,.xlink-footer a{transition:none;}
+  .nav-actions .xlink-nav:hover{transform:none;}
+}
+</style>
+<!-- XLINK:END -->
 </body>
 </html>
