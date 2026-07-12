@@ -426,7 +426,7 @@
     <div class="container nav">
       <a class="brand" href="#top" aria-label="NorthStar Physio &amp; Rehab home"><div class="brand-mark">Ns</div><div><span class="brand-name">NorthStar Physio &amp; Rehab</span><span class="brand-subtitle">Physiotherapy • sports rehab • wellness</span></div></a>
       <nav class="nav-links" id="site-menu" aria-label="Primary navigation"><a href="#services">Services</a><a href="#gallery">Gallery</a><a href="#booking">Book</a><a href="#why">Why us</a><a href="#reviews">Reviews</a><a href="#location">Location</a></nav>
-      <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="site-menu" aria-expanded="false"><span></span></button><div class="nav-actions"><a class="phone-link" href="tel:+61862440550"><span class="phone-dot">☎</span>08 6244 0550</a><a class="btn btn-primary" href="#booking">Book Assessment</a></div>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="site-menu" aria-expanded="false"><span></span></button><div class="nav-actions"><a class="xlink-nav" href="../" aria-label="Back to Wide Web Solutions — all demos"><span class="xlink-arrow" aria-hidden="true">←</span><span class="xlink-nav-text">All demos</span></a><a class="phone-link" href="tel:+61862440550"><span class="phone-dot">☎</span>08 6244 0550</a><a class="btn btn-primary" href="#booking">Book Assessment</a></div>
     </div>
   </header>
 
@@ -543,7 +543,7 @@
     <section class="final-cta"><div class="container final-card"><div><div class="section-kicker" style="color:#fff">Second website concept</div><h2>Another complete website for the Health / Wellness niche.</h2><p>This page uses its own generated imagery embedded directly into the HTML, so it previews without external image loading.</p></div><div class="hero-cta" style="margin:0"><a class="btn btn-secondary" href="tel:+61862440550">Call now</a><a class="btn btn-primary" href="#booking">Book Assessment</a></div></div></section>
   </main>
 
-  <footer class="site-footer"><div class="container footer-grid"><a class="brand" href="#top"><div class="brand-mark">Ns</div><div><span class="brand-name">NorthStar Physio &amp; Rehab</span><span class="brand-subtitle">Health / Wellness second concept</span></div></a><div class="footer-links"><a href="tel:+61862440550">08 6244 0550</a><a href="#services">Services</a><a href="#booking">Book</a><a href="#reviews">Reviews</a></div><div>Demo website concept · Integrated images</div></div></footer>
+  <footer class="site-footer"><div class="container footer-grid"><a class="brand" href="#top"><div class="brand-mark">Ns</div><div><span class="brand-name">NorthStar Physio &amp; Rehab</span><span class="brand-subtitle">Health / Wellness second concept</span></div></a><div class="footer-links"><a href="tel:+61862440550">08 6244 0550</a><a href="#services">Services</a><a href="#booking">Book</a><a href="#reviews">Reviews</a></div><div>Demo website concept · Integrated images</div></div><div class="xlink-footer"><a href="../" aria-label="Back to Wide Web Solutions — all demos">← Back to Wide Web Solutions — see all our demos</a><p class="xlink-footer-note">Part of the Wide Web Solutions demo collection.</p></div></footer>
 
   <script>
     const serviceSelect = document.getElementById('serviceSelect');
@@ -1318,5 +1318,57 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   }
 </style>
 <!-- LAYOUT:END -->
+<!-- XLINK:START -->
+<style>
+/* Cross-link back to the Wide Web Solutions landing page (additive, brand-styled) */
+.nav-actions .xlink-nav{
+  display:inline-flex;align-items:center;gap:.4em;
+  padding:.45em .8em;border-radius:999px;
+  font:inherit;font-size:.85rem;font-weight:600;line-height:1;
+  text-decoration:none;color:currentColor;white-space:nowrap;
+  border:1px solid currentColor;background:transparent;
+  border:1px solid color-mix(in srgb, currentColor 32%, transparent);
+  background:color-mix(in srgb, currentColor 8%, transparent);
+  transition:background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.nav-actions .xlink-nav:hover{
+  background:color-mix(in srgb, currentColor 16%, transparent);
+  transform:translateY(-1px);
+}
+.nav-actions .xlink-nav:focus-visible{
+  outline:none;
+  box-shadow:0 0 0 3px color-mix(in srgb, currentColor 45%, transparent);
+}
+.nav-actions .xlink-nav .xlink-arrow{font-size:1.05em;line-height:1;}
+@media (max-width:480px){
+  .nav-actions .xlink-nav .xlink-nav-text{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+  }
+  .nav-actions .xlink-nav{padding:.45em .55em;gap:0;}
+}
+.xlink-footer{
+  margin-top:1.25rem;padding-top:1.25rem;text-align:center;font-size:.9rem;
+  border-top:1px solid rgba(127,127,127,.25);
+  border-top:1px solid color-mix(in srgb, currentColor 20%, transparent);
+}
+.xlink-footer a{
+  display:inline-block;color:currentColor;font-weight:600;text-decoration:none;
+  padding-bottom:1px;
+  border-bottom:1px solid color-mix(in srgb, currentColor 40%, transparent);
+  transition:opacity .2s ease;
+}
+.xlink-footer a:hover{opacity:.75;}
+.xlink-footer a:focus-visible{
+  outline:none;border-radius:4px;
+  box-shadow:0 0 0 3px color-mix(in srgb, currentColor 45%, transparent);
+}
+.xlink-footer-note{margin:.4rem 0 0;opacity:.7;font-size:.8rem;}
+@media (prefers-reduced-motion: reduce){
+  .nav-actions .xlink-nav,.xlink-footer a{transition:none;}
+  .nav-actions .xlink-nav:hover{transform:none;}
+}
+</style>
+<!-- XLINK:END -->
 </body>
 </html>
