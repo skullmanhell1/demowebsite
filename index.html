@@ -990,5 +990,17 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 })();
 </script>
 <!-- ANIM2:END -->
+<!-- IMGTREAT:START -->
+<style id="imgtreat">
+  /* Cohesive image treatment — CSS only, additive.
+     The landing grid mixes thumbnails from every brand, so this is a neutral,
+     premium grade that lets the whole set feel like one curated portfolio.
+     Filter is on the <img> only, so the existing hover zoom (transform) and the
+     .thumb::after label scrim are untouched. No image files, DOM, src/width/height changed. */
+  .demo .thumb img {
+    filter: saturate(1.06) contrast(1.05) brightness(1.0);
+  }
+</style>
+<!-- IMGTREAT:END -->
 </body>
 </html>
