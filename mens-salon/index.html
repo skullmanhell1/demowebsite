@@ -2371,5 +2371,126 @@
   }
 </style>
 <!-- POLISH-PASS:END -->
+<!-- ANIM2:START -->
+<style id="anim2-layer">
+/* ANIM2 — additive animation layer (follow-up pass).
+   Every effect is gated behind html.anim2-on, which JS only sets when the
+   visitor allows motion. Content is fully visible/usable without JS and under
+   reduced-motion; these rules only enhance. Palette inherits each brand's
+   existing CSS custom properties via --a2-accent. */
+
+/* CTA shine sweep — only added where a prior shine layer is absent (a2-shine-ok) */
+html.a2-shine-ok .btn-primary { position: relative; overflow: hidden; }
+html.a2-shine-ok .btn-primary::before {
+  content: ""; position: absolute; top: 0; bottom: 0; left: -130%; width: 55%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.38), transparent);
+  transform: skewX(-18deg); pointer-events: none; z-index: 1;
+  transition: left .7s cubic-bezier(.22,.61,.36,1);
+}
+html.a2-shine-ok .btn-primary:hover::before,
+html.a2-shine-ok .btn-primary:focus-visible::before { left: 150%; }
+
+/* Subtle resting attention pulse on the hero's primary CTA */
+@keyframes a2Pulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--a2-accent, #7c8aa5) 30%, transparent); }
+  55%      { box-shadow: 0 0 0 8px color-mix(in srgb, var(--a2-accent, #7c8aa5) 0%, transparent); }
+}
+html.anim2-on .a2-pulse { animation: a2Pulse 3.2s ease-in-out infinite; will-change: box-shadow; }
+html.anim2-on .a2-pulse:hover,
+html.anim2-on .a2-pulse:focus-visible { animation: none; }
+
+/* Gallery / media hover sheen (injected <i class="a2-sheen">) */
+html.anim2-on .a2-sheenable { position: relative; }
+html.anim2-on .a2-sheen {
+  position: absolute; top: -10%; left: -80%; width: 55%; height: 120%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.30), transparent);
+  transform: skewX(-16deg); pointer-events: none; z-index: 1;
+  transition: left .85s cubic-bezier(.22,.61,.36,1);
+}
+html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
+
+/* Staggered reveal cascade is applied via inline transition-delay by JS. */
+
+/* Mandatory: neutralise every ANIM2 effect under reduced-motion. */
+@media (prefers-reduced-motion: reduce) {
+  html.a2-shine-ok .btn-primary::before,
+  html.anim2-on .a2-sheen { display: none !important; }
+  html.anim2-on .a2-pulse { animation: none !important; }
+}
+</style>
+<script>
+(function(){
+  try {
+    var mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq && mq.matches) return;                 /* respect reduced motion */
+    var root = document.documentElement;
+    root.classList.add('anim2-on');
+    /* Only add our shine/underline where no prior shine layer exists */
+    if (!document.getElementById('anim-layer')) root.classList.add('a2-shine-ok');
+
+    /* Resolve a brand accent colour from existing custom properties */
+    var cs = getComputedStyle(root);
+    var vars = ['--accent','--primary','--secondary','--gold','--copper','--terracotta',
+                '--honey','--violet','--indigo','--cyan','--blue','--green','--forest',
+                '--rose','--clay','--amber','--red'];
+    for (var i = 0; i < vars.length; i++) {
+      var v = cs.getPropertyValue(vars[i]).trim();
+      if (v) { root.style.setProperty('--a2-accent', v); break; }
+    }
+
+    function ready(fn){
+      if (document.readyState === 'loading')
+        document.addEventListener('DOMContentLoaded', fn, { once: true });
+      else fn();
+    }
+
+    ready(function(){
+      /* 1) Staggered reveal cascade — group existing reveal elements by parent,
+            add a small incremental delay, then clear it so hover stays snappy. */
+      var revs = document.querySelectorAll('.reveal, [data-reveal]');
+      var seen = new Map();
+      revs.forEach(function(el){
+        var p = el.parentElement; if (!p) return;
+        var i = seen.get(p) || 0; seen.set(p, i + 1);
+        if (i === 0) return;                       /* first child: no delay */
+        el.style.transitionDelay = Math.min(i * 70, 420) + 'ms';
+        el.addEventListener('transitionend', function h(ev){
+          if (ev.propertyName === 'opacity' || ev.propertyName === 'transform') {
+            el.style.transitionDelay = '';
+            el.removeEventListener('transitionend', h);
+          }
+        });
+      });
+
+      /* 2) Tag the hero's primary CTA for a subtle resting pulse */
+      var hero = document.querySelector('header.hero, .hero, .masthead');
+      if (hero) {
+        var cta = hero.querySelector('.btn-primary') ||
+                  hero.querySelector('.btn-light, .btn-red, .btn-solid, .btn-cyan') ||
+                  hero.querySelector('.btn');
+        if (cta) cta.classList.add('a2-pulse');
+      }
+
+      /* 3) Add a hover sheen to gallery/media figures that are already clipped */
+      var sel = '.image-card, .detail-image, .journey-photo, .hero-photo, .service-shot,' +
+                '.gallery-item, .shot, .work-item, figure.tilt, .photo, .media-shot,' +
+                '.review-photo, .feature-photo, .about-photo';
+      document.querySelectorAll(sel).forEach(function(el){
+        if (el.__a2sheen) return;
+        var st = getComputedStyle(el);
+        if (st.overflow !== 'hidden' && st.overflowX !== 'hidden') return;
+        if (st.position === 'static') return;
+        if (!(el.querySelector('img') || st.backgroundImage !== 'none')) return;
+        el.__a2sheen = true;
+        el.classList.add('a2-sheenable');
+        var s = document.createElement('i');
+        s.className = 'a2-sheen'; s.setAttribute('aria-hidden', 'true');
+        el.appendChild(s);
+      });
+    });
+  } catch (e) { /* fail silent: page stays fully functional */ }
+})();
+</script>
+<!-- ANIM2:END -->
 </body>
 </html>
