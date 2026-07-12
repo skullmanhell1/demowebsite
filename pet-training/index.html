@@ -745,5 +745,33 @@
 })();
 </script>
 <!-- DEMO-GUIDE:END -->
+<!-- POLISH-PASS:START -->
+<style id="polish-pass">
+  /* Tasteful visual refinement — additive, brand-scoped, motion-safe */
+  .btn { transition: transform .2s cubic-bezier(.2,.7,.2,1), box-shadow .28s ease, background .28s ease; }
+  .btn:active { transform: translateY(0) scale(.98); }
+  .btn-primary:hover { box-shadow: 0 20px 46px color-mix(in srgb, var(--primary) 36%, transparent); }
+  .service-card, .proof-card, .review-card, .why-item, .location-card, .faq-item, .trust-item {
+    transition: transform .34s cubic-bezier(.2,.7,.2,1), box-shadow .34s ease, border-color .34s ease;
+  }
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 26px 58px color-mix(in srgb, var(--dark) 18%, transparent);
+    border-color: color-mix(in srgb, var(--primary) 32%, var(--line));
+  }
+  .review-card:hover, .proof-card:hover, .location-card:hover {
+    box-shadow: 0 22px 50px color-mix(in srgb, var(--dark) 15%, transparent);
+  }
+  /* Hero photo: subtle inner ring for a crisper, more premium frame */
+  .hero-photo { box-shadow: var(--shadow), inset 0 0 0 1px rgba(255,255,255,.12); }
+  /* Typographic safety net */
+  h1, h2, h3 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+  @media (prefers-reduced-motion: reduce) {
+    .btn, .service-card, .proof-card, .review-card, .why-item, .location-card, .faq-item, .trust-item { transition: none !important; }
+    .btn:active { transform: none; }
+  }
+</style>
+<!-- POLISH-PASS:END -->
 </body>
 </html>

@@ -654,5 +654,23 @@
 })();
 </script>
 <!-- DEMO-GUIDE:END -->
+<!-- POLISH-PASS:START -->
+<style id="polish-pass">
+  /* Tasteful visual refinement — additive, brand-scoped, motion-safe */
+  a:focus-visible, button:focus-visible, .btn:focus-visible,
+  input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 12px;
+  }
+  .btn:active { transform: translateY(0) scale(.98); }
+  .card, .plan, .provider, .luxe-item, .review, .editorial-card {
+    transition: transform .48s cubic-bezier(.19,1,.22,1), box-shadow .48s ease, border-color .48s ease;
+  }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+  @media (prefers-reduced-motion: reduce) {
+    .btn:active { transform: none; }
+  }
+</style>
+<!-- POLISH-PASS:END -->
 </body>
 </html>

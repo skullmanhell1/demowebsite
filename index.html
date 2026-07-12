@@ -855,5 +855,19 @@
   .feat:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.22); background: var(--panel-2); }
 </style>
 <!-- SOPHISTICATE:END -->
+<!-- POLISH-PASS:START -->
+<style id="polish-pass">
+  /* Light refinement — additive, on-brand, motion-safe */
+  a:focus-visible, button:focus-visible, .btn:focus-visible,
+  input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 12px;
+  }
+  .btn:active { transform: translateY(0) scale(.985); }
+  .chip:active { transform: translateY(0) scale(.985); }
+  @media (prefers-reduced-motion: reduce) {
+    .btn:active, .chip:active { transform: none; }
+  }
+</style>
+<!-- POLISH-PASS:END -->
 </body>
 </html>

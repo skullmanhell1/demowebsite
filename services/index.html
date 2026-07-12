@@ -2158,5 +2158,24 @@
   @media (max-width: 640px) { #dg-callout { left: 12px; right: 12px !important; box-shadow: 5px 5px 0 var(--green-2) !important; } }
 </style>
 <!-- BRAND-IDENTITY:END -->
+<!-- POLISH-PASS:START -->
+<style id="polish-pass">
+  /* Tasteful visual refinement — additive, brand-scoped, motion-safe.
+     Replaces the generic blue focus ring with the brand blue accent. */
+  a:focus-visible, button:focus-visible, .btn:focus-visible,
+  input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 10px;
+  }
+  .btn:active { transform: translateY(0) scale(.98); }
+  .card, .service-card, .review, .review-card, .meta-pill {
+    transition: transform .4s cubic-bezier(.19,1,.22,1), box-shadow .4s ease, border-color .4s ease;
+  }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+  @media (prefers-reduced-motion: reduce) {
+    .btn:active { transform: none; }
+  }
+</style>
+<!-- POLISH-PASS:END -->
 </body>
 </html>
