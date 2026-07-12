@@ -2885,5 +2885,23 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 </script>
 <!-- ENH:END -->
 
+<!-- LAYOUT:START — layout variety pass (additive, CSS-only, mobile-safe) -->
+<style id="layout-variety">
+  /* Gated at >=1121px so the existing collapse (1120px -> team 2-up, 760px ->
+     every grid single column) is untouched: clean stacking, no overflow.
+     The filterable portfolio (with its own wide/tall bento cells) is deliberately
+     left alone so filtering keeps working. */
+  @media (min-width:1121px){
+    /* Asymmetric two-column service menu (~60/40) — a magazine-style split so the
+       price menu reads as an editorial spread rather than two equal columns. */
+    #services .menu-grid{grid-template-columns:minmax(0,1.2fr) minmax(330px,.8fr);align-items:start;}
+    /* Section width rhythm: let the portfolio run wider (gallery is the hero of a
+       barbershop) while reviews & hours pull into tighter, focused columns. */
+    #gallery .container{width:min(100% - 40px,1340px);}
+    #reviews .container{width:min(100% - 40px,1000px);}
+    #hours .container{width:min(100% - 40px,1000px);}
+  }
+</style>
+<!-- LAYOUT:END -->
 </body>
 </html>

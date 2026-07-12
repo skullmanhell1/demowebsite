@@ -1388,5 +1388,25 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 </script>
 <!-- ENH:END -->
 
+<!-- LAYOUT:START — layout variety pass (additive, CSS-only, mobile-safe) -->
+<style id="layout-variety">
+  /* Gated at >=901px so the existing mobile collapse (900px -> single column) is
+     never touched: clean single-column stacking, no horizontal overflow. */
+  @media (min-width:901px){
+    /* Featured demo hero: the first demo spans the full 2-column width and becomes
+       a horizontal split (large image + copy) so the demo grid opens with an
+       editorial banner instead of a uniform 2-up rhythm. 13 cards: 1 full-width
+       banner + 12 in a clean 6x2 grid = no gaps. */
+    #demos .demos>.demo:first-child{grid-column:1/-1;display:grid;grid-template-columns:1.25fr 1fr;align-items:stretch;}
+    #demos .demos>.demo:first-child .thumb{aspect-ratio:auto;height:100%;min-height:340px;}
+    #demos .demos>.demo:first-child .body{align-self:center;padding:38px 40px;}
+    #demos .demos>.demo:first-child h3{font-size:2.2rem;}
+    #demos .demos>.demo:first-child p{font-size:1.06rem;}
+    /* Width rhythm: pull the three-step "how it works" into a tighter centred
+       column so it reads as a focused interlude between the wide sections. */
+    #how .container{width:min(100% - 40px,860px);}
+  }
+</style>
+<!-- LAYOUT:END -->
 </body>
 </html>

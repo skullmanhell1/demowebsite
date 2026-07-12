@@ -681,5 +681,30 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 </script>
 <!-- ENH:END -->
 
+<!-- LAYOUT:START — layout variety pass (additive, CSS-only, mobile-safe) -->
+<style id="layout-variety">
+  /* Editorial magazine treatment for the concierge story — drop cap on the lead
+     paragraph. Safe at every width. Reuses the brand's gold/forest palette. */
+  .concierge .editorial-card>p:first-of-type::first-letter{
+    font-family:var(--serif,Georgia,serif);font-weight:400;
+    font-size:3.6em;line-height:.7;float:left;padding:10px 16px 0 0;color:var(--gold);
+  }
+  /* Gated at >=981px so the existing tablet (980px) and phone (640px) collapse to
+     2-up / 1-up is never affected — no horizontal overflow on small screens. */
+  @media (min-width:981px){
+    /* Bento feature: promote the first service card to a large 2x2 tile so the
+       services grid reads as a designed composition. 6 cards in 3 cols =>
+       feature(2x2) + 5 cells, no gaps. */
+    .services .cards{grid-auto-flow:dense;}
+    .services .cards>.card:first-child{
+      grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column;justify-content:center;
+    }
+    .services .cards>.card:first-child h3{font-size:2.5rem;}
+    .services .cards>.card:first-child .icon{width:66px;height:66px;font-size:1.7rem;}
+    /* Width rhythm: pull the FAQ into a narrower editorial column. */
+    .faq .container{width:min(920px,calc(100% - 38px));}
+  }
+</style>
+<!-- LAYOUT:END -->
 </body>
 </html>

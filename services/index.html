@@ -2691,5 +2691,21 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 </script>
 <!-- ENH:END -->
 
+<!-- LAYOUT:START — layout variety pass (additive, CSS-only, mobile-safe) -->
+<style id="layout-variety">
+  /* Gated at >=1121px so the existing collapse (1120px -> single column) is
+     untouched: clean stacking, no horizontal overflow on phones/tablets. */
+  @media (min-width:1121px){
+    /* Asymmetric ~60/40 split on the "why choose us" section: the trust/guarantee
+       copy dominates while the financing callout becomes a slim sidebar — breaks
+       the balanced two-column rhythm without any DOM change. */
+    #why .why-grid{grid-template-columns:minmax(0,1.4fr) minmax(300px,.6fr);}
+    /* Section width rhythm: expansive service-area band, then a tighter reviews
+       column, so the page alternates wide/narrow instead of a uniform stack. */
+    #areas .container{width:min(100% - 40px,1320px);}
+    #reviews .container{width:min(100% - 40px,1000px);}
+  }
+</style>
+<!-- LAYOUT:END -->
 </body>
 </html>

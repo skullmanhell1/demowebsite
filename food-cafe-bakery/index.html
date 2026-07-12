@@ -1296,5 +1296,32 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 </script>
 <!-- ENH:END -->
 
+<!-- LAYOUT:START — layout variety pass (additive, CSS-only, mobile-safe) -->
+<style id="layout-variety">
+  /* Editorial "magazine" treatment for the story/why section — drop cap + generous
+     whitespace + an accent rule. Safe at every width (drop cap reflows naturally). */
+  #why .why-card{padding:clamp(28px,5vw,52px);}
+  #why .why-card>p:first-of-type{
+    font-size:1.12rem;line-height:1.75;border-left:3px solid color-mix(in srgb, var(--accent, var(--primary,#c98a3a)) 70%, transparent);
+    padding-left:20px;margin-top:6px;
+  }
+  #why .why-card>p:first-of-type::first-letter{
+    font-family:Georgia,"Times New Roman",serif;font-weight:800;
+    font-size:3.4em;line-height:.72;float:left;padding:8px 14px 0 0;
+    color:var(--accent, var(--primary,#c98a3a));
+  }
+  /* Gated at >=1121px so the existing mobile collapse (1120px/760px) is untouched. */
+  @media (min-width:1121px){
+    /* Bento feature grid: first menu/offer becomes a large 2x2 showcase tile. */
+    #services .services-grid{grid-auto-flow:dense;}
+    #services .services-grid>.service-card:first-child{
+      grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column;
+    }
+    #services .services-grid>.service-card:first-child .service-image{flex:1 1 auto;min-height:330px;}
+    #services .services-grid>.service-card:first-child .service-top h3{font-size:1.6rem;}
+    #services .services-grid>.service-card:first-child .service-body{padding:40px 28px 28px;}
+  }
+</style>
+<!-- LAYOUT:END -->
 </body>
 </html>

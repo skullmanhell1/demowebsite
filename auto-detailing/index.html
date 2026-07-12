@@ -1288,5 +1288,25 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 </script>
 <!-- ENH:END -->
 
+<!-- LAYOUT:START — layout variety pass (additive, CSS-only, mobile-safe) -->
+<style id="layout-variety">
+  /* Gated at >=1121px so the existing mobile collapse (1120px/760px) is untouched. */
+  @media (min-width:1121px){
+    /* Bento feature grid: hero the first service as a large 2x2 showcase tile. */
+    #services .services-grid{grid-auto-flow:dense;}
+    #services .services-grid>.service-card:first-child{
+      grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column;
+    }
+    #services .services-grid>.service-card:first-child .service-image{flex:1 1 auto;min-height:340px;}
+    #services .services-grid>.service-card:first-child .service-top h3{font-size:1.6rem;}
+    #services .services-grid>.service-card:first-child .service-body{padding:40px 28px 28px;}
+    /* Asymmetric story split with a wide, cinematic result photo leading. */
+    #why .why-grid{grid-template-columns:minmax(360px,.86fr) minmax(0,1.14fr);}
+    #why .why-grid>.why-photo{order:-1;min-height:560px;}
+    /* Wide gallery band for extra pacing against the contained sections. */
+    #gallery .container{width:min(100% - 40px,1340px);}
+  }
+</style>
+<!-- LAYOUT:END -->
 </body>
 </html>
