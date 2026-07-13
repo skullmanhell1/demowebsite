@@ -2322,9 +2322,18 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 <!-- ENH-THEME (per-site) -->
 <script>window.ENH_BASE='light';window.ENH_ALT='dark';</script>
 <style id="enh-theme">
+  /* THEMEFIX: genuine dark theme — deep navy-blue neutrals, light ink (WCAG-AA) */
   [data-theme="dark"]{
-    --white:#e8ecf1; --cream:#e6ebf1; --sky:#dbe9f5; --mint:#d9efe7; --lime:#c9e6d8;
-    --line:rgba(16,32,47,0.22);
+    --ink:#eaf1f8;
+    --muted:rgba(234,241,248,0.72);
+    --soft:rgba(234,241,248,0.54);
+    --line:rgba(255,255,255,0.14);
+    --cream:#0e1420;
+    --sky:#172336;
+    --mint:#122a26;
+    --lime:#12241f;
+    --shadow:0 26px 76px rgba(0,0,0,0.55);
+    --soft-shadow:0 16px 42px rgba(0,0,0,0.42);
   }
 </style>
 
@@ -2759,5 +2768,67 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 }
 </style>
 <!-- XLINK:END -->
+<!-- THEMEFIX:START — explicit dark rules for hard-coded white surfaces (BluePeak Home Services template) -->
+<style id="themefix-dark">
+  /* body ambience tinted toward the navy/teal brand */
+  [data-theme="dark"] body{
+    background:
+      radial-gradient(circle at 8% 0%, rgba(23,105,170,0.20), transparent 32rem),
+      radial-gradient(circle at 92% 6%, rgba(50,168,131,0.16), transparent 30rem),
+      linear-gradient(180deg, #0b1017 0%, #0d141d 44%, #0e1420 100%);
+  }
+  /* header + hard-coded white surfaces -> dark navy glass */
+  [data-theme="dark"] .site-header{ background:rgba(12,18,28,.86); border-bottom-color:var(--line); }
+  [data-theme="dark"] .btn-secondary,
+  [data-theme="dark"] .nav-links,
+  [data-theme="dark"] .phone-link,
+  [data-theme="dark"] .phone-hero,
+  [data-theme="dark"] .eyebrow,
+  [data-theme="dark"] .proof-card,
+  [data-theme="dark"] .floating-trust,
+  [data-theme="dark"] .quick-quote-card,
+  [data-theme="dark"] .trust-strip,
+  [data-theme="dark"] .service-card,
+  [data-theme="dark"] .area-card,
+  [data-theme="dark"] .map-card,
+  [data-theme="dark"] .quote-card,
+  [data-theme="dark"] .why-card,
+  [data-theme="dark"] .map-label,
+  [data-theme="dark"] .project-card,
+  [data-theme="dark"] .review-card{ background:rgba(255,255,255,.05); border-color:var(--line); }
+  [data-theme="dark"] .map-label{ box-shadow:none; }
+  /* light map illustration -> dark */
+  [data-theme="dark"] .map-illustration{
+    background:
+      linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(255,255,255,.05) 1px, transparent 1px),
+      radial-gradient(circle at 80% 20%, rgba(50,168,131,0.24), transparent 16rem),
+      linear-gradient(135deg, #0f1a2a, #0e1c1a);
+    background-size:54px 54px,54px 54px,auto,auto; border-color:var(--line);
+  }
+  /* navy text that sat on white -> light ink */
+  [data-theme="dark"] .btn-secondary,
+  [data-theme="dark"] .phone-link,
+  [data-theme="dark"] .phone-hero,
+  [data-theme="dark"] .suburb,
+  [data-theme="dark"] .quick-pills button,
+  [data-theme="dark"] label,
+  [data-theme="dark"] .reviewer strong,
+  [data-theme="dark"] .nav-links a,
+  [data-theme="dark"] .nav-links a:hover{ color:var(--ink); }
+  /* accent text lightened for AA on dark surfaces (brand hues kept) */
+  [data-theme="dark"] .section-kicker,
+  [data-theme="dark"] .eyebrow,
+  [data-theme="dark"] .source{ color:#7cc4f2; }
+  [data-theme="dark"] h1 em,
+  [data-theme="dark"] .meta-pill,
+  [data-theme="dark"] .note-pill,
+  [data-theme="dark"] .suburb::before{ color:#4fd1a8; }
+  /* form fields (were near-white) */
+  [data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea{ background:rgba(255,255,255,.05); color:var(--ink); border-color:rgba(255,255,255,.16); }
+  [data-theme="dark"] input::placeholder,[data-theme="dark"] textarea::placeholder{ color:rgba(234,241,248,.45); }
+  [data-theme="dark"] .field select option,[data-theme="dark"] select option{ color:#10202f; }
+</style>
+<!-- THEMEFIX:END -->
 </body>
 </html>

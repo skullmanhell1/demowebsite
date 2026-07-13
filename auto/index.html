@@ -2220,10 +2220,16 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 <!-- ENH-THEME (per-site) -->
 <script>window.ENH_BASE='light';window.ENH_ALT='dark';</script>
 <style id="enh-theme">
+  /* THEMEFIX: genuine dark theme — deep steel-blue neutrals, light ink (WCAG-AA) */
   [data-theme="dark"]{
-    --bg:#e3e8ee; --ice:#dce6f1; --white:#e8ecf1;
-    --line:rgba(17,25,39,0.22);
-    --shadow:0 28px 90px rgba(11,35,65,0.30);
+    --ink:#eef2f8;
+    --muted:rgba(233,239,247,0.72);
+    --soft:rgba(233,239,247,0.54);
+    --line:rgba(255,255,255,0.14);
+    --bg:#0c1017;
+    --ice:#182231;
+    --shadow:0 28px 90px rgba(0,0,0,0.55);
+    --soft-shadow:0 16px 42px rgba(0,0,0,0.42);
   }
 </style>
 
@@ -2667,5 +2673,45 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 }
 </style>
 <!-- XLINK:END -->
+<!-- THEMEFIX:START — explicit dark rules for hard-coded light surfaces (bespoke Auto template) -->
+<style id="themefix-dark">
+  [data-theme="dark"] body{
+    background:
+      radial-gradient(circle at 8% 0%, rgba(36,120,212,0.20), transparent 32rem),
+      radial-gradient(circle at 94% 6%, rgba(214,58,49,0.16), transparent 30rem),
+      linear-gradient(180deg, #0b0f16 0%, #0c1119 42%, #10161f 100%);
+  }
+  [data-theme="dark"] body::before{ opacity:.16; background-image:linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(0deg, rgba(255,255,255,.05) 1px, transparent 1px); }
+  [data-theme="dark"] .nav-links{ background:rgba(255,255,255,.05); }
+  [data-theme="dark"] .nav-links a:hover{ background:rgba(255,255,255,.08); color:#eef2f8; }
+  [data-theme="dark"] .phone-link,[data-theme="dark"] .phone-hero{ background:rgba(255,255,255,.07); color:#eef2f8; }
+  [data-theme="dark"] .btn-secondary{ background:rgba(255,255,255,.09); color:#eef2f8; border-color:var(--line); }
+  [data-theme="dark"] .proof-card,
+  [data-theme="dark"] .floating-trust,
+  [data-theme="dark"] .quick-card,
+  [data-theme="dark"] .trust-strip,
+  [data-theme="dark"] .service-card,
+  [data-theme="dark"] .reviews-summary,
+  [data-theme="dark"] .fleet-card,
+  [data-theme="dark"] .map-label,
+  [data-theme="dark"] .review-card{ background:color-mix(in srgb, var(--blue) 10%, #171f2b); border-color:var(--line); }
+  [data-theme="dark"] .trust-item,
+  [data-theme="dark"] .why-item{ background:linear-gradient(135deg, color-mix(in srgb, var(--blue) 22%, #12161e), #1b2130); border-color:var(--line); }
+  [data-theme="dark"] .time-chip{ background:rgba(255,255,255,.06); color:#eef2f8; }
+  [data-theme="dark"] .quick-pills button,
+  [data-theme="dark"] .fleet-item,
+  [data-theme="dark"] .address-card,
+  [data-theme="dark"] .estimate-pill{ background:rgba(255,255,255,.06); color:#eef2f8; }
+  [data-theme="dark"] .meta-pill{ background:rgba(255,255,255,.06); color:color-mix(in srgb, var(--blue) 54%, #ffffff); }
+  [data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea{ background:rgba(255,255,255,.05); color:var(--ink); border-color:rgba(255,255,255,.16); }
+  [data-theme="dark"] input::placeholder,[data-theme="dark"] textarea::placeholder{ color:rgba(233,239,247,.45); }
+  [data-theme="dark"] label{ color:#eef2f8; }
+  [data-theme="dark"] .eyebrow{ background:rgba(255,255,255,.06); color:color-mix(in srgb, var(--blue) 54%, #ffffff); }
+  [data-theme="dark"] .section-kicker{ color:color-mix(in srgb, var(--blue) 54%, #ffffff); }
+  [data-theme="dark"] .reviewer strong,
+  [data-theme="dark"] .footer-links a{ color:#eef2f8; }
+  [data-theme="dark"] .map-pin::after{ background:#171f2b; }
+</style>
+<!-- THEMEFIX:END -->
 </body>
 </html>
