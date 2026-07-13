@@ -919,9 +919,15 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 <!-- ENH-THEME (per-site) -->
 <script>window.ENH_BASE='light';window.ENH_ALT='dark';</script>
 <style id="enh-theme">
+  /* THEMEFIX: genuine dark theme — deep neutral tinted toward the brand hue, light ink (WCAG-AA) */
   [data-theme="dark"]{
-    --white:#e8eee8; --cream:#e6ece6; --soft-bg:#dce9dc;
-    --line:rgba(16,32,47,0.22);
+    --ink:#eef2f7;
+    --muted:rgba(236,241,248,0.74);
+    --soft:rgba(236,241,248,0.56);
+    --line:rgba(255,255,255,0.14);
+    --soft-bg:color-mix(in srgb, var(--primary) 24%, #1b212c);
+    --shadow:0 28px 90px rgba(0,0,0,0.55);
+    --soft-shadow:0 16px 42px rgba(0,0,0,0.42);
   }
 </style>
 
@@ -1363,5 +1369,56 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 }
 </style>
 <!-- XLINK:END -->
+<!-- THEMEFIX:START — explicit dark rules for hard-coded light surfaces (Digital Growth template) -->
+<style id="themefix-dark">
+  [data-theme="dark"] body{
+    background:
+      radial-gradient(circle at 8% 0%, color-mix(in srgb, var(--secondary) 24%, transparent), transparent 32rem),
+      radial-gradient(circle at 94% 6%, color-mix(in srgb, var(--primary) 22%, transparent), transparent 30rem),
+      linear-gradient(180deg, #0b0f16 0%, #0d1119 44%, color-mix(in srgb, var(--primary) 16%, #0e131b) 100%);
+  }
+  [data-theme="dark"] body::before{ opacity:.16; background-image:linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(0deg, rgba(255,255,255,.05) 1px, transparent 1px); }
+  [data-theme="dark"] .site-header{ background:color-mix(in srgb, var(--primary) 14%, rgba(13,17,23,.90)); border-bottom-color:var(--line); }
+  [data-theme="dark"] .nav-links{ background:rgba(255,255,255,.05); border-color:var(--line); }
+  [data-theme="dark"] .nav-links a{ color:rgba(236,241,248,.82); }
+  [data-theme="dark"] .nav-links a:hover{ background:rgba(255,255,255,.08); color:#fff; }
+  [data-theme="dark"] .phone-link,[data-theme="dark"] .phone-hero{ background:rgba(255,255,255,.07); color:#fff; border-color:var(--line); }
+  [data-theme="dark"] .eyebrow{ background:rgba(255,255,255,.06); color:color-mix(in srgb, var(--primary) 52%, #ffffff); }
+  [data-theme="dark"] .proof-card,
+  [data-theme="dark"] .float-card,
+  [data-theme="dark"] .quick-card,
+  [data-theme="dark"] .trust-strip,
+  [data-theme="dark"] .service-card,
+  [data-theme="dark"] .form-card,
+  [data-theme="dark"] .why-card,
+  [data-theme="dark"] .location-card,
+  [data-theme="dark"] .map-card,
+  [data-theme="dark"] .faq-item,
+  [data-theme="dark"] .review-card{ background:color-mix(in srgb, var(--primary) 12%, #171c26); border-color:var(--line); }
+  [data-theme="dark"] .trust-item,
+  [data-theme="dark"] .why-item{ background:linear-gradient(135deg, color-mix(in srgb, var(--primary) 24%, #12161e), #1b212c); border-color:var(--line); }
+  [data-theme="dark"] .quick-pills button{ background:rgba(255,255,255,.08); color:#fff; }
+  [data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea{ background:rgba(255,255,255,.05); color:var(--ink); border-color:rgba(255,255,255,.16); }
+  [data-theme="dark"] input::placeholder,[data-theme="dark"] textarea::placeholder{ color:rgba(236,241,248,.45); }
+  [data-theme="dark"] label{ color:#eef2f7; }
+  [data-theme="dark"] .btn-secondary{ color:#eef2f7; background:rgba(255,255,255,.09); border-color:var(--line); }
+  [data-theme="dark"] .note-pill{ background:rgba(255,255,255,.06); color:color-mix(in srgb, var(--primary) 52%, #ffffff); }
+  [data-theme="dark"] .confirmation{ background:color-mix(in srgb, var(--primary) 24%, #12161e); color:#eef2f7; border-color:color-mix(in srgb, var(--primary) 42%, transparent); }
+  [data-theme="dark"] .map-label{ background:color-mix(in srgb, var(--primary) 14%, #171c26); border-color:var(--line); box-shadow:none; }
+  [data-theme="dark"] .map-label span{ color:var(--muted); }
+  [data-theme="dark"] .map-illustration{ background:linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(0deg, rgba(255,255,255,.06) 1px, transparent 1px), radial-gradient(circle at 78% 20%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 16rem), linear-gradient(135deg, #12161e, color-mix(in srgb, var(--primary) 22%, #0e131b)); background-size:54px 54px,54px 54px,auto,auto; border-color:var(--line); }
+  [data-theme="dark"] .map-pin::after{ background:#171c26; }
+  [data-theme="dark"] .service-icon{ border-color:#171c26; }
+  [data-theme="dark"] .section-kicker,
+  [data-theme="dark"] .service-top strong,
+  [data-theme="dark"] h1 em{ color:color-mix(in srgb, var(--primary) 52%, #ffffff); }
+  [data-theme="dark"] .reviewer strong,
+  [data-theme="dark"] .float-card strong,
+  [data-theme="dark"] .hours-list b,
+  [data-theme="dark"] .footer-links a,
+  [data-theme="dark"] .faq-item summary{ color:#eef2f7; }
+  [data-theme="dark"] .hours-list li{ border-bottom-color:rgba(255,255,255,.08); }
+</style>
+<!-- THEMEFIX:END -->
 </body>
 </html>

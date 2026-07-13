@@ -1023,6 +1023,13 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   [data-theme="light"] body::before{ opacity:.25; }
   [data-theme="light"] header.site.is-scrolled{ box-shadow:0 14px 44px rgba(20,26,51,0.12); }
   [data-theme="light"] .field input,[data-theme="light"] .field select,[data-theme="light"] .field textarea{ background:rgba(17,22,48,0.03); }
+  /* THEMEFIX: light-mode contrast — bright cyan accent fails AA as text on light surfaces; darken accent text + fix white hover borders */
+  [data-theme="light"] .eyebrow{ color:#0e7490; }
+  [data-theme="light"] .contact-points .ci{ color:#0e7490; }
+  [data-theme="light"] .stat:hover,
+  [data-theme="light"] .feat:hover,
+  [data-theme="light"] .demo:hover{ border-color:rgba(17,22,48,0.18); }
+  [data-theme="light"] .form-status.err{ color:#c0392b; }
 </style>
 
 <!-- ENH:START — icons, theme toggle, richer components & finishing touches (additive, motion-safe) -->

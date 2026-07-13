@@ -2516,9 +2516,16 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 <!-- ENH-THEME (per-site) -->
 <script>window.ENH_BASE='light';window.ENH_ALT='dark';</script>
 <style id="enh-theme">
+  /* THEMEFIX: genuine dark theme — deep walnut/charcoal neutrals, warm light ink (WCAG-AA) */
   [data-theme="dark"]{
-    --cream:#e7ded1; --linen:#eee4d5; --smoke:#dacdbd; --white:#ece7e0;
-    --shadow:0 30px 96px rgba(23,19,18,0.34);
+    --ink:#f2e9df;
+    --muted:rgba(242,233,223,0.74);
+    --soft:rgba(242,233,223,0.54);
+    --cream:#17120f;
+    --linen:#17120f;
+    --smoke:#241b15;
+    --line:rgba(255,255,255,0.13);
+    --shadow:0 30px 96px rgba(0,0,0,0.55);
   }
 </style>
 
@@ -2955,5 +2962,40 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 }
 </style>
 <!-- XLINK:END -->
+<!-- THEMEFIX:START — explicit dark rules for hard-coded light surfaces (bespoke Men's Salon template) -->
+<style id="themefix-dark">
+  [data-theme="dark"] body{
+    background:
+      radial-gradient(circle at 8% 0%, rgba(183,116,71,0.20), transparent 32rem),
+      radial-gradient(circle at 92% 6%, rgba(217,162,87,0.14), transparent 30rem),
+      linear-gradient(180deg, #120e0b 0%, #16110d 44%, #1b140f 100%);
+  }
+  [data-theme="dark"] body::before{ opacity:.16; background-image:linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(0deg, rgba(255,255,255,.045) 1px, transparent 1px); }
+  [data-theme="dark"] .nav-links{ background:rgba(255,255,255,.05); }
+  [data-theme="dark"] .phone-link,[data-theme="dark"] .phone-hero,[data-theme="dark"] .btn-secondary{ background:rgba(255,255,255,.08); color:#f2e9df; }
+  [data-theme="dark"] .eyebrow{ background:rgba(255,255,255,.06); color:var(--amber); }
+  [data-theme="dark"] .proof-card,
+  [data-theme="dark"] .floating-rating,
+  [data-theme="dark"] .quick-book-card,
+  [data-theme="dark"] .menu-card,
+  [data-theme="dark"] .insta-card,
+  [data-theme="dark"] .team-card,
+  [data-theme="dark"] .review-card{ background:color-mix(in srgb, var(--copper) 10%, #201812); border-color:var(--line); }
+  [data-theme="dark"] .time-chip,[data-theme="dark"] .filter-btn{ background:rgba(255,255,255,.06); color:#f2e9df; }
+  [data-theme="dark"] .quick-pills button,
+  [data-theme="dark"] .estimate,
+  [data-theme="dark"] .specialties span,
+  [data-theme="dark"] .info-panel{ background:rgba(255,255,255,.06); color:#f2e9df; border-color:var(--line); }
+  [data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea{ background:rgba(255,255,255,.05); color:var(--ink); border-color:rgba(255,255,255,.16); }
+  [data-theme="dark"] input::placeholder,[data-theme="dark"] textarea::placeholder{ color:rgba(242,233,223,.45); }
+  [data-theme="dark"] label{ color:#f2e9df; }
+  [data-theme="dark"] .section-kicker,
+  [data-theme="dark"] h1 em,
+  [data-theme="dark"] .menu-title span,
+  [data-theme="dark"] .role{ color:var(--amber); }
+  [data-theme="dark"] .reviewer{ color:var(--muted); }
+  [data-theme="dark"] .reviewer strong{ color:#f2e9df; }
+</style>
+<!-- THEMEFIX:END -->
 </body>
 </html>

@@ -2477,9 +2477,17 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 <!-- ENH-THEME (per-site) -->
 <script>window.ENH_BASE='light';window.ENH_ALT='dark';</script>
 <style id="enh-theme">
+  /* THEMEFIX: genuine dark theme — deep warm espresso neutrals, light ink (WCAG-AA) */
   [data-theme="dark"]{
-    --cream:#efe6d6; --flour:#ece5d8; --linen:#e6d7c3; --sand:#dfc7a9; --white:#ece7df;
-    --shadow:0 28px 90px rgba(58,32,23,0.30);
+    --ink:#f4ece1;
+    --muted:rgba(244,236,225,0.74);
+    --soft:rgba(244,236,225,0.54);
+    --cream:#1a1310;
+    --flour:#1a1310;
+    --linen:#241a14;
+    --sand:#2c1f16;
+    --line:rgba(255,255,255,0.13);
+    --shadow:0 28px 90px rgba(0,0,0,0.55);
   }
 </style>
 
@@ -2919,5 +2927,44 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 }
 </style>
 <!-- XLINK:END -->
+<!-- THEMEFIX:START — explicit dark rules for hard-coded light surfaces (bespoke Food & Drink template) -->
+<style id="themefix-dark">
+  [data-theme="dark"] body{
+    background:
+      radial-gradient(circle at 8% 0%, rgba(200,95,52,0.18), transparent 32rem),
+      radial-gradient(circle at 92% 6%, rgba(231,171,72,0.14), transparent 30rem),
+      linear-gradient(180deg, #140f0c 0%, #17110d 42%, #1d150f 100%);
+  }
+  [data-theme="dark"] body::before{ opacity:.16; background-image:linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(0deg, rgba(255,255,255,.045) 1px, transparent 1px); }
+  [data-theme="dark"] .nav-links{ background:rgba(255,255,255,.05); }
+  [data-theme="dark"] .nav-links a{ color:rgba(244,236,225,.80); }
+  [data-theme="dark"] .nav-links a:hover{ color:#f4ece1; }
+  [data-theme="dark"] .order-link,[data-theme="dark"] .btn-secondary{ background:rgba(255,255,255,.08); color:#f4ece1; }
+  [data-theme="dark"] .eyebrow{ background:rgba(255,255,255,.06); color:color-mix(in srgb, var(--terracotta) 62%, #ffffff); }
+  [data-theme="dark"] .proof-card,
+  [data-theme="dark"] .floating-review,
+  [data-theme="dark"] .quick-card,
+  [data-theme="dark"] .dish-card,
+  [data-theme="dark"] .menu-side,
+  [data-theme="dark"] .truck-card,
+  [data-theme="dark"] .review-card,
+  [data-theme="dark"] .map-label{ background:color-mix(in srgb, var(--terracotta) 10%, #211812); border-color:var(--line); }
+  [data-theme="dark"] .tab-btn,[data-theme="dark"] .filter-btn,[data-theme="dark"] .time-chip{ background:rgba(255,255,255,.06); color:#f4ece1; }
+  [data-theme="dark"] .quick-pills button,
+  [data-theme="dark"] .tag,
+  [data-theme="dark"] .platform-card,
+  [data-theme="dark"] .source-item,
+  [data-theme="dark"] .address-card,
+  [data-theme="dark"] .schedule-item{ background:rgba(255,255,255,.06); color:#f4ece1; border-color:var(--line); }
+  [data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea{ background:rgba(255,255,255,.05); color:var(--ink); border-color:rgba(255,255,255,.16); }
+  [data-theme="dark"] input::placeholder,[data-theme="dark"] textarea::placeholder{ color:rgba(244,236,225,.45); }
+  [data-theme="dark"] label{ color:#f4ece1; }
+  [data-theme="dark"] .section-kicker,
+  [data-theme="dark"] h1 em,
+  [data-theme="dark"] .dish-top h3{ color:color-mix(in srgb, var(--terracotta) 62%, #ffffff); }
+  [data-theme="dark"] .reviewer{ color:var(--muted); }
+  [data-theme="dark"] .reviewer strong{ color:#f4ece1; }
+</style>
+<!-- THEMEFIX:END -->
 </body>
 </html>
