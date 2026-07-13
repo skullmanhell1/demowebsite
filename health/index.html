@@ -1522,5 +1522,19 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 })();
 </script>
 <!-- REDESIGN:END -->
+<!-- DARKHERO:START — dark-mode eyebrow/kicker legibility (additive; ONLY html[data-theme="dark"] rules; light mode untouched).
+     Root cause (this site): the base rule `.eyebrow{color:var(--forest)}` is only overridden to the light
+     `var(--mint)` for .hero/.visual/.reviews/.services-luxe eyebrows. Every CONTENT-section eyebrow
+     (.concierge, .membership, .booking-section, .journey, .final, .faq …) keeps the DARK brand token
+     --forest (resolves to the deep heather ≈#6c6398 in dark mode). On this site's dark section surfaces that
+     renders dark-on-dark (≈3:1 — below AA). Body copy and headings (which inherit the light dark-mode --ink)
+     are already legible; only these eyebrows were missed. Fix: re-assert the same light mint the hero eyebrow
+     already uses. The hero H1, hero eyebrow and hero .lead already resolve to light ink, so they need no
+     change. html[data-theme="dark"] .eyebrow (0,2,1) out-specifies the section overrides and comes last, so
+     it wins cleanly in dark mode only. -->
+<style id="darkhero">
+  html[data-theme="dark"] .eyebrow{ color: var(--mint); }
+</style>
+<!-- DARKHERO:END -->
 </body>
 </html>
