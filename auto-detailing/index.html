@@ -1417,5 +1417,204 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   [data-theme="dark"] .hours-list li{ border-bottom-color:rgba(255,255,255,.08); }
 </style>
 <!-- THEMEFIX:END -->
+<!-- REDESIGN:START — MirrorFinish Detailing: Liquid Chrome & Oil-Slick Iridescence (skill-driven, additive, motion-safe) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" /></noscript>
+<style id="redesign-mirrorfinish">
+  /* ============================================================
+     MirrorFinish Detailing — full-page skill-driven redesign
+     Concept: liquid obsidian + platinum chrome, where the ONLY
+     colour is an iridescent "ceramic-coating oil-slick" sheen.
+     Retunes design tokens (all components inherit) + fonts,
+     adds a recurring iridescent hairline motif, and one signature
+     mirror-finish light sweep across the hero. Placed last so it
+     wins ties without !important spam. Reduced-motion respected.
+     ============================================================ */
+
+  :root {
+    /* Named brand palette (chrome spine + iridescent light) */
+    --mf-obsidian:#0C1218;   /* deepest metal / CTA base   */
+    --mf-graphite:#161D26;   /* dark panels                */
+    --mf-iris:#5A43D6;       /* anchor accent (AA on light)*/
+    --mf-iris-bright:#7A5CF0;/* brighter iris for gradients*/
+    --mf-cyan:#2BC4D6;       /* sheen partner (decorative) */
+    --mf-mint:#7CE7C9;       /* sheen partner (decorative) */
+    --mf-pink:#FF8FE0;       /* sheen partner (decorative) */
+    /* Signature: oil-slick ceramic sheen (decorative light only) */
+    --mf-sheen:linear-gradient(100deg,#7A5CF0 0%,#6A4DE8 22%,#2BC4D6 52%,#7CE7C9 74%,#FF8FE0 100%);
+
+    /* Retune existing tokens so every component inherits the new look */
+    --ink:#0E141B;
+    --muted:rgba(14,20,27,.70);
+    --soft:rgba(14,20,27,.55);
+    --line:rgba(14,20,27,.12);
+    --primary:#5A43D6;
+    --secondary:#2BC4D6;
+    --dark:#0C1218;
+    --accent:#6A4DE8;
+    --soft-bg:#E7ECF3;
+    --cream:#F6F8FB;
+    --radius-xl:28px;
+    --radius-lg:22px;
+  }
+
+  /* ---- Typography: Syne display + Outfit body + JetBrains Mono labels ---- */
+  body { font-family:'Outfit', Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+  h1, h2, h3, .brand-name { font-family:'Syne','Outfit', ui-sans-serif, system-ui, sans-serif; }
+  h1 { letter-spacing:-.03em; font-weight:800; }
+  h2 { letter-spacing:-.025em; font-weight:800; }
+  h3 { letter-spacing:-.015em; font-weight:700; }
+  .brand-name { font-weight:800; letter-spacing:-.02em; }
+  .eyebrow, .section-kicker, .brand-subtitle {
+    font-family:'JetBrains Mono', ui-monospace, "SFMono-Regular", Menlo, monospace;
+    letter-spacing:.16em; text-transform:uppercase;
+  }
+  .eyebrow { font-weight:600; font-size:.72rem; }
+  .section-kicker { font-weight:600; }
+
+  /* ---- Showroom-pearl backdrop with faint iris + cyan reflections ---- */
+  body {
+    background:
+      radial-gradient(circle at 6% -4%, color-mix(in srgb, var(--mf-iris) 12%, transparent), transparent 34rem),
+      radial-gradient(circle at 97% 3%, color-mix(in srgb, var(--mf-cyan) 12%, transparent), transparent 30rem),
+      linear-gradient(180deg, #F6F8FB 0%, #EEF2F6 46%, #E7ECF3 100%);
+  }
+  body::before { opacity:.09; }
+
+  /* ---- Header: cooler pearl glass ---- */
+  .site-header { background:rgba(244,247,250,.86); }
+  .site-header.scrolled { background:rgba(244,247,250,.96); box-shadow:0 10px 30px rgba(12,18,24,.10); }
+  .brand-mark { background:radial-gradient(circle at 28% 20%, rgba(255,255,255,.35), transparent 32%), linear-gradient(135deg, var(--mf-obsidian), var(--mf-iris) 62%, var(--mf-cyan)); }
+
+  /* ---- Recurring signature motif: iridescent hairline in every kicker ---- */
+  .section-kicker::before {
+    width:30px; height:2px; opacity:1; border-radius:2px;
+    background:var(--mf-sheen); background-size:200% 100%;
+  }
+
+  /* ---- Buttons: liquid chrome → iris, with iridescent resting glint ---- */
+  .btn-primary {
+    background:linear-gradient(135deg, var(--mf-graphite) 0%, var(--mf-iris) 68%, var(--mf-iris-bright) 100%);
+    box-shadow:0 16px 36px color-mix(in srgb, var(--mf-iris) 30%, transparent);
+  }
+  .btn-primary:hover { box-shadow:0 20px 46px color-mix(in srgb, var(--mf-iris) 38%, transparent); }
+  .btn-accent { background:linear-gradient(135deg, var(--mf-iris), var(--mf-iris-bright)); }
+
+  /* ---- Nav underline uses the iridescent sheen ---- */
+  .nav-links a { background-image:var(--mf-sheen); }
+
+  /* ---- Iridescent top-edge on signature surfaces (all overflow-hidden) ---- */
+  .service-card, .offer-card, .final-card, .form-copy { position:relative; }
+  .service-card::after,
+  .offer-card::after,
+  .final-card::after,
+  .form-copy::after {
+    content:""; position:absolute; left:0; right:0; top:0; height:3px; z-index:3;
+    background:var(--mf-sheen); background-size:220% 100%;
+    opacity:.55; transition:opacity .4s ease;
+  }
+  .service-card:hover::after,
+  .offer-card:hover::after,
+  .final-card:hover::after,
+  .form-copy:hover::after { opacity:1; }
+  /* keep the service photo scrim/icon above nothing it shouldn't; hairline is thin */
+  .service-card .service-image { z-index:1; }
+
+  /* ---- Hero: crisp iridescent frame + deep gloss on the feature photo ---- */
+  .hero-photo {
+    box-shadow: var(--shadow), inset 0 0 0 1px color-mix(in srgb, var(--mf-iris) 38%, transparent);
+    filter: saturate(1.08) contrast(1.06);
+  }
+  .float-card .stars, .review-card .stars { color:var(--mf-iris); }
+  .trust-icon, .why-item > span:first-child { background:linear-gradient(135deg, var(--mf-iris), var(--mf-iris-bright)); }
+  .service-icon { background:linear-gradient(135deg, var(--mf-obsidian), var(--mf-iris)); }
+
+  /* ---- Reviews summary + offer bands: iridescent glow anchor ---- */
+  .reviews-summary { background:radial-gradient(circle at 24% 16%, color-mix(in srgb, var(--mf-cyan) 26%, transparent), transparent 18rem), linear-gradient(150deg, var(--mf-obsidian), var(--mf-iris)); }
+  .review-score { background:var(--mf-sheen); -webkit-background-clip:text; background-clip:text; color:transparent; }
+
+  /* ================= SIGNATURE ANIMATION ================= */
+  /* One mirror-finish light sweep travels across the hero feature photo on
+     load, plus a slow iridescent glide on kicker hairlines. Only enabled
+     when the visitor allows motion; content is fully visible without it. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-media { position:relative; }
+    .hero-media::before {
+      content:""; position:absolute; z-index:3; pointer-events:none;
+      top:14px; bottom:0; left:0; width:42%;
+      background:linear-gradient(100deg, transparent, rgba(255,255,255,.42), transparent);
+      transform:skewX(-14deg) translateX(-160%);
+      animation:mfHeroSweep 1.5s cubic-bezier(.22,.61,.36,1) .55s 1 both;
+      mix-blend-mode:screen; border-radius:46px;
+    }
+    @keyframes mfHeroSweep {
+      from { transform:skewX(-14deg) translateX(-160%); }
+      to   { transform:skewX(-14deg) translateX(320%); }
+    }
+    .section-kicker::before { animation:mfSheenGlide 6s linear infinite; }
+    @keyframes mfSheenGlide { from { background-position:0% 0; } to { background-position:200% 0; } }
+    .service-card::after, .offer-card::after, .final-card::after, .form-copy::after { animation:mfSheenGlide 8s linear infinite; }
+    /* extra scroll-reveal accents (elements the base reveal doesn't cover) */
+    .mf-reveal { opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1); }
+    .mf-reveal.mf-in { opacity:1; transform:none; }
+  }
+
+  /* ================= DARK THEME COHESION ================= */
+  [data-theme="dark"] {
+    --ink:#EAF0F6;
+    --muted:rgba(234,240,246,.74);
+    --soft:rgba(234,240,246,.56);
+    --line:rgba(255,255,255,.13);
+    --primary:#9D8CFF;         /* brighter iris — AA on obsidian (6.8:1) */
+    --accent:#9D8CFF;
+    --secondary:#55D8E6;
+    --dark:#0C1218;
+    --soft-bg:#141B24;
+    --cream:#12181F;
+  }
+  [data-theme="dark"] body {
+    background:
+      radial-gradient(circle at 6% -4%, color-mix(in srgb, var(--mf-iris) 24%, transparent), transparent 34rem),
+      radial-gradient(circle at 97% 3%, color-mix(in srgb, var(--mf-cyan) 20%, transparent), transparent 30rem),
+      linear-gradient(180deg, #080B10 0%, #0C1218 46%, #0E141B 100%);
+  }
+  [data-theme="dark"] .site-header { background:color-mix(in srgb, var(--mf-iris) 10%, rgba(10,14,19,.90)); }
+  [data-theme="dark"] .review-score { color:transparent; }
+  [data-theme="dark"] .float-card .stars, [data-theme="dark"] .review-card .stars { color:var(--mf-iris-bright); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-media::before { display:none !important; }
+    .section-kicker::before,
+    .service-card::after, .offer-card::after, .final-card::after, .form-copy::after { animation:none !important; }
+    .mf-reveal { opacity:1 !important; transform:none !important; transition:none !important; }
+  }
+</style>
+<script id="redesign-mirrorfinish-js">
+(function(){
+  "use strict";
+  try {
+    var mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq && mq.matches) return;                 /* respect reduced motion */
+    if (!('IntersectionObserver' in window)) return;
+    function ready(fn){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',fn,{once:true}); else fn(); }
+    ready(function(){
+      /* Scroll-reveal for sections the base observer doesn't already handle. */
+      var sel = '#offer .offer-card, #gallery .gallery-main, #gallery .gallery-side,'
+              + ' #booking .form-copy, #booking .form-card, #location .location-card,'
+              + ' #location .map-illustration, .final-cta .final-card';
+      var els = [].slice.call(document.querySelectorAll(sel));
+      if (!els.length) return;
+      els.forEach(function(el){ if(!el.classList.contains('reveal')) el.classList.add('mf-reveal'); });
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('mf-in'); io.unobserve(en.target); } });
+      }, { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+      els.forEach(function(el){ if(el.classList.contains('mf-reveal')) io.observe(el); });
+    });
+  } catch(e) { /* fail silent — page stays fully functional */ }
+})();
+</script>
+<!-- REDESIGN:END -->
 </body>
 </html>
