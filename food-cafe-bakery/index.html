@@ -1432,5 +1432,231 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   [data-theme="dark"] .hours-list li{ border-bottom-color:rgba(255,255,255,.08); }
 </style>
 <!-- THEMEFIX:END -->
+<!-- REDESIGN:START — "Sunrise Bakehouse" skill-driven redesign + animation (additive, motion-safe, last layer wins) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400;500;600;700&display=swap" /></noscript>
+<style id="redesign">
+  /* =========================================================================
+     MORNING CRUST CAFÉ — "Sunrise Bakehouse"
+     Concept: the first warm light of morning breaking over a cool dawn sky as
+     the bakehouse opens. A rising marigold sun (warm crust / fresh-milled glow)
+     against a porcelain morning, grounded by espresso-plum ink, with a fresh
+     pistachio note for brunch greens. Deliberately NOT the warm-cream + serif +
+     terracotta café cliché, and distinct from the velvet/steel/ember siblings.
+
+     COLOR (named): Espresso Plum #2B1A2E · Marigold Sun #E8720C ·
+       Golden Honey #F4A52B · Pistachio Sage #4F8A5B · Sun-Wash #FFF0DD ·
+       Porcelain Dawn #FFFAF4
+     TYPE: Bricolage Grotesque (characterful display / signage) + Instrument Sans
+       (humanist body & labels). Distinct from a terracotta serif café.
+     LAYOUT: keep the disciplined editorial grid; unify every band with the
+       rising-sun motif and a warm→cool dawn gradient field.
+     SIGNATURE: a rising sun — an animated dawn glow that rises behind the hero,
+       a warm gradient sweep across the emphasised word, and a little sun mark
+       that leads every section eyebrow.
+     RISK: a warm sun rising into a COOL dawn-sky field (rather than an all-warm
+       café), plus a grotesque signage display instead of the expected serif.
+     ========================================================================= */
+
+  :root {
+    --ink:#2b1a2e;                 /* espresso plum */
+    --muted:rgba(43,26,46,.70);
+    --soft:rgba(43,26,46,.54);
+    --line:rgba(43,26,46,.13);
+    --primary:#e8720c;             /* marigold sun */
+    --secondary:#f4a52b;           /* golden honey */
+    --dark:#2b1a2e;                /* espresso plum (dark surfaces) */
+    --accent:#4f8a5b;              /* pistachio sage */
+    --soft-bg:#fff0dd;             /* warm sun-wash */
+    --cream:#fffaf4;               /* porcelain dawn */
+    --dg-accent:#e8720c;           /* keep the demo-guide on-brand */
+  }
+
+  /* ---- Morning-light field: warm sun rising into a cool dawn sky ---- */
+  body {
+    font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:
+      radial-gradient(circle at 6% -4%, color-mix(in srgb, var(--secondary) 30%, transparent), transparent 30rem),
+      radial-gradient(circle at 96% 2%, color-mix(in srgb, #cfe0ef 60%, transparent), transparent 28rem),
+      linear-gradient(180deg, #fffdf8 0%, var(--cream) 42%, color-mix(in srgb, var(--soft-bg) 62%, #eef3f8) 100%);
+  }
+
+  /* ---- Typography: Bricolage Grotesque display, disciplined + signage-bold ---- */
+  h1, h2, h3, .brand-name { font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, "Segoe UI", sans-serif; }
+  h1 { font-weight:800; letter-spacing:-.04em; }
+  h2 { font-weight:700; letter-spacing:-.032em; }
+  h3 { font-weight:700; letter-spacing:-.02em; }
+  .brand-name { font-weight:800; letter-spacing:-.03em; }
+  .eyebrow, .section-kicker, .brand-subtitle { font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif; }
+
+  /* Accent text kept AA on porcelain by biasing toward espresso plum */
+  .section-kicker, .eyebrow, .service-top strong { color:color-mix(in srgb, var(--primary) 56%, var(--dark)); }
+
+  /* ---- Signature motif: a rising-sun mark leading every eyebrow ---- */
+  .section-kicker::before {
+    content:""; width:15px; height:15px; border-radius:50%; opacity:1;
+    background:radial-gradient(circle at 50% 34%, var(--secondary), var(--primary) 78%);
+    box-shadow:0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent);
+    transition:transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease;
+  }
+  .eyebrow::before { background:var(--secondary); box-shadow:0 0 0 6px color-mix(in srgb, var(--primary) 16%, transparent); }
+
+  /* ---- Hero: the boldest moment — a sun rising behind the headline ---- */
+  .hero { position:relative; }
+  .hero-grid { position:relative; z-index:1; }
+  .hero::before {
+    content:""; position:absolute; z-index:0; pointer-events:none;
+    left:clamp(-140px, -6vw, -50px); bottom:-70px;
+    width:min(640px, 74%); aspect-ratio:1; border-radius:50%;
+    background:radial-gradient(circle at 50% 55%,
+      color-mix(in srgb, var(--secondary) 78%, transparent),
+      color-mix(in srgb, var(--primary) 34%, transparent) 46%, transparent 70%);
+    filter:blur(4px); opacity:.92;
+  }
+
+  /* Emphasised hero word: warm sunrise gradient (AA-safe deep stops), large text */
+  .hero h1 em { color:#b4530a; }
+  @supports ((-webkit-background-clip:text) or (background-clip:text)) {
+    .hero h1 em {
+      background:linear-gradient(96deg, #a94c08, var(--primary) 46%, #e0561f);
+      background-size:220% 100%; background-position:0 0;
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent; color:transparent;
+    }
+  }
+
+  /* ---- Buttons retuned: sunrise fills anchored dark enough for legible labels ---- */
+  .btn-primary { background:linear-gradient(135deg, var(--dark), color-mix(in srgb, var(--primary) 60%, var(--dark))); box-shadow:0 16px 36px color-mix(in srgb, var(--primary) 30%, transparent); }
+  .btn-primary:hover { box-shadow:0 20px 46px color-mix(in srgb, var(--primary) 34%, transparent); }
+  .btn-accent { background:linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 46%, var(--dark))); }
+
+  /* ---- Warm the photo scrims to espresso plum for cohesion ---- */
+  .hero-photo::after, .gallery-main::after {
+    background:linear-gradient(0deg, color-mix(in srgb, var(--dark) 88%, transparent), transparent);
+  }
+
+  /* ---- Bands unified with the sunrise gradient (left stays dark for AA text) ---- */
+  .offer-card {
+    background:linear-gradient(96deg, color-mix(in srgb, var(--dark) 92%, transparent), color-mix(in srgb, var(--primary) 52%, var(--dark))), var(--alt-img) center/cover;
+    border-color:color-mix(in srgb, var(--primary) 26%, transparent);
+  }
+  .form-copy {
+    background:linear-gradient(160deg, color-mix(in srgb, var(--dark) 90%, transparent), color-mix(in srgb, var(--dark) 74%, transparent)), var(--hero-img) center/cover;
+  }
+  .final-card {
+    background:linear-gradient(96deg, color-mix(in srgb, var(--dark) 90%, transparent), color-mix(in srgb, var(--primary) 46%, var(--dark))), var(--hero-img) center/cover;
+  }
+  .reviews-summary {
+    background:radial-gradient(circle at 26% 16%, color-mix(in srgb, var(--secondary) 30%, transparent), transparent 18rem),
+      linear-gradient(150deg, var(--dark), color-mix(in srgb, var(--primary) 58%, var(--dark)));
+  }
+
+  /* ---- Dawn dark theme: warm the neutral darks toward espresso plum ---- */
+  [data-theme="dark"] { --cream:#1a1220; }
+  [data-theme="dark"] body {
+    background:
+      radial-gradient(circle at 8% -2%, color-mix(in srgb, var(--secondary) 22%, transparent), transparent 34rem),
+      radial-gradient(circle at 94% 4%, color-mix(in srgb, var(--primary) 20%, transparent), transparent 30rem),
+      linear-gradient(180deg, #1b1222 0%, #17101d 46%, #140e19 100%);
+  }
+  [data-theme="dark"] .site-header { background:color-mix(in srgb, var(--primary) 12%, rgba(23,16,29,.90)); }
+  [data-theme="dark"] .proof-card,
+  [data-theme="dark"] .float-card,
+  [data-theme="dark"] .quick-card,
+  [data-theme="dark"] .trust-strip,
+  [data-theme="dark"] .service-card,
+  [data-theme="dark"] .form-card,
+  [data-theme="dark"] .why-card,
+  [data-theme="dark"] .location-card,
+  [data-theme="dark"] .map-card,
+  [data-theme="dark"] .faq-item,
+  [data-theme="dark"] .review-card { background:color-mix(in srgb, var(--primary) 10%, #221826); }
+  [data-theme="dark"] .trust-item,
+  [data-theme="dark"] .why-item { background:linear-gradient(135deg, color-mix(in srgb, var(--primary) 22%, #1c1424), #241a2b); }
+  [data-theme="dark"] .map-illustration {
+    background:linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(0deg, rgba(255,255,255,.06) 1px, transparent 1px),
+      radial-gradient(circle at 78% 20%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 16rem),
+      linear-gradient(135deg, #1c1424, color-mix(in srgb, var(--primary) 20%, #140e19));
+    background-size:54px 54px,54px 54px,auto,auto;
+  }
+  [data-theme="dark"] .map-pin::after,
+  [data-theme="dark"] .service-icon { border-color:#221826; }
+
+  /* =========================================================================
+     ANIMATION — complements existing ANIM / ANIM2 (no duplication).
+     New, on-brand motion: (1) signature sunrise glow rises on load,
+     (2) sunrise sweep across the emphasised word, (3) sun-mark scroll-reveal on
+     section eyebrows (hooks the existing .in-view class), (4) a fresh scroll
+     cascade for bands the base observer doesn't cover, (5) a sun-mark hover
+     micro-interaction. All transform/opacity; all reduced-motion safe; content
+     is fully visible without JS.
+     ========================================================================= */
+
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes rdSunrise { from { transform:translateY(96px) scale(.68); opacity:0; } to { transform:none; opacity:.92; } }
+    .hero::before { animation:rdSunrise 1.5s .12s both cubic-bezier(.2,.72,.24,1); }
+    @keyframes rdSunWord { from { background-position:120% 0; } to { background-position:0 0; } }
+    @supports ((-webkit-background-clip:text) or (background-clip:text)) {
+      .hero h1 em { animation:rdSunWord 1.15s .55s both ease; }
+    }
+  }
+
+  /* Sun-mark reveal on eyebrows — armed only by JS when motion is allowed, so
+     without JS (or under reduced motion) the mark is always fully visible. */
+  html.rd-armed .section-head .section-kicker::before { transform:scale(.3); opacity:0; }
+  html.rd-armed .section-head.in-view .section-kicker::before { transform:scale(1); opacity:1; }
+
+  /* Fresh scroll cascade for bands not covered by the existing reveal observer */
+  html.rd-armed .rd-reveal { opacity:0; transform:translateY(26px); transition:opacity .75s cubic-bezier(.2,.7,.2,1), transform .75s cubic-bezier(.2,.7,.2,1); }
+  html.rd-armed .rd-reveal.rd-in { opacity:1; transform:none; }
+
+  /* On-brand hover micro-interaction: the section's sun rises a touch brighter */
+  @media (hover:hover) {
+    .section-head:hover .section-kicker::before { transform:scale(1.14); box-shadow:0 0 0 6px color-mix(in srgb, var(--primary) 20%, transparent); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero::before { animation:none !important; }
+    .hero h1 em { animation:none !important; }
+    .section-kicker::before { transition:none !important; }
+    html.rd-armed .section-head .section-kicker::before { transform:none !important; opacity:1 !important; }
+    html.rd-armed .rd-reveal { opacity:1 !important; transform:none !important; transition:none !important; }
+  }
+</style>
+<script id="redesign-js">
+(function(){
+  "use strict";
+  try {
+    var mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq && mq.matches) return;                    /* honour reduced motion: leave everything static + visible */
+    if (!('IntersectionObserver' in window)) return; /* no observer: content stays fully visible, no arming */
+
+    var root = document.documentElement;
+    root.classList.add('rd-armed');                  /* enables the sun-mark + band reveals (initial-hide is gated on this) */
+
+    function ready(fn){
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn, { once:true });
+      else fn();
+    }
+    ready(function(){
+      try {
+        var sel = '.offer-card, .gallery-main, .gallery-side, .form-copy, .form-card, .location-card, .map-card, .final-card';
+        var els = [].slice.call(document.querySelectorAll(sel));
+        if (!els.length) return;
+        els.forEach(function(el){ el.classList.add('rd-reveal'); });
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(en){
+            if (en.isIntersecting){ en.target.classList.add('rd-in'); io.unobserve(en.target); }
+          });
+        }, { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+        els.forEach(function(el){ io.observe(el); });
+      } catch (e) { /* on failure, reveal everything so nothing stays hidden */
+        try { [].forEach.call(document.querySelectorAll('.rd-reveal'), function(el){ el.classList.add('rd-in'); }); } catch(_){}
+      }
+    });
+  } catch (e) { /* fail silent — page remains fully functional and visible */ }
+})();
+</script>
+<!-- REDESIGN:END -->
 </body>
 </html>
