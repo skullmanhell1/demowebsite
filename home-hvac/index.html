@@ -1630,5 +1630,18 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 })();
 </script>
 <!-- REDESIGN:END -->
+<!-- DARKFIX:START — restore WCAG-AA dark-mode ink (additive; ONLY [data-theme="dark"] rules; light mode untouched).
+     Root cause: the REDESIGN :root retuned --ink/--muted/--soft to DARK values. Those have equal specificity
+     to the earlier [data-theme="dark"] token block but win by source order, so in dark mode body copy, headings
+     and .lead rendered dark-on-dark. html[data-theme="dark"] out-specifies :root, so this re-asserts the
+     theme's intended light ink cleanly (no !important, no DOM/JS/copy changes). -->
+<style id="darkfix">
+  html[data-theme="dark"]{
+    --ink:#eef2f7;
+    --muted:rgba(236,241,248,0.74);
+    --soft:rgba(236,241,248,0.56);
+  }
+</style>
+<!-- DARKFIX:END -->
 </body>
 </html>

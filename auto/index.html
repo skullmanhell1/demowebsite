@@ -3035,5 +3035,18 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 })();
 </script>
 <!-- REDESIGN:END -->
+<!-- DARKFIX:START — restore WCAG-AA dark-mode ink (additive; ONLY [data-theme="dark"] rules; light mode untouched).
+     Root cause: the REDESIGN :root retuned --ink to #181a20 (DARK). It has equal specificity to the earlier
+     [data-theme="dark"] token block but wins by source order, so in dark mode body copy, headings and the
+     THEMEFIX inputs rule (color:var(--ink)) rendered dark-on-dark. Values match this site's intended steel-blue
+     dark palette; html[data-theme="dark"] out-specifies :root so this wins cleanly. -->
+<style id="darkfix">
+  html[data-theme="dark"]{
+    --ink:#eef2f8;
+    --muted:rgba(233,239,247,0.72);
+    --soft:rgba(233,239,247,0.54);
+  }
+</style>
+<!-- DARKFIX:END -->
 </body>
 </html>
