@@ -2997,5 +2997,283 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   [data-theme="dark"] .reviewer strong{ color:#f2e9df; }
 </style>
 <!-- THEMEFIX:END -->
+
+<!-- REDESIGN:START — "Steel & Brass, a tonsorial parlour" full-page skill-driven redesign.
+     Additive & CSS-only (plus one non-blocking font link). Placed AFTER every prior block so
+     the retuned tokens + component refinements win cleanly by cascade order (no !important spam).
+     Direction: gunmetal steel-blue + brass hardware + oxblood leather on bone/ivory paper,
+     Oswald condensed signage display. Signature motif: the brass "razor rule". -->
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap"
+      media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" /></noscript>
+<style id="redesign-steel-brass">
+  /* ============================================================
+     1) PALETTE — retune the site's semantic tokens so every
+        component inherits the new steel/brass/oxblood identity.
+     ============================================================ */
+  :root {
+    /* new named palette */
+    --gr-bone:      #f1ece2;   /* paper background        */
+    --gr-bone-card: #fbf8f1;   /* raised card surface     */
+    --gr-ink:       #171b21;   /* primary text            */
+    --gr-gunmetal:  #1a2028;   /* near-black steel        */
+    --gr-steel:     #33414e;   /* slate straight-razor steel */
+    --gr-brass:     #9c7a3c;   /* metallic hardware accent (decorative / large / UI) */
+    --gr-bronze:    #6e5426;   /* AA accent text on light  */
+    --gr-oxblood:   #6e2a28;   /* leather red accent       */
+
+    /* remap the legacy tokens the template already uses everywhere */
+    --ink:      var(--gr-ink);
+    --charcoal: var(--gr-gunmetal);
+    --blackwood:#20262e;
+    --walnut:   var(--gr-steel);
+    --copper:   var(--gr-brass);
+    --amber:    #c9a15c;                 /* light-brass highlight (kickers on dark, hovers) */
+    --cream:    var(--gr-bone);
+    --linen:    #f6f2ea;
+    --smoke:    #e2dacb;
+    --muted:    rgba(23, 27, 33, 0.70);
+    --soft:     rgba(23, 27, 33, 0.54);
+    --shadow:      0 30px 84px rgba(20, 25, 31, 0.20);
+    --soft-shadow: 0 18px 44px rgba(20, 25, 31, 0.13);
+
+    /* swap the display face from Fraunces -> Oswald (the brand-identity block
+       applies var(--gr-display) to headings, so redefining it re-skins them). */
+    --gr-display: "Oswald", "Bebas Neue", "Arial Narrow", Impact, system-ui, sans-serif;
+
+    /* keep the enhancement layer on-brand: oxblood is white-text-safe */
+    --enh-accent: var(--gr-oxblood);
+    --dg-accent:  var(--gr-brass);
+  }
+
+  ::selection { background: var(--gr-brass); color: #fff; }
+  * { scrollbar-color: var(--gr-brass) transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--gr-brass) !important; }
+  #premium-progress { background: linear-gradient(90deg, var(--gr-gunmetal), var(--gr-steel) 46%, var(--gr-brass)) !important; box-shadow: 0 0 12px rgba(156,122,60,0.53) !important; }
+
+  /* ============================================================
+     2) PAGE SURFACES — bone paper with a cool steel wash.
+     ============================================================ */
+  body {
+    background:
+      radial-gradient(circle at 12% 0%, rgba(51, 65, 78, 0.16), transparent 32rem),
+      radial-gradient(circle at 92% 6%, rgba(156, 122, 60, 0.16), transparent 30rem),
+      linear-gradient(180deg, #f6f2ea 0%, #efe9dd 46%, #e8e0d1 100%);
+  }
+  body::before {
+    background-image:
+      linear-gradient(90deg, rgba(26, 32, 40, 0.16) 1px, transparent 1px),
+      linear-gradient(0deg,  rgba(26, 32, 40, 0.13) 1px, transparent 1px);
+  }
+  .site-header { background: rgba(244, 240, 232, 0.86) !important; border-bottom: 1px solid rgba(156, 122, 60, 0.22) !important; }
+
+  /* ============================================================
+     3) TYPOGRAPHY — Oswald condensed signage; the hero is the thesis.
+     ============================================================ */
+  h1 {
+    text-transform: uppercase;
+    letter-spacing: 0.005em !important;
+    line-height: 0.92;
+    font-weight: 700;
+  }
+  h1 em {
+    color: var(--gr-oxblood);
+    font-style: normal;
+    letter-spacing: 0.005em;
+  }
+  h2, h3 { letter-spacing: 0.002em; line-height: 0.98; font-weight: 600; }
+  .brand-name { letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+  .brand-subtitle { color: var(--gr-bronze); }
+
+  /* ============================================================
+     4) SIGNATURE MOTIF — the brass "razor rule".
+        A short brass keyline leads every section label; a rotated
+        brass stud marks the hero eyebrow; a diamond centres dividers.
+     ============================================================ */
+  .section-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    color: var(--gr-bronze);
+    font-family: var(--gr-display);
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.26em;
+  }
+  .section-kicker::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    flex: none;
+    background: linear-gradient(90deg, var(--gr-brass), rgba(156, 122, 60, 0.15));
+  }
+  /* inline-styled kickers on dark bands (booking / final CTA) get a brighter rule */
+  .booking-copy .section-kicker::before,
+  .final-card .section-kicker::before { background: linear-gradient(90deg, var(--amber), rgba(201, 161, 92, 0.2)); }
+
+  .eyebrow {
+    font-family: var(--gr-display);
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--gr-bronze);
+    background: var(--gr-bone-card);
+    border: 1px solid rgba(156, 122, 60, 0.34);
+  }
+  .eyebrow::before {
+    width: 9px;
+    height: 9px;
+    border-radius: 1px;
+    transform: rotate(45deg);
+    background: var(--gr-brass);
+    box-shadow: none;
+  }
+
+  /* section dividers inserted by the enhancement layer become razor rules */
+  .enh-divider { position: relative; height: 16px; }
+  .enh-divider::before { background: linear-gradient(90deg, transparent, rgba(156, 122, 60, 0.55), transparent); }
+  .enh-divider::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background: var(--gr-brass);
+    box-shadow: 0 0 0 4px var(--gr-bone);
+  }
+
+  /* ============================================================
+     5) HERO — boldest moment. Framed portrait + an ambient
+        barber-pole corner (oxblood/steel), clipped by .hero overflow.
+     ============================================================ */
+  .hero-media::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: -10px;
+    right: -8px;
+    width: 128px;
+    height: 128px;
+    border-radius: 10px;
+    pointer-events: none;
+    opacity: 0.16;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--gr-oxblood) 0 9px,
+      transparent 9px 18px,
+      var(--gr-steel) 18px 27px,
+      transparent 27px 36px);
+  }
+  #hero-title::after {
+    content: "";
+    display: block;
+    width: 148px;
+    max-width: 60%;
+    height: 3px;
+    margin-top: 0.34em;
+    background: linear-gradient(90deg, var(--gr-brass), rgba(156, 122, 60, 0.1));
+  }
+
+  /* ============================================================
+     6) BANDS — retune the hard-coded warm gradients to steel + brass.
+     ============================================================ */
+  .promo-card {
+    background:
+      radial-gradient(circle at 88% 20%, rgba(156, 122, 60, 0.34), transparent 19rem),
+      linear-gradient(135deg, var(--gr-gunmetal) 0%, var(--gr-steel) 68%, #3d4c59 100%) !important;
+    border: 1px solid rgba(156, 122, 60, 0.24) !important;
+  }
+  .promo-card::after { background: rgba(156, 122, 60, 0.14) !important; }
+  .promo-badge { color: #e7c583; }
+  .instagram-section .insta-header,
+  #instagram [class*="insta"] { --amber: #c9a15c; }
+
+  /* focus ring already reads var(--copper) => brass; keep offset tidy */
+  a:focus-visible, button:focus-visible, .btn:focus-visible,
+  input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible {
+    outline-color: var(--gr-brass);
+  }
+
+  /* ============================================================
+     7) DARK THEME — genuine gunmetal parlour at night (WCAG-AA).
+        Placed after enh-theme + themefix-dark so these win cleanly.
+     ============================================================ */
+  [data-theme="dark"] {
+    --ink:   #ece7dc;
+    --muted: rgba(236, 231, 220, 0.74);
+    --soft:  rgba(236, 231, 220, 0.55);
+    --cream: #12161b;
+    --linen: #141a20;
+    --smoke: #1f2831;
+    --amber: #cba15e;
+    --enh-accent: var(--gr-oxblood);
+    --shadow: 0 30px 96px rgba(0, 0, 0, 0.6);
+  }
+  [data-theme="dark"] body {
+    background:
+      radial-gradient(circle at 10% 0%, rgba(51, 65, 78, 0.34), transparent 34rem),
+      radial-gradient(circle at 92% 6%, rgba(156, 122, 60, 0.16), transparent 30rem),
+      linear-gradient(180deg, #0f1318 0%, #12161c 46%, #151b22 100%);
+  }
+  [data-theme="dark"] body::before { opacity: 0.16; background-image:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+      linear-gradient(0deg,  rgba(255, 255, 255, 0.04) 1px, transparent 1px); }
+  [data-theme="dark"] .site-header { background: rgba(16, 20, 25, 0.86) !important; border-bottom: 1px solid rgba(203, 161, 94, 0.18) !important; }
+  [data-theme="dark"] .brand-name { color: var(--ink); }
+  [data-theme="dark"] .nav-links a { color: rgba(236, 231, 220, 0.72) !important; }
+  [data-theme="dark"] .nav-links a:hover { color: #ffffff !important; border-bottom-color: var(--amber); }
+  [data-theme="dark"] .section-kicker,
+  [data-theme="dark"] .brand-subtitle,
+  [data-theme="dark"] .eyebrow { color: var(--amber); }
+  [data-theme="dark"] .eyebrow { background: rgba(255, 255, 255, 0.05); border-color: rgba(203, 161, 94, 0.28); }
+  [data-theme="dark"] h1 em { color: var(--amber); }
+
+  /* cool steel card surfaces (override themefix warm color-mix) */
+  [data-theme="dark"] .proof-card,
+  [data-theme="dark"] .floating-rating,
+  [data-theme="dark"] .quick-book-card,
+  [data-theme="dark"] .menu-card,
+  [data-theme="dark"] .insta-card,
+  [data-theme="dark"] .team-card,
+  [data-theme="dark"] .review-card,
+  [data-theme="dark"] .booking-widget,
+  [data-theme="dark"] .reviews-summary,
+  [data-theme="dark"] .hours-card,
+  [data-theme="dark"] .walkin-card {
+    background: #1a2129 !important;
+    border-color: rgba(203, 161, 94, 0.20) !important;
+  }
+  [data-theme="dark"] .promo-card {
+    background:
+      radial-gradient(circle at 88% 20%, rgba(203, 161, 94, 0.22), transparent 19rem),
+      linear-gradient(135deg, #12161b 0%, #232e39 70%, #2c3945 100%) !important;
+    border-color: rgba(203, 161, 94, 0.24) !important;
+  }
+  [data-theme="dark"] a:focus-visible,
+  [data-theme="dark"] button:focus-visible,
+  [data-theme="dark"] .btn:focus-visible,
+  [data-theme="dark"] input:focus-visible,
+  [data-theme="dark"] select:focus-visible,
+  [data-theme="dark"] textarea:focus-visible { outline-color: var(--amber); }
+
+  /* ============================================================
+     8) MOTION SAFETY — no new motion is introduced, but guard anyway.
+     ============================================================ */
+  @media (prefers-reduced-motion: reduce) {
+    #premium-progress { transition: none !important; }
+    .hero-media::before { opacity: 0.12; }
+  }
+
+  /* ============================================================
+     9) RESPONSIVE — keep the hero rule + corner tidy on small screens.
+     ============================================================ */
+  @media (max-width: 768px) {
+    .hero-media::before { width: 92px; height: 92px; top: -6px; right: -4px; }
+    #hero-title::after { width: 116px; }
+  }
+</style>
+<!-- REDESIGN:END -->
 </body>
 </html>
