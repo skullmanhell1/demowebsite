@@ -802,5 +802,212 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   [data-theme="dark"] .btn-light{ background:#eef2ec; color:#151f1b; border-color:rgba(255,255,255,.70); }
 </style>
 <!-- THEMEFIX:END -->
+<!-- REDESIGN:START — Pawhaven Club skill-driven redesign + animation (additive, motion-safe).
+     Direction: "Botanic Retreat" — a calm five-star pet haven. Cool petrol-teal calm
+     paired with a warm apricot/terracotta signature (the deliberate warm/cool aesthetic
+     risk), Fraunces (display) + Manrope (body/label), and a recurring "Haven Arch" motif.
+     Retunes the brand tokens so every component inherits the new palette; refines each
+     section; adds a tasteful hero entrance + one signature animated moment (the arch
+     blooms up behind the headline). Placed after ALL prior blocks so token/dark overrides
+     win. Everything gated behind prefers-reduced-motion; page is fully usable without JS. -->
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" /></noscript>
+<style id="redesign-pawhaven">
+  /* ============================================================
+     1) TOKEN RETUNE — Botanic Retreat palette + typography
+     ------------------------------------------------------------
+     Named colors:
+       Petrol Teal   #14494F  (primary — eyebrows, buttons, icons, nums)
+       Deep Pine-Teal#0B2A2E  (dark surfaces / hero+scrim base)
+       Porcelain     #F5EFE4  (warm calm background)
+       Apricot Clay  #C96F3F  (signature warm accent — large/decorative)
+       Soft Apricot  #E7A977  (glow / stars / featured price)
+       Eucalyptus    #7FA597  (calm secondary sage)
+     ============================================================ */
+  :root{
+    --serif:"Fraunces",Georgia,"Times New Roman",serif;
+    --sans:"Manrope",Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    --ink:#17292A;            /* body ink — teal charcoal */
+    --deep:#0B2A2E;           /* dark surfaces (topbar, reviews, footer, protocol) */
+    --deep2:#0E3237;
+    --forest:#14494F;         /* primary petrol teal */
+    --sage:#7FA597;           /* eucalyptus */
+    --mint:#DCEAE3;           /* soft mint (text on dark) */
+    --cream:#F5EFE4;          /* warm porcelain */
+    --ivory:#FFFBF3;
+    --sand:#E7D8C2;
+    --gold:#C96F3F;           /* apricot-clay signature (decorative/large) */
+    --gold2:#E7A977;          /* soft apricot glow */
+    --clay:#C96F3F;
+    --rose:#DDA893;
+    --muted:#55655F;          /* readable label muted (>=5.3:1 on porcelain) */
+    --line:rgba(23,41,42,.13);
+    --line-light:rgba(255,251,243,.18);
+    --enh-accent:#C96F3F;     /* keep ENH bolt-ons on-brand */
+    --a2-accent:#C96F3F;
+  }
+  /* body text tint follows the new ink family (base hard-set a green rgba) */
+  p{ color:rgba(23,41,42,.74); }
+  /* Fraunces display wants a touch more optical weight at large sizes */
+  h1,h2,h3{ font-weight:500; letter-spacing:-.03em; }
+  .price,.metric b,.trust b,.protocol-item .count,.caption b,.detail-image b,.hero-card h3{ font-weight:500; }
+
+  /* ============================================================
+     2) SIGNATURE MOTIF — the "Haven Arch"
+     ============================================================ */
+  /* 2a. A faint apricot arch that frames the hero headline (the haven doorway). */
+  .hero .hero-grid{ position:relative; }
+  .hero .hero-grid::before{
+    content:""; position:absolute; z-index:-1; left:-2%; bottom:-6%;
+    width:min(520px,58%); height:118%;
+    border:1.5px solid rgba(231,169,119,.30); border-bottom:0;
+    border-radius:280px 280px 0 0;
+    -webkit-mask:linear-gradient(#000,transparent 86%);
+            mask:linear-gradient(#000,transparent 86%);
+    transform-origin:bottom center; pointer-events:none;
+  }
+  /* 2b. Arched tops on the three "haven" panels tie the motif together. */
+  .hero-card,.booking-card{ border-top-left-radius:104px; border-top-right-radius:104px; }
+  .plan.featured{ border-top-left-radius:96px; border-top-right-radius:96px; }
+  /* soft apricot keyline crowning the featured plan */
+  .plan.featured{ position:relative; }
+  .plan.featured::after{
+    content:""; position:absolute; left:22%; right:22%; top:6px; height:1px;
+    background:linear-gradient(90deg,transparent,rgba(231,169,119,.7),transparent);
+  }
+  /* 2c. Warm the ambient paw motif so the signature reads across the hero. */
+  .paw{
+    background:rgba(231,169,119,.30);
+    box-shadow:12px -8px 0 -4px rgba(231,169,119,.24),-12px -8px 0 -4px rgba(231,169,119,.24),
+               6px -20px 0 -5px rgba(231,169,119,.24),-6px -20px 0 -5px rgba(231,169,119,.24);
+  }
+
+  /* ============================================================
+     3) SECTION REFINEMENTS (cohesive, palette-led)
+     ============================================================ */
+  /* Hero ambient glow → eucalyptus + apricot (was sage + gold) */
+  .hero:after{
+    background:radial-gradient(circle at 22% 72%,rgba(127,165,151,.30),transparent 28%),
+               radial-gradient(circle at 80% 22%,rgba(231,169,119,.26),transparent 30%);
+  }
+  /* Nav: animated apricot underline micro-interaction */
+  .nav-links a{ position:relative; }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:-6px; height:2px; width:0;
+    background:linear-gradient(90deg,var(--gold),var(--gold2)); border-radius:2px;
+    transition:width .32s cubic-bezier(.19,1,.22,1);
+  }
+  .nav-links a:hover::after,.nav-links a:focus-visible::after{ width:100%; }
+  /* Service / protocol / plan cards: warmer accent on hover */
+  .card:hover{ border-color:rgba(201,111,63,.42); }
+  .card:hover .icon{ color:var(--forest); background:linear-gradient(135deg,rgba(127,165,151,.28),rgba(231,169,119,.22)); }
+  .protocol-item:hover{ border-color:rgba(231,169,119,.48); }
+  .plan:hover{ border-color:rgba(201,111,63,.42); }
+  .step:hover{ border-color:rgba(201,111,63,.42); }
+  /* Featured plan gradient → petrol teal (was forest green) */
+  .plan.featured{ background:linear-gradient(145deg,rgba(20,73,79,.96),rgba(11,42,46,.96)); border-color:rgba(231,169,119,.38); }
+  /* Icon tiles pick up eucalyptus→apricot wash */
+  .icon{ background:linear-gradient(135deg,rgba(127,165,151,.26),rgba(231,169,119,.18)); }
+  /* Booking top bar + hero progress bar → teal→apricot */
+  .booking-card:before{ background:linear-gradient(90deg,var(--sage),var(--gold),var(--clay)); }
+  .progress{ background:linear-gradient(90deg,var(--sage),var(--gold),var(--clay)); box-shadow:0 0 18px rgba(201,111,63,.5); }
+  /* Preloader mark & cursor glow re-tint */
+  .preloader-mark{ background:linear-gradient(135deg,var(--forest),var(--sage)); }
+  .cursor-glow{ background:radial-gradient(circle,rgba(201,111,63,.15),rgba(127,165,151,.10) 36%,transparent 68%); }
+  .mark{ background:linear-gradient(135deg,var(--forest),var(--sage)); }
+  /* Editorial-card ambient blob → eucalyptus */
+  .editorial-card:before{ background:radial-gradient(circle,rgba(127,165,151,.24),transparent 66%); }
+  /* Image figures echo a gentle arched top corner (signature) */
+  .detail-image,.image-card,.journey-photo{ border-top-left-radius:44px; }
+
+  /* ============================================================
+     4) ANIMATION (gated behind html.rd-anim — JS adds it only when
+        motion is allowed; complements existing ANIM2/reveal, never fights)
+     ============================================================ */
+  /* 4a. Signature moment — the Haven Arch blooms up behind the headline (once). */
+  html.rd-anim .hero .hero-grid::before{ animation:rdArchBloom 1.5s cubic-bezier(.19,1,.22,1) both; }
+  @keyframes rdArchBloom{ from{ opacity:0; transform:scaleY(.55) translateY(24px); } to{ opacity:1; transform:none; } }
+  /* 4b. Hero entrance — gentle staggered rise for the concierge mini-book. */
+  html.rd-anim .hero-card .mini-book>*{ opacity:0; animation:rdRise .7s cubic-bezier(.19,1,.22,1) forwards; }
+  html.rd-anim .hero-card .mini-book>*:nth-child(1){ animation-delay:.55s; }
+  html.rd-anim .hero-card .mini-book>*:nth-child(2){ animation-delay:.66s; }
+  html.rd-anim .hero-card .mini-book>*:nth-child(3){ animation-delay:.77s; }
+  @keyframes rdRise{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:none; } }
+  /* 4c. Scroll-reveal accent — an apricot underline draws under section titles
+         as they enter (not covered by the existing fade-in reveal). */
+  html.rd-anim .rd-underline{ position:relative; }
+  html.rd-anim .rd-underline::after{
+    content:""; position:absolute; left:0; bottom:-.16em; height:2px; width:0;
+    background:linear-gradient(90deg,var(--gold),transparent); border-radius:2px;
+    transition:width 1s cubic-bezier(.19,1,.22,1);
+  }
+  html.rd-anim .rd-underline.rd-seen::after{ width:2.6em; }
+
+  /* ============================================================
+     5) DARK THEME — retune green-tinted surfaces to petrol teal + apricot
+        (placed after THEMEFIX so these win; keeps AA contrast)
+     ============================================================ */
+  [data-theme="dark"]{
+    --cream:#0C2023; --sand:#1c2f2c; --mint:#DCEAE3;
+    --deep:#081b1e; --deep2:#0b262a;
+    --gold:#E7A977; --gold2:#E7A977; --clay:#E7A977;
+    --line:rgba(255,255,255,0.12); --line-light:rgba(255,255,255,0.14);
+  }
+  [data-theme="dark"] .services,[data-theme="dark"] .faq{ background:#0c2023; }
+  [data-theme="dark"] .concierge{ background:linear-gradient(180deg,#0d2427,#0c2023); }
+  [data-theme="dark"] .membership{ background:linear-gradient(180deg,#0c2023,#0d2427); }
+  [data-theme="dark"] .journey{ background:#0d2427; }
+  [data-theme="dark"] .booking-section{ background:radial-gradient(circle at 85% 12%,rgba(127,165,151,.16),transparent 32%),linear-gradient(180deg,#0d2427,#081b1e); }
+  [data-theme="dark"] .plan.featured{ background:linear-gradient(145deg,rgba(20,73,79,.95),rgba(8,27,30,.96)); }
+  [data-theme="dark"] .nav.scrolled{ background:rgba(12,32,35,.85); }
+  [data-theme="dark"] .rail{ background:rgba(13,36,39,.86); }
+  [data-theme="dark"] .icon{ background:linear-gradient(135deg,rgba(127,165,151,.22),rgba(231,169,119,.16)); }
+  [data-theme="dark"] .price{ color:var(--gold2); }
+
+  /* ============================================================
+     6) REDUCED MOTION — hard stop for every redesign animation
+        (JS also refuses to add rd-anim; content stays fully visible)
+     ============================================================ */
+  @media (prefers-reduced-motion: reduce){
+    html.rd-anim .hero .hero-grid::before{ animation:none !important; opacity:1 !important; transform:none !important; }
+    html.rd-anim .hero-card .mini-book>*{ animation:none !important; opacity:1 !important; transform:none !important; }
+    html.rd-anim .rd-underline::after{ transition:none !important; }
+    .nav-links a::after{ transition:none !important; }
+  }
+</style>
+<script id="redesign-pawhaven-js">
+(function(){
+  "use strict";
+  try{
+    var mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq && mq.matches) return;                 /* respect reduced motion: no enhancements */
+    var root = document.documentElement;
+    if (root.__rdPaw) return; root.__rdPaw = true;
+    root.classList.add('rd-anim');
+    function ready(fn){
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn, { once:true });
+      else fn();
+    }
+    ready(function(){
+      try{
+        if (!('IntersectionObserver' in window)) return;
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            if (e.isIntersecting){ e.target.classList.add('rd-seen'); io.unobserve(e.target); }
+          });
+        }, { threshold:.35 });
+        /* left-aligned section titles only — never the centered final CTA */
+        document.querySelectorAll('.section-head h2, .editorial-card h2').forEach(function(el){
+          el.classList.add('rd-underline'); io.observe(el);
+        });
+      }catch(e){/* no-op */}
+    });
+  }catch(e){ /* fail silent — page stays fully functional */ }
+})();
+</script>
+<!-- REDESIGN:END -->
 </body>
 </html>
