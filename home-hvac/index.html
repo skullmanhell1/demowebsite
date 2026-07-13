@@ -1418,5 +1418,217 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   [data-theme="dark"] .hours-list li{ border-bottom-color:rgba(255,255,255,.08); }
 </style>
 <!-- THEMEFIX:END -->
+
+<!-- REDESIGN:START — BreezePro Air & Heating: "Thermal Comfort Engineering" skill-driven redesign + animation.
+     Additive layer placed after ALL prior blocks. Retunes tokens (glacier-teal + thermal-amber duality),
+     applies Chivo / Golos Text / Spline Sans Mono site-wide, adds the "Thermal Ribbon" signature motif,
+     an airflow hero moment + scroll reveals. No DOM/markup/copy/JSON-LD/JS-behaviour changes. Everything
+     gated behind prefers-reduced-motion; content fully visible without JS. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" media="print" onload="this.media='all'"
+      href="https://fonts.googleapis.com/css2?family=Chivo:wght@700;800;900&family=Golos+Text:wght@400;500;600;700;800;900&family=Spline+Sans+Mono:wght@500;600;700&display=swap" />
+<noscript><link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Chivo:wght@700;800;900&family=Golos+Text:wght@400;500;600;700;800;900&family=Spline+Sans+Mono:wght@500;600;700&display=swap" /></noscript>
+<style id="redesign-breezepro">
+  /* ============================================================
+     1) DESIGN TOKENS — cool "glacier" foundation + warm "thermal"
+        counterpoint. The hot/cool duality IS the HVAC subject.
+     ============================================================ */
+  :root{
+    --ink:#16242e;
+    --muted:rgba(22,36,46,.66);
+    --soft:rgba(22,36,46,.5);
+    --line:rgba(22,36,46,.12);
+    --primary:#0b6e82;        /* glacier teal-cyan — cooling; 5.9:1 on white */
+    --secondary:#12a08f;      /* aqua breeze — cool mid */
+    --accent:#d2660f;         /* thermal amber — heating / emergency warmth */
+    --dark:#0a2733;           /* deep petrol graphite — anchor */
+    --soft-bg:#e7f4f5;        /* frost tint */
+    --cream:#f5fafb;
+    /* Signature: the Thermal Ribbon — cool -> aqua -> warm */
+    --hv-ribbon:linear-gradient(90deg, var(--primary), var(--secondary) 44%, var(--accent));
+    --hv-ribbon-soft:linear-gradient(90deg,
+        color-mix(in srgb, var(--primary) 26%, transparent),
+        color-mix(in srgb, var(--secondary) 24%, transparent) 46%,
+        color-mix(in srgb, var(--accent) 30%, transparent));
+    /* Adopt brand hue for the shared enhancement layer (toggle, sticky CTA,
+       dividers, avatars, badges) so those inherit the redesign. */
+    --enh-accent:#0b6e82;
+  }
+
+  /* ============================================================
+     2) TYPOGRAPHY — Chivo (engineered industrial display),
+        Golos Text (humanist body), Spline Sans Mono (instrument
+        "readout" labels — the thermostat/panel voice).
+     ============================================================ */
+  body{ font-family:'Golos Text', Inter, ui-sans-serif, system-ui, -apple-system, sans-serif; }
+  h1, h2, h3, .brand-name{ font-family:'Chivo','Sora', Inter, ui-sans-serif, system-ui, sans-serif; }
+  h1{ font-weight:900; letter-spacing:-.05em; }
+  h2{ font-weight:800; letter-spacing:-.035em; }
+  h3, .brand-name{ font-weight:800; }
+  .section-kicker, .eyebrow, .brand-subtitle, .note-pill,
+  .offer-code small, .hours-list li, .map-label span, .reviewer span, .trust-item span{
+    font-family:'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .section-kicker, .eyebrow, .brand-subtitle{ letter-spacing:.16em; font-weight:600; }
+  .hours-list li{ letter-spacing:.01em; }
+  ::selection{ background:var(--primary); color:#fff; }
+
+  /* ============================================================
+     3) SIGNATURE MOTIF — the Thermal Ribbon recurs as the kicker
+        lead-in, key-card top edge, and a hero accent bar.
+     ============================================================ */
+  .section-kicker{ align-items:center; }
+  .section-kicker::before{
+    content:""; width:34px; height:3px; border-radius:3px;
+    background:var(--hv-ribbon); opacity:1; flex:none;
+  }
+  /* Curated key surfaces get a thin thermal header edge for rhythm */
+  .why-card, .form-card, .location-card, .reviews-summary, .offer-card, .final-card{ position:relative; }
+  .why-card::before, .form-card::before, .location-card::before,
+  .offer-card::before, .final-card::before{
+    content:""; position:absolute; left:0; right:0; top:0; height:4px;
+    background:var(--hv-ribbon); border-radius:inherit; border-bottom-left-radius:0; border-bottom-right-radius:0;
+    opacity:.9; pointer-events:none;
+  }
+  /* Service cards: a thermal strip above the photo that warms on hover */
+  .service-card{ position:relative; }
+  .service-card::before{
+    content:""; position:absolute; left:0; right:0; top:0; height:4px; z-index:3;
+    background:var(--hv-ribbon); transform:scaleX(.34); transform-origin:left;
+    transition:transform .4s cubic-bezier(.2,.7,.2,1); pointer-events:none;
+  }
+  .service-card:hover::before{ transform:scaleX(1); }
+
+  /* Eyebrow keeps its cool dot but sits on the frost/brand system */
+  .eyebrow{ color:var(--primary); border-color:color-mix(in srgb, var(--primary) 24%, transparent); }
+
+  /* Hero signature accent bar under the headline — animated thermal sweep */
+  .hero h1{ position:relative; }
+  .hero h1::after{
+    content:""; display:block; width:132px; height:6px; margin-top:24px; border-radius:4px;
+    background:linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--secondary), var(--primary));
+    background-size:220% 100%; background-position:0% 0;
+  }
+
+  /* ============================================================
+     4) HERO AIRFLOW — ambient drifting streamlines (cool from the
+        left, a warm counter-current lower-right) = moving air.
+     ============================================================ */
+  .hero{ position:relative; isolation:isolate; }
+  .hero > .container{ position:relative; z-index:2; }
+  .hero::before, .hero::after{
+    content:""; position:absolute; top:0; height:100%; z-index:0; pointer-events:none;
+    background-repeat:repeat;
+  }
+  .hero::before{
+    left:-20%; width:150%;
+    background-image:repeating-linear-gradient(114deg,
+        transparent 0 30px,
+        color-mix(in srgb, var(--primary) 20%, transparent) 30px 31px,
+        transparent 31px 66px);
+    -webkit-mask-image:linear-gradient(104deg, transparent 0%, #000 26%, #000 58%, transparent 90%);
+            mask-image:linear-gradient(104deg, transparent 0%, #000 26%, #000 58%, transparent 90%);
+    opacity:.5;
+  }
+  .hero::after{
+    right:-20%; width:120%;
+    background-image:repeating-linear-gradient(114deg,
+        transparent 0 40px,
+        color-mix(in srgb, var(--accent) 16%, transparent) 40px 41px,
+        transparent 41px 84px);
+    -webkit-mask-image:linear-gradient(284deg, transparent 0%, #000 20%, transparent 62%);
+            mask-image:linear-gradient(284deg, transparent 0%, #000 20%, transparent 62%);
+    opacity:.42;
+  }
+
+  /* ============================================================
+     5) MICRO-INTERACTIONS — quiet, brand-tied.
+     ============================================================ */
+  .quick-pills button{ transition:transform .2s ease, background-color .25s ease, color .25s ease, box-shadow .25s ease; }
+  .quick-pills button:hover{
+    color:#fff; background:var(--hv-ribbon); transform:translateY(-2px);
+    box-shadow:0 10px 22px color-mix(in srgb, var(--primary) 30%, transparent);
+  }
+  .why-item{ transition:transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease, border-color .3s ease; }
+  .why-item:hover{ transform:translateY(-3px); border-color:color-mix(in srgb, var(--primary) 30%, var(--line)); }
+  .phone-link, .phone-hero{ transition:transform .2s ease, box-shadow .2s ease; }
+  .phone-link:hover, .phone-hero:hover{ transform:translateY(-1px); }
+  .footer-links a{ background-image:var(--hv-ribbon); background-repeat:no-repeat; background-position:left 100%; background-size:0% 2px; transition:background-size .3s ease; }
+  .footer-links a:hover{ background-size:100% 2px; }
+
+  /* ============================================================
+     6) SCROLL REVEAL — only for sections the existing observer
+        doesn't already cover. Class is added by JS solely when
+        motion is allowed; otherwise content is visible by default.
+     ============================================================ */
+  .rd-reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+  .rd-reveal.rd-in{ opacity:1; transform:none; }
+
+  /* ============================================================
+     7) DARK THEME cohesion — keep the thermal ribbon legible on
+        the deep petrol surface; brighten the hero currents a touch.
+     ============================================================ */
+  [data-theme="dark"] .hero::before{ opacity:.42; }
+  [data-theme="dark"] .hero::after{ opacity:.5; }
+  [data-theme="dark"] .quick-pills button{ color:#eef2f7; }
+  [data-theme="dark"] .quick-pills button:hover{ color:#fff; }
+  [data-theme="dark"] .eyebrow{ color:color-mix(in srgb, var(--primary) 52%, #ffffff); }
+
+  /* ============================================================
+     8) MOTION SEQUENCE (CSS) — hero air currents + ribbon sweep.
+     ============================================================ */
+  @keyframes rdAirCool{ from{ background-position:0 0; } to{ background-position:132px 0; } }
+  @keyframes rdAirWarm{ from{ background-position:0 0; } to{ background-position:-168px 0; } }
+  @keyframes rdSweep{ 0%,100%{ background-position:0% 0; } 50%{ background-position:100% 0; } }
+  @media (min-width:961px) and (prefers-reduced-motion:no-preference){
+    .hero::before{ animation:rdAirCool 13s linear infinite; }
+    .hero::after{ animation:rdAirWarm 17s linear infinite; }
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .hero h1::after{ animation:rdSweep 9s ease-in-out infinite; }
+  }
+
+  /* ============================================================
+     9) REDUCED MOTION — neutralise every redesign motion; keep
+        all content and the static thermal ribbon fully visible.
+     ============================================================ */
+  @media (prefers-reduced-motion:reduce){
+    .hero::before, .hero::after{ animation:none !important; }
+    .hero h1::after{ animation:none !important; }
+    .service-card::before{ transition:none !important; transform:scaleX(1) !important; }
+    .quick-pills button, .why-item, .phone-link, .phone-hero, .footer-links a{ transition:none !important; }
+    .rd-reveal{ opacity:1 !important; transform:none !important; transition:none !important; }
+  }
+</style>
+<script>
+/* REDESIGN reveal — additive, guarded, motion-safe. Adds a soft rise to the
+   sections the original observer skips. Fully no-op under reduced motion or
+   when IntersectionObserver is unavailable, so content is always visible. */
+(function(){
+  try{
+    var mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq && mq.matches) return;
+    if (!('IntersectionObserver' in window)) return;
+    var run = function(){
+      var sel = '.offer-card, .gallery-main, .gallery-side, .form-copy, .form-card,'
+              + ' .reviews-summary, .location-card, .map-card, .final-card';
+      var els = document.querySelectorAll(sel);
+      if (!els.length) return;
+      els.forEach(function(el){ el.classList.add('rd-reveal'); });
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if (en.isIntersecting){ en.target.classList.add('rd-in'); io.unobserve(en.target); }
+        });
+      }, { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+      els.forEach(function(el){ io.observe(el); });
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run, { once:true });
+    else run();
+  }catch(e){ /* fail silent: page stays fully functional */ }
+})();
+</script>
+<!-- REDESIGN:END -->
 </body>
 </html>
