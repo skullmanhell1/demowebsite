@@ -430,14 +430,15 @@
   </header>
 
   <main id="top">
-    <section class="hero" aria-labelledby="hero-title">
+    <section class="hero vna-hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">Second concept for Beauty &amp; Grooming</div>
-          <h1 id="hero-title">Nails that look <em>polished</em> before you even book.</h1>
-          <p class="lead">A premium nail salon website concept focused on online bookings, beautiful nail art, clear prices, portfolio proof and star reviews.</p>
+        <div class="vna-hero-copy">
+          <div class="eyebrow">Gel · Chrome · Fine-line art — Perth</div>
+          <span class="vna-shade-rail" aria-hidden="true"><i style="--s:#5B1A2E"></i><i style="--s:#A81D4D"></i><i style="--s:#C8A15A"></i><i style="--s:#E8B7C2"></i><i style="--s:#7A2E46"></i></span>
+          <h1 id="hero-title">Every set, <em>lacquered</em> to a mirror finish.</h1>
+          <p class="lead">A Perth nail atelier that treats each nail like a small canvas — builder gel, chrome and fine-line art, with clear prices, a real portfolio and booking you can do from the couch.</p>
           <div class="hero-cta"><a class="btn btn-primary" href="#booking">Book Nails</a><a class="btn btn-secondary" href="#services">View Services</a><a class="phone-hero" href="tel:+61862440510"><span class="phone-dot">☎</span>08 6244 0510</a></div>
-          <div class="hero-proof"><div class="proof-card"><strong>4.9★</strong><span>from 420 nail clients</span></div><div class="proof-card"><strong>24/7</strong><span>online appointment requests</span></div><div class="proof-card"><strong>15%</strong><span>first-visit offer</span></div></div>
+          <div class="hero-proof"><div class="proof-card"><strong>4.9★</strong><span>from 420 nail clients</span></div><div class="proof-card"><strong>24/7</strong><span>online booking requests</span></div><div class="proof-card"><strong>15%</strong><span>off your first set</span></div></div>
         </div>
         <div class="hero-media">
           <div class="hero-photo hero-bg"><div class="hero-caption"><div><strong>Velvet Nail Atelier</strong><span>Nail salon • gel • art • pedicures</span></div><a class="btn btn-secondary btn-small" href="#gallery">See Nail Art</a></div></div>
@@ -1429,5 +1430,173 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   [data-theme="dark"] .hours-list li{ border-bottom-color:rgba(255,255,255,.08); }
 </style>
 <!-- THEMEFIX:END -->
+<!-- HERO-REDESIGN:START — skill-driven "Velvet Lacquer" hero (additive, brand-scoped, motion-safe).
+     Rebuilds only the above-the-fold thesis for Velvet Nail Atelier. Keeps every ID/class the
+     scripts rely on (.hero, #hero-title, .eyebrow, .lead, .hero-cta, .btn-primary/.btn-secondary,
+     .hero-proof/.proof-card, .hero-media, .hero-photo.hero-bg, .hero-caption, .float-card,
+     .quick-card, [data-service]). Loaded last so it overrides prior hero styling. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,600&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,600&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript>
+<style id="hero-redesign">
+  :root{
+    --vna-bordeaux:#5B1A2E;   /* velvet oxblood — the "velvet" ground */
+    --vna-plum:#3C1020;       /* deep plum shadow */
+    --vna-lacquer:#A81D4D;    /* saturated lacquered ruby — the polish shade */
+    --vna-gold:#C8A15A;       /* gilded champagne — atelier gilding + specular */
+    --vna-blush:#F1D7DE;      /* porcelain blush — light detail on dark */
+    --vna-cream:#FBF3F0;      /* warm paper for headline base */
+    --vna-display:'Fraunces',Georgia,'Times New Roman',serif;
+    --vna-label:'Space Grotesk',ui-sans-serif,system-ui,-apple-system,sans-serif;
+  }
+
+  /* ---- Velvet panel: an inset, rounded "atelier card" instead of a flat strip ---- */
+  .vna-hero{
+    position:relative;
+    width:min(100% - 24px, 1280px);
+    margin:20px auto 6px;
+    padding:clamp(30px,4.6vw,62px) 0 clamp(26px,3.6vw,44px);
+    border-radius:clamp(26px,3.6vw,42px);
+    overflow:hidden;
+    isolation:isolate;
+    color:var(--vna-cream);
+    background:
+      radial-gradient(130% 120% at 10% -8%, #71203B 0%, transparent 52%),
+      radial-gradient(90% 90% at 96% 4%, color-mix(in srgb, var(--vna-gold) 26%, transparent) 0%, transparent 46%),
+      linear-gradient(158deg, var(--vna-plum) 0%, var(--vna-bordeaux) 50%, #4A1526 100%);
+    box-shadow:0 40px 90px rgba(40,10,24,.28), inset 0 0 0 1px color-mix(in srgb, var(--vna-gold) 26%, transparent);
+  }
+  /* faint vertical "velvet nap" sheen + a gilt hairline at the top edge */
+  .vna-hero::before{
+    content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:
+      linear-gradient(90deg, transparent, rgba(255,255,255,.05) 46%, transparent 54%),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.014) 0 2px, transparent 2px 6px);
+    mix-blend-mode:screen;opacity:.6;
+  }
+  .vna-hero::after{
+    content:"";position:absolute;left:clamp(24px,4vw,58px);right:clamp(24px,4vw,58px);top:0;height:2px;
+    background:linear-gradient(90deg, transparent, var(--vna-gold), transparent);opacity:.7;
+  }
+
+  /* ---- Eyebrow + shade rail (Space Grotesk labels) ---- */
+  .vna-hero .eyebrow{
+    font-family:var(--vna-label);
+    color:var(--vna-blush);
+    background:color-mix(in srgb, #fff 7%, transparent);
+    border:1px solid color-mix(in srgb, var(--vna-gold) 42%, transparent);
+    letter-spacing:.16em;font-weight:600;
+  }
+  .vna-hero .eyebrow::before{ background:var(--vna-gold); box-shadow:0 0 0 6px color-mix(in srgb, var(--vna-gold) 22%, transparent); }
+  .vna-shade-rail{ display:inline-flex; gap:9px; align-items:center; margin:18px 0 4px; }
+  .vna-shade-rail i{
+    width:15px;height:15px;border-radius:50%;background:var(--s);
+    box-shadow:inset 0 2px 3px rgba(255,255,255,.55), inset 0 -3px 5px rgba(0,0,0,.35), 0 2px 5px rgba(0,0,0,.35);
+    transform:scale(0);animation:vnaChip .5s cubic-bezier(.2,.8,.25,1) both;
+  }
+  .vna-shade-rail i:nth-child(1){animation-delay:.30s} .vna-shade-rail i:nth-child(2){animation-delay:.37s}
+  .vna-shade-rail i:nth-child(3){animation-delay:.44s} .vna-shade-rail i:nth-child(4){animation-delay:.51s}
+  .vna-shade-rail i:nth-child(5){animation-delay:.58s}
+  @keyframes vnaChip{ from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+
+  /* ---- Headline: characterful Fraunces + the lacquer-gloss signature word ---- */
+  .vna-hero h1{
+    font-family:var(--vna-display);
+    color:var(--vna-cream);
+    font-weight:600;
+    font-size:clamp(2.9rem,6.6vw,6rem);
+    line-height:.98;letter-spacing:-.02em;
+    margin-top:14px;max-width:15ch;
+    font-optical-sizing:auto;
+  }
+  /* SIGNATURE: the word "lacquered" rendered as wet lacquer catching a moving highlight */
+  .vna-hero h1 em{
+    font-style:italic;font-weight:600;color:transparent;
+    background-image:linear-gradient(100deg,
+      var(--vna-lacquer) 0%, var(--vna-lacquer) 34%,
+      #F6E4B0 47%, var(--vna-gold) 52%,
+      var(--vna-lacquer) 66%, var(--vna-lacquer) 100%);
+    background-size:280% 100%;background-position:120% 0;
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:vnaGloss 2s cubic-bezier(.4,.1,.2,1) .55s both;
+    text-shadow:0 1px 0 rgba(0,0,0,.12);
+  }
+  @keyframes vnaGloss{ 0%{background-position:120% 0} 100%{background-position:0 0} }
+
+  .vna-hero .lead{ color:color-mix(in srgb, var(--vna-cream) 86%, transparent); max-width:52ch; }
+
+  /* ---- CTAs: gold primary that owns the dark ground; quiet glass secondary ---- */
+  .vna-hero .hero-cta .btn-primary{
+    color:#2A0E18;
+    background:linear-gradient(135deg, #E9C877, var(--vna-gold) 60%, #B98A44);
+    box-shadow:0 16px 34px rgba(0,0,0,.34);
+  }
+  .vna-hero .hero-cta .btn-primary:hover{ box-shadow:0 20px 44px rgba(0,0,0,.42); }
+  .vna-hero .hero-cta .btn-secondary{
+    color:var(--vna-cream);
+    background:color-mix(in srgb, #fff 8%, transparent);
+    border:1px solid color-mix(in srgb, var(--vna-gold) 46%, transparent);
+  }
+  .vna-hero .phone-hero{
+    color:var(--vna-cream);
+    background:color-mix(in srgb, #fff 6%, transparent);
+    border:1px solid color-mix(in srgb, #fff 18%, transparent);
+    box-shadow:none;
+  }
+  .vna-hero .phone-hero .phone-dot{ background:var(--vna-gold); color:#2A0E18; }
+
+  /* ---- Proof chips: quiet velvet-glass ticks ---- */
+  .vna-hero .hero-proof .proof-card{
+    background:color-mix(in srgb, #fff 5%, transparent);
+    border:1px solid color-mix(in srgb, var(--vna-gold) 24%, transparent);
+    box-shadow:none;
+  }
+  .vna-hero .hero-proof .proof-card strong{ color:#fff; font-family:var(--vna-display); font-weight:600; }
+  .vna-hero .hero-proof .proof-card span{ color:color-mix(in srgb, var(--vna-cream) 66%, transparent); }
+
+  /* ---- Media: arched "nail-tip" photo frame with a gilt hairline ---- */
+  .vna-hero .hero-photo{
+    inset:8px 6px 6px 10px;
+    border-radius:clamp(120px,17vw,210px) clamp(120px,17vw,210px) 30px 30px;
+    transform:none;animation:none;
+    border:1px solid color-mix(in srgb, var(--vna-gold) 55%, transparent);
+    box-shadow:0 30px 70px rgba(30,8,18,.45), inset 0 0 0 1px rgba(255,255,255,.12);
+  }
+  .vna-hero .hero-caption strong{ font-family:var(--vna-display); font-weight:600; }
+  .vna-hero .hero-caption .btn-secondary{ color:var(--vna-cream); background:color-mix(in srgb, #fff 12%, transparent); border:1px solid color-mix(in srgb, var(--vna-gold) 50%, transparent); }
+
+  /* ---- Floating cards stay bright glass so they read against the velvet ---- */
+  .vna-hero .float-card strong,.vna-hero .quick-card strong{ font-family:var(--vna-display); font-weight:600; letter-spacing:-.01em; }
+  .vna-hero .float-card{ border:1px solid color-mix(in srgb, var(--vna-gold) 34%, #fff); }
+  .vna-hero .quick-card{ border:1px solid color-mix(in srgb, var(--vna-gold) 30%, #fff); }
+  .vna-hero .quick-pills button{ background:color-mix(in srgb, var(--vna-lacquer) 12%, #fff); color:var(--vna-bordeaux); }
+  .vna-hero .quick-pills button:hover{ background:color-mix(in srgb, var(--vna-lacquer) 20%, #fff); }
+  .vna-hero .stars{ color:var(--vna-gold); }
+
+  /* focus visibility on the velvet ground */
+  .vna-hero a:focus-visible,.vna-hero button:focus-visible{ outline:3px solid var(--vna-gold); outline-offset:3px; }
+
+  /* Dark theme: the hero is intentionally dark in BOTH modes; nudge the gilt frame
+     so it still reads when the toggle mutes surrounding surfaces. */
+  html[data-theme="dark"] .vna-hero{ box-shadow:0 40px 90px rgba(0,0,0,.42), inset 0 0 0 1px color-mix(in srgb, var(--vna-gold) 34%, transparent); }
+
+  /* keep the arched frame from fighting the 1120/760 collapse */
+  @media (max-width:760px){
+    .vna-hero{ width:min(100% - 16px, 1280px); margin-top:14px; padding-top:26px; }
+    .vna-hero .hero-photo{ inset:0; border-radius:120px 120px 26px 26px; }
+    .vna-hero h1{ font-size:clamp(2.6rem,11vw,4.2rem); max-width:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .vna-hero h1 em{ animation:none; background-position:0 0; }
+    .vna-shade-rail i{ animation:none; transform:scale(1); opacity:1; }
+  }
+
+  /* Fallback: keep the signature word visible if clip-to-text is unsupported */
+  @supports not ((-webkit-background-clip:text) or (background-clip:text)){
+    .vna-hero h1 em{ color:var(--vna-gold); -webkit-text-fill-color:currentColor; background:none; animation:none; }
+  }
+</style>
+<!-- HERO-REDESIGN:END -->
 </body>
 </html>
