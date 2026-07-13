@@ -2966,5 +2966,229 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   [data-theme="dark"] .reviewer strong{ color:#f4ece1; }
 </style>
 <!-- THEMEFIX:END -->
+<!-- REDESIGN:START — Ember & Olive: skill-driven wood-fired brand direction.
+     Additive, CSS-only (+ one non-render-blocking font link). Retunes design tokens
+     so all token-driven components inherit; refines every section with a recurring
+     "ember rule" gradient motif; keeps every existing hook, class and script intact.
+     Placed AFTER all prior blocks so overrides win by source order (no !important spam;
+     !important used only to re-point the two font custom properties the identity layer
+     already locks with !important). AA in both themes; motion-safe. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,500;1,9..144,600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,900&display=swap"></noscript>
+<style id="redesign-ember-olive">
+  /* ========================================================================
+     1) PALETTE RETUNE — smoked ember + living olive (maps onto existing token
+        names so every inheriting component shifts at once). Distinct from the
+        cream/terracotta cliche, the near-black+acid look, and the sibling demos.
+     ======================================================================== */
+  :root{
+    --ink:#1E1712;            /* charred-bark ink — body copy */
+    --espresso:#241C16;       /* smoked near-black — nav text, dark fills */
+    --char:#17120E;           /* deepest char — strips, footer accents */
+    --burnt:#B23A14;          /* burnt ember — kickers, prices, labels */
+    --terracotta:#D5461E;     /* ember — primary fire accent */
+    --tomato:#EA6A2A;         /* flame highlight */
+    --olive:#5B6B3A;          /* deep living olive — the counterpoint */
+    --basil:#7E8B4E;          /* lit olive */
+    --honey:#E4A23C;          /* amber glow */
+    --cream:#ECE6DC;          /* smoked-ash canvas (was warm cream) */
+    --flour:#F4EFE7;          /* porcelain — lightest card surface */
+    --linen:#E4DACB;          /* ash linen */
+    --sand:#D8CDBB;           /* toasted ash */
+    --muted:rgba(30,23,18,0.70);
+    --soft:rgba(30,23,18,0.54);
+    --shadow:0 30px 88px rgba(23,18,14,0.20);
+    --soft-shadow:0 16px 44px rgba(23,18,14,0.13);
+
+    /* Fonts — re-point the identity layer's locked custom props (it uses
+       var(--eo-display)/var(--eo-body) with !important, so redefining the
+       variable value swaps fonts site-wide). */
+    --eo-display:"Fraunces", Georgia, "Times New Roman", serif;
+    --eo-body:"Archivo", Inter, system-ui, -apple-system, sans-serif;
+
+    /* Signature motif + downstream skill hooks */
+    --eo-ember-rule:linear-gradient(90deg, var(--olive) 0%, var(--honey) 34%, var(--terracotta) 66%, var(--burnt) 100%);
+    --enh-accent:var(--terracotta);   /* ENH dividers/badges/sticky/focus → ember */
+    --dg-accent:var(--terracotta);    /* demo-guide accent → ember */
+  }
+
+  body{ font-optical-sizing:auto; -webkit-font-smoothing:antialiased; }
+
+  /* Smoked-ash canvas lit by embers (top) and a faint olive glow (base). */
+  body{
+    background:
+      radial-gradient(circle at 12% -6%, rgba(213,70,30,0.16), transparent 34rem),
+      radial-gradient(circle at 88% 0%, rgba(228,162,60,0.14), transparent 30rem),
+      radial-gradient(circle at 50% 118%, rgba(91,107,58,0.12), transparent 40rem),
+      linear-gradient(180deg, #EFE9DF 0%, #ECE6DC 46%, #E3DACB 100%);
+  }
+  body::before{
+    opacity:0.13;
+    background-image:
+      radial-gradient(rgba(36,28,22,0.55) 0.6px, transparent 0.6px),
+      radial-gradient(rgba(91,107,58,0.42) 0.5px, transparent 0.5px);
+  }
+
+  /* ========================================================================
+     2) TYPOGRAPHY — Fraunces display, Archivo body. Hero carries the drama.
+     ======================================================================== */
+  .review-score, .story-badge strong{ font-family:var(--eo-display) !important; }
+  h1{ font-weight:900 !important; letter-spacing:-0.028em !important; }
+  h2, .review-score{ font-weight:600 !important; letter-spacing:-0.018em; }
+  .brand-name{ font-weight:600 !important; letter-spacing:0.005em !important; }
+
+  /* ========================================================================
+     3) SIGNATURE — the recurring "ember rule".
+     ======================================================================== */
+  .section-kicker{ display:inline-flex; align-items:center; gap:10px; color:var(--burnt); }
+  .section-kicker::before{
+    content:""; width:26px; height:2px; border-radius:999px;
+    background:var(--eo-ember-rule);
+  }
+  .section-head h2{ position:relative; }
+  .section-head h2::after{
+    content:""; display:block; width:92px; height:4px; margin-top:18px;
+    border-radius:999px; background:var(--eo-ember-rule);
+  }
+
+  /* Eyebrow: glowing ember bead instead of the flat honey dot. */
+  .eyebrow{ color:var(--burnt); border-color:rgba(213,70,30,0.24); background:rgba(255,253,250,0.72); }
+  .eyebrow::before{
+    background:radial-gradient(circle at 35% 30%, var(--tomato), var(--terracotta) 60%, var(--burnt));
+    box-shadow:0 0 0 6px rgba(213,70,30,0.18), 0 0 10px rgba(234,106,42,0.55);
+  }
+
+  /* ========================================================================
+     4) HERO — the boldest moment: coals glowing behind, ember-clipped word.
+     ======================================================================== */
+  .hero{ position:relative; }
+  .hero::before{
+    content:""; position:absolute; z-index:0; left:50%; top:-4%;
+    width:min(122%, 1220px); height:72%; transform:translateX(-50%);
+    pointer-events:none; filter:blur(8px); opacity:0.85;
+    background:
+      radial-gradient(ellipse at 32% 42%, rgba(234,106,42,0.22), transparent 60%),
+      radial-gradient(ellipse at 70% 30%, rgba(228,162,60,0.16), transparent 62%),
+      radial-gradient(ellipse at 52% 78%, rgba(178,58,20,0.14), transparent 60%);
+  }
+  .hero-grid{ position:relative; z-index:1; }
+  h1 em{ color:var(--terracotta); font-style:italic; }
+  @supports ((-webkit-background-clip:text) or (background-clip:text)){
+    h1 em{
+      background:linear-gradient(118deg, var(--burnt) 0%, var(--terracotta) 42%, var(--tomato) 74%, var(--honey) 100%);
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+  }
+
+  /* ========================================================================
+     5) NAV + ACTIONS — smoked, ember on hover.
+     ======================================================================== */
+  .site-header{ background:rgba(236,230,220,0.82) !important; border-bottom:1px solid rgba(23,18,14,0.10) !important; }
+  .nav-links a:hover{ color:var(--terracotta) !important; }
+  .order-link span{ background:var(--olive); }
+
+  /* ========================================================================
+     6) BUTTONS — the ember gradient (dark→fire), white text stays AA-safe.
+     ======================================================================== */
+  .btn-primary{
+    background:linear-gradient(135deg, #2a1206 0%, var(--burnt) 42%, var(--terracotta) 80%, var(--tomato) 100%);
+    box-shadow:0 15px 36px rgba(178,58,20,0.34), inset 0 1px 0 rgba(255,255,255,0.12);
+    text-shadow:0 1px 2px rgba(20,8,4,0.42);
+  }
+  .btn-primary:hover{ box-shadow:0 22px 52px rgba(178,58,20,0.42), inset 0 1px 0 rgba(255,255,255,0.14); }
+  .btn-olive{ background:linear-gradient(135deg, #3f4a2a, var(--olive)); box-shadow:0 15px 36px rgba(91,107,58,0.26); }
+
+  /* ========================================================================
+     7) MENU TABS / FILTERS / TIME CHIPS — "ignite" to a glowing coal when active.
+        (Preserves .tab-btn / .filter-btn / .time-chip + .active hooks used by JS.)
+     ======================================================================== */
+  .tab-btn, .filter-btn, .time-chip{ border-color:rgba(178,58,20,0.18); }
+  .tab-btn:hover, .filter-btn:hover, .time-chip:hover{
+    color:var(--burnt); background:color-mix(in srgb, var(--terracotta) 12%, #ffffff);
+    border-color:color-mix(in srgb, var(--terracotta) 40%, transparent);
+  }
+  .tab-btn.active, .filter-btn.active, .time-chip.active{
+    color:#fff;
+    background:linear-gradient(135deg, var(--burnt), var(--terracotta) 68%, var(--tomato));
+    border-color:transparent;
+    box-shadow:0 8px 22px rgba(178,58,20,0.34), 0 0 0 1px rgba(178,58,20,0.36);
+  }
+
+  /* ========================================================================
+     8) SUPPORTING SURFACES — tie chips/pills to the smoked palette.
+     ======================================================================== */
+  .tag, .quick-pills button, .platform-card, .source-item,
+  .address-card, .schedule-item{
+    background:color-mix(in srgb, var(--olive) 7%, #efe9de);
+    border-color:color-mix(in srgb, var(--burnt) 14%, transparent);
+    color:var(--espresso);
+  }
+  .dish-price, .source, .schedule-item time{ color:var(--burnt); }
+  .schedule-item a{ color:var(--olive); }
+  .stars, .floating-review .stars{ color:var(--honey); }
+  input:focus, select:focus, textarea:focus{
+    border-color:rgba(213,70,30,0.60);
+    box-shadow:0 0 0 4px rgba(234,106,42,0.20);
+  }
+
+  /* Footer: a hairline ember rule signature along the top. */
+  .site-footer{ position:relative; border-top:1px solid rgba(23,18,14,0.12); }
+  .site-footer::before{
+    content:""; position:absolute; left:0; right:0; top:-1px; height:2px;
+    background:var(--eo-ember-rule); opacity:0.7;
+  }
+  .footer-links a{ color:var(--espresso); }
+  .footer-links a:hover{ color:var(--terracotta); }
+
+  /* ========================================================================
+     9) DARK THEME — keep the ember/olive identity cohesive & readable (AA).
+        Layered AFTER THEMEFIX so these win; accents already inherit new tokens.
+     ======================================================================== */
+  [data-theme="dark"] body{
+    background:
+      radial-gradient(circle at 10% -4%, rgba(213,70,30,0.20), transparent 34rem),
+      radial-gradient(circle at 90% 4%, rgba(228,162,60,0.13), transparent 30rem),
+      radial-gradient(circle at 52% 120%, rgba(91,107,58,0.12), transparent 42rem),
+      linear-gradient(180deg, #140f0c 0%, #17110d 44%, #1d150f 100%);
+  }
+  [data-theme="dark"] .site-header{ background:rgba(20,15,12,0.82) !important; border-bottom-color:rgba(255,255,255,0.10) !important; }
+  [data-theme="dark"] .eyebrow{ border-color:rgba(234,106,42,0.30); }
+  [data-theme="dark"] .tab-btn.active,
+  [data-theme="dark"] .filter-btn.active,
+  [data-theme="dark"] .time-chip.active{
+    color:#fff;
+    background:linear-gradient(135deg, var(--burnt), var(--terracotta) 68%, var(--tomato));
+    border-color:transparent;
+    box-shadow:0 8px 24px rgba(234,106,42,0.30), 0 0 0 1px rgba(234,106,42,0.34);
+  }
+  [data-theme="dark"] .dish-price,
+  [data-theme="dark"] .source,
+  [data-theme="dark"] .schedule-item time{ color:color-mix(in srgb, var(--terracotta) 60%, #ffffff); }
+  [data-theme="dark"] .schedule-item a{ color:color-mix(in srgb, var(--basil) 55%, #ffffff); }
+  [data-theme="dark"] .footer-links a{ color:#f4ece1; }
+  [data-theme="dark"] .footer-links a:hover{ color:color-mix(in srgb, var(--terracotta) 60%, #ffffff); }
+  @supports ((-webkit-background-clip:text) or (background-clip:text)){
+    [data-theme="dark"] h1 em{
+      background:linear-gradient(118deg, var(--tomato) 0%, #F6A63C 60%, var(--honey) 100%);
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+  }
+
+  /* ========================================================================
+     10) MOTION — one restrained ambient (coals breathing); reduced-motion safe.
+     ======================================================================== */
+  @media (prefers-reduced-motion: no-preference){
+    .hero::before{ animation:eoEmberGlow 6.5s ease-in-out infinite; }
+    @keyframes eoEmberGlow{ 0%,100%{ opacity:0.72; } 50%{ opacity:1; } }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero::before{ animation:none !important; }
+  }
+</style>
+<!-- REDESIGN:END -->
 </body>
 </html>
