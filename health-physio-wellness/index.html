@@ -1427,5 +1427,233 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   [data-theme="dark"] .hours-list li{ border-bottom-color:rgba(255,255,255,.08); }
 </style>
 <!-- THEMEFIX:END -->
+<!-- REDESIGN:START — NorthStar Physio & Rehab · "Kinetic North" (skill-driven, additive; builds on every prior block) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+<style id="redesign-kinetic-north">
+  /* ============================================================
+     KINETIC NORTH — recovery as guided motion.
+     Palette: Midnight Indigo #1A1C46 · Signal Indigo #2B2E6B ·
+     Kinetic Coral #FB5334 · Deep Coral #D83A1E · Porcelain #EEF0FA · Ink #191B34
+     Type: Archivo (display, engineered/athletic) + Hanken Grotesk (body).
+     Signature: the NorthStar — a 4-point ✦ that recurs at every section, a
+     hero "alignment" constellation with a drawn progress arc, and an aligning
+     coral underline. Deliberately rejects the generic clinical teal/blue.
+     Everything below is additive; dark-theme tokens set by earlier blocks are
+     preserved (light overrides are scoped to :not([data-theme="dark"])).
+     ============================================================ */
+
+  /* ---- Brand hues (safe: dark theme never overrides these) ---- */
+  :root{
+    --primary:#2B2E6B;
+    --dark:#1A1C46;
+    --secondary:#FB5334;
+    --accent:#FB5334;
+    --cream:#f5f6fd;
+    --dg-accent:#FB5334;         /* demo-guide badge: coral takes dark text (5.7:1) */
+    --ns-coral:#FB5334;
+    --ns-coral-deep:#D83A1E;
+    --ns-star:'✦';
+  }
+  /* ---- Light-only surface tokens (won't clobber dark values) ---- */
+  :root:not([data-theme="dark"]){
+    --ink:#191B34;
+    --muted:rgba(25,27,52,.70);
+    --soft:rgba(25,27,52,.54);
+    --line:rgba(25,27,52,.12);
+    --soft-bg:#EAECF8;
+  }
+
+  /* ---- Typography ---- */
+  body, input, select, textarea, button{
+    font-family:'Hanken Grotesk', Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  h1, h2, h3, .brand-name, .review-score,
+  .hero-caption strong, .float-card strong, .proof-card strong{
+    font-family:'Archivo', 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+  }
+  h1{ font-weight:900; letter-spacing:-.045em; }
+  h2{ font-weight:800; letter-spacing:-.03em; }
+  h3, .brand-name{ font-weight:800; letter-spacing:-.02em; }
+  .review-score{ font-weight:900; }
+  /* Kickers / eyebrows: engineered, tracked caps — reads sports-science */
+  .section-kicker, .eyebrow, .brand-subtitle{
+    font-family:'Archivo','Hanken Grotesk',sans-serif; font-weight:800; letter-spacing:.16em;
+  }
+
+  /* ---- Cool porcelain canvas with indigo + coral aurora (light) ---- */
+  :root:not([data-theme="dark"]) body{
+    background:
+      radial-gradient(1100px 620px at 88% -8%, color-mix(in srgb, var(--ns-coral) 15%, transparent), transparent 60%),
+      radial-gradient(920px 560px at 3% 1%, color-mix(in srgb, var(--primary) 15%, transparent), transparent 60%),
+      linear-gradient(180deg, #f3f4fc 0%, #ffffff 46%, #ebedf9 100%);
+  }
+  /* Retune the faint blueprint grid to indigo (movement/measurement motif) */
+  :root:not([data-theme="dark"]) body::before{
+    background-image:
+      linear-gradient(90deg, rgba(43,46,107,.15) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(43,46,107,.11) 1px, transparent 1px);
+    opacity:.10;
+  }
+
+  /* ---- SIGNATURE MOTIF: the NorthStar ✦ at every section kicker ---- */
+  .section-kicker::after{
+    content:'✦'; margin-left:.55em; color:var(--ns-coral);
+    font-size:.9em; line-height:1; display:inline-block; letter-spacing:0;
+    transform:translateY(.02em);
+  }
+  /* On dark bands the kicker text is forced white — keep the star coral for pop
+     except where readability wants it to follow the text. */
+  .offer .section-kicker::after,
+  .gallery-side-panel .section-kicker::after,
+  .form-copy .section-kicker::after,
+  .final-card .section-kicker::after{ color:var(--ns-coral); }
+
+  /* ---- HERO: the boldest moment ---- */
+  /* Aligning coral underline beneath the emphasised word */
+  .hero h1 em{ position:relative; color:var(--primary); }
+  .hero h1 em::after{
+    content:""; position:absolute; left:0; right:0; bottom:-.06em; height:.14em;
+    border-radius:999px; transform:scaleX(1); transform-origin:left center;
+    background:linear-gradient(90deg, var(--ns-coral), var(--ns-coral-deep));
+    animation:nsUnderline 1s 1.05s both cubic-bezier(.2,.7,.2,1);
+  }
+  @keyframes nsUnderline{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
+
+  /* Signature constellation (injected into .hero-media, decorative) */
+  .ns-constellation{
+    position:absolute; top:8px; right:8px; width:min(210px,40%); height:auto;
+    z-index:3; pointer-events:none; overflow:visible;
+    filter:drop-shadow(0 6px 18px rgba(26,28,70,.28));
+  }
+  .ns-constellation .ns-arc{
+    fill:none; stroke:var(--ns-coral); stroke-width:2.4; stroke-linecap:round;
+    stroke-dasharray:250; stroke-dashoffset:0;
+    animation:nsArcDraw 1.7s .55s both cubic-bezier(.4,0,.2,1);
+  }
+  .ns-constellation .ns-orbit{ fill:none; stroke:rgba(255,255,255,.55); stroke-width:1; stroke-dasharray:2 6; }
+  .ns-constellation .ns-star{ fill:#fff; transform-box:fill-box; transform-origin:center;
+    animation:nsTwinkle 3.4s ease-in-out 2.1s infinite; }
+  .ns-constellation .ns-star-core{ fill:var(--ns-coral); }
+  .ns-constellation .ns-dot{ fill:#fff; opacity:0; animation:nsDot .5s both ease; }
+  .ns-constellation .ns-dot.d1{ animation-delay:1.5s; }
+  .ns-constellation .ns-dot.d2{ animation-delay:1.75s; }
+  .ns-constellation .ns-dot.d3{ animation-delay:2s; }
+  @keyframes nsArcDraw{ from{ stroke-dashoffset:250; } to{ stroke-dashoffset:0; } }
+  @keyframes nsTwinkle{ 0%,100%{ transform:scale(1); opacity:1; } 50%{ transform:scale(1.14); opacity:.82; } }
+  @keyframes nsDot{ from{ opacity:0; transform:scale(.4); } to{ opacity:.9; transform:scale(1); } }
+  @media (max-width:760px){ .ns-constellation{ display:none; } }
+
+  /* ---- Scroll-reveal accent: kicker star twinkles as a section enters view
+       (reuses the existing IntersectionObserver .in-view class — no new JS) ---- */
+  .section-head.in-view .section-kicker::after{ animation:nsPop .7s both cubic-bezier(.2,.7,.2,1); }
+  @keyframes nsPop{ 0%{ transform:translateY(.02em) scale(.2) rotate(-40deg); opacity:0; }
+                    60%{ transform:translateY(.02em) scale(1.2) rotate(6deg); opacity:1; }
+                    100%{ transform:translateY(.02em) scale(1) rotate(0); opacity:1; } }
+
+  /* ---- Recurring "guiding axis" on dark editorial bands ---- */
+  .offer-card, .form-copy, .final-card, .reviews-summary{ position:relative; overflow:hidden; }
+  .offer-card::after, .final-card::after{
+    content:'✦'; position:absolute; top:14px; right:20px; font-size:1.35rem;
+    color:color-mix(in srgb, var(--ns-coral) 88%, #fff); opacity:.85; pointer-events:none;
+  }
+
+  /* ---- Signal-color detailing (disciplined coral sparks) ---- */
+  .btn-accent{ background:linear-gradient(135deg, var(--primary), var(--ns-coral-deep)); }
+  .offer-card{ border-color:color-mix(in srgb, var(--ns-coral) 34%, transparent); }
+  .proof-card::before{
+    content:""; position:absolute; left:0; top:14px; bottom:14px; width:3px; border-radius:999px;
+    background:linear-gradient(180deg, var(--ns-coral), var(--ns-coral-deep));
+    opacity:0; transform:scaleY(.4); transform-origin:top;
+    transition:opacity .3s ease, transform .3s ease;
+  }
+  .proof-card{ position:relative; padding-left:22px; }
+  .proof-card:hover::before, .proof-card.in-view::before{ opacity:1; transform:scaleY(1); }
+  .service-top strong{ color:var(--ns-coral-deep); }        /* prices in signal coral (deep = 4.6:1) */
+  .review-card .stars, .float-card .stars, .stars{ color:var(--ns-coral); }  /* star ratings on-brand */
+  .why-item > span:first-child{ background:linear-gradient(135deg, var(--primary), var(--ns-coral-deep)); }
+  .trust-icon{ background:linear-gradient(135deg, var(--primary), var(--ns-coral-deep)); }
+
+  /* ---- Hover micro-interactions (complement existing, don't fight them) ---- */
+  .quick-pills button{ transition:transform .2s cubic-bezier(.2,.7,.2,1), background .2s ease, color .2s ease, box-shadow .2s ease; }
+  .quick-pills button:hover{ transform:translateY(-2px); background:var(--ns-coral); color:#fff; box-shadow:0 10px 22px color-mix(in srgb, var(--ns-coral) 34%, transparent); }
+  .faq-item summary{ transition:color .2s ease; }
+  .faq-item[open] summary, .faq-item summary:hover{ color:var(--primary); }
+  .hours-list li{ transition:color .2s ease; }
+  .hours-list li:hover b{ color:var(--ns-coral-deep); }
+  .footer-links a{ transition:color .2s ease; }
+  .footer-links a:hover{ color:var(--ns-coral-deep); }
+
+  /* Map pin adopts the brand duotone; label stays legible */
+  .map-pin{ background:linear-gradient(135deg, var(--dark), var(--ns-coral-deep)); }
+  .map-pin::after{ color:var(--primary); }
+
+  /* ---- Sticky mobile CTA (enh injects inline styles from --accent=coral):
+       force AA-safe indigo so labels clear 4.5:1 in both themes ---- */
+  .enh-sticky .enh-sticky-book{ background:var(--primary) !important; color:#fff !important; }
+  .enh-sticky .enh-sticky-call{ color:var(--primary) !important; border-color:var(--primary) !important; }
+
+  /* ---- Dark-theme cohesion for the new coral detailing ---- */
+  [data-theme="dark"] .service-top strong{ color:color-mix(in srgb, var(--ns-coral) 62%, #fff); }
+  [data-theme="dark"] .hours-list li:hover b,
+  [data-theme="dark"] .footer-links a:hover{ color:color-mix(in srgb, var(--ns-coral) 60%, #fff); }
+  [data-theme="dark"] .section-kicker::after,
+  [data-theme="dark"] .review-card .stars,
+  [data-theme="dark"] .float-card .stars,
+  [data-theme="dark"] .stars{ color:color-mix(in srgb, var(--ns-coral) 74%, #fff); }
+  [data-theme="dark"] .enh-sticky .enh-sticky-book{ background:color-mix(in srgb, var(--primary) 60%, #fff) !important; color:#12151d !important; }
+  [data-theme="dark"] .enh-sticky .enh-sticky-call{ color:color-mix(in srgb, var(--primary) 60%, #fff) !important; border-color:color-mix(in srgb, var(--primary) 55%, #fff) !important; }
+
+  /* ---- Reduced motion: neutralise every new animation ---- */
+  @media (prefers-reduced-motion: reduce){
+    .hero h1 em::after{ animation:none !important; transform:scaleX(1) !important; }
+    .ns-constellation .ns-arc{ animation:none !important; stroke-dashoffset:0 !important; }
+    .ns-constellation .ns-star{ animation:none !important; }
+    .ns-constellation .ns-dot{ animation:none !important; opacity:.9 !important; }
+    .section-head.in-view .section-kicker::after{ animation:none !important; }
+    .quick-pills button, .faq-item summary, .hours-list li, .footer-links a, .proof-card::before{ transition:none !important; }
+  }
+</style>
+<script id="redesign-kinetic-north-js">
+(function(){
+  "use strict";
+  try{
+    var root = document.documentElement;
+    if(root.__nsRedesign) return; root.__nsRedesign = true;
+
+    function ready(fn){
+      if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn, {once:true});
+      else fn();
+    }
+    ready(function(){
+      try{
+        var media = document.querySelector('.hero .hero-media');
+        if(!media || media.querySelector('.ns-constellation')) return;
+        var NS = 'http://www.w3.org/2000/svg';
+        var svg = document.createElementNS(NS, 'svg');
+        svg.setAttribute('class', 'ns-constellation');
+        svg.setAttribute('viewBox', '0 0 120 120');
+        svg.setAttribute('aria-hidden', 'true');
+        svg.setAttribute('focusable', 'false');
+        svg.innerHTML =
+          '<circle class="ns-orbit" cx="60" cy="60" r="50"/>' +
+          '<path class="ns-arc" d="M60 12 A48 48 0 1 1 22 30"/>' +
+          '<circle class="ns-dot d1" cx="106" cy="44" r="2.6"/>' +
+          '<circle class="ns-dot d2" cx="20" cy="96" r="2.2"/>' +
+          '<circle class="ns-dot d3" cx="98" cy="92" r="2"/>' +
+          '<g class="ns-star">' +
+            '<path fill="rgba(0,0,0,0.001)" d="M40 40h40v40H40z"/>' +
+            '<path class="ns-star-core" d="M60 34 L66 54 L86 60 L66 66 L60 86 L54 66 L34 60 L54 54 Z"/>' +
+            '<path fill="#fff" opacity="0.9" d="M60 44 L63 57 L76 60 L63 63 L60 76 L57 63 L44 60 L57 57 Z"/>' +
+          '</g>';
+        media.appendChild(svg);
+      }catch(e){ /* decorative only */ }
+    });
+  }catch(e){ /* fail silent — page stays fully functional */ }
+})();
+</script>
+<!-- REDESIGN:END -->
 </body>
 </html>
