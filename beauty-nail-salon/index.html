@@ -1591,6 +1591,11 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
     .vna-hero h1 em{ animation:none; background-position:0 0; }
     .vna-shade-rail i{ animation:none; transform:scale(1); opacity:1; }
   }
+
+  /* Fallback: keep the signature word visible if clip-to-text is unsupported */
+  @supports not ((-webkit-background-clip:text) or (background-clip:text)){
+    .vna-hero h1 em{ color:var(--vna-gold); -webkit-text-fill-color:currentColor; background:none; animation:none; }
+  }
 </style>
 <!-- HERO-REDESIGN:END -->
 </body>
