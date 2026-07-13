@@ -1658,5 +1658,26 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 })();
 </script>
 <!-- REDESIGN:END -->
+<!-- DARKFIX:START — restore WCAG-AA dark-mode ink (additive; ONLY [data-theme="dark"] rules; light mode untouched).
+     Root cause: the REDESIGN :root retuned --ink/--muted/--soft to DARK values (equal specificity to the
+     earlier [data-theme="dark"] token block, but later in source order), so dark-mode body copy + headings
+     rendered dark-on-dark. Also the hero emphasised word used a deep sunrise gradient (#a94c08 stop) that
+     is sub-AA on the dark field. html[data-theme="dark"] out-specifies :root so these win cleanly. -->
+<style id="darkfix">
+  html[data-theme="dark"]{
+    --ink:#eef2f7;
+    --muted:rgba(236,241,248,0.74);
+    --soft:rgba(236,241,248,0.56);
+  }
+  /* Retint the hero emphasised word to a lighter marigold that clears AA for large display text on dark. */
+  html[data-theme="dark"] .hero h1 em{ color:#ffcf99; }
+  @supports ((-webkit-background-clip:text) or (background-clip:text)){
+    html[data-theme="dark"] .hero h1 em{
+      background:linear-gradient(96deg, #ffb266, #ff9a52 48%, #ffd9b0);
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;
+    }
+  }
+</style>
+<!-- DARKFIX:END -->
 </body>
 </html>
