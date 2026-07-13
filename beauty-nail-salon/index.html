@@ -1598,5 +1598,269 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   }
 </style>
 <!-- HERO-REDESIGN:END -->
+<!-- SITEWIDE:START — "Velvet Nail Atelier" site-wide brand extension (additive, CSS-only, motion-safe).
+     Placed last so it cleanly overrides earlier layers. Strategy (per frontend-design steering:
+     "spend your boldness in one place"): the dark velvet HERO stays the signature; the rest of the
+     page becomes a REFINED, DISCIPLINED LIGHT treatment — an "atelier on paper" — that inherits the
+     same velvet/gold system through retuned design tokens. Nothing here touches the hero (all hero
+     rules are scoped under .vna-hero at higher specificity), the DOM, copy, JSON-LD or JS. -->
+<style id="sitewide-velvet">
+  /* ============================================================================
+     1) TOKEN RETUNE — velvet-ify every existing component at once.
+        Mode-agnostic brand hues live in :root (apply in light AND dark so the
+        dark THEMEFIX surfaces, which color-mix from --primary, become velvet too).
+        Light-only ink/surfaces live under html:not([data-theme="dark"]) so they
+        never clobber the genuine dark theme (which keeps its own light ink).
+     ============================================================================ */
+  :root{
+    --primary:#A81D4D;        /* lacquered ruby — the polish shade (was #a94f7a) */
+    --secondary:#8A2D4A;      /* mid velvet rose for gradients (was #d98aa9) */
+    --accent:#C8A15A;         /* gilded champagne — DECORATIVE gilding only (was #d7a44b) */
+    --dark:#3C1020;           /* deep plum/bordeaux (was #2b1722) */
+    --enh-accent:#C8A15A;     /* keep JS-driven dividers/focus rings gilt-consistent */
+    --dg-accent:#A81D4D;      /* demo-guide highlight → ruby */
+  }
+  html:not([data-theme="dark"]){
+    --ink:#2B0F1B;                    /* warm near-black plum ink for body copy */
+    --muted:rgba(58,15,30,.76);       /* body copy on paper — ~7:1 on cream (AA) */
+    --soft:rgba(58,15,30,.66);        /* meta/labels — ~5:1 (AA) */
+    --line:rgba(58,15,30,.14);        /* warm hairline */
+    --soft-bg:#F7E7EC;                /* warm blush surface (was cool #fff0f6) */
+    --cream:#FBF3F0;                  /* warm paper */
+    --white:#ffffff;
+  }
+  /* Warm the paper: swap the cool blue page wash for an ivory/blush atelier ground. */
+  html:not([data-theme="dark"]) body{
+    background:
+      radial-gradient(circle at 8% 0%, color-mix(in srgb, var(--vna-blush) 42%, transparent), transparent 34rem),
+      radial-gradient(circle at 94% 6%, color-mix(in srgb, var(--vna-gold) 12%, transparent), transparent 30rem),
+      linear-gradient(180deg, var(--vna-cream) 0%, #ffffff 46%, color-mix(in srgb, var(--vna-blush) 55%, var(--vna-cream)) 100%);
+  }
+  /* Warm the faint background grid so it reads as ink, not slate. */
+  html:not([data-theme="dark"]) body::before{
+    background-image:
+      linear-gradient(90deg, rgba(58,15,30,.12) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(58,15,30,.09) 1px, transparent 1px);
+  }
+
+  /* ============================================================================
+     2) TYPOGRAPHY — match the hero. Fraunces for display, Space Grotesk for labels.
+        (Both already loaded by the hero block; no new dependencies.)
+     ============================================================================ */
+  h1, h2, h3,
+  .brand-name,
+  .review-score,
+  .service-top h3,
+  .form-top h3,
+  .location-card h3{
+    font-family: var(--vna-display, 'Fraunces', Georgia, serif);
+  }
+  .section-kicker,
+  .eyebrow,
+  .brand-subtitle,
+  label,
+  .note-pill,
+  .top-strip,
+  .quick-pills button,
+  .offer-code small,
+  .reviewer span,
+  .footer-links a{
+    font-family: var(--vna-label, 'Space Grotesk', ui-sans-serif, system-ui, sans-serif);
+  }
+  /* section titles pick up a touch of Fraunces weight/tracking to echo the hero */
+  h2{ font-weight:600; letter-spacing:-.02em; }
+  h3{ font-weight:600; }
+
+  /* ============================================================================
+     3) COMPONENT REFINEMENT — the "atelier on paper" look with recurring gilt motifs.
+     ============================================================================ */
+
+  /* -- Top strip: plum band, refined label tracking -- */
+  html:not([data-theme="dark"]) .top-strip{ letter-spacing:.02em; }
+  html:not([data-theme="dark"]) .top-strip strong{ color:var(--vna-gold); }
+
+  /* -- Header / nav: warm frosted glass with a gilt underline -- */
+  html:not([data-theme="dark"]) .site-header{
+    background:color-mix(in srgb, var(--vna-cream) 80%, rgba(255,255,255,.6));
+    border-bottom-color:color-mix(in srgb, var(--vna-gold) 32%, var(--line));
+  }
+  html:not([data-theme="dark"]) .site-header.scrolled{
+    background:color-mix(in srgb, var(--vna-cream) 92%, #ffffff);
+  }
+  html:not([data-theme="dark"]) .nav-links a{ color:var(--dark); }
+  html:not([data-theme="dark"]) .nav-links a:hover{ background:var(--soft-bg); color:var(--vna-bordeaux); }
+  /* phone dot: keep the gold accent but use plum glyph so it clears AA (≥4.5:1) */
+  html:not([data-theme="dark"]) .phone-dot{ background:var(--accent); color:#2A0E18; }
+
+  /* -- Warm-paper cards + a gilt hairline as the recurring motif -- */
+  html:not([data-theme="dark"]) .service-card,
+  html:not([data-theme="dark"]) .review-card,
+  html:not([data-theme="dark"]) .why-card,
+  html:not([data-theme="dark"]) .location-card,
+  html:not([data-theme="dark"]) .map-card,
+  html:not([data-theme="dark"]) .form-card,
+  html:not([data-theme="dark"]) .trust-strip{
+    background:color-mix(in srgb, var(--vna-cream) 58%, #ffffff);
+    border-color:color-mix(in srgb, var(--vna-gold) 24%, var(--line));
+  }
+  html:not([data-theme="dark"]) .faq-item{
+    background:color-mix(in srgb, var(--vna-cream) 46%, #ffffff);
+    border-color:color-mix(in srgb, var(--vna-gold) 22%, var(--line));
+  }
+  /* gilt lead-in on every section kicker (recurring atelier detail) */
+  .section-kicker::before{ background:var(--accent); opacity:.85; }
+  /* ruby focus/hover borders keep the family tie */
+  .service-card:hover, .review-card:hover, .why-card:hover,
+  .location-card:hover, .faq-item:hover{
+    border-color:color-mix(in srgb, var(--primary) 34%, var(--line));
+  }
+
+  /* -- Trust bar: warm chips, gold icon ring option kept on ruby for contrast -- */
+  html:not([data-theme="dark"]) .trust-item{
+    background:linear-gradient(135deg, var(--soft-bg), #fff);
+    border:1px solid color-mix(in srgb, var(--vna-gold) 18%, var(--line));
+  }
+
+  /* -- Offer band: velvet plum scrim over the image + gilt hairline -- */
+  .offer-card{
+    background:
+      linear-gradient(100deg, color-mix(in srgb, var(--vna-plum) 90%, transparent), color-mix(in srgb, var(--vna-bordeaux) 62%, transparent)),
+      var(--alt-img) center/cover;
+    border-color:color-mix(in srgb, var(--vna-gold) 36%, transparent);
+    position:relative;
+  }
+  .offer-code{ border-color:color-mix(in srgb, var(--vna-gold) 34%, transparent); }
+  .offer-code strong{ color:var(--vna-gold); font-family:var(--vna-display, 'Fraunces', serif); }
+
+  /* -- Services: gilt price, warm image tone handled by IMGTREAT already -- */
+  html:not([data-theme="dark"]) .service-top strong{ color:var(--primary); }
+
+  /* -- Gallery: velvet plum glass panels + gilt edges -- */
+  .gallery-main::after{
+    background:linear-gradient(0deg, color-mix(in srgb, var(--vna-plum) 82%, transparent), transparent);
+  }
+  .gallery-side-panel{
+    background:color-mix(in srgb, var(--vna-plum) 54%, transparent);
+    border-color:color-mix(in srgb, var(--vna-gold) 28%, transparent);
+  }
+  .gallery-label{
+    background:color-mix(in srgb, var(--vna-plum) 42%, transparent);
+    border-color:color-mix(in srgb, var(--vna-gold) 26%, transparent);
+  }
+
+  /* -- Booking: velvet copy panel + refined form on paper -- */
+  .form-copy{
+    background:
+      linear-gradient(160deg, color-mix(in srgb, var(--vna-plum) 88%, transparent), color-mix(in srgb, var(--vna-bordeaux) 72%, transparent)),
+      var(--hero-img) center/cover;
+    position:relative;
+  }
+  html:not([data-theme="dark"]) input,
+  html:not([data-theme="dark"]) select,
+  html:not([data-theme="dark"]) textarea{
+    background:color-mix(in srgb, var(--vna-cream) 45%, #ffffff);
+    border-color:color-mix(in srgb, var(--vna-bordeaux) 20%, transparent);
+  }
+  html:not([data-theme="dark"]) label{ color:var(--dark); }
+  html:not([data-theme="dark"]) .note-pill{ color:var(--primary); background:var(--soft-bg); }
+
+  /* -- Why-choose-us numbered chips on ruby (white numerals pass AA) -- */
+  html:not([data-theme="dark"]) .why-item{
+    background:linear-gradient(135deg, var(--soft-bg), #fff);
+    border-color:color-mix(in srgb, var(--vna-gold) 18%, var(--line));
+  }
+
+  /* -- Reviews summary: already velvet (plum→ruby); add a gilt frame -- */
+  .reviews-summary{ border:1px solid color-mix(in srgb, var(--vna-gold) 30%, transparent); }
+
+  /* -- Location / hours + map: warm map illustration, gilt map label -- */
+  html:not([data-theme="dark"]) .map-illustration{
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--vna-bordeaux) 8%, transparent) 1px, transparent 1px),
+      linear-gradient(0deg, color-mix(in srgb, var(--vna-bordeaux) 8%, transparent) 1px, transparent 1px),
+      radial-gradient(circle at 78% 20%, color-mix(in srgb, var(--vna-gold) 22%, transparent), transparent 16rem),
+      linear-gradient(135deg, var(--vna-cream), var(--soft-bg));
+    background-size:54px 54px,54px 54px,auto,auto;
+  }
+  html:not([data-theme="dark"]) .map-label{
+    border-color:color-mix(in srgb, var(--vna-gold) 30%, rgba(255,255,255,.72));
+  }
+
+  /* -- Final CTA: matching velvet scrim + gilt hairline -- */
+  .final-card{
+    background:
+      linear-gradient(100deg, color-mix(in srgb, var(--vna-plum) 90%, transparent), color-mix(in srgb, var(--vna-bordeaux) 60%, transparent)),
+      var(--hero-img) center/cover;
+    position:relative;
+  }
+
+  /* Recurring GILT HAIRLINE across the velvet-dark bands (top edge, like the hero). */
+  .offer-card::before, .form-copy::before, .final-card::before{
+    content:""; position:absolute; left:0; right:0; top:0; height:2px; z-index:2;
+    background:linear-gradient(90deg, transparent, var(--vna-gold), transparent); opacity:.72;
+    pointer-events:none;
+  }
+
+  /* -- Footer: warm hairline + plum links -- */
+  html:not([data-theme="dark"]) .site-footer{
+    border-top:1px solid color-mix(in srgb, var(--vna-gold) 26%, var(--line));
+  }
+  html:not([data-theme="dark"]) .footer-links a{ color:var(--dark); }
+
+  /* Stars stay warm gold everywhere (decorative). */
+  .stars{ color:var(--vna-gold); }
+
+  /* ============================================================================
+     4) DARK MODE COHESION — the token retune above intentionally flows into the
+        existing THEMEFIX/ENH dark rules (they color-mix from --primary, now ruby).
+        Add a few gilt touches so dark reads as the same velvet family and stays
+        fully legible (light ink is already provided by #enh-theme / #themefix-dark).
+     ============================================================================ */
+  html[data-theme="dark"] .site-header{
+    border-bottom-color:color-mix(in srgb, var(--vna-gold) 22%, var(--line));
+  }
+  html[data-theme="dark"] .top-strip strong{ color:var(--vna-gold); }
+  html[data-theme="dark"] .service-card,
+  html[data-theme="dark"] .review-card,
+  html[data-theme="dark"] .why-card,
+  html[data-theme="dark"] .location-card,
+  html[data-theme="dark"] .map-card,
+  html[data-theme="dark"] .form-card,
+  html[data-theme="dark"] .faq-item,
+  html[data-theme="dark"] .trust-strip{
+    border-color:color-mix(in srgb, var(--vna-gold) 18%, var(--line));
+  }
+  html[data-theme="dark"] .service-top strong,
+  html[data-theme="dark"] .offer-code strong{
+    color:color-mix(in srgb, var(--vna-gold) 82%, #ffffff);
+  }
+  html[data-theme="dark"] .reviews-summary,
+  html[data-theme="dark"] .offer-card,
+  html[data-theme="dark"] .final-card,
+  html[data-theme="dark"] .form-copy{
+    border-color:color-mix(in srgb, var(--vna-gold) 26%, transparent);
+  }
+  /* keep the offer/form/final velvet scrims dark enough in dark mode too */
+  html[data-theme="dark"] .offer-card{
+    background:
+      linear-gradient(100deg, color-mix(in srgb, var(--vna-plum) 94%, transparent), color-mix(in srgb, var(--vna-bordeaux) 74%, transparent)),
+      var(--alt-img) center/cover;
+  }
+  html[data-theme="dark"] .form-copy,
+  html[data-theme="dark"] .final-card{
+    background:
+      linear-gradient(160deg, color-mix(in srgb, var(--vna-plum) 94%, transparent), color-mix(in srgb, var(--vna-bordeaux) 80%, transparent)),
+      var(--hero-img) center/cover;
+  }
+
+  /* ============================================================================
+     5) MOTION SAFETY — this block adds no new animation; neutralise any inherited
+        transition surprises under reduced-motion just in case.
+     ============================================================================ */
+  @media (prefers-reduced-motion: reduce){
+    .offer-card::before, .form-copy::before, .final-card::before{ transition:none !important; }
+  }
+</style>
+<!-- SITEWIDE:END -->
 </body>
 </html>
