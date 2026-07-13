@@ -1420,5 +1420,221 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   [data-theme="dark"] .hours-list li{ border-bottom-color:rgba(255,255,255,.08); }
 </style>
 <!-- THEMEFIX:END -->
+<!-- REDESIGN:START — "Pawsitive Path Training" skill-driven brand + animation pass.
+     Additive only. Placed after every prior block so its token retune wins.
+     Direction: confident, energetic, encouraging coaching. Palette: royal field
+     cobalt + electric chartreuse "go/marker" signal + warm coral praise + midnight
+     navy ink. Signature motif: the "Pawsitive PATH" — a travelling dotted trail
+     (paw steps along a training route) that recurs across the page and animates in
+     the hero. Fonts: Bricolage Grotesque (display) + Hanken Grotesk (body) — distinct
+     from every sibling demo. All motion is gated behind prefers-reduced-motion and
+     content is fully visible without JS. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" media="print" onload="this.media='all'"
+  href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" />
+<noscript><link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" /></noscript>
+<style id="redesign-pet-training">
+  /* ============================================================
+     1. TOKEN RETUNE — every component inherits the new palette
+     ============================================================ */
+  :root{
+    /* named brand palette */
+    --pp-navy:#131A33;        /* ink / midnight field */
+    --pp-cobalt:#2A46E0;      /* royal field cobalt — primary/confidence */
+    --pp-cobalt-deep:#1E31B4; /* darker cobalt for AA text-on-fill */
+    --pp-coral:#FF6B4A;       /* warm praise / encouragement pop */
+    --pp-lime:#C2F53F;        /* electric "go / marker" signal — the risk */
+    --pp-sky:#EEF1FF;         /* soft field-sky surface */
+    --pp-paper:#FBFBFE;
+
+    /* remap the site's semantic tokens */
+    --ink:#131A33;
+    --muted:rgba(19,26,51,.70);
+    --soft:rgba(19,26,51,.54);
+    --line:rgba(19,26,51,.12);
+    --primary:#2A46E0;
+    --secondary:#FF6B4A;
+    --accent:#2A46E0;   /* cobalt drives JS-derived UI (focus/sticky/dividers) so it stays AA */
+    --dark:#141C3A;
+    --soft-bg:#EEF1FF;
+    --cream:#FBFBFE;
+  }
+
+  /* ============================================================
+     2. TYPE — deliberate display + body pairing, site-wide
+     ============================================================ */
+  body{ font-family:"Hanken Grotesk", Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+  h1, h2, h3, .brand-name{ font-family:"Bricolage Grotesque", "Fraunces", Georgia, serif; }
+  h1{ font-weight:800; letter-spacing:-.03em; }
+  h2{ font-weight:700; letter-spacing:-.02em; }
+  h3{ font-weight:700; letter-spacing:-.015em; }
+  .brand-name{ font-weight:800; letter-spacing:-.02em; }
+  .eyebrow, .section-kicker, .brand-subtitle{ font-weight:800; }
+
+  /* ============================================================
+     3. SIGNATURE MOTIF — the "path": a trail of steps leading
+        every section (recurring), plus warm/energetic accents
+     ============================================================ */
+  /* kicker lead-in becomes a little trail of steps; currentColor keeps the
+     dots readable in every context (cobalt on light, white on dark photo bands,
+     light-cobalt in dark theme) */
+  .section-kicker::before{
+    content:""; width:40px; height:8px; opacity:1; background:none;
+    background-image:radial-gradient(circle, currentColor 42%, transparent 46%);
+    background-size:13px 8px; background-repeat:repeat-x; background-position:left center;
+  }
+  /* coral eyebrow dot with encouraging glow */
+  .eyebrow::before{
+    background:var(--pp-coral);
+    box-shadow:0 0 0 7px color-mix(in srgb, var(--pp-coral) 18%, transparent);
+  }
+  /* the hero's emphasised word gets a lime "marker" highlight (clicker-training cue) */
+  .hero h1 em{ position:relative; z-index:0; }
+  .hero h1 em::before{
+    content:""; position:absolute; left:-.05em; right:-.05em; bottom:.02em; height:.30em;
+    z-index:-1; border-radius:99px; transform:scaleX(1); transform-origin:left;
+    background:linear-gradient(90deg, color-mix(in srgb, var(--pp-lime) 82%, transparent), var(--pp-lime));
+  }
+  /* warm coral rating stars for brand cohesion */
+  .stars{ color:var(--pp-coral); }
+  /* reviews summary: coral praise-glow over the cobalt/navy field */
+  .reviews-summary{
+    background:
+      radial-gradient(circle at 26% 18%, color-mix(in srgb, var(--pp-coral) 30%, transparent), transparent 18rem),
+      linear-gradient(145deg, var(--dark), var(--primary));
+  }
+  /* offer "code" reads as an energetic lime marker on the dark band */
+  .offer-code strong{ color:var(--pp-lime); }
+  /* keep the small accent button AA (white text sits on deep cobalt, not coral) */
+  .btn-accent{ background:linear-gradient(135deg, var(--primary), var(--pp-cobalt-deep)); }
+
+  /* ============================================================
+     4. FOCUS / CONTRAST HARDENING (both themes)
+     ============================================================ */
+  :focus-visible,
+  html.enh-on a:focus-visible, html.enh-on button:focus-visible,
+  html.enh-on .btn:focus-visible, html.enh-on [role="button"]:focus-visible{
+    outline:3px solid var(--primary); outline-offset:3px;
+  }
+  input:focus-visible, select:focus-visible, textarea:focus-visible{
+    outline:none; border-color:var(--primary);
+    box-shadow:0 0 0 3px color-mix(in srgb, var(--primary) 20%, transparent);
+  }
+  /* sticky mobile CTA (JS sets inline colours) — force AA cobalt fill */
+  .enh-sticky .enh-sticky-book{ background:var(--primary) !important; color:#fff !important; }
+  .enh-sticky .enh-sticky-call{ color:var(--primary) !important; border-color:var(--primary) !important; }
+
+  /* ============================================================
+     5. MICRO-INTERACTIONS (hover) — quiet, transform/opacity only
+     ============================================================ */
+  /* hero "choose a path" chips light up in the signal lime */
+  .quick-pills button{ transition:background-color .2s ease, color .2s ease, transform .2s ease; }
+  .quick-pills button:hover{ background:var(--pp-lime); color:var(--pp-navy); transform:translateY(-2px); }
+  /* service cards reveal a lime "way-marker" bar along their top edge */
+  .service-card{ position:relative; }
+  .service-card::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:3px; z-index:3;
+    background:var(--pp-lime); transform:scaleX(0); transform-origin:left;
+    transition:transform .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .service-card:hover::before{ transform:scaleX(1); }
+
+  /* ============================================================
+     6. ANIMATION — complements (does not fight) #anim / ANIM2
+        6a. hero signature trail (injected, decorative, motion-gated)
+        6b. lime marker draw-on under the hero word
+        6c. scroll-reveal for sections the base reveal doesn't cover
+     ============================================================ */
+  .hero{ position:relative; }
+  .hero > .container{ position:relative; z-index:1; }
+  .pp-hero-trail{ position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+  .pp-hero-trail svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .pp-hero-trail path{
+    fill:none; stroke:var(--pp-cobalt); stroke-width:4; stroke-linecap:round;
+    stroke-dasharray:1 22; opacity:0;
+  }
+  html.pp-motion .pp-hero-trail path{
+    opacity:.26;
+    animation:ppTrailIn 1s .3s both ease, ppTrailMove 9s 1.3s linear infinite;
+  }
+  @keyframes ppTrailIn{ from{ opacity:0; } to{ opacity:.26; } }
+  @keyframes ppTrailMove{ to{ stroke-dashoffset:-230; } }
+
+  html.pp-motion .hero h1 em::before{ animation:ppMark .7s 1s both cubic-bezier(.2,.7,.2,1); }
+  @keyframes ppMark{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
+
+  html.pp-motion .pp-reveal{
+    opacity:0; transform:translateY(22px);
+    transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
+  }
+  html.pp-motion .pp-reveal.pp-in{ opacity:1; transform:none; }
+
+  /* ============================================================
+     7. DARK-THEME COHESION for the new elements (after THEMEFIX)
+     ============================================================ */
+  [data-theme="dark"] .section-kicker::before{
+    background-image:radial-gradient(circle, var(--pp-lime) 42%, transparent 46%);
+  }
+  [data-theme="dark"] .pp-hero-trail path{ stroke:var(--pp-lime); }
+  html[data-theme="dark"].pp-motion .pp-hero-trail path{ opacity:.22; }
+  [data-theme="dark"] .service-card::before{ background:var(--pp-lime); }
+
+  /* ============================================================
+     8. REDUCED MOTION — neutralise everything this block adds
+     ============================================================ */
+  @media (prefers-reduced-motion: reduce){
+    .hero h1 em::before{ animation:none !important; transform:scaleX(1) !important; }
+    html.pp-motion .pp-hero-trail path{ animation:none !important; }
+    .service-card::before, .quick-pills button{ transition:none !important; }
+    html.pp-motion .pp-reveal{ opacity:1 !important; transform:none !important; transition:none !important; }
+  }
+</style>
+<script>
+/* REDESIGN motion: self-contained, additive, guarded. Never rebinds existing
+   handlers. Content is fully visible if this never runs. */
+(function(){
+  try{
+    var root = document.documentElement;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function ready(fn){
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn, { once:true });
+      else fn();
+    }
+    ready(function(){
+      /* 6a. inject the decorative hero trail (behind hero content) */
+      var hero = document.querySelector('.hero');
+      if (hero && !hero.querySelector('.pp-hero-trail')){
+        var wrap = document.createElement('div');
+        wrap.className = 'pp-hero-trail';
+        wrap.setAttribute('aria-hidden','true');
+        wrap.innerHTML = '<svg viewBox="0 0 1000 600" preserveAspectRatio="none">' +
+          '<path d="M-20,560 C220,520 320,300 520,320 S820,180 1020,80"/></svg>';
+        hero.insertBefore(wrap, hero.firstChild);
+      }
+      if (reduce) return;               /* respect reduced motion: no classes, no reveals */
+      root.classList.add('pp-motion');
+
+      /* 6c. scroll-reveal for sections not covered by the base reveal set */
+      if ('IntersectionObserver' in window){
+        var sel = '.offer-card, .gallery-main, .gallery-side, .form-copy, .form-card,' +
+                  '.why-card, .location-card, .map-card, .final-card';
+        var els = [].slice.call(document.querySelectorAll(sel));
+        if (els.length){
+          els.forEach(function(el){ el.classList.add('pp-reveal'); });
+          var io = new IntersectionObserver(function(entries){
+            entries.forEach(function(en){
+              if (en.isIntersecting){ en.target.classList.add('pp-in'); io.unobserve(en.target); }
+            });
+          }, { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+          els.forEach(function(el){ io.observe(el); });
+        }
+      }
+    });
+  } catch(e){ /* fail silent — page stays fully functional */ }
+})();
+</script>
+<!-- REDESIGN:END -->
 </body>
 </html>
