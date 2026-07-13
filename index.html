@@ -1415,5 +1415,238 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   }
 </style>
 <!-- LAYOUT:END -->
+
+<!-- REDESIGN:START — skill-driven identity + animation for the Wide Web Solutions umbrella brand.
+     Additive only: retunes tokens/typography/palette (all components inherit), applies a recurring
+     "registration bracket / signal" motif, and adds a hero entrance sequence + one signature animated
+     moment. Placed after every prior block so it wins by source order without !important spam. No DOM,
+     copy, JSON-LD, form fields/ids, links or existing JS behaviour changed. All new motion is gated
+     behind html.rdl-on (JS + motion-allowed only) so the page is fully visible without JS and under
+     reduced-motion. Signature palette: ink canvas + electric "signal" blue + refined aqua, with a warm
+     amber "pulse" used ONLY in the signature motif. Utility face: Space Mono (system-mono fallback). -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"></noscript>
+<style id="redesign-wws">
+  /* ============================================================
+     1) TOKENS — deliberate retune. Cooler, more "engineered" ink
+     field; a single electric signal blue; a refined aqua; violet
+     demoted; ONE warm amber reserved for the signature motif.
+     ============================================================ */
+  :root {
+    --bg: #080B16;            /* deeper ink canvas */
+    --bg-2: #0E1526;
+    --indigo: #5B78FF;        /* signal blue (primary accent) */
+    --cyan: #3FE0CE;          /* refined aqua-teal */
+    --violet: #8A6BFF;        /* demoted, used sparingly */
+    --signal: #5B78FF;        /* alias for motif lines/brackets */
+    --pulse: #FFB25A;         /* warm amber — SIGNATURE ONLY */
+    --line: rgba(230,236,255,0.11);
+    --radius: 20px;           /* tighter, more precise */
+    --mono: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+
+  /* Retuned dark backdrop: disciplined cool field + a fine top glow.
+     Plain `body` (0,0,1) intentionally does NOT override the light-theme
+     rule `[data-theme="light"] body` (0,1,1), so light mode is preserved. */
+  body {
+    background:
+      radial-gradient(1150px 620px at 8% -8%, rgba(91,120,255,0.20), transparent 60%),
+      radial-gradient(820px 520px at 96% -4%, rgba(63,224,206,0.12), transparent 55%),
+      linear-gradient(180deg, #0A0F1F 0%, var(--bg) 46%, #070A12 100%);
+  }
+
+  /* ============================================================
+     2) TYPOGRAPHY — Space Grotesk (display, already loaded) + Inter
+     (body) kept; a monospace utility face now carries every label,
+     eyebrow, tag and data readout to reinforce the studio/blueprint
+     identity. Deliberate structural device, not decoration.
+     ============================================================ */
+  .eyebrow, .sec-head .kick, .stat span, .demo .tag, .demo .biz,
+  .form-hint, .contact-info .kick, footer .foot > div:last-child a {
+    font-family: var(--mono);
+  }
+  .eyebrow, .sec-head .kick, .contact-info .kick { letter-spacing: 0.16em; }
+  .stat span { letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.78rem; }
+  .demo .tag { letter-spacing: 0.04em; font-weight: 700; }
+  .demo .biz { letter-spacing: 0.01em; font-size: 0.8rem; }
+  footer .foot > div:last-child a { letter-spacing: 0.02em; font-size: 0.82rem; }
+
+  /* ============================================================
+     3) SIGNATURE MOTIF — registration brackets + signal ticks.
+     Recurs on the hero (bold), section kicks, demo cards, the
+     contact panel and the footer. Everything is decorative and
+     pointer-events:none so links/DOM are untouched.
+     ============================================================ */
+
+  /* Section kick: mono label with a leading signal tick (enhances the
+     existing hairline from #sophisticate rather than replacing it). */
+  .sec-head .kick::after,
+  .contact-info .kick::after {
+    content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 2px;
+    background: var(--pulse); border-radius: 1px; vertical-align: middle;
+    box-shadow: 0 0 0 3px rgba(255,178,90,0.16);
+  }
+
+  /* Hero framing brackets — the boldest expression of the motif. */
+  .hero .container { position: relative; }
+  .hero .container::before,
+  .hero .container::after {
+    content: ""; position: absolute; width: 26px; height: 26px; pointer-events: none; z-index: 1;
+    border: 0 solid var(--pulse); opacity: 0.6;
+  }
+  .hero .container::before { left: 0; top: 4px; border-left-width: 2px; border-top-width: 2px; border-top-left-radius: 6px; }
+  .hero .container::after { right: 0; bottom: 8px; border-right-width: 2px; border-bottom-width: 2px; border-bottom-right-radius: 6px; }
+
+  /* Signal rule under the hero lead — the studio's "baseline". */
+  .hero .lead { position: relative; padding-bottom: 22px; }
+  .hero .lead::after {
+    content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 132px; border-radius: 2px;
+    background: linear-gradient(90deg, var(--signal), var(--cyan));
+  }
+
+  /* Demo cards: paired corner brackets that frame the card and brighten
+     on hover (a signature micro-interaction that does NOT touch the
+     existing translate/glow/image-zoom hover from earlier layers). */
+  .demo::before,
+  .demo::after {
+    content: ""; position: absolute; width: 18px; height: 18px; z-index: 3; pointer-events: none;
+    border: 0 solid var(--signal); opacity: 0; transition: opacity .3s ease;
+  }
+  .demo::before { top: 12px; right: 12px; border-right-width: 2px; border-top-width: 2px; border-top-right-radius: 6px; }
+  .demo::after { left: 12px; bottom: 12px; border-left-width: 2px; border-bottom-width: 2px; border-bottom-left-radius: 6px; }
+  .demo:hover::before, .demo:hover::after,
+  .demo:focus-visible::before, .demo:focus-visible::after { opacity: 0.85; }
+
+  /* "What's included" feature cards: a small accent tick, top-left. */
+  .features .feat { position: relative; }
+  .features .feat::before {
+    content: ""; position: absolute; top: 14px; right: 16px; width: 6px; height: 6px; border-radius: 1px;
+    background: var(--signal); opacity: .5; transition: opacity .3s ease, transform .3s ease;
+  }
+  .features .feat:hover::before { opacity: 1; transform: translateY(-1px); }
+
+  /* "How it works" step numbers: mono, engineered. */
+  #how .feat .ic {
+    font-family: var(--mono); font-weight: 700; font-size: 1.15rem; color: var(--cyan);
+    background: linear-gradient(135deg, rgba(91,120,255,0.22), rgba(63,224,206,0.16));
+  }
+
+  /* Contact info panel: registration brackets frame the pitch. */
+  .contact-info { position: relative; }
+  .contact-info::before,
+  .contact-info::after {
+    content: ""; position: absolute; width: 24px; height: 24px; pointer-events: none;
+    border: 0 solid var(--pulse); opacity: .55;
+  }
+  .contact-info::before { left: 16px; top: 16px; border-left-width: 2px; border-top-width: 2px; border-top-left-radius: 6px; }
+  .contact-info::after { right: 16px; bottom: 16px; border-right-width: 2px; border-bottom-width: 2px; border-bottom-right-radius: 6px; }
+
+  /* Footer signal line — closes the page on the same motif. */
+  footer { position: relative; }
+  footer::before {
+    content: ""; position: absolute; top: -1px; left: 0; width: 96px; height: 2px;
+    background: linear-gradient(90deg, var(--signal), var(--cyan)); border-radius: 2px;
+  }
+
+  /* ============================================================
+     4) COMPONENT REFINEMENT — small, cohesive polish.
+     ============================================================ */
+  .eyebrow { border-color: rgba(63,224,206,0.28); }
+  .btn-primary { background: linear-gradient(135deg, var(--cyan), var(--signal)); }
+  .demo .go { letter-spacing: 0.01em; }
+
+  /* ============================================================
+     5) LIGHT THEME — keep AA. `[data-theme="light"]` selectors here
+     win over the earlier light block by source order. Accent-as-text
+     is darkened so it passes on light surfaces (improves prior state).
+     ============================================================ */
+  [data-theme="light"] {
+    --signal: #3550E0;
+    --line: rgba(17,22,48,0.12);
+  }
+  [data-theme="light"] .demo .go { color: #1f43c9; }         /* aqua fails AA on light — use signal blue */
+  [data-theme="light"] .demo::before,
+  [data-theme="light"] .demo::after { border-color: #3550E0; }
+  [data-theme="light"] .features .feat::before { background: #3550E0; }
+  [data-theme="light"] #how .feat .ic { color: #1f43c9; }
+  [data-theme="light"] h1 .grad {
+    background: linear-gradient(120deg, #1f43c9, #6a34e0);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  [data-theme="light"] .hero .lead::after,
+  [data-theme="light"] footer::before { background: linear-gradient(90deg, #3550E0, #0e8f7f); }
+
+  /* ============================================================
+     6) ANIMATION — hero entrance sequence + ONE signature moment.
+     All gated behind html.rdl-on (added by JS only when motion is
+     allowed) so the page is fully visible without JS. Complements —
+     never duplicates — the existing intro/ANIM/MOTION/ANIM2 layers:
+     these target hero *children* (not the section) and add a hero
+     signal-sweep no other layer performs.
+     ============================================================ */
+  @media (prefers-reduced-motion: no-preference) {
+    /* Staggered hero entrance (eyebrow -> headline -> lead -> CTAs).
+       .stats is intentionally excluded — it already reveals via the
+       IntersectionObserver + ANIM2 stagger. */
+    html.rdl-on .hero .eyebrow,
+    html.rdl-on .hero h1,
+    html.rdl-on .hero .lead,
+    html.rdl-on .hero .hero-cta { animation: rdlRise .8s cubic-bezier(.16,.84,.44,1) both; }
+    html.rdl-on .hero .eyebrow  { animation-delay: .12s; }
+    html.rdl-on .hero h1        { animation-delay: .22s; }
+    html.rdl-on .hero .lead     { animation-delay: .36s; }
+    html.rdl-on .hero .hero-cta { animation-delay: .50s; }
+    @keyframes rdlRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+    /* SIGNATURE MOMENT: a luminous "signal" line sweeps once across the
+       hero on load — the studio scanning/aligning the page. */
+    html.rdl-on .hero { position: relative; overflow: hidden; }
+    html.rdl-on .hero::before {
+      content: ""; position: absolute; top: 0; bottom: 0; left: -30%; width: 2px; z-index: 0; pointer-events: none;
+      background: linear-gradient(180deg, transparent, var(--cyan), var(--signal), transparent);
+      box-shadow: 0 0 24px 2px rgba(91,120,255,0.45);
+      animation: rdlSweep 1.5s cubic-bezier(.5,.02,.2,1) .35s both;
+    }
+    @keyframes rdlSweep {
+      0% { left: -30%; opacity: 0; }
+      12% { opacity: .9; }
+      88% { opacity: .9; }
+      100% { left: 118%; opacity: 0; }
+    }
+  }
+
+  /* ============================================================
+     7) REDUCED MOTION — neutralise everything this block added.
+     ============================================================ */
+  @media (prefers-reduced-motion: reduce) {
+    html.rdl-on .hero .eyebrow,
+    html.rdl-on .hero h1,
+    html.rdl-on .hero .lead,
+    html.rdl-on .hero .hero-cta { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html.rdl-on .hero::before { display: none !important; }
+    .demo::before, .demo::after { transition: none !important; }
+  }
+
+  /* ============================================================
+     8) RESPONSIVE SAFETY — no horizontal overflow; motif stays tidy.
+     ============================================================ */
+  @media (max-width: 560px) {
+    .hero .container::before, .hero .container::after { display: none; } /* keep tight margins clean */
+    .contact-info::before, .contact-info::after { width: 18px; height: 18px; }
+  }
+</style>
+<script>
+/* Guarded, self-contained: only flips on the redesign's entrance/sweep when
+   motion is allowed. Adds no listeners, rebinds nothing, and fails silent so
+   the sticky nav, hamburger, theme toggle and contact form JS are untouched. */
+(function(){
+  try {
+    var mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq && mq.matches) return;
+    document.documentElement.classList.add('rdl-on');
+  } catch (e) { /* no-op: page stays fully functional & visible */ }
+})();
+</script>
+<!-- REDESIGN:END -->
 </body>
 </html>
