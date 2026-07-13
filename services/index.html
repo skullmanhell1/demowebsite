@@ -2830,5 +2830,275 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   [data-theme="dark"] .field select option,[data-theme="dark"] select option{ color:#10202f; }
 </style>
 <!-- THEMEFIX:END -->
+
+<!-- REDESIGN:START — "Blueprint & Hi-Vis" brand direction for BluePeak Home Services.
+     Skill-driven, additive, placed AFTER every prior block so tokens/fonts cascade last.
+     Concept: an engineering-drawing idiom for licensed trades — prussian-ink workwear
+     base, technical draft-cyan dimension linework, and a controlled hi-vis safety-yellow
+     signal. Deliberately NOT the generic "trust-blue + tradie-orange" cliché the design
+     tool recommended, and distinct from all eight sibling brands. Retunes existing CSS
+     custom properties (so every component inherits), swaps fonts site-wide, adds a
+     recurring dimension-tick motif, and a reduced-motion-safe hero draft-in sequence. -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Public+Sans:wght@400;500;600;700&display=swap" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Public+Sans:wght@400;500;600;700&display=swap" /></noscript>
+<style id="redesign-bluepeak">
+  /* ============================================================
+     1) TOKEN RETUNE — LIGHT  (all components inherit these vars)
+     Palette (6 named):
+       Prussian Ink  #0B2A3D   base dark / header / display
+       Draft Cyan    #37C6E6   signature dimension lines / glow (decorative + on-dark)
+       Depth Blue    #0C5F80   primary interactive accent (AA on white ~6.5:1)
+       Deep Teal     #0C6E7E   secondary accent (AA on white ~5:1)
+       Hi-Vis Signal #E8E011   safety-yellow signal (decorative / on-dark / bg+ink)
+       Signal Red    #DE3B2C   emergency semantics only
+     ============================================================ */
+  :root{
+    --ink:#0A1C29;
+    --navy:#0B2A3D;
+    --blue:#0C5F80;
+    --blue-2:#37C6E6;
+    --green:#0C6E7E;
+    --green-2:#12A0B4;
+    --sky:#E4EEF4;
+    --mint:#E1F1F5;
+    --lime:#E7F3EF;
+    --cream:#F3F7FA;
+    --slate:#43596A;
+    --amber:#E8B21E;
+    --red:#DE3B2C;
+    --muted:rgba(10,28,41,0.70);
+    --soft:rgba(10,28,41,0.55);
+    --line:rgba(11,42,61,0.14);
+    --signal:#E8E011;
+    --signal-ink:#16210A;
+    --bp-display:"Barlow Semi Condensed","Public Sans",system-ui,sans-serif;
+    --bp-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+
+  /* ============================================================
+     2) TYPOGRAPHY — sturdy condensed display + utilitarian body + drafting mono
+     ============================================================ */
+  body{
+    font-family:"Public Sans",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:
+      radial-gradient(circle at 6% -2%, rgba(55,198,230,0.16), transparent 30rem),
+      radial-gradient(circle at 96% 2%, rgba(18,160,180,0.12), transparent 28rem),
+      linear-gradient(180deg,#F4F8FB 0%, #FFFFFF 44%, #EAF2F6 100%);
+  }
+  /* Blueprint grid recoloured to draft cyan (base body::before already draws the grid) */
+  body::before{
+    background-image:
+      linear-gradient(90deg, rgba(12,95,128,0.11) 1px, transparent 1px),
+      linear-gradient(0deg,  rgba(12,95,128,0.09) 1px, transparent 1px);
+    background-size:46px 46px;
+    opacity:0.16;
+  }
+  /* Chunky signage CTAs */
+  .btn{ font-family:var(--bp-display); letter-spacing:0.012em; }
+  /* Drafting-label typography for eyebrow / kickers / brand line */
+  .eyebrow{ font-family:"Public Sans",sans-serif; font-weight:700; letter-spacing:0.14em; }
+  .brand-subtitle{ font-family:var(--bp-mono); font-weight:500; letter-spacing:0.1em; text-transform:uppercase; }
+
+  /* ============================================================
+     3) SIGNATURE MOTIF — dimension-tick kickers (recurs in every section)
+     ============================================================ */
+  .section-kicker{
+    font-family:var(--bp-mono);
+    font-weight:600;
+    font-size:0.72rem;
+    letter-spacing:0.2em;
+    color:var(--blue);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .section-kicker::before{
+    content:"";
+    flex:none;
+    width:26px;
+    height:9px;
+    border-left:2px solid var(--blue-2);
+    border-bottom:2px solid var(--blue-2);
+    transform:translateY(-1px);
+  }
+  /* Keep the inline-styled kickers on dark panels on-palette (beats inline color) */
+  .quote-copy .section-kicker[style],
+  .finance-card .section-kicker[style],
+  .final-card .section-kicker[style]{ color:#8FE9F5 !important; }
+
+  /* ============================================================
+     4) HERO — the boldest moment: hi-vis marker + draft dimension rule
+     ============================================================ */
+  .hero h1 em{ position:relative; color:var(--blue); }
+  .hero h1 em::after{
+    content:"";
+    position:absolute; left:-0.02em; right:-0.02em; bottom:0.05em;
+    height:0.16em; border-radius:2px;
+    background:var(--signal); opacity:0.9; z-index:-1;
+  }
+  /* Vertical draft "dimension" rule with a hi-vis spec node beside the headline */
+  .hero .hero-grid>div:first-child{ position:relative; }
+  .hero .hero-grid>div:first-child::before{
+    content:"";
+    position:absolute; left:-16px; top:4px; bottom:22%; width:2px;
+    background:linear-gradient(180deg,var(--blue-2), rgba(55,198,230,0.14));
+    transform-origin:top center;
+  }
+  .hero .hero-grid>div:first-child::after{
+    content:"";
+    position:absolute; left:-22px; top:0; width:14px; height:14px;
+    background:var(--signal);
+    border:2px solid var(--navy);
+    transform:rotate(45deg);
+    box-shadow:0 6px 16px rgba(11,42,61,0.28);
+  }
+
+  /* ============================================================
+     5) HOVER MICRO-INTERACTIONS (draft-cyan cues; colour/shadow only)
+     ============================================================ */
+  .quick-pills button,.suburb,.meta-pill{
+    transition:background .2s ease,color .2s ease,box-shadow .2s ease;
+  }
+  .quick-pills button:hover{ background:var(--navy); color:#fff; }
+  .suburb:hover{ box-shadow:inset 0 0 0 1.5px var(--blue-2); }
+  .meta-pill:hover{ box-shadow:0 0 0 2px rgba(55,198,230,0.45); }
+  /* Corner "sheet" tick on padded panels — quiet, disciplined */
+  .quote-card,.why-card{ position:relative; }
+  .quote-card::after,.why-card::after{
+    content:""; position:absolute; top:14px; right:14px; width:15px; height:15px;
+    border-top:2px solid var(--blue-2); border-right:2px solid var(--blue-2);
+    border-top-right-radius:4px; opacity:0.6; pointer-events:none;
+  }
+  /* Draft-cyan top edge grows in on service/project card hover */
+  .service-card,.project-card{ position:relative; }
+  .service-card::before,.project-card::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:3px; z-index:5;
+    background:linear-gradient(90deg,var(--blue-2),var(--green-2));
+    transform:scaleX(0); transform-origin:left center;
+    transition:transform .45s cubic-bezier(.16,.84,.44,1);
+  }
+  .service-card:hover::before,.project-card:hover::before{ transform:scaleX(1); }
+
+  /* Confirmation banner tinted to the teal palette */
+  .confirmation{ color:#0a5563; }
+
+  /* ============================================================
+     6) ANIMATION — hero draft-in sequence (gated behind html.rd-on,
+        which JS only sets when motion is allowed). Content is fully
+        visible without JS and under reduced-motion.
+        Complements (does not duplicate) INTRO/PREMIUM/MOTION/ANIM/ANIM2.
+     ============================================================ */
+  html.rd-on .hero .eyebrow,
+  html.rd-on .hero h1,
+  html.rd-on .hero .lead,
+  html.rd-on .hero .hero-cta,
+  html.rd-on .hero .hero-proof{
+    opacity:0; transform:translateY(14px);
+    animation:rdRise .7s cubic-bezier(.16,.84,.44,1) forwards;
+    will-change:opacity,transform;
+  }
+  html.rd-on .hero .eyebrow{ animation-delay:.05s; }
+  html.rd-on .hero h1{ animation-delay:.15s; }
+  html.rd-on .hero .lead{ animation-delay:.28s; }
+  html.rd-on .hero .hero-cta{ animation-delay:.40s; }
+  html.rd-on .hero .hero-proof{ animation-delay:.52s; }
+  html.rd-on .hero .hero-media{
+    opacity:0; animation:rdMedia .9s .22s cubic-bezier(.16,.84,.44,1) forwards;
+    will-change:opacity,transform;
+  }
+  @keyframes rdRise{ to{ opacity:1; transform:none; } }
+  @keyframes rdMedia{ from{ opacity:0; transform:translateY(18px) scale(.986); } to{ opacity:1; transform:none; } }
+  /* Signature moment: the draft rule "draws down", then the hi-vis spec node snaps in */
+  html.rd-on .hero .hero-grid>div:first-child::before{
+    transform:scaleY(0); animation:rdDraw .7s .2s cubic-bezier(.16,.84,.44,1) forwards;
+  }
+  html.rd-on .hero .hero-grid>div:first-child::after{
+    opacity:0; transform:rotate(45deg) scale(.4);
+    animation:rdNode .5s .82s cubic-bezier(.34,1.56,.64,1) forwards;
+  }
+  @keyframes rdDraw{ to{ transform:scaleY(1); } }
+  @keyframes rdNode{ to{ opacity:1; transform:rotate(45deg) scale(1); } }
+
+  /* ============================================================
+     7) DARK THEME — cohesive prussian night + AA-safe cyan accents.
+        Placed after THEMEFIX so these win where specificity ties.
+     ============================================================ */
+  [data-theme="dark"]{
+    --ink:#EAF2F8;
+    --muted:rgba(234,242,248,0.72);
+    --soft:rgba(234,242,248,0.55);
+    --line:rgba(255,255,255,0.14);
+    --cream:#0C1824;
+    --sky:#12222F;
+    --mint:#0F2530;
+    --lime:#0F2530;
+    /* Fills (--blue/--green/--green-2/--blue-2) intentionally kept from the light
+       palette: they are deep teal/blue that keep white-text contrast on the dark
+       prussian surfaces. Small TEXT accents are lightened explicitly below. */
+  }
+  [data-theme="dark"] body{
+    background:
+      radial-gradient(circle at 6% -2%, rgba(55,198,230,0.14), transparent 30rem),
+      radial-gradient(circle at 96% 3%, rgba(232,224,17,0.06), transparent 26rem),
+      linear-gradient(180deg,#081420 0%, #0A1A26 46%, #08131D 100%);
+  }
+  [data-theme="dark"] body::before{
+    background-image:
+      linear-gradient(90deg, rgba(95,209,238,0.08) 1px, transparent 1px),
+      linear-gradient(0deg,  rgba(95,209,238,0.07) 1px, transparent 1px);
+  }
+  /* Re-point THEMEFIX's hard-coded accents at the new palette (matched specificity) */
+  [data-theme="dark"] .section-kicker,
+  [data-theme="dark"] .eyebrow,
+  [data-theme="dark"] .source{ color:#63D0EE; }
+  [data-theme="dark"] h1 em,
+  [data-theme="dark"] .meta-pill,
+  [data-theme="dark"] .note-pill,
+  [data-theme="dark"] .suburb::before{ color:#5FD1EE; }
+  [data-theme="dark"] .hero h1 em{ color:#EAF2F8; }
+  [data-theme="dark"] .confirmation{ color:#7fe6c9; }
+
+  /* ============================================================
+     8) SMALL RESPONSIVE GUARDS for the new motif
+     ============================================================ */
+  @media (max-width:760px){
+    /* Drop the draft rule/node in the stacked single-column hero to avoid clutter */
+    .hero .hero-grid>div:first-child::before,
+    .hero .hero-grid>div:first-child::after{ display:none; }
+  }
+  @media (max-width:400px){
+    .eyebrow{ font-size:0.66rem; letter-spacing:0.08em; }
+    .section-kicker{ letter-spacing:0.14em; }
+  }
+
+  /* ============================================================
+     9) MANDATORY — neutralise every new motion under reduced-motion
+     ============================================================ */
+  @media (prefers-reduced-motion: reduce){
+    html.rd-on .hero .eyebrow,
+    html.rd-on .hero h1,
+    html.rd-on .hero .lead,
+    html.rd-on .hero .hero-cta,
+    html.rd-on .hero .hero-proof,
+    html.rd-on .hero .hero-media{ opacity:1 !important; transform:none !important; animation:none !important; }
+    html.rd-on .hero .hero-grid>div:first-child::before{ transform:none !important; animation:none !important; }
+    html.rd-on .hero .hero-grid>div:first-child::after{ opacity:1 !important; transform:rotate(45deg) !important; animation:none !important; }
+    .service-card::before,.project-card::before{ transition:none !important; }
+    .quick-pills button,.suburb,.meta-pill{ transition:none !important; }
+  }
+</style>
+<script>
+/* REDESIGN: enable the hero draft-in only when motion is welcome. Additive,
+   self-contained, guarded — does not rebind or interfere with existing handlers. */
+(function(){
+  try{
+    var mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq && mq.matches) return;              /* respect reduced motion */
+    document.documentElement.classList.add('rd-on');
+  }catch(e){ /* fail silent: content stays fully visible */ }
+})();
+</script>
+<!-- REDESIGN:END -->
 </body>
 </html>
