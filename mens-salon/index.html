@@ -3275,5 +3275,25 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   }
 </style>
 <!-- REDESIGN:END -->
+<!-- FIXALL:START — contrast/legibility sweep (light + dark). Additive, theme-scoped.
+     Dark: prices/footer used var(--charcoal), which a later :root re-pointed to a dark gunmetal
+     while the dark token block only lightened --ink -> dark-on-dark price text. --charcoal is also
+     used as text on light chips, so we retint only the affected on-dark elements. Light: faint
+     muted small-text and white photo-caption/tag labels over near-white scrims failed AA. -->
+<style id="fixall">
+  /* ---- DARK THEME ---- */
+  html[data-theme="dark"] .price-row strong,
+  html[data-theme="dark"] .price,
+  html[data-theme="dark"] .estimate strong,
+  html[data-theme="dark"] .footer-links a{ color:var(--ink); }
+  html[data-theme="dark"] input::placeholder,
+  html[data-theme="dark"] textarea::placeholder{ color:rgba(242,233,223,0.66); }
+  /* ---- LIGHT THEME ---- */
+  html:not([data-theme="dark"]) .price-row small{ color:rgba(23,27,33,0.72); }
+  html:not([data-theme="dark"]) .step small{ color:rgba(255,255,255,0.92); }
+  html:not([data-theme="dark"]) .portfolio-caption{ background:rgba(18,14,12,0.52); }
+  html:not([data-theme="dark"]) .portfolio-caption .tag{ background:rgba(0,0,0,0.34); border-color:rgba(255,255,255,0.28); }
+</style>
+<!-- FIXALL:END -->
 </body>
 </html>

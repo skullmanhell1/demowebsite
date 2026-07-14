@@ -1862,5 +1862,21 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   }
 </style>
 <!-- SITEWIDE:END -->
+<!-- FIXALL:START — contrast/legibility sweep (light + dark). Additive, theme-scoped.
+     Light: hero float/quick sub-cards are light but their strong text inherited the hero's near-white
+     ink (invisible); the promo-code accent gold was too light on the dark offer band. Both themes:
+     the .btn-accent lacquer->gold gradient was too light at the gold end for its white label. -->
+<style id="fixall">
+  /* ---- DARK THEME ---- */
+  html[data-theme="dark"] input::placeholder,
+  html[data-theme="dark"] textarea::placeholder{ color:rgba(236,241,248,0.66); }
+  html[data-theme="dark"] .btn-accent{ background:linear-gradient(135deg, var(--primary), #8f5f28); }
+  /* ---- LIGHT THEME ---- */
+  html:not([data-theme="dark"]) .vna-hero .float-card strong,
+  html:not([data-theme="dark"]) .vna-hero .quick-card strong{ color:var(--vna-bordeaux); }
+  html:not([data-theme="dark"]) .offer-code strong{ color:color-mix(in srgb, var(--vna-gold) 55%, #ffffff); }
+  html:not([data-theme="dark"]) .btn-accent{ background:linear-gradient(135deg, var(--primary), #8f5f28); }
+</style>
+<!-- FIXALL:END -->
 </body>
 </html>
