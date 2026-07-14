@@ -1679,5 +1679,23 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   }
 </style>
 <!-- DARKFIX:END -->
+<!-- FIXALL:START — contrast/legibility sweep (light + dark). Additive, theme-scoped.
+     Both themes: the translucent-white .offer-code band was too light for its white small-print.
+     Light: the white gallery caption over a photo scrim, and the brand-orange note-pill on the
+     cream pill, missed AA. Dark: the secondary button over the warm band, and the faint
+     ::placeholder ink, missed AA. -->
+<style id="fixall">
+  /* ---- both themes ---- */
+  html:not([data-theme="dark"]) .offer-code{ background:rgba(20,12,6,0.26); }
+  html[data-theme="dark"] .offer-code{ background:rgba(20,12,6,0.26); }
+  /* ---- LIGHT (default) ---- */
+  html:not([data-theme="dark"]) .gallery-label{ background:rgba(15,12,10,0.44); }
+  html:not([data-theme="dark"]) .note-pill{ color:#9c4708; }
+  /* ---- DARK ---- */
+  html[data-theme="dark"] .btn-secondary{ background:rgba(18,12,8,0.50); }
+  html[data-theme="dark"] input::placeholder,
+  html[data-theme="dark"] textarea::placeholder{ color:rgba(236,241,248,0.66); }
+</style>
+<!-- FIXALL:END -->
 </body>
 </html>

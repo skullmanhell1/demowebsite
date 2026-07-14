@@ -1616,5 +1616,12 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 })();
 </script>
 <!-- REDESIGN:END -->
+<!-- FIXALL:START — contrast/legibility sweep. Additive, theme-scoped.
+     Dark: the input/textarea ::placeholder ink (.45 alpha) fell just under AA on the dark field. -->
+<style id="fixall">
+  html[data-theme="dark"] input::placeholder,
+  html[data-theme="dark"] textarea::placeholder{ color:rgba(236,241,248,0.66); }
+</style>
+<!-- FIXALL:END -->
 </body>
 </html>

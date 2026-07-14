@@ -3100,5 +3100,21 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 })();
 </script>
 <!-- REDESIGN:END -->
+<!-- FIXALL:START — contrast/legibility sweep (light + dark). Additive, theme-scoped.
+     Dark: .trust-item kept a light gradient fill (not re-skinned for dark) -> light-on-light; and
+     footer links used the dark navy ink on the dark footer -> dark-on-dark. Both themes: the
+     .btn-call teal gradient was too light for its white label. -->
+<style id="fixall">
+  /* ---- DARK THEME ---- */
+  html[data-theme="dark"] .trust-item{ background:rgba(255,255,255,0.05); border:1px solid var(--line); }
+  html[data-theme="dark"] .footer-links a{ color:rgba(234,241,248,0.92); }
+  html[data-theme="dark"] input::placeholder,
+  html[data-theme="dark"] textarea::placeholder{ color:rgba(234,241,248,0.66); }
+  html[data-theme="dark"] .btn-call{ background:linear-gradient(135deg,#0a5a68,#0c7482); }
+  /* ---- LIGHT THEME ---- */
+  html:not([data-theme="dark"]) .quote-step small{ color:rgba(255,255,255,0.92); }
+  html:not([data-theme="dark"]) .btn-call{ background:linear-gradient(135deg,#0a5a68,#0c7482); }
+</style>
+<!-- FIXALL:END -->
 </body>
 </html>

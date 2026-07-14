@@ -1536,5 +1536,16 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   html[data-theme="dark"] .eyebrow{ color: var(--mint); }
 </style>
 <!-- DARKHERO:END -->
+<!-- FIXALL:START — contrast/legibility sweep (light + dark). Additive, theme-scoped.
+     Default (light): the dark .final CTA eyebrow kept the dark forest ink; the glass hero-card
+     paragraph and the footer credit note inherited the dark base p colour on dark surfaces
+     (dark-on-dark). Dark theme already passed and is left untouched. -->
+<style id="fixall">
+  /* ---- LIGHT (default) ---- */
+  html:not([data-theme="dark"]) .final .eyebrow{ color:var(--mint); }
+  html:not([data-theme="dark"]) .hero-card p{ color:rgba(255,250,242,0.82); }
+  html:not([data-theme="dark"]) .xlink-footer-note{ color:rgba(246,241,232,0.72); }
+</style>
+<!-- FIXALL:END -->
 </body>
 </html>

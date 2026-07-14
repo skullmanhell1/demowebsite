@@ -3203,5 +3203,39 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   }
 </style>
 <!-- DARKFIX:END -->
+<!-- FIXALL:START — contrast/legibility sweep (light + dark). Additive, theme-scoped.
+     Dark: several light-glass cards were never re-skinned for dark (light-on-light); and the nav
+     links carried a dark ink with !important that beat the dark override (dark-on-dark). Both
+     themes: the active tab/filter pill gradient was too light for its white label. -->
+<style id="fixall">
+  /* ---- DARK THEME ---- */
+  html[data-theme="dark"] .menu-side,
+  html[data-theme="dark"] .order-copy,
+  html[data-theme="dark"] .reservation-card,
+  html[data-theme="dark"] .story-card,
+  html[data-theme="dark"] .reviews-summary,
+  html[data-theme="dark"] .hours-card,
+  html[data-theme="dark"] .map-card{
+    background:color-mix(in srgb, var(--terracotta) 10%, #211812); border-color:var(--line);
+  }
+  html[data-theme="dark"] .nav-links a{ color:rgba(244,236,225,0.90) !important; }
+  html[data-theme="dark"] input::placeholder,
+  html[data-theme="dark"] textarea::placeholder{ color:rgba(244,236,225,0.66); }
+  html[data-theme="dark"] .schedule-item small{ color:rgba(244,236,225,0.68); }
+  html[data-theme="dark"] .tab-btn.active,
+  html[data-theme="dark"] .filter-btn.active,
+  html[data-theme="dark"] .time-chip.active{
+    background:linear-gradient(135deg,#c23c15,#a5330f);
+  }
+  /* ---- LIGHT THEME ---- */
+  html:not([data-theme="dark"]) .step small{ color:rgba(255,255,255,0.92); }
+  html:not([data-theme="dark"]) .schedule-item small{ color:rgba(30,23,18,0.74); }
+  html:not([data-theme="dark"]) .tab-btn.active,
+  html:not([data-theme="dark"]) .filter-btn.active,
+  html:not([data-theme="dark"]) .time-chip.active{
+    background:linear-gradient(135deg,#c23c15,#a5330f);
+  }
+</style>
+<!-- FIXALL:END -->
 </body>
 </html>

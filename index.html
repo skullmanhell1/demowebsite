@@ -1648,5 +1648,20 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
 })();
 </script>
 <!-- REDESIGN:END -->
+<!-- FIXALL:START — comprehensive contrast/legibility sweep (light + dark). Additive, theme-scoped.
+     Root cause (light): a later :root{} redefined --bg/--bg-2 to the dark canvas at equal
+     specificity to the earlier [data-theme="light"] token block, so light mode inherited a dark
+     background via var() -> dark-on-dark everywhere. html[data-theme="light"] out-specifies :root. -->
+<style id="fixall">
+  /* ---- LIGHT THEME ---- */
+  html[data-theme="light"]{ --bg:#f5f7fc; --bg-2:#e9eef8; }
+  html[data-theme="light"] .eyebrow{ color:#0b6273; }
+  html[data-theme="light"] .field input::placeholder,
+  html[data-theme="light"] .field textarea::placeholder{ color:rgba(20,26,51,0.66); }
+  /* ---- DARK THEME ---- */
+  html[data-theme="dark"] .field input::placeholder,
+  html[data-theme="dark"] .field textarea::placeholder{ color:rgba(238,241,251,0.62); }
+</style>
+<!-- FIXALL:END -->
 </body>
 </html>

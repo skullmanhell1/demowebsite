@@ -3048,5 +3048,29 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   }
 </style>
 <!-- DARKFIX:END -->
+<!-- FIXALL:START — contrast/legibility sweep (light + dark). Additive, theme-scoped.
+     Dark: light-glass cards (.booking-card/.why-card/.location-card/.map-card) were never
+     re-skinned for dark, leaving light-on-light text; darken them to the site's dark card tint.
+     Both themes: the .btn-primary CTA was forced to a bright ignite orange with white text
+     (fails AA); deepen the orange so the white label passes while keeping the ignite identity. -->
+<style id="fixall">
+  /* ---- DARK THEME ---- */
+  html[data-theme="dark"] .booking-card,
+  html[data-theme="dark"] .why-card,
+  html[data-theme="dark"] .location-card,
+  html[data-theme="dark"] .map-card{
+    background:color-mix(in srgb, var(--blue) 10%, #171f2b); border-color:var(--line);
+  }
+  html[data-theme="dark"] input::placeholder,
+  html[data-theme="dark"] textarea::placeholder{ color:rgba(233,239,247,0.66); }
+  html[data-theme="dark"] .btn-primary{
+    background:linear-gradient(135deg,#c8461a,#a3380e) !important;
+  }
+  /* ---- LIGHT THEME ---- */
+  html:not([data-theme="dark"]) .btn-primary{
+    background:linear-gradient(135deg,#c8461a,#a3380e) !important;
+  }
+</style>
+<!-- FIXALL:END -->
 </body>
 </html>
