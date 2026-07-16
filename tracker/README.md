@@ -90,6 +90,14 @@ Ref code:  joescafe
 | Client time | Timestamp from the visitor's browser |
 | Notes | Copied from the Prospects row |
 
+## Times
+
+- Times are shown in **12-hour format** (e.g. `Thu 16 Jul 2026, 6:00 PM`) in both the alert
+  email and the `Visits` tab. The `Received` cell still holds a real datetime, so it stays
+  sortable.
+- Times use your **Apps Script project timezone**. To set it: Apps Script editor →
+  **Project Settings (gear)** → **Time zone** → choose yours (e.g. `Australia/Perth`).
+
 ## Notes & limits
 
 - **You can't read a visitor's email from their browser** — no tracker can. This works because

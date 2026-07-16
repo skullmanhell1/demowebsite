@@ -64,6 +64,10 @@ function handle_(e) {
     var screen   = p.screen   || "";
     var clientTs = p.ts       || "";
 
+    // Human-friendly 12-hour times (e.g. "Thu 16 Jul 2026, 6:00 PM").
+    var whenReadable   = fmt_(now);
+    var clientReadable = clientTs ? fmtIso_(clientTs) : "";
+
     // Resolve the ref code against the Prospects lookup tab.
     var match    = lookupProspect_(ref); // {business, email, phone, notes} (blanks if not found)
     var business = match.business;
@@ -73,7 +77,7 @@ function handle_(e) {
 
     getVisitsSheet_().appendRow([
       now, ref, business, email, phone,
-      site, page, referrer, lang, screen, clientTs, notes
+      site, page, referrer, lang, screen, clientReadable, notes
     ]);
 
     if (ALERT_EMAIL && !isDuplicate_(ref, site)) {
@@ -96,7 +100,8 @@ function handle_(e) {
         "Page:       " + page + "\n" +
         "Came from:  " + (referrer || "(direct / email)") + "\n" +
         "Device:     " + (screen || "-") + " / " + (lang || "-") + "\n" +
-        "Time:       " + now + "\n"
+        "Time:       " + whenReadable + "\n" +
+        (clientReadable ? "Their time: " + clientReadable + "\n" : "")
       );
     }
 
@@ -151,7 +156,31 @@ function getVisitsSheet_() {
     sheet.appendRow(VISITS_HEADER);
     sheet.setFrozenRows(1);
   }
+  // Show the "Received" column (A) as a 12-hour time, e.g. "Thu 16 Jul 2026, 6:00 PM".
+  // The cell still holds a real datetime, so it stays sortable.
+  try {
+    sheet.getRange("A2:A").setNumberFormat("ddd d mmm yyyy, h:mm AM/PM");
+  } catch (e) { /* non-fatal */ }
   return sheet;
+}
+
+/** Format a Date as a friendly 12-hour string in the project's timezone. */
+function fmt_(date) {
+  try {
+    var tz = Session.getScriptTimeZone() || "Etc/GMT";
+    return Utilities.formatDate(date, tz, "EEE d MMM yyyy, h:mm a"); // e.g. Thu 16 Jul 2026, 6:00 PM
+  } catch (e) {
+    return String(date);
+  }
+}
+
+/** Parse an ISO timestamp string and format it 12-hour; falls back to the raw value. */
+function fmtIso_(iso) {
+  try {
+    var d = new Date(iso);
+    if (!isNaN(d.getTime())) return fmt_(d);
+  } catch (e) {}
+  return iso;
 }
 
 function getProspectsSheet_() {
