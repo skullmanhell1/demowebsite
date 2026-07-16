@@ -106,6 +106,30 @@
   <style id="soph-min">
     html { scroll-padding-top: 96px; }
   </style>
+  <!-- Visit tracker — pings backend on real page load (see /tracker/README.md) -->
+  <script>
+  (function () {
+    var TRACKER_ENDPOINT = "https://script.google.com/macros/s/REPLACE_WITH_YOUR_DEPLOYMENT_ID/exec";
+    var SITE_ID = "pet-services";
+    try {
+      var q = new URLSearchParams(window.location.search);
+      var ref = q.get("ref") || q.get("utm_content") || q.get("utm_campaign") || "";
+      var d = {
+        site: SITE_ID,
+        ref: ref,
+        page: window.location.pathname,
+        referrer: document.referrer || "",
+        lang: navigator.language || "",
+        screen: (window.screen ? window.screen.width + "x" + window.screen.height : ""),
+        ts: new Date().toISOString()
+      };
+      var qs = Object.keys(d).map(function (k) {
+        return encodeURIComponent(k) + "=" + encodeURIComponent(d[k]);
+      }).join("&");
+      new Image().src = TRACKER_ENDPOINT + "?" + qs;
+    } catch (e) { /* never break the page */ }
+  })();
+  </script>
 </head>
 <body>
   <div class="noise"></div><div class="preloader" id="preloader"><div><div class="preloader-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 17c-2.8-1.8-7-4.8-7-8.2A3.8 3.8 0 0 1 8.8 5c1.4 0 2.5.7 3.2 1.8A3.8 3.8 0 0 1 15.2 5 3.8 3.8 0 0 1 19 8.8c0 3.4-4.2 6.4-7 8.2Z" fill="white"/><circle cx="6" cy="4" r="1.5" fill="white" opacity=".7"/><circle cx="10" cy="3" r="1.5" fill="white" opacity=".7"/><circle cx="14" cy="3" r="1.5" fill="white" opacity=".7"/><circle cx="18" cy="4" r="1.5" fill="white" opacity=".7"/></svg></div><div class="preloader-text">Pawhaven Club</div><div class="preloader-line"></div></div></div>

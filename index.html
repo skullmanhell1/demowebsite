@@ -194,6 +194,30 @@
     "url": "https://skullmanhell1.github.io/demowebsite/"
   }
   </script>
+  <!-- Visit tracker — pings backend on real page load (see /tracker/README.md) -->
+  <script>
+  (function () {
+    var TRACKER_ENDPOINT = "https://script.google.com/macros/s/REPLACE_WITH_YOUR_DEPLOYMENT_ID/exec";
+    var SITE_ID = "landing";
+    try {
+      var q = new URLSearchParams(window.location.search);
+      var ref = q.get("ref") || q.get("utm_content") || q.get("utm_campaign") || "";
+      var d = {
+        site: SITE_ID,
+        ref: ref,
+        page: window.location.pathname,
+        referrer: document.referrer || "",
+        lang: navigator.language || "",
+        screen: (window.screen ? window.screen.width + "x" + window.screen.height : ""),
+        ts: new Date().toISOString()
+      };
+      var qs = Object.keys(d).map(function (k) {
+        return encodeURIComponent(k) + "=" + encodeURIComponent(d[k]);
+      }).join("&");
+      new Image().src = TRACKER_ENDPOINT + "?" + qs;
+    } catch (e) { /* never break the page */ }
+  })();
+  </script>
 </head>
 <body>
   <!-- INTRO-JS:START --><script>document.documentElement.classList.add("has-js");</script><!-- INTRO-JS:END -->
