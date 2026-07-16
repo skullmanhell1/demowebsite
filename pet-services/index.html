@@ -106,6 +106,28 @@
   <style id="soph-min">
     html { scroll-padding-top: 96px; }
   </style>
+
+
+<style id="motion-plus">
+/* =============================================================================
+   Motion+ — genuine upgrade layer (additive). Adds NEW motion on top of the
+   page's existing reveal system WITHOUT touching it. Uses transform / opacity /
+   box-shadow / color only; introduces no layout shift. Every effect is gated
+   behind html.mp-on (added by the guarded companion script only when motion is
+   allowed) and fully neutralised under prefers-reduced-motion. Decorative
+   injected nodes are aria-hidden. The contact/booking form is never touched.
+   Tier: STANDARD (friendly / lively) — springier easing, micro-interactions kept <=300ms.
+   ============================================================================= */
+#mp-progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:2147483200;transform:scaleX(0);transform-origin:0 50%;pointer-events:none;background:linear-gradient(90deg,var(--primary,#888),var(--accent,var(--primary,#888)));will-change:transform;}
+.mp-count{font-variant-numeric:tabular-nums;}
+html.mp-on .mp-hero-host{position:relative;isolation:isolate;}
+.mp-hero-glow{position:absolute;inset:-14% -8%;z-index:-1;pointer-events:none;border-radius:inherit;background:radial-gradient(46% 56% at 30% 28%,color-mix(in srgb,var(--accent,var(--primary,#c86b8f)) 28%,transparent),transparent 72%);opacity:.5;filter:blur(26px);}
+html.mp-on .mp-hero-host .mp-hero-glow{animation:mpDrift 13s cubic-bezier(.2,.7,.2,1) infinite;will-change:transform;}
+@keyframes mpDrift{0%{transform:translate3d(0,0,0);}50%{transform:translate3d(4%,-2.5%,0);}100%{transform:translate3d(0,0,0);}}
+html.mp-on .card{transition:transform .28s cubic-bezier(.34,1.3,.64,1),box-shadow .28s ease,border-color .28s ease;}
+html.mp-on .card:hover{transform:translateY(-7px) scale(1.02);box-shadow:0 26px 58px color-mix(in srgb,var(--dark,#222) 20%,transparent);}
+@media (prefers-reduced-motion: reduce){#mp-progress{display:none!important;}.mp-hero-glow{display:none!important;animation:none!important;}html.mp-on .card{transition:none!important;}html.mp-on .card:hover{transform:none!important;}}
+</style>
 </head>
 <body>
   <div class="noise"></div><div class="preloader" id="preloader"><div><div class="preloader-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 17c-2.8-1.8-7-4.8-7-8.2A3.8 3.8 0 0 1 8.8 5c1.4 0 2.5.7 3.2 1.8A3.8 3.8 0 0 1 15.2 5 3.8 3.8 0 0 1 19 8.8c0 3.4-4.2 6.4-7 8.2Z" fill="white"/><circle cx="6" cy="4" r="1.5" fill="white" opacity=".7"/><circle cx="10" cy="3" r="1.5" fill="white" opacity=".7"/><circle cx="14" cy="3" r="1.5" fill="white" opacity=".7"/><circle cx="18" cy="4" r="1.5" fill="white" opacity=".7"/></svg></div><div class="preloader-text">Pawhaven Club</div><div class="preloader-line"></div></div></div>
@@ -1050,5 +1072,119 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   html[data-theme="dark"] .hero-card p{ color:rgba(238,242,236,0.92); }
 </style>
 <!-- FIXALL:END -->
+
+
+<script id="motion-plus-js">
+(function () {
+  "use strict";
+  try {
+    var win = window, doc = document, root = doc.documentElement;
+    if (root.__motionPlusDone) { return; }
+    root.__motionPlusDone = true;
+
+    // Capability + reduced-motion gate. On failure we add NO motion and leave
+    // all numbers at their original text (count-up shows final value immediately).
+    var mq = win.matchMedia && win.matchMedia('(prefers-reduced-motion: reduce)');
+    if ((mq && mq.matches) || typeof win.requestAnimationFrame !== 'function') { return; }
+    root.classList.add('mp-on');
+
+    function ready(fn) {
+      if (doc.readyState === 'loading') { doc.addEventListener('DOMContentLoaded', fn, { once: true }); }
+      else { fn(); }
+    }
+
+    // 1) Scroll progress bar (thin, brand-coloured, transform: scaleX only).
+    var bar = doc.createElement('div');
+    bar.id = 'mp-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    var host = doc.body || root;
+    host.insertBefore(bar, host.firstChild);
+    var ticking = false;
+    function updateBar() {
+      ticking = false;
+      var el = doc.documentElement;
+      var max = el.scrollHeight - el.clientHeight;
+      var y = win.scrollY || el.scrollTop || 0;
+      var p = max > 0 ? y / max : 0;
+      if (p < 0) { p = 0; } if (p > 1) { p = 1; }
+      bar.style.transform = 'scaleX(' + p + ')';
+    }
+    function onScroll() { if (!ticking) { ticking = true; win.requestAnimationFrame(updateBar); } }
+    win.addEventListener('scroll', onScroll, { passive: true });
+    win.addEventListener('resize', onScroll, { passive: true });
+    updateBar();
+
+    // Count-up: animate a numeric stat from 0 to its value once, then restore the
+    // EXACT original text (preserving symbols like star / % / +). Never touches forms.
+    function animateCount(t) {
+      if (t.__done) { return; } t.__done = true;
+      var numStr = t.numStr;
+      var target = parseFloat(numStr.replace(/,/g, ''));
+      if (isNaN(target)) { t.el.textContent = t.original; return; }
+      var decimals = (numStr.split('.')[1] || '').length;
+      var grouped = /,/.test(numStr);
+      var prefix = t.original.slice(0, t.index);
+      var suffix = t.original.slice(t.index + numStr.length);
+      var dur = 900, start = null;
+      function fmt(v) {
+        var s = decimals > 0 ? v.toFixed(decimals) : String(Math.round(v));
+        if (grouped) { var pr = s.split('.'); pr[0] = pr[0].replace(/\B(?=(\d{3})+(?!\d))/g, ','); s = pr.join('.'); }
+        return s;
+      }
+      function frame(ts) {
+        if (start === null) { start = ts; }
+        var p = Math.min((ts - start) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        t.el.textContent = prefix + fmt(target * eased) + suffix;
+        if (p < 1) { win.requestAnimationFrame(frame); }
+        else { t.el.textContent = t.original; } // restore exact original
+      }
+      win.requestAnimationFrame(frame);
+    }
+
+    ready(function () {
+      // Hero ambient glow (decorative, behind hero content, drifts slowly).
+      try {
+        var hero = doc.querySelector('.hero');
+        if (hero && !hero.querySelector('.mp-hero-glow')) {
+          hero.classList.add('mp-hero-host');
+          var glow = doc.createElement('div');
+          glow.className = 'mp-hero-glow';
+          glow.setAttribute('aria-hidden', 'true');
+          hero.insertBefore(glow, hero.firstChild);
+        }
+      } catch (e) {}
+
+      // Count-up hero stats (fire-once when they enter the viewport).
+      try {
+        var nums = doc.querySelectorAll('.trust-row .trust b');
+        var targets = [];
+        Array.prototype.forEach.call(nums, function (el) {
+          var original = el.textContent;
+          var m = original.match(/-?\d[\d,]*(?:\.\d+)?/);
+          if (!m) { return; } // no numeric content (e.g. "Small") -> leave as-is
+          el.classList.add('mp-count');
+          targets.push({ el: el, original: original, index: m.index, numStr: m[0] });
+        });
+        if (targets.length) {
+          if ('IntersectionObserver' in win) {
+            var io = new win.IntersectionObserver(function (entries) {
+              entries.forEach(function (en) {
+                if (en.isIntersecting) {
+                  if (en.target.__mpT) { animateCount(en.target.__mpT); }
+                  io.unobserve(en.target);
+                }
+              });
+            }, { threshold: 0.4 });
+            targets.forEach(function (t) { t.el.__mpT = t; io.observe(t.el); });
+          } else {
+            targets.forEach(animateCount);
+          }
+        }
+      } catch (e) {}
+    });
+  } catch (e) { /* fail silent: static, fully-visible page remains intact */ }
+})();
+</script>
 </body>
 </html>
