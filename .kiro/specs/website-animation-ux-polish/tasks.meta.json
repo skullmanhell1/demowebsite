@@ -1,0 +1,93 @@
+{
+  "pbtResults": {
+    "3.1 Write property test for the duration clamp": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189523534
+    },
+    "3.2 Write property test for fire-once scroll-reveal": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189526240
+    },
+    "3.3 Write property test for stagger ordering and spacing": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189530096
+    },
+    "5.1 Write property test for motion timing bands": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189534316
+    },
+    "5.2 Write property test for non-linear easing": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189537177
+    },
+    "5.3 Write property test for compositor-only animated properties": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189539947
+    },
+    "5.4 Write property test for self-contained static output": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189542648
+    },
+    "6.1 Write property test for reduced-motion static/accessible state": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189545329
+    },
+    "6.2 Write property test for live reduced-motion toggle": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189547940
+    },
+    "6.3 Write property test for entrance terminal state": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189550593
+    },
+    "6.4 Write property test for pre-reveal accessibility-tree presence": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189553249
+    },
+    "6.5 Write property test for observer-unavailable fallback": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189558093
+    },
+    "6.6 Write property test for focus indicator quality": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189560639
+    },
+    "6.7 Write property test for text contrast minimums": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189563504
+    },
+    "6.8 Write property test for pressed-state existence and hover reversibility": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189566257
+    },
+    "6.9 Write property test for no-focus-trap / keyboard operability": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189569019
+    },
+    "6.10 Write property test for decorative-element aria-hidden": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189572557
+    },
+    "6.11 Write property test for non-color state cues": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189575199
+    },
+    "7.1 Write property test for bounded, seamless ambient motion": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189577995
+    },
+    "7.2 Write property test for decorative, flag-confined ambient motion": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189581144
+    },
+    "8.1 Write property test for content/branding/structure preservation": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189584288
+    },
+    "8.2 Write property test for contact-form preservation": {
+      "status": "passed",
+      "lastRunTimestamp": 1784189586951
+    }
+  },
+  "executionHistory": {}
+}

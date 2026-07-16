@@ -1,0 +1,24 @@
+{
+  "name": "motion-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DEV-ONLY test harness for the website-animation-ux-polish Motion_System. Never referenced by any shipped index.html.",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "test:unit": "node --test tests/property-*.test.js tests/example-*.test.js",
+    "test:perf": "node --test tests/perf-09-headless.test.js"
+  },
+  "keywords": [
+    "motion-system",
+    "property-based-testing",
+    "dev-only"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "fast-check": "^3.23.1",
+    "jsdom": "^25.0.1",
+    "postcss": "^8.4.49",
+    "playwright": "^1.48.2"
+  }
+}

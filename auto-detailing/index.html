@@ -410,6 +410,26 @@
     .eyebrow, .section-kicker, .brand-subtitle { letter-spacing: .14em; }
     @media print { body::after { display: none !important; } }
   </style>
+<style id="motion-plus">
+/* =============================================================================
+   Motion+ — genuine upgrade layer (additive). Adds NEW motion on top of the
+   page's existing #anim / .reveal system WITHOUT touching it. Uses transform /
+   opacity / box-shadow only; introduces no layout shift. Every effect is gated
+   behind html.mp-on (added by the guarded companion script only when motion is
+   allowed) and fully neutralised under prefers-reduced-motion. Decorative
+   injected nodes are aria-hidden. Tier: STANDARD (confident / mechanical) —
+   crisper, firmer, NO hero ambient glow.
+   Effects: (1) scroll progress bar (2) count-up stats (3) refined card-hover
+            depth (4) primary-CTA hover depth.
+   ============================================================================= */
+#mp-progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:2147483200;transform:scaleX(0);transform-origin:0 50%;pointer-events:none;background:linear-gradient(90deg,var(--primary,#888),var(--accent,var(--primary,#888)));will-change:transform;}
+.mp-count{font-variant-numeric:tabular-nums;}
+html.mp-on .service-card{transition:transform .26s cubic-bezier(.4,0,.2,1),box-shadow .26s ease,border-color .26s ease;}
+html.mp-on .service-card:hover{transform:translateY(-6px) scale(1.016);box-shadow:0 26px 56px color-mix(in srgb,var(--dark,#222) 22%,transparent);}
+html.mp-on .btn-primary{transition:transform .18s cubic-bezier(.4,0,.2,1),box-shadow .22s ease,background .22s ease;}
+html.mp-on .btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 40px color-mix(in srgb,var(--primary,#333) 40%,transparent);}
+@media (prefers-reduced-motion: reduce){#mp-progress{display:none!important;}html.mp-on .service-card,html.mp-on .btn-primary{transition:none!important;}html.mp-on .service-card:hover{transform:none!important;}html.mp-on .btn-primary:hover{transform:none!important;}}
+</style>
   <!-- Visit tracker — pings backend on real page load (see /tracker/README.md) -->
   <script>
   (function () {
@@ -1647,5 +1667,105 @@ html.anim2-on .a2-sheenable:hover .a2-sheen { left: 130%; }
   html[data-theme="dark"] textarea::placeholder{ color:rgba(236,241,248,0.66); }
 </style>
 <!-- FIXALL:END -->
+<script id="motion-plus-js">
+(function () {
+  "use strict";
+  try {
+    var win = window, doc = document, root = doc.documentElement;
+    if (root.__motionPlusDone) { return; }
+    root.__motionPlusDone = true;
+
+    // Capability + reduced-motion gate. On failure we add NO motion and leave
+    // all numbers at their original text (count-up shows final value immediately).
+    var mq = win.matchMedia && win.matchMedia('(prefers-reduced-motion: reduce)');
+    if ((mq && mq.matches) || typeof win.requestAnimationFrame !== 'function') { return; }
+    root.classList.add('mp-on');
+
+    function ready(fn) {
+      if (doc.readyState === 'loading') { doc.addEventListener('DOMContentLoaded', fn, { once: true }); }
+      else { fn(); }
+    }
+
+    // 1) Scroll progress bar (thin, brand-coloured, transform: scaleX only).
+    var bar = doc.createElement('div');
+    bar.id = 'mp-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    var host = doc.body || root;
+    host.insertBefore(bar, host.firstChild);
+    var ticking = false;
+    function updateBar() {
+      ticking = false;
+      var el = doc.documentElement;
+      var max = el.scrollHeight - el.clientHeight;
+      var y = win.scrollY || el.scrollTop || 0;
+      var p = max > 0 ? y / max : 0;
+      if (p < 0) { p = 0; } if (p > 1) { p = 1; }
+      bar.style.transform = 'scaleX(' + p + ')';
+    }
+    function onScroll() { if (!ticking) { ticking = true; win.requestAnimationFrame(updateBar); } }
+    win.addEventListener('scroll', onScroll, { passive: true });
+    win.addEventListener('resize', onScroll, { passive: true });
+    updateBar();
+
+    // Count-up: animate a numeric stat from 0 to its value once, then restore the
+    // EXACT original text (preserving symbols like star / % / +). Never touches forms.
+    function animateCount(t) {
+      if (t.__done) { return; } t.__done = true;
+      var numStr = t.numStr;
+      var target = parseFloat(numStr.replace(/,/g, ''));
+      if (isNaN(target)) { t.el.textContent = t.original; return; }
+      var decimals = (numStr.split('.')[1] || '').length;
+      var grouped = /,/.test(numStr);
+      var prefix = t.original.slice(0, t.index);
+      var suffix = t.original.slice(t.index + numStr.length);
+      var dur = 850, start = null;
+      function fmt(v) {
+        var s = decimals > 0 ? v.toFixed(decimals) : String(Math.round(v));
+        if (grouped) { var pr = s.split('.'); pr[0] = pr[0].replace(/\B(?=(\d{3})+(?!\d))/g, ','); s = pr.join('.'); }
+        return s;
+      }
+      function frame(ts) {
+        if (start === null) { start = ts; }
+        var p = Math.min((ts - start) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        t.el.textContent = prefix + fmt(target * eased) + suffix;
+        if (p < 1) { win.requestAnimationFrame(frame); }
+        else { t.el.textContent = t.original; } // restore exact original
+      }
+      win.requestAnimationFrame(frame);
+    }
+
+    ready(function () {
+      // 3) Count-up hero stats (fire-once when they enter the viewport).
+      try {
+        var nums = doc.querySelectorAll('.hero-proof .proof-card strong');
+        var targets = [];
+        Array.prototype.forEach.call(nums, function (el) {
+          var original = el.textContent;
+          var m = original.match(/-?\d[\d,]*(?:\.\d+)?/);
+          if (!m) { return; } // no numeric content (e.g. "Private") -> leave as-is
+          el.classList.add('mp-count');
+          targets.push({ el: el, original: original, index: m.index, numStr: m[0] });
+        });
+        if (targets.length) {
+          if ('IntersectionObserver' in win) {
+            var io = new win.IntersectionObserver(function (entries) {
+              entries.forEach(function (en) {
+                if (en.isIntersecting) {
+                  if (en.target.__mpT) { animateCount(en.target.__mpT); }
+                  io.unobserve(en.target);
+                }
+              });
+            }, { threshold: 0.4 });
+            targets.forEach(function (t) { t.el.__mpT = t; io.observe(t.el); });
+          } else {
+            targets.forEach(animateCount);
+          }
+        }
+      } catch (e) {}
+    });
+  } catch (e) { /* fail silent: static, fully-visible page remains intact */ }
+})();
+</script>
 </body>
 </html>
