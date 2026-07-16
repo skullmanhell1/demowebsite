@@ -2,37 +2,53 @@
  * Wide Web Solutions — Demo Visit Tracker (backend)
  * -------------------------------------------------
  * Receives a "ping" from each demo page when a real browser loads it,
- * logs it to a Google Sheet, and (optionally) emails you an instant alert.
+ * resolves the ?ref= code against a "Prospects" lookup tab, logs the visit
+ * to a "Visits" tab, and (optionally) emails you an instant alert that
+ * includes the prospect's business name, email and phone.
  *
- * HOW TO DEPLOY (once):
- *   1. Create a new Google Sheet (this will hold the visit log).
- *   2. Extensions > Apps Script. Delete any code, paste this file in.
- *   3. Set ALERT_EMAIL below to the address that should get alerts
- *      (or set it to "" to disable emails and only log to the Sheet).
- *   4. Click Deploy > New deployment > type: Web app.
- *        - Execute as: Me
- *        - Who has access: Anyone
- *      Copy the resulting /exec URL.
- *   5. Paste that URL into TRACKER_ENDPOINT in the pages' tracker snippet
- *      (see tracker/README.md for the exact spot).
+ * TABS (created automatically; run setup() once to create them up front):
+ *   - "Prospects"  your lookup list. Columns:
+ *         A: Ref code   (the short slug you put in ?ref=, e.g. "joescafe")
+ *         B: Business   (e.g. "Joe's Cafe")
+ *         C: Email      (e.g. "joe@joescafe.com")
+ *         D: Phone      (e.g. "+61 400 000 000")
+ *         E: Notes      (anything you like)
+ *   - "Visits"     the auto-filled log of every visit.
+ *
+ * HOW TO (RE)DEPLOY:
+ *   1. In the Demo Visits Sheet: Extensions > Apps Script.
+ *   2. Replace the code with this file. Set ALERT_EMAIL below. Save.
+ *   3. (Optional) Run the setup() function once (Run > setup) to create the
+ *      Prospects/Visits tabs with headers and an example row.
+ *   4. Deploy > Manage deployments > (edit / pencil) > Version: New version
+ *      > Deploy.  ** This keeps the SAME /exec URL, so the website pages do
+ *      not need to change. **  (Only use "New deployment" for a brand-new URL.)
  *
  * Notes:
- *   - This fires only when the actual page loads in a browser, NOT when an
- *     email is merely opened — so it reflects genuine site visits.
- *   - MailApp has a daily send quota (~100/day on consumer Gmail). The
- *     DEDUPE window below prevents repeat emails for the same prospect+demo.
+ *   - Fires only when the page actually loads in a browser, NOT on email open.
+ *   - MailApp has a daily quota (~100/day consumer Gmail). DEDUPE_MINUTES
+ *     prevents repeat emails for the same ref+demo within the window (the
+ *     Visits tab still logs every hit).
  */
 
-var SHEET_NAME    = "Visits";
-var ALERT_EMAIL   = "you@example.com"; // <-- change this, or set "" to disable emails
-var DEDUPE_MINUTES = 360;              // don't re-email same ref+site within this window (0 = always email)
+var VISITS_SHEET    = "Visits";
+var PROSPECTS_SHEET = "Prospects";
+var ALERT_EMAIL     = "you@example.com"; // <-- change this, or set "" to disable emails
+var DEDUPE_MINUTES  = 360;               // don't re-email same ref+site within this window (0 = always email)
 
-function doGet(e) {
-  return handle_(e);
-}
+var VISITS_HEADER = [
+  "Received", "Ref code", "Business", "Email", "Phone",
+  "Site", "Page", "Referrer", "Language", "Screen", "Client time", "Notes"
+];
+var PROSPECTS_HEADER = ["Ref code", "Business", "Email", "Phone", "Notes"];
 
-function doPost(e) {
-  return handle_(e);
+function doGet(e)  { return handle_(e); }
+function doPost(e) { return handle_(e); }
+
+/** Run once from the editor to create the tabs before you start. */
+function setup() {
+  getProspectsSheet_();
+  getVisitsSheet_();
 }
 
 function handle_(e) {
@@ -48,33 +64,68 @@ function handle_(e) {
     var screen   = p.screen   || "";
     var clientTs = p.ts       || "";
 
-    getSheet_().appendRow([now, site, ref, page, referrer, lang, screen, clientTs]);
+    // Resolve the ref code against the Prospects lookup tab.
+    var match    = lookupProspect_(ref); // {business, email, phone, notes} (blanks if not found)
+    var business = match.business;
+    var email    = match.email;
+    var phone    = match.phone;
+    var notes    = match.notes;
+
+    getVisitsSheet_().appendRow([
+      now, ref, business, email, phone,
+      site, page, referrer, lang, screen, clientTs, notes
+    ]);
 
     if (ALERT_EMAIL && !isDuplicate_(ref, site)) {
-      var who = ref ? ref : "(no ref tag)";
+      // Prefer the friendly business label; fall back to the raw ref code.
+      var label = business
+        ? (business + (email ? " (" + email + ")" : ""))
+        : (ref ? ref + " (unknown ref — add it to Prospects)" : "(no ref tag)");
+
       MailApp.sendEmail(
         ALERT_EMAIL,
-        "Demo visit: " + who + " -> " + (site || "site"),
-        "Someone opened a demo page.\n\n" +
-        "Prospect (ref): " + who + "\n" +
-        "Demo:           " + site + "\n" +
-        "Page:           " + page + "\n" +
-        "Came from:      " + (referrer || "(direct / email)") + "\n" +
-        "Language:       " + lang + "\n" +
-        "Screen:         " + screen + "\n" +
-        "Time:           " + now + "\n"
+        "Demo visit: " + label + " -> " + (site || "site"),
+        "A prospect opened a demo page.\n\n" +
+        "Business:   " + (business || "(not in Prospects list)") + "\n" +
+        "Email:      " + (email    || "-") + "\n" +
+        "Phone:      " + (phone    || "-") + "\n" +
+        "Ref code:   " + (ref      || "(none)") + "\n" +
+        "Notes:      " + (notes    || "-") + "\n" +
+        "\n" +
+        "Demo:       " + site + "\n" +
+        "Page:       " + page + "\n" +
+        "Came from:  " + (referrer || "(direct / email)") + "\n" +
+        "Device:     " + (screen || "-") + " / " + (lang || "-") + "\n" +
+        "Time:       " + now + "\n"
       );
     }
 
-    // Return a 1x1 transparent GIF so the <img> beacon resolves cleanly.
-    return ContentService
-      .createTextOutput("ok")
-      .setMimeType(ContentService.MimeType.TEXT);
+    return ContentService.createTextOutput("ok").setMimeType(ContentService.MimeType.TEXT);
   } catch (err) {
-    return ContentService
-      .createTextOutput("err: " + err)
-      .setMimeType(ContentService.MimeType.TEXT);
+    return ContentService.createTextOutput("err: " + err).setMimeType(ContentService.MimeType.TEXT);
   }
+}
+
+/** Look up a ref code (case-insensitive, trimmed) in the Prospects tab. */
+function lookupProspect_(ref) {
+  var empty = { business: "", email: "", phone: "", notes: "" };
+  var key = String(ref || "").trim().toLowerCase();
+  if (!key) return empty;
+
+  var sheet = getProspectsSheet_();
+  var values = sheet.getDataRange().getValues();
+  for (var i = 1; i < values.length; i++) { // skip header
+    var code = String(values[i][0] || "").trim().toLowerCase();
+    if (code && code === key) {
+      return {
+        business: String(values[i][1] || "").trim(),
+        email:    String(values[i][2] || "").trim(),
+        phone:    String(values[i][3] || "").trim(),
+        notes:    String(values[i][4] || "").trim()
+      };
+    }
+  }
+  return empty;
 }
 
 function isDuplicate_(ref, site) {
@@ -90,13 +141,28 @@ function isDuplicate_(ref, site) {
   }
 }
 
-function getSheet_() {
+function getVisitsSheet_() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName(SHEET_NAME);
+  var sheet = ss.getSheetByName(VISITS_SHEET);
   if (!sheet) {
-    sheet = ss.insertSheet(SHEET_NAME);
-    sheet.appendRow(["Received", "Site", "Ref (prospect)", "Page", "Referrer", "Language", "Screen", "Client time"]);
+    sheet = ss.insertSheet(VISITS_SHEET);
+  }
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(VISITS_HEADER);
     sheet.setFrozenRows(1);
+  }
+  return sheet;
+}
+
+function getProspectsSheet_() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(PROSPECTS_SHEET);
+  if (!sheet) {
+    sheet = ss.insertSheet(PROSPECTS_SHEET);
+    sheet.appendRow(PROSPECTS_HEADER);
+    sheet.setFrozenRows(1);
+    // Example row so the format is obvious — edit or delete it.
+    sheet.appendRow(["joescafe", "Joe's Cafe", "joe@joescafe.com", "+61 400 000 000", "Met at expo"]);
   }
   return sheet;
 }
