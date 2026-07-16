@@ -1,0 +1,232 @@
+/* =============================================================================
+   Motion_System — Canonical CSS layer (reference template)
+   Feature: website-animation-ux-polish
+
+   Source of truth for the additive `<style id="motion-system">` block that is
+   copied inline into each Target_Page's <head> AFTER the existing page styles.
+   This file is DEV-ONLY (lives under tools/motion-tests/) and must never be
+   linked or referenced by any shipped index.html.
+
+   Design guarantees encoded here:
+   - Fail-safe default: the resting (no-JS) state of every element is its final,
+     fully visible, interactive state. Hidden/initial motion states are gated
+     behind `html.motion-on`, which the JS layer only adds AFTER confirming
+     motion is allowed (not reduced-motion, IntersectionObserver present).
+     => reduced-motion and no-observer paths render everything visible with zero
+        extra work (Req 3.6, 6.x; design "fail-safe default").
+   - Only `transform` / `opacity` are animated for movement & fade (Req 11.1).
+     `box-shadow` / `color` / `border-color` / `outline` are used only for
+     non-layout hover/focus polish (they do not move already-rendered content).
+   - A single `@media (prefers-reduced-motion: reduce)` block neutralizes every
+     effect (Req 6.1).
+
+   Requirements: 2.1, 2.2, 3.1, 3.3, 4.1, 4.2, 4.3, 4.4, 5.1, 5.2, 6.1,
+                 7.1, 7.2, 7.3, 11.1
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. Motion tokens (Standard Motion Tokens table)
+   Per-page application may TUNE these values within the permitted bands noted
+   in comments, but never outside them.
+   --------------------------------------------------------------------------- */
+:root {
+  /* Micro-interaction timing — Req 4.1 / 7.1 (150–300ms) */
+  --mo-micro: 200ms;            /* band: 150–300ms  */
+  --mo-micro-max: 300ms;        /* band: <=300ms    */
+  --mo-feedback-max: 500ms;     /* band: <=500ms  (hard cap, Req 7.3) */
+
+  /* Scroll-reveal — Req 3.1 (200–600ms) */
+  --mo-reveal: 450ms;           /* band: 200–600ms  */
+  --mo-reveal-stagger: 90ms;    /* band: 50–150ms  (Req 3.3) */
+  --mo-reveal-shift: 24px;      /* initial translateY offset (transform only) */
+
+  /* Hero entrance — Req 2.1 (200–1000ms) */
+  --mo-entrance: 700ms;         /* band: 200–1000ms */
+  --mo-entrance-delay: 90ms;    /* band: 50–300ms  (stagger, Req 2.2) */
+
+  /* Easing — must be non-linear for interactive feedback (Req 7.2) */
+  --mo-ease-out: cubic-bezier(.2, .7, .2, 1);        /* entering */
+  --mo-ease-standard: cubic-bezier(.4, 0, .2, 1);    /* standard micro */
+
+  /* Ambient / atmospheric motion — Req 5.1 / 5.2 */
+  --mo-ambient-cycle: 12s;      /* band: 4–30s */
+  --mo-ambient-shift: 5%;       /* max displacement / opacity delta (<=5%) */
+
+  /* Focus indicator (>=2px, >=3:1 contrast — Req 4.2). Tune per page brand. */
+  --mo-focus-ring: #1a56db;
+  --mo-focus-ring-offset: #ffffff;
+}
+
+/* -----------------------------------------------------------------------------
+   2. Keyframes — transform / opacity ONLY (Req 11.1)
+   --------------------------------------------------------------------------- */
+
+/* Entrance fade + rise */
+@keyframes moRise {
+  from { opacity: 0; transform: translateY(var(--mo-reveal-shift)); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Entrance fade + subtle scale */
+@keyframes moFade {
+  from { opacity: 0; transform: scale(.985); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Ambient horizontal/vertical drift — seamless (0% == 100%), <=5% displacement.
+   translate percentages are relative to the element's own rendered size, so
+   `var(--mo-ambient-shift)` (5%) guarantees the <=5% cap (Req 5.1). */
+@keyframes moDrift {
+  0%   { transform: translate3d(0, 0, 0); }
+  50%  { transform: translate3d(var(--mo-ambient-shift), calc(-1 * var(--mo-ambient-shift)), 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+/* Ambient float — vertical only, seamless, <=5% displacement */
+@keyframes moFloat {
+  0%   { transform: translate3d(0, 0, 0); opacity: 1; }
+  50%  { transform: translate3d(0, calc(-1 * var(--mo-ambient-shift)), 0); opacity: .96; }
+  100% { transform: translate3d(0, 0, 0); opacity: 1; }
+}
+
+/* -----------------------------------------------------------------------------
+   3. Scroll-reveal utilities
+   Hidden/initial state is gated behind `html.motion-on` so that, absent JS or
+   under reduced-motion / no-observer, content is fully visible by default.
+   --------------------------------------------------------------------------- */
+html.motion-on .reveal {
+  opacity: 0;
+  transform: translateY(var(--mo-reveal-shift));
+  transition:
+    opacity var(--mo-reveal) var(--mo-ease-out),
+    transform var(--mo-reveal) var(--mo-ease-out);
+  will-change: opacity, transform;
+}
+html.motion-on .reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* Sibling stagger for grids/lists that enter together (Req 3.3).
+   The JS layer also applies a precise per-element transition-delay; these
+   nth-child steps are a CSS-only baseline (each step = one --mo-reveal-stagger). */
+html.motion-on .mo-stagger > *              { transition-delay: 0ms; }
+html.motion-on .mo-stagger > *:nth-child(2) { transition-delay: calc(var(--mo-reveal-stagger) * 1); }
+html.motion-on .mo-stagger > *:nth-child(3) { transition-delay: calc(var(--mo-reveal-stagger) * 2); }
+html.motion-on .mo-stagger > *:nth-child(4) { transition-delay: calc(var(--mo-reveal-stagger) * 3); }
+html.motion-on .mo-stagger > *:nth-child(5) { transition-delay: calc(var(--mo-reveal-stagger) * 4); }
+html.motion-on .mo-stagger > *:nth-child(6) { transition-delay: calc(var(--mo-reveal-stagger) * 5); }
+
+/* -----------------------------------------------------------------------------
+   4. Hero entrance sequence
+   The primary hero element (first child / [data-mo-primary]) begins first; each
+   subsequent element is offset by one --mo-entrance-delay (Req 2.2). Terminal
+   state is opacity:1 / transform:none via `both` fill + the JS entrance
+   controller stripping residual transforms on animationend (Req 2.3, 2.5).
+   --------------------------------------------------------------------------- */
+html.motion-on .mo-entrance > * {
+  opacity: 0;
+  animation: moRise var(--mo-entrance) var(--mo-ease-out) both;
+}
+html.motion-on .mo-entrance > *:nth-child(1),
+html.motion-on .mo-entrance > [data-mo-primary] { animation-delay: 0ms; }
+html.motion-on .mo-entrance > *:nth-child(2) { animation-delay: calc(var(--mo-entrance-delay) * 1); }
+html.motion-on .mo-entrance > *:nth-child(3) { animation-delay: calc(var(--mo-entrance-delay) * 2); }
+html.motion-on .mo-entrance > *:nth-child(4) { animation-delay: calc(var(--mo-entrance-delay) * 3); }
+html.motion-on .mo-entrance > *:nth-child(5) { animation-delay: calc(var(--mo-entrance-delay) * 4); }
+html.motion-on .mo-entrance > *:nth-child(6) { animation-delay: calc(var(--mo-entrance-delay) * 5); }
+
+/* Once JS marks the entrance done, guarantee the final interactive state. */
+html.motion-on .mo-entrance.mo-entrance-done > * {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+/* -----------------------------------------------------------------------------
+   5. Micro-interaction polish
+   Restricted to transform / opacity / box-shadow / color (Req 4.4 — no reflow).
+   Durations use --mo-micro (150–300ms) with non-linear easing (Req 7.1, 7.2).
+   --------------------------------------------------------------------------- */
+.btn,
+.mo-hover,
+a.mo-link,
+[data-mo-card] {
+  transition:
+    transform var(--mo-micro) var(--mo-ease-standard),
+    box-shadow var(--mo-micro) var(--mo-ease-standard),
+    color var(--mo-micro) var(--mo-ease-standard),
+    opacity var(--mo-micro) var(--mo-ease-standard);
+}
+
+/* Hover lift (transform only — no layout shift) */
+html.motion-on .btn:hover,
+html.motion-on .mo-hover:hover,
+html.motion-on [data-mo-card]:hover {
+  transform: translateY(-2px);
+}
+
+/* Pressed / active feedback via transform + opacity, begins immediately (Req 4.3) */
+.btn:active,
+.mo-hover:active,
+[data-mo-card]:active {
+  transform: translateY(0) scale(.985);
+  opacity: .92;
+  transition-duration: 90ms;
+}
+
+/* Link hover polish — color only (no reflow) */
+a.mo-link:hover { opacity: .82; }
+
+/* -----------------------------------------------------------------------------
+   6. Focus-visible reinforcement (Req 4.2 / 10.2)
+   Persistent indicator >=2px thick with >=3:1 contrast against BOTH the element
+   and the adjacent background. Two-tone ring (outline + offset box-shadow halo)
+   keeps it visible on light and dark surfaces. NOT gated by motion-on: focus
+   visibility is an accessibility floor that always applies.
+   --------------------------------------------------------------------------- */
+.btn:focus-visible,
+.mo-hover:focus-visible,
+a.mo-link:focus-visible,
+[data-mo-card]:focus-visible,
+[data-mo-focus]:focus-visible {
+  outline: 3px solid var(--mo-focus-ring);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--mo-focus-ring-offset);
+}
+
+/* -----------------------------------------------------------------------------
+   7. Ambient / atmospheric hooks — opt-in via [data-atmosphere] only (Req 5.5)
+   Decorative layers loop seamlessly, <=5% displacement, 4–30s cycle (Req 5.1/5.2).
+   Decorative children should also carry aria-hidden="true" in markup (Req 10.5).
+   --------------------------------------------------------------------------- */
+html.motion-on [data-atmosphere] .mo-ambient-drift {
+  animation: moDrift var(--mo-ambient-cycle) ease-in-out infinite;
+  will-change: transform;
+}
+html.motion-on [data-atmosphere] .mo-ambient-float {
+  animation: moFloat var(--mo-ambient-cycle) ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* -----------------------------------------------------------------------------
+   8. Reduced-motion override — single block neutralizing every effect (Req 6.1)
+   Any residual essential transition is capped well under 100ms.
+   --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html .reveal,
+  html.motion-on .reveal,
+  html.motion-on .reveal.in-view,
+  html.motion-on .mo-entrance > *,
+  html.motion-on [data-atmosphere] .mo-ambient-drift,
+  html.motion-on [data-atmosphere] .mo-ambient-float,
+  .btn,
+  .mo-hover,
+  a.mo-link,
+  [data-mo-card] {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,5 @@
+# Dev-only motion-test harness — never shipped to any page.
+node_modules/
+package-lock.json
+*.log
+.playwright/
