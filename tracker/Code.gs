@@ -1,28 +1,25 @@
 /**
- * Wide Web Solutions — Demo Visit Tracker (backend)
- * -------------------------------------------------
- * Receives a "ping" from each demo page when a real browser loads it,
- * resolves the ?ref= code against a "Prospects" lookup tab, logs the visit
- * to a "Visits" tab, and (optionally) emails you an instant alert that
- * includes the prospect's business name, email and phone.
+ * Wide Web Solutions - Demo Visit Tracker (backend)
+ * Receives a ping when a demo page loads, resolves the ?ref= code against a
+ * "Prospects" tab, logs the visit to a "Visits" tab, and (optionally) emails
+ * an instant alert with the prospect's business name, email and phone.
  *
- * TABS (created automatically; run setup() once to create them up front):
- *   - "Prospects"  your lookup list. Columns:
- *         A: Ref code   (the short slug you put in ?ref=, e.g. "joescafe")
- *         B: Business   (e.g. "Joe's Cafe")
- *         C: Email      (e.g. "joe@joescafe.com")
- *         D: Phone      (e.g. "+61 400 000 000")
- *         E: Notes      (anything you like)
- *   - "Visits"     the auto-filled log of every visit.
+ * TABS (run setup() once to create them):
+ *   - "Prospects": your lookup list. Columns:
+ *         A: Ref code (the short slug you put in ?ref=, e.g. "joescafe")
+ *         B: Business (e.g. "Joe's Cafe")
+ *         C: Email    (e.g. "joe@joescafe.com")
+ *         D: Phone    (e.g. "+61 400 000 000")
+ *         E: Notes
+ *   - "Visits": the auto-filled log of every visit.
  *
  * HOW TO (RE)DEPLOY:
- *   1. In the Demo Visits Sheet: Extensions > Apps Script.
+ *   1. Demo Visits Sheet > Extensions > Apps Script.
  *   2. Replace the code with this file. Set ALERT_EMAIL below. Save.
- *   3. (Optional) Run the setup() function once (Run > setup) to create the
- *      Prospects/Visits tabs with headers and an example row.
- *   4. Deploy > Manage deployments > (edit / pencil) > Version: New version
- *      > Deploy.  ** This keeps the SAME /exec URL, so the website pages do
- *      not need to change. **  (Only use "New deployment" for a brand-new URL.)
+ *   3. (Optional) Run > setup to create the tabs up front.
+ *   4. Deploy > Manage deployments > (edit / pencil) > Version: New version >
+ *      Deploy. This keeps the SAME /exec URL so the website pages do not change.
+ *      (Only use "New deployment" for a brand-new URL.)
  *
  * Notes:
  *   - Fires only when the page actually loads in a browser, NOT on email open.
@@ -33,8 +30,8 @@
 
 var VISITS_SHEET    = "Visits";
 var PROSPECTS_SHEET = "Prospects";
-var ALERT_EMAIL     = "you@example.com"; // <-- change this, or set "" to disable emails
-var DEDUPE_MINUTES  = 360;               // don't re-email same ref+site within this window (0 = always email)
+var ALERT_EMAIL     = "skullmanhell1@gmail.com"; // change this, or set "" to disable emails
+var DEDUPE_MINUTES  = 360;                        // don't re-email same ref+site within this window (0 = always)
 
 var VISITS_HEADER = [
   "Received", "Ref code", "Business", "Email", "Phone",
@@ -64,12 +61,10 @@ function handle_(e) {
     var screen   = p.screen   || "";
     var clientTs = p.ts       || "";
 
-    // Human-friendly 12-hour times (e.g. "Thu 16 Jul 2026, 6:00 PM").
     var whenReadable   = fmt_(now);
     var clientReadable = clientTs ? fmtIso_(clientTs) : "";
 
-    // Resolve the ref code against the Prospects lookup tab.
-    var match    = lookupProspect_(ref); // {business, email, phone, notes} (blanks if not found)
+    var match    = lookupProspect_(ref);
     var business = match.business;
     var email    = match.email;
     var phone    = match.phone;
@@ -81,10 +76,9 @@ function handle_(e) {
     ]);
 
     if (ALERT_EMAIL && !isDuplicate_(ref, site)) {
-      // Prefer the friendly business label; fall back to the raw ref code.
       var label = business
         ? (business + (email ? " (" + email + ")" : ""))
-        : (ref ? ref + " (unknown ref — add it to Prospects)" : "(no ref tag)");
+        : (ref ? ref + " (unknown ref - add it to Prospects)" : "(no ref tag)");
 
       MailApp.sendEmail(
         ALERT_EMAIL,
@@ -119,7 +113,7 @@ function lookupProspect_(ref) {
 
   var sheet = getProspectsSheet_();
   var values = sheet.getDataRange().getValues();
-  for (var i = 1; i < values.length; i++) { // skip header
+  for (var i = 1; i < values.length; i++) {
     var code = String(values[i][0] || "").trim().toLowerCase();
     if (code && code === key) {
       return {
@@ -139,7 +133,7 @@ function isDuplicate_(ref, site) {
     var cache = CacheService.getScriptCache();
     var key = "seen:" + (ref || "noref") + "|" + (site || "nosite");
     if (cache.get(key)) return true;
-    cache.put(key, "1", Math.min(DEDUPE_MINUTES * 60, 21600)); // cache max is 6h
+    cache.put(key, "1", Math.min(DEDUPE_MINUTES * 60, 21600));
     return false;
   } catch (e) {
     return false;
@@ -150,8 +144,7 @@ function getVisitsSheet_() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(VISITS_SHEET);
 
-  // If a Visits tab from an older layout exists (no "Business" column), archive it
-  // so the new columns line up instead of writing under the wrong headers.
+  // If a Visits tab from an older layout exists (no "Business" column), archive it.
   if (sheet && sheet.getLastRow() > 0) {
     var cols = Math.max(sheet.getLastColumn(), VISITS_HEADER.length);
     var header = sheet.getRange(1, 1, 1, cols).getValues()[0];
@@ -170,11 +163,10 @@ function getVisitsSheet_() {
     sheet.appendRow(VISITS_HEADER);
     sheet.setFrozenRows(1);
   }
-  // Show the "Received" column (A) as a 12-hour time, e.g. "Thu 16 Jul 2026, 6:00 PM".
-  // The cell still holds a real datetime, so it stays sortable.
+  // Show the "Received" column (A) as a 12-hour time (still a real datetime, so sortable).
   try {
     sheet.getRange("A2:A").setNumberFormat("ddd d mmm yyyy, h:mm AM/PM");
-  } catch (e) { /* non-fatal */ }
+  } catch (e) {}
   return sheet;
 }
 
@@ -188,7 +180,7 @@ function fmt_(date) {
   }
 }
 
-/** Parse an ISO timestamp string and format it 12-hour; falls back to the raw value. */
+/** Parse an ISO timestamp string and format it 12-hour; falls back to raw. */
 function fmtIso_(iso) {
   try {
     var d = new Date(iso);
@@ -204,10 +196,8 @@ function getProspectsSheet_() {
     sheet = ss.insertSheet(PROSPECTS_SHEET);
     sheet.appendRow(PROSPECTS_HEADER);
     sheet.setFrozenRows(1);
-    // Treat the lookup columns as plain text so phone numbers that start with "+"
-    // (e.g. +61 400 000 000) aren't mistaken for a formula (which shows #ERROR!).
+    // Plain text so phone numbers starting with "+" are not read as a formula.
     sheet.getRange("A2:E").setNumberFormat("@");
-    // Example row so the format is obvious — edit or delete it.
     sheet.appendRow(["joescafe", "Joe's Cafe", "joe@joescafe.com", "+61 400 000 000", "Met at expo"]);
   }
   return sheet;
