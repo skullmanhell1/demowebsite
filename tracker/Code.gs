@@ -149,8 +149,22 @@ function isDuplicate_(ref, site) {
 function getVisitsSheet_() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(VISITS_SHEET);
+
+  // If a Visits tab from an older layout exists (no "Business" column), archive it
+  // so the new columns line up instead of writing under the wrong headers.
+  if (sheet && sheet.getLastRow() > 0) {
+    var cols = Math.max(sheet.getLastColumn(), VISITS_HEADER.length);
+    var header = sheet.getRange(1, 1, 1, cols).getValues()[0];
+    var isCurrent = header[1] === "Ref code" && header[2] === "Business";
+    if (!isCurrent) {
+      var stamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone() || "Etc/GMT", "yyyy-MM-dd HHmm");
+      sheet.setName(VISITS_SHEET + " (old " + stamp + ")");
+      sheet = null;
+    }
+  }
+
   if (!sheet) {
-    sheet = ss.insertSheet(VISITS_SHEET);
+    sheet = ss.getSheetByName(VISITS_SHEET) || ss.insertSheet(VISITS_SHEET);
   }
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(VISITS_HEADER);
@@ -190,6 +204,9 @@ function getProspectsSheet_() {
     sheet = ss.insertSheet(PROSPECTS_SHEET);
     sheet.appendRow(PROSPECTS_HEADER);
     sheet.setFrozenRows(1);
+    // Treat the lookup columns as plain text so phone numbers that start with "+"
+    // (e.g. +61 400 000 000) aren't mistaken for a formula (which shows #ERROR!).
+    sheet.getRange("A2:E").setNumberFormat("@");
     // Example row so the format is obvious — edit or delete it.
     sheet.appendRow(["joescafe", "Joe's Cafe", "joe@joescafe.com", "+61 400 000 000", "Met at expo"]);
   }
