@@ -1173,6 +1173,30 @@ html.mp-on .btn-primary{transition:transform .2s cubic-bezier(.4,0,.2,1),box-sha
 html.mp-on .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px color-mix(in srgb,var(--primary,#333) 34%,transparent);}
 @media (prefers-reduced-motion: reduce){#mp-progress{display:none!important;}html.mp-on .service-card{transition:none!important;}html.mp-on .service-card:hover{transform:none!important;}html.mp-on .btn-primary{transition:none!important;}html.mp-on .btn-primary:hover{transform:none!important;}}
 </style>
+  <!-- Visit tracker — pings backend on real page load (see /tracker/README.md) -->
+  <script>
+  (function () {
+    var TRACKER_ENDPOINT = "https://script.google.com/macros/s/AKfycbyC31Rpe-zU1B7giiCAZ5_E837hKeBgwtOQxhxnbzHRBiMFzfGkqsjj8p7F7Y3zI4LNUQ/exec";
+    var SITE_ID = "services";
+    try {
+      var q = new URLSearchParams(window.location.search);
+      var ref = q.get("ref") || q.get("utm_content") || q.get("utm_campaign") || "";
+      var d = {
+        site: SITE_ID,
+        ref: ref,
+        page: window.location.pathname,
+        referrer: document.referrer || "",
+        lang: navigator.language || "",
+        screen: (window.screen ? window.screen.width + "x" + window.screen.height : ""),
+        ts: new Date().toISOString()
+      };
+      var qs = Object.keys(d).map(function (k) {
+        return encodeURIComponent(k) + "=" + encodeURIComponent(d[k]);
+      }).join("&");
+      new Image().src = TRACKER_ENDPOINT + "?" + qs;
+    } catch (e) { /* never break the page */ }
+  })();
+  </script>
 </head>
 <body>
   <!-- INTRO-JS:START --><script>document.documentElement.classList.add("has-js");</script><!-- INTRO-JS:END -->
